@@ -13,5 +13,3 @@ El personaje se presentará en el mapa sin armas, y aparecerán una serie de dro
 **Nombre:** Denis Gudiña Nuñez  **Correo:**  d.gudina.2016@alumnos.urjc.es   **Cuenta GitHub:**  KaptainSportaco
 
 **Nombre:** Luis Miguel Moreno López **Correo** lm.moreno.2016@alumnos.urjc.es **Cuenta GitHub:** lmml-l
-
-Esto es una prueba
