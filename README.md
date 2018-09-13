@@ -9,3 +9,4 @@ El personaje se presentará en el mapa sin armas, y aparecerán una serie de dro
 
 **Integrantes del equipo de desarrollo:**  
 **Nombre:** Alejandro José Carrillo Ezcurra  **Correo:**  aj.carrilloe@alumnos.urjc.es   **Cuenta GitHub:**
+**Nombre:** Denis Gudiña Nuñez  **Correo:**  d.gudina.2016@alumnos.urjc.es   **Cuenta GitHub:**  KaptainSportaco
