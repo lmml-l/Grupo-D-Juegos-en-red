@@ -11,3 +11,5 @@ El personaje se presentará en el mapa sin armas, y aparecerán una serie de dro
 **Nombre:** Alejandro José Carrillo Ezcurra  **Correo:**  aj.carrilloe@alumnos.urjc.es   **Cuenta GitHub:** Tenusiano
 
 **Nombre:** Denis Gudiña Nuñez  **Correo:**  d.gudina.2016@alumnos.urjc.es   **Cuenta GitHub:**  KaptainSportaco
+
+**Nombre:** Luis Miguel Moreno López **Correo** lm.moreno.2016@alumnos.urjc.es **Cuenta GitHub:** lmml-l
