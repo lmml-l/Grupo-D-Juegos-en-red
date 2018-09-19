@@ -13,12 +13,27 @@
 - Disparar
 - Munición del arma
 - Atacar cuerpo a cuerpo
-- Cubrirse
+- Escudo
 - Barra de vida
+- Subir y bajar plataformas metálicas
 
-*Dinámica:* Los personajes se presentarán en el mapa sin armas y aparecerán una serie de drops o armas en el entorno que podrán recoger para atacar a su contrincante. Los objetos recogidos volverán a aparecer en un tiempo aleatorio, mientras que las soltadas por el jugador desaparecen a los pocos segundos.
-Las armas de fuego tendrán munición finita y se tendrán barras de vida que se reducirán si el jugador logra dañar al oponente, en función del arma empleada. Ambos luchadores pueden defenderse con un *escudo* esférico, que se dañará al ser impactado hasta romperse. No te podrás mover al usar el escudo. 
-La partida se gana cuando el rival tenga la barra de vida a cero.
+*Dinámica:* Los personajes se presentarán en el mapa sin armas y aparecerán una serie de drops o armas en el entorno que podrán recoger para atacar a su contrincante.
+Los objetos recogidos volverán a aparecer en un tiempo aleatorio, mientras que las soltadas por el jugador desaparecen a los pocos segundos.
+Las armas de fuego tendrán munición finita y escasa. Se tendrán barras de vida que se reducirán si el jugador logra dañar al oponente, en función del arma empleada. Cuando no se tiene arma, se podrán usar los puños para empujar al rival. 
+Ambos luchadores pueden defenderse con un *escudo* esférico, que se dañará al ser impactado hasta romperse. No te podrás mover al usar el escudo.
+Durante el combate, se podrá interacturar con algunas elementos del escenario, algunos aleatorios, para perjudicar al rival, o bien evitar peligros.
+Existe un tiempo límite por ronda; si vence éste sin ganador se produce un evento de desempate, sin tiempo, en el que vendrá la policía e irá dispararando aleatoriamente por el escenario, hasta finalizar la ronda.
+La partida se gana cuando el rival tenga la barra de vida a cero, en una competición al mejor de cinco rondas (hay que ganar tres rondas).
+
+*Elementos externos:*
+Para evitar bloqueos en el flujo de partida, tendremos elementos interaccionables y eventos aleatorios.
+
+- Boca de incendio: al destruírse crearán chorros de agua que empujarán a los jugadores
+- Tanque de combustible: al destruírse estalla e incendia el alrededor
+- Tendido de alta tensión averiado: se activa sólo en ocasiones y daña al personaje si está cerca
+- Mafiosos: pueden aparecer en ventanas y disparar
+- Jauría de perros: aparecen en el callejón y atacan a quien esté
+- Más por determinar
 
 *Armas plantedas:*
 - Fusil tipo Thompson
@@ -27,7 +42,8 @@ La partida se gana cuando el rival tenga la barra de vida a cero.
 - Puño americano
 - Bate de baseball
 
-**Referencias visuales**
+**Referencias artísticas**
+El estilo visual de este juego estará basado en la estética de los beat'm up de los años 90, imitando la manera de la textura, iluminación y calles. El movimiento de los personajes, sin embargo, se ajustará únicamente al eje horizontal y vertical, sin profundidad. Los personajes tampoco ocuparán tanto espacio en pantalla, para dar algo más de protagonismo a los elementos del escenario.
 
 ![...](http://pixeljoint.com/files/icons/full/mafia2d_mockup_final.png)
 
