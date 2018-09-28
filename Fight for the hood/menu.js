@@ -3,7 +3,7 @@ class MainMenu extends Phaser.Scene {
 		super({key:"MainMenu"});
 	}
 	preload(){
-		var title = this.load.image('title','Logo.png');
+		var title = this.load.image('title','Recursos/Imagenes/Logo.png');
 		var buttonlocal = this.load.image('buttonlocal','Recursos/Imagenes/plain-button-500x500.png');
 		var buttononline = this.load.image('buttononline','Recursos/Imagenes/plain-button-500x500.jpg')
 		var controles = this.load.image('controles','Recursos/Imagenes/plain-button-500x500.jpg')
