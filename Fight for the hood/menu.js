@@ -4,19 +4,29 @@ class MainMenu extends Phaser.Scene {
 	}
 	
 	menu(){
-		var title = this.add.image((this.game.canvas.width/2),(this.game.canvas.height/2),'title').setScale(1);
-		//var buttonlocal = this.add.image(600,300,'buttonlocal');
-		//var buttononline = this.add.image(700,200,'buttononline');
-		//var controles = this.add.image(800,200,'controles');
-		console.log("reading this");
+		var title = this.add.image(0,150,'title').setScale(0.5);
+		var buttonlocal = this.add.image(0,300,'buttonlocal').setScale(0.5).setInteractive();
+		var buttononline = this.add.image(0,400,'buttononline').setScale(0.5).setInteractive();
+		var controles = this.add.image(0,500,'controles').setScale(0.5).setInteractive();
+		
+		buttonlocal.on('pointerdown', function(event){this.scene.start(CharapterSelection)},this); 
+		buttononline.on('pointerdown', function(event){this.scene.start(CharapterSelection)},this);
+		controles.on('pointerdown', function(event){this.scene.start(CharapterSelection)},this); 
+
+		var container = this.add.container(0,0);
+		container.add(title);
+		container.add(buttonlocal); 
+		container.add(buttononline); 
+		container.add(controles);  
+		container.setX(this.game.canvas.width/2);
+		
 	}
 	preload(){
 		var title = this.load.image('title','Recursos/Imagenes/Logo.png')
-		var buttonlocal = this.load.image('buttonlocal','Recursos/Imagenes/plain-button-500x500.jpg');
-		var buttononline = this.load.image('buttononline','Recursos/Imagenes/plain-button-500x500.jpg');
-		var controles = this.load.image('controles','Recursos/Imagenes/plain-button-500x500.jpg');
+		var buttonlocal = this.load.image('buttonlocal','Recursos/Imagenes/Jugar_Local.png');
+		var buttononline = this.load.image('buttononline','Recursos/Imagenes/Jugar_Online.png');
+		var controles = this.load.image('controles','Recursos/Imagenes/Controles.png');
 	}
-	//this.add.image(400,300,)
 
 	create(){
 		this.menu();
