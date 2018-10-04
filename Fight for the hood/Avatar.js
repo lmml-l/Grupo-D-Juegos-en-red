@@ -1,11 +1,13 @@
-class P1 extends Phaser.Sprite {
-	constructor(){
-		super({key:"Personaje"});
+class Avatar extends Phaser.GameObjects.Sprite {
+	constructor(spritesheet,posx,posy){
+		super({key:"Personaje",x:x,y:posy});
+		this.left=spritesheet[1];
+		this.right=spritesheet[2];
 	}
 	
 	preload(){
-		this.load.spritesheet('p1l','Recursos/Imagenes/Logo.png');
-		this.load.spritesheet('p1r','Recursos/Imagenes/Logo.png');
+		this.load.spritesheet('p1l',left);
+		this.load.spritesheet('p1r',right);
 
 	}
 	create(){
@@ -22,5 +24,7 @@ class P1 extends Phaser.Sprite {
     	frameRate: 10,
     	repeat: -1
 		});
+
+
 	}
 }
