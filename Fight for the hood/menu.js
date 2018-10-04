@@ -9,9 +9,9 @@ class MainMenu extends Phaser.Scene {
 		var buttononline = this.add.image(0,this.game.canvas.height*(4/6),'buttononline').setScale(0.5).setInteractive();
 		var controles = this.add.image(0,(this.game.canvas.height*(5/6)),'controles').setScale(0.5).setInteractive();
 		
-		buttonlocal.on('pointerdown', function(event){this.scene.start(CharapterSelection)},this); 
-		buttononline.on('pointerdown', function(event){this.scene.start(CharapterSelection)},this);
-		controles.on('pointerdown', function(event){this.scene.start(CharapterSelection)},this); 
+		buttonlocal.on('pointerdown', function(event){this.scene.start('CharapterSelection')},this); 
+		buttononline.on('pointerdown', function(event){this.scene.start('CharapterSelection')},this);
+		controles.on('pointerdown', function(event){this.scene.start('CharapterSelection')},this); 
 
 		var container = this.add.container(0,0);
 		container.add(title);
