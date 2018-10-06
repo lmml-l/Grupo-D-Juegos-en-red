@@ -1,38 +1,46 @@
-function Avatar (name,scene,posx,posy,spritesheet) {
+function Avatar (nam,scen,posx,posy,spritesheet) {
 		
-	
+		this.name = nam;
 		this.left=spritesheet[0];
 		this.right=spritesheet[1];
-		this.names=name;
+		this.names=nam;
 		this.x=posx;
 		this.y=posy;
-		this.scene=scene;
+		this.scene=scen;
 		this.sprite;
 		
 		var that = this;
 
-		this.preload = function(){
-			that.scene.load.spritesheet('p1l',Avatar.left);
-			that.scene.load.spritesheet('p1r',Avatar.right);
+		this.preload=function(){
+			that.scene.load.spritesheet(that.nam +'p1l',that.left,{ frameWidth: 130, frameHeight: 161 });
+			that.scene.load.spritesheet(that.nam +'p1r',that.right,{ frameWidth: 130, frameHeight: 161 });
+			//that.scene.game.load.start();
 		}
 
-		this.create=function(){
-			scene.anims.create({
-    			key:'left',
-   				frames: scene.anims.generateFrameNumbers('p1l', { start: 0, end: 3 }),
-    			frameRate: 10,
+		this.animaciones=function(){
+		that.scene.anims.create({
+    			key: that.nam +'left',
+   				frames: that.scene.anims.generateFrameNumbers(that.nam + 'p1l', { start: 0, end: 4 }),
+    			frameRate: 9,
     			repeat: -1
 			});
 
-			scene.anims.create({
-    			key: 'right',
-   				frames: scene.anims.generateFrameNumbers('p1r', { start: 0, end: 3 }),
-    			frameRate: 10,
+		that.scene.anims.create({
+    			key: that.nam + 'right',
+   				frames: that.scene.anims.generateFrameNumbers(that.nam + 'p1r', { start: 0, end: 4 }),
+    			frameRate: 9,
     			repeat: -1
-			});
+			})
+		}
+		this.spawnavatar=function(){
+			that.sprite = that.scene.physics.add.sprite(that.x,that.y,that.nam + 'p1l');
+		}
 
-		that.sprite = that.scene.add.sprite(that.posx,that.posy,'p1l');
-
+		this.walkright=function(){
+			that.sprite.anims.play(that.nam +'right');
+		}
+		this.walkleft=function(){
+			that.sprite.anims.play(that.nam +'left');
 		}
 	}
 		
