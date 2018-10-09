@@ -9,7 +9,7 @@ var config = {
             debug: false
         }
     },
-    scene: [MainMenu,CharapterSelection]
+    scene: [MainMenu,CharapterSelection,Escenario]
          
 };
 
