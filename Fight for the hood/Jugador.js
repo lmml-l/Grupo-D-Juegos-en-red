@@ -31,20 +31,21 @@ function Jugador(avatar,controles){
 	this.vida=100;
 
 	var that = this;
+
 	this.preload=function(){
 		that.avatar.preload();
 	}
 	this.create=function(){
 		that.avatar.animaciones();
 		that.avatar.spawnavatar();
+
 	}
 	this.update=function(){
-
+		if(that.controles.salto.isDown){
+		console.log("pulsas w ?")
+		that.avatar.walkleft();
 		
-
-		
-			that.avatar.walkleft();
-		
+		}
 		
 	}
 }

@@ -24,9 +24,10 @@ class CharapterSelection extends Phaser.Scene {
 		
 		
 		this.add.image(400, 300, 'sky');
+	
 		this.jugador.create();
 
-		//this.avatar.animaciones();
+		
 		
 		//this.avatar.walkright();
 
