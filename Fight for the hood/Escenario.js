@@ -60,5 +60,6 @@ create(){
     plataformasMetal.create(646, 436, 'plat2');
     plataformasMetal.create(647, 524, 'plat2');
 	}
+}
 
 	//QUEDAN MÁS PLATAFORMAS POR PONER, DE DISTINTOS TAMAÑOS
