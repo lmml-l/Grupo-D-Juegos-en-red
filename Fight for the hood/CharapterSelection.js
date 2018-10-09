@@ -3,14 +3,18 @@ class CharapterSelection extends Phaser.Scene {
 		super({key:"CharapterSelection"});
 		var sprite = ["Recursos/Imagenes/Sprite2.png","Recursos/Imagenes/Sprite2.png"]
 		this.avatar = new Avatar("a",this,400,400,sprite);
+		this.jugador = new Jugador(this.avatar,controles2);
+
 
 		
 	}
 	preload ()
 	{
+		this.jugador.preload();
+		this.load.image('sky', 'Recursos/Imagenes/escenarioREADY.png')
 		//this.load.image('p1l',"Recursos/Imagenes/HojadeSpriteBasica.png");
 		//this.load.image('p1l',"Recursos/Imagenes/HojadeSpriteBasica.png");
-		this.avatar.preload();
+		
 		
 	}
 
@@ -19,10 +23,12 @@ class CharapterSelection extends Phaser.Scene {
 		
 		
 		
+		this.add.image(400, 300, 'sky');
+		this.jugador.create();
+
+		//this.avatar.animaciones();
 		
-		this.avatar.animaciones();
-		this.avatar.spawnavatar();
-		this.avatar.walkright();
+		//this.avatar.walkright();
 
 		//this.sprite = new Phaser.Gameobjects.Sprite(this,100,100,'p1l',2).setScale(4);
 		//var a = this.add.image(150,150,'p1l').setScale(1);
@@ -30,5 +36,6 @@ class CharapterSelection extends Phaser.Scene {
 
 	update ()
 	{
+		this.jugador.update();
 	}
 }

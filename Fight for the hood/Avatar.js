@@ -1,3 +1,6 @@
+
+'use strict'
+
 function Avatar (nam,scen,posx,posy,spritesheet) {
 		
 		this.name = nam;
