@@ -11,7 +11,7 @@ class CharapterSelection extends Phaser.Scene {
 	preload ()
 	{
 		this.jugador.preload();
-		this.load.image('sky', 'Recursos/Imagenes/escenarioREADY.png')
+		this.load.image('sky', 'Recursos/Imagenes/stage.png');
 		//this.load.image('p1l',"Recursos/Imagenes/HojadeSpriteBasica.png");
 		//this.load.image('p1l',"Recursos/Imagenes/HojadeSpriteBasica.png");
 		
