@@ -30,7 +30,9 @@ function Jugador(avatar,controles){
 	this.controles=controles;
 	this.vida=100;
 
+
 	var that = this;
+	
 
 	this.preload=function(){
 		that.avatar.preload();
@@ -39,12 +41,16 @@ function Jugador(avatar,controles){
 		that.avatar.animaciones();
 		that.avatar.spawnavatar();
 
+
 	}
 	this.update=function(){
-		if(that.controles.salto.isDown){
-		console.log("pulsas w ?")
-		that.avatar.walkleft();
 		
+		
+		var cursors = that.avatar.scene.input.keyboard.createCursorKeys()
+
+		if(cursors.left.isDown){
+		that.avatar.walkright();
+		that.avatar.setVelocityX(160);
 		}
 		
 	}

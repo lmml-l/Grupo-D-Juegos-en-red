@@ -37,6 +37,6 @@ class CharapterSelection extends Phaser.Scene {
 
 	update ()
 	{
-		this.jugador.update();
+	  this.jugador.update();
 	}
 }
