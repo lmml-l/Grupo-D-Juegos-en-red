@@ -14,7 +14,16 @@ preload(){
     this.jugador.preload();
 	this.load.image('fondo', 'Recursos/Imagenes/stage.png')
 	this.load.image('plat2', 'Recursos/Imagenes/plat2.png'); //atravesables
+    this.load.image('platShort', 'Recursos/Imagenes/platShort.png');
     this.load.image('sueloPixel', 'Recursos/Imagenes/sueloPixel.png');
+    this.load.image('techoApixel', 'Recursos/Imagenes/techoApixel.png');
+    this.load.image('techoBpixel', 'Recursos/Imagenes/techoBpixel.png');
+    this.load.image('techoCpixel', 'Recursos/Imagenes/techoCpixel.png');
+    this.load.image('techoDpixel', 'Recursos/Imagenes/techoDpixel.png');
+    this.load.image('cartelPixel', 'Recursos/Imagenes/cartelPixel.png');
+    this.load.image('toldoLPixel', 'Recursos/Imagenes/toldoLPixel.png');
+    this.load.image('toldoRPixel', 'Recursos/Imagenes/toldoRPixel.png');
+    this.load.image('tuboPixel', 'Recursos/Imagenes/stage.png');
 
 }
 
@@ -22,10 +31,7 @@ create(){
     
 
 	var plataformas;
-	var plataformasMetal;
 	var suelo;
-    var techoA; var techoB; var techoC; var techoD;
-
 
     //IMPORTANTE: LA POSICIÓN (0,0) ES EL CENTRO DEL ESCENARIO.
     //            EN PHOTOSHOP ES LA ESQUINA SUPERIOR IZQUIERDA
@@ -37,13 +43,10 @@ create(){
 		//this.add.sprite(0, 0, 'Plat2')
 
 	plataformas = this.physics.add.staticGroup();  //Hace solidas las plataformas
-	plataformasMetal = this.physics.add.staticGroup();
+    //plataformasCortas = this.physics.add.staticGroup();
     suelo = this.physics.add.staticGroup();
-    techoA = this.physics.add.staticGroup();
-    techoB = this.physics.add.staticGroup();
-    techoC = this.physics.add.staticGroup();
-    techoD = this.physics.add.staticGroup();
-
+    
+ 
 	//las plataformas de metal no son colisionables desde abajo
 	//this.plataformasMetal.setAll('body.collideDown', false);
 
@@ -60,28 +63,31 @@ create(){
     //coloco plataformas fijas atravesables
     //escaleras de emergencia
     //izquierda 
-    plataformasMetal.create(319, 63,  'plat2');
-    plataformasMetal.create(319, 153, 'plat2');
-    plataformasMetal.create(319, 241, 'plat2');
-    plataformasMetal.create(319, 328, 'plat2');
-    plataformasMetal.create(319, 416, 'plat2');
+    plataformas.create(319, 63,  'plat2');
+    plataformas.create(319, 153, 'plat2');
+    plataformas.create(319, 241, 'plat2');
+    plataformas.create(319, 328, 'plat2');
+    plataformas.create(319, 416, 'plat2');
     //derecha
-    plataformasMetal.create(866, 141, 'plat2');
-    plataformasMetal.create(866, 229, 'plat2');
-    plataformasMetal.create(866, 317, 'plat2');
-    plataformasMetal.create(866, 404, 'plat2');
+    plataformas.create(866, 141, 'plat2');
+    plataformas.create(866, 229, 'plat2');
+    plataformas.create(866, 317, 'plat2');
+    plataformas.create(866, 404, 'plat2');
     //sueltas
-    plataformasMetal.create(471, 275, 'plat2');
-    plataformasMetal.create(536, 361, 'plat2');
-    plataformasMetal.create(536, 467, 'plat2');
-    plataformasMetal.create(702, 275, 'plat2');
-    plataformasMetal.create(703, 363, 'plat2');
+    plataformas.create(455, 276, 'platShort'); //-16
+    plataformas.create(520, 362, 'platShort');
+    plataformas.create(520, 468, 'platShort');
+    plataformas.create(686, 276, 'platShort');
+    plataformas.create(686, 364, 'platShort');
+    //toldos
+    plataformas.create(159, 480, 'toldoLPixel'); //izquierdo 85 646
+    plataformas.create(686, 364, 'toldoRPixel'); //derecho
+    //tubería
 
+    //tanque de agua
     this.jugador.create();
-	}
-
     this.physics.add.collider(this.jugador.avatar.sprite, suelo);
-
+	}
 update(){
     this.jugador.update();
     }
