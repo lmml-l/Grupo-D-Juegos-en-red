@@ -2,12 +2,16 @@ class MainEscenario extends Phaser.Scene {
 
 	constructor(){
 		super({key:"MainEscenario"});
+        var sprite = ["Recursos/Imagenes/Sprite2.png","Recursos/Imagenes/Sprite2.png"]
+        this.avatar = new Avatar("a",this,400,400,sprite);
+        this.jugador = new Jugador(this.avatar,controles2);
 	}
 
 
 
 preload(){
 
+    this.jugador.preload();
 	this.load.image('fondo', 'Recursos/Imagenes/stage.png')
 	this.load.image('plat2', 'Recursos/Imagenes/plat2.png'); //atravesables
     this.load.image('sueloPixel', 'Recursos/Imagenes/sueloPixel.png');
@@ -15,6 +19,8 @@ preload(){
 }
 
 create(){
+    
+
 	var plataformas;
 	var plataformasMetal;
 	var suelo;
@@ -70,7 +76,15 @@ create(){
     plataformasMetal.create(536, 467, 'plat2');
     plataformasMetal.create(702, 275, 'plat2');
     plataformasMetal.create(703, 363, 'plat2');
+
+    this.jugador.create();
 	}
+
+    this.physics.add.collider(this.jugador.avatar.sprite, suelo);
+
+update(){
+    this.jugador.update();
+    }
 }
 
 	//QUEDAN MÁS PLATAFORMAS POR PONER, DE DISTINTOS TAMAÑOS

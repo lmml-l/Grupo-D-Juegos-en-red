@@ -50,7 +50,7 @@ function Avatar (nam,scen,posx,posy,spritesheet) {
 
 		}
 		this.spawnavatar=function(){
-			that.sprite = that.scene.physics.add.sprite(that.x,that.y,that.names + 'p1l');
+			that.sprite = that.scene.physics.add.sprite(that.x,that.y,that.names + 'p1l').setScale(0.5);
 		}
 
 

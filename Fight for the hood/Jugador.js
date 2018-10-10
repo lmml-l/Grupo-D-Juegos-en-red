@@ -57,6 +57,7 @@ function Jugador(avatar,controles){
 	   keymovabajo = this.avatar.scene.input.keyboard.addKey(that.controles.movabajo);
 	   keydisparo = this.avatar.scene.input.keyboard.addKey(that.controles.disparo);
 	   keyrecargar = this.avatar.scene.input.keyboard.addKey(that.controles.recargar);
+	   keyrecarma = this.avatar.scene.input.keyboard.addKey(that.controles.recarma);
 	   keyescudo = this.avatar.scene.input.keyboard.addKey(that.controles.escudo);
 	}
 	this.update=function(){
@@ -81,7 +82,7 @@ function Jugador(avatar,controles){
 			that.avatar.velx(0);
 		}
 
-		if(keysalto.isDown && player.body.touching.down){
+		if(keysalto.isDown && that.avatar.sprite.body.touching.down){
 			that.avatar.vely(-20);
 		}
 		if(keymovabajo.isDown){
