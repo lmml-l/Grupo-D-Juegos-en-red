@@ -33,16 +33,52 @@ function Avatar (nam,scen,posx,posy,spritesheet) {
     			frameRate: 9,
     			repeat: -1
 			})
+
+		that.scene.anims.create({
+    			key: that.names + 'idle right',
+   				frames: that.scene.anims.generateFrameNumbers(that.names + 'p1r', { start: 1, end: 1 }),
+    			frameRate: 9,
+    			repeat: -1
+			})
+
+			that.scene.anims.create({
+    			key: that.names + 'idle left',
+   				frames: that.scene.anims.generateFrameNumbers(that.names + 'p1l', { start: 1, end: 1 }),
+    			frameRate: 9,
+    			repeat: -1
+			})
+
 		}
 		this.spawnavatar=function(){
 			that.sprite = that.scene.physics.add.sprite(that.x,that.y,that.names + 'p1l');
 		}
 
+
 		this.walkright=function(){
 			that.sprite.anims.play(that.names +'right',true);
 		}
 		this.walkleft=function(){
-			that.sprite.animas.play(that.names +'left',true);
+			that.sprite.anims.play(that.names +'left',true);
+		}
+		this.idleleft=function(){
+			that.sprite.anims.play(that.names +'idle left',true);
+		}
+		this.idleright=function(){
+			that.sprite.anims.play(that.names +'idle right',true);
+		}
+
+
+		this.stopanim=function(){
+			that.sprite.anims.stop();
+		}
+		this.getanim=function(){
+			return that.sprite.anims.getCurrentKey();
+		}
+		this.velx=function(vel){
+			that.sprite.setVelocityX(vel);
+		}
+		this.vely=function(vel){
+			that.sprite.setVelocityY(vel);
 		}
 	}
 		
