@@ -5,7 +5,7 @@ class CharapterSelection extends Phaser.Scene {
 		this.avatar = new Avatar("a",this,400,400,sprite);
 		this.jugador = new Jugador(this.avatar,controles2);
 
-
+		
 		
 	}
 	preload ()
@@ -24,7 +24,6 @@ class CharapterSelection extends Phaser.Scene {
 		
 		
 		this.add.image(400, 300, 'sky');
-	
 		this.jugador.create();
 
 		
@@ -37,6 +36,6 @@ class CharapterSelection extends Phaser.Scene {
 
 	update ()
 	{
-	  this.jugador.update();
+	  	this.jugador.update()
 	}
 }

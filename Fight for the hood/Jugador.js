@@ -30,9 +30,13 @@ function Jugador(avatar,controles){
 	this.controles=controles;
 	this.vida=100;
 
+	
 
 	var that = this;
-	
+	var keysalto;
+	var keymovder;
+	var keymovizq;
+	//this.keysalto = this.avatar.scene.input.keyboard.addKey(that.controles.salto);
 
 	this.preload=function(){
 		that.avatar.preload();
@@ -41,17 +45,12 @@ function Jugador(avatar,controles){
 		that.avatar.animaciones();
 		that.avatar.spawnavatar();
 
-
+	   keysalto = this.avatar.scene.input.keyboard.addKey(that.controles.salto);
 	}
 	this.update=function(){
-		
-		
-		var cursors = that.avatar.scene.input.keyboard.createCursorKeys()
-
-		if(cursors.left.isDown){
-		that.avatar.walkright();
-		that.avatar.setVelocityX(160);
+		if(keysalto.isDown){
+			that.avatar.walkright();
+			//that.avatar.setVelocityX(160);
 		}
-		
 	}
 }

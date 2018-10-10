@@ -10,13 +10,13 @@ var config = {
         }
     },
     scene: [MainMenu,CharapterSelection,MainEscenario]
-         
 };
 
 var game = new Phaser.Game(config);
 
 function preload ()
 {
+
 }
 
 function create ()
