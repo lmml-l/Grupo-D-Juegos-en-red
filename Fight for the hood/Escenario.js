@@ -4,7 +4,7 @@ class MainEscenario extends Phaser.Scene {
 		super({key:"MainEscenario"});
         var sprite = ["Recursos/Imagenes/Sprite2.png","Recursos/Imagenes/Sprite2.png"]
         this.avatar = new Avatar("a",this,400,400,sprite);
-        this.jugador = new Jugador(this.avatar,controles2);
+        this.jugador = new Jugador(this.avatar,controles1);
 	}
 
 

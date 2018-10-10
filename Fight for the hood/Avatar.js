@@ -75,10 +75,10 @@ function Avatar (nam,scen,posx,posy,spritesheet) {
 			return that.sprite.anims.getCurrentKey();
 		}
 		this.velx=function(vel){
-			that.sprite.setVelocityX(vel);
+			that.sprite.body.velocity.x=vel;
 		}
 		this.vely=function(vel){
-			that.sprite.setVelocityY(vel);
+			that.sprite.body.velocity.y=vel;
 		}
 	}
 		

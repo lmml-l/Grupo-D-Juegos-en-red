@@ -83,7 +83,7 @@ function Jugador(avatar,controles){
 		}
 
 		if(keysalto.isDown && that.avatar.sprite.body.touching.down){
-			that.avatar.vely(-20);
+			that.avatar.vely(-40);
 		}
 		if(keymovabajo.isDown){
 
