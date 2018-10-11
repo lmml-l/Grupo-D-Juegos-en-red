@@ -50,7 +50,7 @@ function Avatar (nam,scen,posx,posy,spritesheet) {
 
 		}
 		this.spawnavatar=function(){
-			that.sprite = that.scene.physics.add.sprite(that.x,that.y,that.names + 'p1l').setScale(0.5);
+			that.sprite = that.scene.physics.add.sprite(that.x,that.y,that.names + 'p1l').setScale(0.40);
 		}
 
 
@@ -79,6 +79,13 @@ function Avatar (nam,scen,posx,posy,spritesheet) {
 		}
 		this.vely=function(vel){
 			that.sprite.body.velocity.y=vel;
+		}
+
+		this.getvelx=function(){
+			return that.sprite.body.velocity.x;
+		}
+		this.getvely=function(){
+			return that.sprite.body.velocity.y;
 		}
 	}
 		

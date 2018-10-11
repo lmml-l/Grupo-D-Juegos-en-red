@@ -60,7 +60,16 @@ function Jugador(avatar,controles){
 	   keyrecarma = this.avatar.scene.input.keyboard.addKey(that.controles.recarma);
 	   keyescudo = this.avatar.scene.input.keyboard.addKey(that.controles.escudo);
 	}
+	this.gravedad=function(){
+		if(that.avatar.sprite.body.touching.down){
+			that.avatar.vely(0);
+		}else {
+			that.avatar.vely(that.avatar.getvely()+ 9.8);
+		}
+	}
 	this.update=function(){
+		that.gravedad();
+
 		if(keymovder.isDown){
 			that.avatar.walkright();
 			that.avatar.velx(100);
@@ -83,7 +92,7 @@ function Jugador(avatar,controles){
 		}
 
 		if(keysalto.isDown && that.avatar.sprite.body.touching.down){
-			that.avatar.vely(-40);
+			that.avatar.vely(-400);
 		}
 		if(keymovabajo.isDown){
 
