@@ -1,96 +1,106 @@
-class Drops extends Phaser.Physics.Arcade.Image {
-	constructor(sprites){
+function Drop(escena, sprites) {
+		this.scene = escena;
 		this.pistola = sprites[1];
 		this.escopeta = sprites[2];
 		this.subfusil = sprites[3];
 		this.puñoamericano = sprites[4];
 		this.batebeisbol = sprites[5];
-		this.pickcommand = "SoltarRecoger";
-		this.lastWeapon = //Aqui necesito saber si el personaje guarda un identificador para el arma que lleva o si solo se indica si lleva o no arma;
-		this.newArma = "none";
-		this.callbackID = "none";
+		this.sprite;
+		var that = this;
+
+	this.initPos = function(){
+		return Math.random()*this.game.canvas.width;
+		//that.game.setGravity(-0.98);
 	}
 
-	initPos(){
-		var x;
-		var y = this.game.canvas.height;
-		this.game.setGravity(-0.98);
-	}
-
-	init(){
+	/*this.init = function(){
 		y += this.game.getGravity();
 
 	}
+	*/
+	
+	this.preload = function(){
 
-	select(){
-		var s = Math.random()*this.game.canvas.width;
-		x = s;
+		that.scene.load.sprite('Pistola', that.pistola);
+		that.scene.load.sprite('Escopeta', that.escopeta);
+		that.scene.load.sprite('Subfusil', that.subfusil);
+		that.scene.load.sprite('Puño Americano', that.puñoamericano);
+		that.scene.load.sprite('Bate de Beisbol', that.batebeisbol);
 
+
+	}
+
+	this.selectID = function(){
+		var name;
 		var e = Math.floor(Math.random()*4);
 		switch(e){
 			case 0:
-				printWeapon(esc);
+				name = "Escopeta";
 			break;
 
 			case 1:
-				printWeapon(pst);
+				name = "Pistola";
 			break;
 
 			case 2:
-				printWeapon(sbf);
+				name = "Subfusil";
 			break;
 
 			case 3:
-				printWeapon(pa);
+				name = "Puño Americano";
 			break;
 
 			case 4:
-				printWeapon(bb);
+				name = "Bate de Beisbol";
 			break;
 		}
+		return name;
 	}
 
-	printWeapon(idarma){
+	this.spawnarma = function(){
+		var x = that.initPos();
+		that.sprite = that.scene.physics.add.sprite(x, 0, that.selectID());
+	}
+
+	/*this.printWeapon = function(idarma){
 		switch(idarma){
 			case esc:
-				this.load.spritesheet('Escopeta',escopeta);
-				this.newArma = "escopeta";
+				that.load.spritesheet('Escopeta',escopeta);
+				that.newArma = "escopeta";
 			break;
 				
 			case pst:
-				this.load.spritesheet('Pistola',pistola);
-				this.newArma = "pistola";
+				that.load.spritesheet('Pistola',pistola);
+				that.newArma = "pistola";
 			break;
 
 			case sbf:
-				this.load.spritesheet('Subfusil',subfusil);
-				this.newArma = "subfusil";
+				that.load.spritesheet('Subfusil',subfusil);
+				that.newArma = "subfusil";
 			break;
 
 			case pa:
-				this.load.spritesheet('PuñoAmericano',puñoamericano);
-				this.newArma = "puño americano";
+				that.load.spritesheet('PuñoAmericano',puñoamericano);
+				that.newArma = "puño americano";
 			break;
 
 			case bb:
-				this.load.spritesheet('BateBeisbol',batebeisbol);
-				this.newArma = "bate de beisbol";
+				that.load.spritesheet('BateBeisbol',batebeisbol);
+				that.newArma = "bate de beisbol";
 			break;
-		}
-
-		
-		
-		
-		
+		}	
 	}
+	*/
 
-	pickndrop(scene, newArma){
-		this.Drops.destroy(this.scene);
+	/*this.pickndrop = function(arma, scene, newArma){
 		this.callbackID = this.newArma;
-		printWeapon(this.lastWeapon);
+		this.sprite.destroy();
+		printWeapon(arma);
 	}
+	*/
 
-	setnewID(){
-		return this.callbackID;
+	/*this.setnewID = function(){
+		this.Jugador.arma = this.callbackID;
 	}
+	*/
 }
