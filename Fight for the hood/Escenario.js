@@ -4,7 +4,9 @@ class MainEscenario extends Phaser.Scene {
 		super({key:"MainEscenario"});
         var sprite = ["Recursos/Imagenes/Sprite2.png","Recursos/Imagenes/Sprite2.png"]
         this.avatar = new Avatar("a",this,400,400,sprite);
-        this.jugador = new Jugador(this.avatar,controles2); //elegir controles 1 o controles 2
+        this.avatar1 = new Avatar("b",this,600,400,sprite);
+        this.jugador = new Jugador(this.avatar,controles2);
+        this.jugador1 = new Jugador(this.avatar1,controles1); //elegir controles 1 o controles 2
         this.plataformas;
         this.suelo;
         this.tanque;
@@ -30,6 +32,8 @@ atravesarplataformaspersonaje(jugador,plataforma){
 preload(){
 
     this.jugador.preload();
+    this.jugador1.preload();
+
 	this.load.image('fondo', 'Recursos/Imagenes/stage.png');
 	this.load.image('plat2', 'Recursos/Imagenes/plat2.png'); //atravesables
     this.load.image('platShort', 'Recursos/Imagenes/platShort.png');
@@ -65,11 +69,14 @@ create(){
 		//this.add.sprite(0, 0, 'Plat2')
 
 	this.plataformas = this.physics.add.staticGroup();  //Hace solidas las plataformas
-    //plataformasCortas = this.physics.add.staticGroup();
     this.suelo = this.physics.add.staticGroup();
     this.tanque = this.physics.add.staticGroup();
     this.pared = this.physics.add.staticGroup();
     
+    this.plataformas2 = this.physics.add.staticGroup();  //Hace solidas las plataformas
+    this.suelo2 = this.physics.add.staticGroup();
+    this.tanque2 = this.physics.add.staticGroup();
+    this.pared2 = this.physics.add.staticGroup();
 
 	//Suelo
     //platformas.create(x, y, 'suelo').setScale(2).refreshBody();
@@ -115,20 +122,63 @@ create(){
     this.plataformas.create(60, 385, 'cartelPixel').alpha=0; //izquierdo
     this.plataformas.create(726, 443, 'cartelPixel').alpha=0; //derecho
 
+    //AHORA SE HACEN LO MISMO PARA EL PERSONAJE DOS
+    this.suelo2.create(512, 592, 'sueloPixel').alpha=0;
+
+    this.plataformas2.create(319, 63,  'plat2').alpha=0;
+    this.plataformas2.create(319, 153, 'plat2').alpha=0;
+    this.plataformas2.create(319, 241, 'plat2').alpha=0;
+    this.plataformas2.create(319, 328, 'plat2').alpha=0;
+    this.plataformas2.create(319, 416, 'plat2').alpha=0;
+    //derecha
+    this.plataformas2.create(866, 141, 'plat2').alpha=0;
+    this.plataformas2.create(866, 229, 'plat2').alpha=0;
+    this.plataformas2.create(866, 317, 'plat2').alpha=0;
+    this.plataformas2.create(866, 404, 'plat2').alpha=0;
+    //sueltas
+    this.plataformas2.create(455, 276, 'platShort').alpha=0;
+    this.plataformas2.create(520, 362, 'platShort').alpha=0;
+    this.plataformas2.create(520, 468, 'platShort').alpha=0;
+    this.plataformas2.create(686, 276, 'platShort').alpha=0;
+    this.plataformas2.create(686, 364, 'platShort').alpha=0;
+    //techos
+    this.plataformas2.create(158, 305, 'techoApixel').alpha=0;
+    this.plataformas2.create(376, 60, 'techoBpixel').alpha=0;
+    this.plataformas2.create(624, 192, 'techoCpixel').alpha=0;
+    this.plataformas2.create(824, 130, 'techoDpixel').alpha=0;
+    //pared derecha
+    this.pared2.create(925, 215, 'paredPixel').alpha=0;
+    //toldos
+    this.plataformas2.create(159, 480, 'toldoLPixel').alpha=0; //izquierdo
+    this.plataformas2.create(878, 480, 'toldoRPixel').alpha=0; //derecho
+    //tubería
+    this.plataformas2.create(605, 116, 'tuboPixel').alpha=0;
+    //tanque de agua
+    this.tanque2.create(831, 97, 'tanquePixel').alpha=0;
+    //cartel
+    this.plataformas2.create(60, 385, 'cartelPixel').alpha=0; //izquierdo
+    this.plataformas2.create(726, 443, 'cartelPixel').alpha=0; //derecho
 
     this.jugador.create();
-    //colisiones
+    this.jugador1.create();
+    //colisiones jugador 1
     this.physics.add.collider(this.jugador.avatar.sprite, this.suelo); //con suelo
     this.physics.add.collider(this.jugador.avatar.sprite,this.plataformas); //con plataformas
     this.physics.add.collider(this.jugador.avatar.sprite, this.pared); //con la pared derecha
     this.jugador.avatar.sprite.body.collideWorldBounds = true; //con bordes
-    
+    //colisiones jugador 2
+    this.physics.add.collider(this.jugador1.avatar.sprite, this.suelo2); //con suelo
+    this.physics.add.collider(this.jugador1.avatar.sprite,this.plataformas2); //con plataformas
+    this.physics.add.collider(this.jugador1.avatar.sprite, this.pared2); //con la pared derecha
+    this.jugador1.avatar.sprite.body.collideWorldBounds = true; //con bordes
     //las plataformas no son colisionables desde abajo (si ejecuta estalla)
     //this.plataformas.setAll('body.collideDown', false);
     //plataformas.collideDown=false; //este no hace nada, pero no estalla
 	}
 update(){
     this.jugador.update();
+    this.jugador1.update();
     this.atravesarplataformaspersonaje(this.jugador.avatar.sprite,this.plataformas);
+    this.atravesarplataformaspersonaje(this.jugador1.avatar.sprite,this.plataformas2);
     }
 }
