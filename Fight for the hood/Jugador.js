@@ -67,9 +67,7 @@ function Jugador(avatar,controles){
 			that.avatar.vely(that.avatar.getvely()+ 9.8);
 		}
 	}
-	this.update=function(){
-		that.gravedad();
-
+	this.controldepersonaje = function(){
 		if(keymovder.isDown){
 			that.avatar.walkright();
 			that.avatar.velx(100);
@@ -92,7 +90,7 @@ function Jugador(avatar,controles){
 		}
 
 		if(keysalto.isDown && that.avatar.sprite.body.touching.down){
-			that.avatar.vely(-400);
+			that.avatar.vely(-375);
 		}
 		if(keymovabajo.isDown){
 
@@ -109,6 +107,10 @@ function Jugador(avatar,controles){
 		if(keyrecarma.isDown){
 			
 		}
-
+	}
+	this.update=function(){
+		that.gravedad();
+		that.controldepersonaje();
+		
 	}
 }
