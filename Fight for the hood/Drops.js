@@ -1,15 +1,16 @@
-function Drop(escena, sprites) {
+function Drops(escena, sprites) {
 		this.scene = escena;
 		this.pistola = sprites[1];
 		this.escopeta = sprites[2];
 		this.subfusil = sprites[3];
 		this.puñoamericano = sprites[4];
 		this.batebeisbol = sprites[5];
-		this.sprite;
+		this.sprite = new Array();
 		var that = this;
 
 	this.initPos = function(){
-		return Math.random()*this.game.canvas.width;
+		var arrayPos = [Math.random()*this.scene.game.canvas.width,Math.random()*this.scene.game.canvas.height]
+		return arrayPos;
 		//that.game.setGravity(-0.98);
 	}
 
@@ -21,11 +22,11 @@ function Drop(escena, sprites) {
 	
 	this.preload = function(){
 
-		that.scene.load.sprite('Pistola', that.pistola);
-		that.scene.load.sprite('Escopeta', that.escopeta);
-		that.scene.load.sprite('Subfusil', that.subfusil);
-		that.scene.load.sprite('Puño Americano', that.puñoamericano);
-		that.scene.load.sprite('Bate de Beisbol', that.batebeisbol);
+		that.scene.load.image('Pistola', that.pistola);
+		that.scene.load.image('Escopeta', that.escopeta);
+		that.scene.load.image('Subfusil', that.subfusil);
+		that.scene.load.image('Puño Americano', that.puñoamericano);
+		that.scene.load.image('Bate de Beisbol', that.batebeisbol);
 
 
 	}
@@ -58,8 +59,13 @@ function Drop(escena, sprites) {
 	}
 
 	this.spawnarma = function(){
-		var x = that.initPos();
-		that.sprite = that.scene.physics.add.sprite(x, 0, that.selectID());
+		var armapos = that.initPos();
+		var armapw = that.scene.physics.add.sprite(armapos[0],armapos[1], that.selectID());
+		that.sprite.push(armapw);
+		if(that.sprite.length > 5){
+			var s = that.sprite.shift();
+			s.destroy();
+		}
 	}
 
 	/*this.printWeapon = function(idarma){

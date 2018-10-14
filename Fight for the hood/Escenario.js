@@ -3,6 +3,9 @@ class MainEscenario extends Phaser.Scene {
 	constructor(){
 		super({key:"MainEscenario"});
         var sprite = ["Recursos/Imagenes/Sprite2.png","Recursos/Imagenes/Sprite2.png"]
+        var spritearmas = ["Recursos/Imagenes/Sprites_Armas/Bate_de_Beisbol/BateBeisbolPixelizado.png","Recursos/Imagenes/Sprites_Armas/Escopeta/EscopetaPixelizada.png","Recursos/Imagenes/Sprites_Armas/Pistola/PistolaPixelizada.png",
+        "Recursos/Imagenes/Sprites_Armas/Thompson/ThompsonPixelizado.png","Recursos/Imagenes/Sprites_Armas/Puno_Americano/PunoAmericanoPixelizado.png"]
+
         this.avatar = new Avatar("a",this,400,400,sprite);
         this.avatar1 = new Avatar("b",this,600,400,sprite);
         this.jugador = new Jugador(this.avatar,controles2);
@@ -11,6 +14,9 @@ class MainEscenario extends Phaser.Scene {
         this.suelo;
         this.tanque;
         this.pared;
+
+        this.drops = new Drops(this,spritearmas);
+       
 	}
 
 atravesarplataformaspersonaje(jugador,plataforma){
@@ -33,6 +39,8 @@ preload(){
 
     this.jugador.preload();
     this.jugador1.preload();
+    this.drops.preload();
+
 
 	this.load.image('fondo', 'Recursos/Imagenes/stage.png');
 	this.load.image('plat2', 'Recursos/Imagenes/plat2.png'); //atravesables
@@ -180,5 +188,7 @@ update(){
     this.jugador1.update();
     this.atravesarplataformaspersonaje(this.jugador.avatar.sprite,this.plataformas);
     this.atravesarplataformaspersonaje(this.jugador1.avatar.sprite,this.plataformas2);
+
+    this.drops.spawnarma();
     }
 }

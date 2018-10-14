@@ -1,5 +1,5 @@
 
-'use strict'
+'use strict';
 
 function Avatar (nam,scen,posx,posy,spritesheet) {
 		
@@ -41,13 +41,132 @@ function Avatar (nam,scen,posx,posy,spritesheet) {
     			repeat: -1
 			})
 
-			that.scene.anims.create({
+		that.scene.anims.create({
     			key: that.names + 'idle left',
    				frames: that.scene.anims.generateFrameNumbers(that.names + 'p1l', { start: 1, end: 1 }),
     			frameRate: 9,
     			repeat: -1
 			})
-
+		that.scene.anims.create({
+    			key: that.names + 'thompsom left',
+   				frames: that.scene.anims.generateFrameNumbers(that.names + 'p1l', { start: 1, end: 1 }),
+    			frameRate: 9,
+    			repeat: -1
+			})
+		that.scene.anims.create({
+    			key: that.names + 'thompsom right',
+   				frames: that.scene.anims.generateFrameNumbers(that.names + 'p1l', { start: 1, end: 1 }),
+    			frameRate: 9,
+    			repeat: -1
+			})
+		that.scene.anims.create({
+    			key: that.names + 'thompsom idle left',
+   				frames: that.scene.anims.generateFrameNumbers(that.names + 'p1l', { start: 1, end: 1 }),
+    			frameRate: 9,
+    			repeat: -1
+			})
+		that.scene.anims.create({
+    			key: that.names + 'thompsom idle right',
+   				frames: that.scene.anims.generateFrameNumbers(that.names + 'p1l', { start: 1, end: 1 }),
+    			frameRate: 9,
+    			repeat: -1
+			})
+		that.scene.anims.create({
+    			key: that.names + 'escopeta left',
+   				frames: that.scene.anims.generateFrameNumbers(that.names + 'p1l', { start: 1, end: 1 }),
+    			frameRate: 9,
+    			repeat: -1
+			})
+		that.scene.anims.create({
+    			key: that.names + 'escopeta right',
+   				frames: that.scene.anims.generateFrameNumbers(that.names + 'p1l', { start: 1, end: 1 }),
+    			frameRate: 9,
+    			repeat: -1
+			})
+		that.scene.anims.create({
+    			key: that.names + 'escopeta idle left',
+   				frames: that.scene.anims.generateFrameNumbers(that.names + 'p1l', { start: 1, end: 1 }),
+    			frameRate: 9,
+    			repeat: -1
+			})
+		that.scene.anims.create({
+    			key: that.names + 'escopeta idle right',
+   				frames: that.scene.anims.generateFrameNumbers(that.names + 'p1l', { start: 1, end: 1 }),
+    			frameRate: 9,
+    			repeat: -1
+			})
+		that.scene.anims.create({
+    			key: that.names + 'pistola left',
+   				frames: that.scene.anims.generateFrameNumbers(that.names + 'p1l', { start: 1, end: 1 }),
+    			frameRate: 9,
+    			repeat: -1
+			})
+		that.scene.anims.create({
+    			key: that.names + 'pistola right',
+   				frames: that.scene.anims.generateFrameNumbers(that.names + 'p1l', { start: 1, end: 1 }),
+    			frameRate: 9,
+    			repeat: -1
+			})
+		that.scene.anims.create({
+    			key: that.names + 'pistola idle left',
+   				frames: that.scene.anims.generateFrameNumbers(that.names + 'p1l', { start: 1, end: 1 }),
+    			frameRate: 9,
+    			repeat: -1
+			})
+		that.scene.anims.create({
+    			key: that.names + 'pistola idle right',
+   				frames: that.scene.anims.generateFrameNumbers(that.names + 'p1l', { start: 1, end: 1 }),
+    			frameRate: 9,
+    			repeat: -1
+			})
+		that.scene.anims.create({
+    			key: that.names + 'puñoamericano left',
+   				frames: that.scene.anims.generateFrameNumbers(that.names + 'p1l', { start: 1, end: 1 }),
+    			frameRate: 9,
+    			repeat: -1
+			})
+		that.scene.anims.create({
+    			key: that.names + 'puñoamericano right',
+   				frames: that.scene.anims.generateFrameNumbers(that.names + 'p1l', { start: 1, end: 1 }),
+    			frameRate: 9,
+    			repeat: -1
+			})
+		that.scene.anims.create({
+    			key: that.names + 'puñoamericano idle left',
+   				frames: that.scene.anims.generateFrameNumbers(that.names + 'p1l', { start: 1, end: 1 }),
+    			frameRate: 9,
+    			repeat: -1
+			})
+		that.scene.anims.create({
+    			key: that.names + 'puñoamericano idle right',
+   				frames: that.scene.anims.generateFrameNumbers(that.names + 'p1l', { start: 1, end: 1 }),
+    			frameRate: 9,
+    			repeat: -1
+			})
+		that.scene.anims.create({
+    			key: that.names + 'bate left',
+   				frames: that.scene.anims.generateFrameNumbers(that.names + 'p1l', { start: 1, end: 1 }),
+    			frameRate: 9,
+    			repeat: -1
+			})
+		that.scene.anims.create({
+    			key: that.names + 'bate right',
+   				frames: that.scene.anims.generateFrameNumbers(that.names + 'p1l', { start: 1, end: 1 }),
+    			frameRate: 9,
+    			repeat: -1
+			})
+		that.scene.anims.create({
+    			key: that.names + 'bate idle left',
+   				frames: that.scene.anims.generateFrameNumbers(that.names + 'p1l', { start: 1, end: 1 }),
+    			frameRate: 9,
+    			repeat: -1
+			})
+		that.scene.anims.create({
+    			key: that.names + 'bate idle right',
+   				frames: that.scene.anims.generateFrameNumbers(that.names + 'p1l', { start: 1, end: 1 }),
+    			frameRate: 9,
+    			repeat: -1
+			})
 		}
 		this.spawnavatar=function(){
 			that.sprite = that.scene.physics.add.sprite(that.x,that.y,that.names + 'p1l').setScale(0.40);
