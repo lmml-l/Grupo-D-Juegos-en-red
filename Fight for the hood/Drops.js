@@ -60,12 +60,21 @@ function Drops(escena, sprites) {
 
 	this.spawnarma = function(){
 		var armapos = that.initPos();
-		var armapw = that.scene.physics.add.sprite(armapos[0],armapos[1], that.selectID());
-		that.sprite.push(armapw);
+		var armapw = that.scene.physics.add.sprite(armapos[0],armapos[1], that.selectID()).setScale(0.1);
+		that.sprite.push(armapw)
+		//var i = Math.floor(Math.random(5));
+		//var s = that.sprite[i];
+		//if(that.sprite[i]!=undefined){
+			//s.destroy();
+		//}
+		
+		//that.sprite[i]=armapw;
+
 		if(that.sprite.length > 5){
 			var s = that.sprite.shift();
 			s.destroy();
 		}
+		
 	}
 
 	/*this.printWeapon = function(idarma){

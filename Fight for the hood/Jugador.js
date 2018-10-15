@@ -68,16 +68,23 @@ function Jugador(avatar,controles){
 		}
 	}
 	this.controldepersonaje = function(){
+		var animacionactual = that.avatar.getanim();
 		if(keymovder.isDown){
+			if(animacionactual != that.avatar.names + that.arma + ' right' ){
+				that.avatar.stopanim();
+			}
 			that.avatar.walkright(that.arma);
 			that.avatar.velx(100);
 		}
 		else if (keymovizq.isDown){
+			if(animacionactual != that.avatar.names + that.arma + ' left' ){
+				that.avatar.stopanim();
+			}
 			that.avatar.walkleft(that.arma);
 			that.avatar.velx(-100);
 		}
 		else{
-			var animacionactual = that.avatar.getanim(); 
+			//var animacionactual = that.avatar.getanim(); 
 			if(animacionactual == (that.avatar.names + that.arma + ' left')){
 				that.avatar.stopanim();
 				that.avatar.idleleft(that.arma);

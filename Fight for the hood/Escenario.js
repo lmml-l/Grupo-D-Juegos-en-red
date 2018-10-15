@@ -2,9 +2,18 @@ class MainEscenario extends Phaser.Scene {
     
 	constructor(){
 		super({key:"MainEscenario"});
-        var sprite = ["Recursos/Imagenes/Sprite2.png","Recursos/Imagenes/Sprite2.png"]
-        var spritearmas = ["Recursos/Imagenes/Sprites_Armas/Pistola/PistolaPixelizada.png","Recursos/Imagenes/Sprites_Armas/Escopeta/EscopetaPixelizada.png","Recursos/Imagenes/Sprites_Armas/Thompson/ThompsonPixelizado.png",
-        "Recursos/Imagenes/Sprites_Armas/Puno_Americano/PunoAmericanoPixelizado.png","Recursos/Imagenes/Sprites_Armas/Bate_de_Beisbol/BateBeisbolPixelizado.png"]
+        var sprite = ["Recursos/Imagenes/Sprite2.png","Recursos/Imagenes/Sprite2.png",
+        "Recursos/Imagenes/Sprite2.png","Recursos/Imagenes/Sprite2.png",
+        "Recursos/Imagenes/Sprite2.png","Recursos/Imagenes/Sprite2.png",
+        "Recursos/Imagenes/Sprite2.png","Recursos/Imagenes/Sprite2.png",
+        "Recursos/Imagenes/Sprite2.png","Recursos/Imagenes/Sprite2.png",
+        "Recursos/Imagenes/Sprite2.png","Recursos/Imagenes/Sprite2.png"]
+
+        var spritearmas = ["Recursos/Imagenes/Sprites_Armas/Pistola/PistolaPixelizada.png",
+        "Recursos/Imagenes/Sprites_Armas/Escopeta/EscopetaPixelizada.png",
+        "Recursos/Imagenes/Sprites_Armas/Thompson/ThompsonPixelizado.png",
+        "Recursos/Imagenes/Sprites_Armas/Puno_Americano/PunoAmericanoPixelizado.png",
+        "Recursos/Imagenes/Sprites_Armas/Bate_de_Beisbol/BateBeisbolPixelizado.png"]
 
         this.avatar = new Avatar("a",this,400,400,sprite);
         this.avatar1 = new Avatar("b",this,600,400,sprite);
@@ -17,6 +26,7 @@ class MainEscenario extends Phaser.Scene {
 
         this.drops = new Drops(this,spritearmas);
        
+
 	}
 
 atravesarplataformaspersonaje(jugador,plataforma){
@@ -182,13 +192,18 @@ create(){
     //las plataformas no son colisionables desde abajo (si ejecuta estalla)
     //this.plataformas.setAll('body.collideDown', false);
     //plataformas.collideDown=false; //este no hace nada, pero no estalla
+
+    //time event spawndrop
+    var dropevent = this.time.addEvent({delay:10000 ,loop:true ,
+        callback: this.drops.spawnarma })
 	}
+    
 update(){
     this.jugador.update();
     this.jugador1.update();
     this.atravesarplataformaspersonaje(this.jugador.avatar.sprite,this.plataformas);
     this.atravesarplataformaspersonaje(this.jugador1.avatar.sprite,this.plataformas2);
 
-    this.drops.spawnarma();
+    
     }
 }
