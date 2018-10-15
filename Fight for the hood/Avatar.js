@@ -59,121 +59,121 @@ function Avatar (nam,scen,posx,posy,spritesheet) {
     			repeat: -1
 			})
 		that.scene.anims.create({
-    			key: that.names + 'thompsom left',
+    			key: that.names + 'Subfusil left',
    				frames: that.scene.anims.generateFrameNumbers(that.names + 'p1lt', { start: 0, end: 2 }),
     			frameRate: 9,
     			repeat: -1
 			})
 		that.scene.anims.create({
-    			key: that.names + 'thompsom right',
+    			key: that.names + 'Subfusil right',
    				frames: that.scene.anims.generateFrameNumbers(that.names + 'p1rt', { start: 0, end: 2 }),
     			frameRate: 9,
     			repeat: -1
 			})
 		that.scene.anims.create({
-    			key: that.names + 'thompsom idle left',
+    			key: that.names + 'Subfusil idle left',
    				frames: that.scene.anims.generateFrameNumbers(that.names + 'p1lt', { start: 1, end: 1 }),
     			frameRate: 9,
     			repeat: -1
 			})
 		that.scene.anims.create({
-    			key: that.names + 'thompsom idle right',
+    			key: that.names + 'Subfusil idle right',
    				frames: that.scene.anims.generateFrameNumbers(that.names + 'p1rt', { start: 1, end: 1 }),
     			frameRate: 9,
     			repeat: -1
 			})
 		that.scene.anims.create({
-    			key: that.names + 'escopeta left',
+    			key: that.names + 'Escopeta left',
    				frames: that.scene.anims.generateFrameNumbers(that.names + 'p1le', { start: 0, end: 2 }),
     			frameRate: 9,
     			repeat: -1
 			})
 		that.scene.anims.create({
-    			key: that.names + 'escopeta right',
+    			key: that.names + 'Escopeta right',
    				frames: that.scene.anims.generateFrameNumbers(that.names + 'p1re', { start: 0, end: 2 }),
     			frameRate: 9,
     			repeat: -1
 			})
 		that.scene.anims.create({
-    			key: that.names + 'escopeta idle left',
+    			key: that.names + 'Escopeta idle left',
    				frames: that.scene.anims.generateFrameNumbers(that.names + 'p1le', { start: 1, end: 1 }),
     			frameRate: 9,
     			repeat: -1
 			})
 		that.scene.anims.create({
-    			key: that.names + 'escopeta idle right',
+    			key: that.names + 'Escopeta idle right',
    				frames: that.scene.anims.generateFrameNumbers(that.names + 'p1re', { start: 1, end: 1 }),
     			frameRate: 9,
     			repeat: -1
 			})
 		that.scene.anims.create({
-    			key: that.names + 'pistola left',
+    			key: that.names + 'Pistola left',
    				frames: that.scene.anims.generateFrameNumbers(that.names + 'p1lp', { start: 0, end: 2 }),
     			frameRate: 9,
     			repeat: -1
 			})
 		that.scene.anims.create({
-    			key: that.names + 'pistola right',
+    			key: that.names + 'Pistola right',
    				frames: that.scene.anims.generateFrameNumbers(that.names + 'p1rp', { start: 0, end: 2 }),
     			frameRate: 9,
     			repeat: -1
 			})
 		that.scene.anims.create({
-    			key: that.names + 'pistola idle left',
+    			key: that.names + 'Pistola idle left',
    				frames: that.scene.anims.generateFrameNumbers(that.names + 'p1lp', { start: 1, end: 1 }),
     			frameRate: 9,
     			repeat: -1
 			})
 		that.scene.anims.create({
-    			key: that.names + 'pistola idle right',
+    			key: that.names + 'Pistola idle right',
    				frames: that.scene.anims.generateFrameNumbers(that.names + 'p1rp', { start: 1, end: 1 }),
     			frameRate: 9,
     			repeat: -1
 			})
 		that.scene.anims.create({
-    			key: that.names + 'puñoamericano left',
+    			key: that.names + 'Puñoamericano left',
    				frames: that.scene.anims.generateFrameNumbers(that.names + 'p1lpa', { start: 0, end: 2 }),
     			frameRate: 9,
     			repeat: -1
 			})
 		that.scene.anims.create({
-    			key: that.names + 'puñoamericano right',
+    			key: that.names + 'Puñoamericano right',
    				frames: that.scene.anims.generateFrameNumbers(that.names + 'p1rpa', { start: 0, end: 2 }),
     			frameRate: 9,
     			repeat: -1
 			})
 		that.scene.anims.create({
-    			key: that.names + 'puñoamericano idle left',
+    			key: that.names + 'Puñoamericano idle left',
    				frames: that.scene.anims.generateFrameNumbers(that.names + 'p1lpa', { start: 1, end: 1 }),
     			frameRate: 9,
     			repeat: -1
 			})
 		that.scene.anims.create({
-    			key: that.names + 'puñoamericano idle right',
+    			key: that.names + 'Puñoamericano idle right',
    				frames: that.scene.anims.generateFrameNumbers(that.names + 'p1rpa', { start: 1, end: 1 }),
     			frameRate: 9,
     			repeat: -1
 			})
 		that.scene.anims.create({
-    			key: that.names + 'bate left',
+    			key: that.names + 'Bate left',
    				frames: that.scene.anims.generateFrameNumbers(that.names + 'p1lb', { start: 0, end: 2 }),
     			frameRate: 9,
     			repeat: -1
 			})
 		that.scene.anims.create({
-    			key: that.names + 'bate right',
+    			key: that.names + 'Bate right',
    				frames: that.scene.anims.generateFrameNumbers(that.names + 'p1rb', { start: 0, end: 2 }),
     			frameRate: 9,
     			repeat: -1
 			})
 		that.scene.anims.create({
-    			key: that.names + 'bate idle left',
+    			key: that.names + 'Bate idle left',
    				frames: that.scene.anims.generateFrameNumbers(that.names + 'p1lb', { start: 1, end: 1 }),
     			frameRate: 9,
     			repeat: -1
 			})
 		that.scene.anims.create({
-    			key: that.names + 'bate idle right',
+    			key: that.names + 'Bate idle right',
    				frames: that.scene.anims.generateFrameNumbers(that.names + 'p1rb', { start: 1, end: 1 }),
     			frameRate: 9,
     			repeat: -1

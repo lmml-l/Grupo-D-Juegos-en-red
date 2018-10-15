@@ -194,16 +194,23 @@ create(){
     //plataformas.collideDown=false; //este no hace nada, pero no estalla
 
     //time event spawndrop
+    var that = this;
+    //var functionevent = function(){
+           // var obj = that.drops.spawnarma();
+            //that.physics.add.overlap(that.jugador1.avatar.sprite,obj); 
+            //that.physics.add.overlap(that.jugador.avatar.sprite,obj); 
+      //  }
+
     var dropevent = this.time.addEvent({delay:10000 ,loop:true ,
-        callback: this.drops.spawnarma })
+        callback: that.drops.spawnarma })
 	}
+
     
 update(){
-    this.jugador.update();
-    this.jugador1.update();
+    this.jugador.update(this.drops);
+    this.jugador1.update(this.drops);
     this.atravesarplataformaspersonaje(this.jugador.avatar.sprite,this.plataformas);
     this.atravesarplataformaspersonaje(this.jugador1.avatar.sprite,this.plataformas2);
-
     
     }
 }

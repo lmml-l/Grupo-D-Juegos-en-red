@@ -13,27 +13,21 @@ function Drops(escena, sprites) {
 		return arrayPos;
 		//that.game.setGravity(-0.98);
 	}
-
-	/*this.init = function(){
-		y += this.game.getGravity();
-
-	}
-	*/
 	
 	this.preload = function(){
 
 		that.scene.load.image('Pistola', that.pistola);
 		that.scene.load.image('Escopeta', that.escopeta);
 		that.scene.load.image('Subfusil', that.subfusil);
-		that.scene.load.image('Puño Americano', that.puñoamericano);
-		that.scene.load.image('Bate de Beisbol', that.batebeisbol);
+		that.scene.load.image('Puñoamericano', that.puñoamericano);
+		that.scene.load.image('Bate', that.batebeisbol);
 
 
 	}
 
 	this.selectID = function(){
 		var name;
-		var e = Math.floor(Math.random()*5);
+		var e = Math.floor(Math.random()*1);
 		switch(e){
 			case 0:
 				name = "Escopeta";
@@ -48,11 +42,11 @@ function Drops(escena, sprites) {
 			break;
 
 			case 3:
-				name = "Puño Americano";
+				name = "Puñoamericano";
 			break;
 
 			case 4:
-				name = "Bate de Beisbol";
+				name = "Bate";
 			break;
 		}
 		return name;
@@ -75,6 +69,7 @@ function Drops(escena, sprites) {
 			s.destroy();
 		}
 		
+		return armapw;
 	}
 
 	/*this.printWeapon = function(idarma){

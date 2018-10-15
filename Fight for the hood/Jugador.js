@@ -60,6 +60,25 @@ function Jugador(avatar,controles){
 	   keyrecarma = this.avatar.scene.input.keyboard.addKey(that.controles.recarma);
 	   keyescudo = this.avatar.scene.input.keyboard.addKey(that.controles.escudo);
 	}
+
+	this.selectarma = function(armasdrops,offset){
+        for(var i = 0 ; i < armasdrops.sprite.length ; i++){
+           //console.log("res:" + (Math.abs(armasdrops.sprite[i].x-that.avatar.sprite.x)))
+            if((Math.abs(armasdrops.sprite[i].x-that.avatar.sprite.x))< offset){
+                if((Math.abs(armasdrops.sprite[i].y-that.avatar.sprite.y))<offset){
+                    that.arma = armasdrops.sprite[i].texture.key;
+                    var armarecogida = armasdrops.sprite[i];
+                    armarecogida.destroy();
+                    armasdrops.sprite.splice(i,1);
+
+                }
+                else{
+                    this.arma="";
+                }
+            }
+        }
+    }
+	
 	this.gravedad=function(){
 		if(that.avatar.sprite.body.touching.down){
 			that.avatar.vely(0);
@@ -108,16 +127,19 @@ function Jugador(avatar,controles){
 		if(keyescudo.isDown){
 			
 		}
-		if(keyrecargar.isDown){
-			
-		}
 		if(keyrecarma.isDown){
 			
 		}
 	}
-	this.update=function(){
+	this.cambiararma = function(dropss){
+		if(keyrecargar.isDown){
+			that.selectarma(dropss,100);
+		}
+	}
+	this.update=function(dropss){
 		that.gravedad();
 		that.controldepersonaje();
-		
+		that.cambiararma(dropss);
 	}
+
 }
