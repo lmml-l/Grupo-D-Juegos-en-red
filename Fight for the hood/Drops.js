@@ -1,10 +1,10 @@
 function Drops(escena, sprites) {
 		this.scene = escena;
-		this.pistola = sprites[1];
-		this.escopeta = sprites[2];
-		this.subfusil = sprites[3];
-		this.puñoamericano = sprites[4];
-		this.batebeisbol = sprites[5];
+		this.pistola = sprites[0];
+		this.escopeta = sprites[1];
+		this.subfusil = sprites[2];
+		this.puñoamericano = sprites[3];
+		this.batebeisbol = sprites[4];
 		this.sprite = new Array();
 		var that = this;
 
@@ -33,7 +33,7 @@ function Drops(escena, sprites) {
 
 	this.selectID = function(){
 		var name;
-		var e = Math.floor(Math.random()*4);
+		var e = Math.floor(Math.random()*5);
 		switch(e){
 			case 0:
 				name = "Escopeta";

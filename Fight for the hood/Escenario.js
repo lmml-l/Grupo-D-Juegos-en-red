@@ -3,8 +3,8 @@ class MainEscenario extends Phaser.Scene {
 	constructor(){
 		super({key:"MainEscenario"});
         var sprite = ["Recursos/Imagenes/Sprite2.png","Recursos/Imagenes/Sprite2.png"]
-        var spritearmas = ["Recursos/Imagenes/Sprites_Armas/Bate_de_Beisbol/BateBeisbolPixelizado.png","Recursos/Imagenes/Sprites_Armas/Escopeta/EscopetaPixelizada.png","Recursos/Imagenes/Sprites_Armas/Pistola/PistolaPixelizada.png",
-        "Recursos/Imagenes/Sprites_Armas/Thompson/ThompsonPixelizado.png","Recursos/Imagenes/Sprites_Armas/Puno_Americano/PunoAmericanoPixelizado.png"]
+        var spritearmas = ["Recursos/Imagenes/Sprites_Armas/Pistola/PistolaPixelizada.png","Recursos/Imagenes/Sprites_Armas/Escopeta/EscopetaPixelizada.png","Recursos/Imagenes/Sprites_Armas/Thompson/ThompsonPixelizado.png",
+        "Recursos/Imagenes/Sprites_Armas/Puno_Americano/PunoAmericanoPixelizado.png","Recursos/Imagenes/Sprites_Armas/Bate_de_Beisbol/BateBeisbolPixelizado.png"]
 
         this.avatar = new Avatar("a",this,400,400,sprite);
         this.avatar1 = new Avatar("b",this,600,400,sprite);
