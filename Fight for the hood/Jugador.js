@@ -26,7 +26,7 @@ var controles2 = {
 
 function Jugador(avatar,controles){
 	this.avatar = avatar;
-	this.arma;
+	this.arma ="";
 	this.escudo;
 	this.controles=controles;
 	this.vida=100;
@@ -69,22 +69,22 @@ function Jugador(avatar,controles){
 	}
 	this.controldepersonaje = function(){
 		if(keymovder.isDown){
-			that.avatar.walkright();
+			that.avatar.walkright(that.arma);
 			that.avatar.velx(100);
 		}
 		else if (keymovizq.isDown){
-			that.avatar.walkleft();
+			that.avatar.walkleft(that.arma);
 			that.avatar.velx(-100);
 		}
 		else{
 			var animacionactual = that.avatar.getanim(); 
-			if(animacionactual == (that.avatar.names + 'left')){
+			if(animacionactual == (that.avatar.names + that.arma + ' left')){
 				that.avatar.stopanim();
-				that.avatar.idleleft();
+				that.avatar.idleleft(that.arma);
 			}
-			else if(animacionactual == (that.avatar.names + 'right')){
+			else if(animacionactual == (that.avatar.names + that.arma + ' right')){
 				that.avatar.stopanim();
-				that.avatar.idleright();
+				that.avatar.idleright(that.arma);
 			}
 			that.avatar.velx(0);
 		}

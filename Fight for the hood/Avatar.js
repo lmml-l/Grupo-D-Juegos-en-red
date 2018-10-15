@@ -21,28 +21,28 @@ function Avatar (nam,scen,posx,posy,spritesheet) {
 
 		this.animaciones=function(){
 		that.scene.anims.create({
-    			key: that.names +'left',
+    			key: that.names +' left',
    				frames: that.scene.anims.generateFrameNumbers(that.names + 'p1l', { start: 0, end: 3 }),
     			frameRate: 9,
     			repeat: -1
 			});
 
 		that.scene.anims.create({
-    			key: that.names + 'right',
+    			key: that.names + ' right',
    				frames: that.scene.anims.generateFrameNumbers(that.names + 'p1r', { start: 0, end: 3 }),
     			frameRate: 9,
     			repeat: -1
 			})
 
 		that.scene.anims.create({
-    			key: that.names + 'idle right',
+    			key: that.names + ' idle right',
    				frames: that.scene.anims.generateFrameNumbers(that.names + 'p1r', { start: 1, end: 1 }),
     			frameRate: 9,
     			repeat: -1
 			})
 
 		that.scene.anims.create({
-    			key: that.names + 'idle left',
+    			key: that.names + ' idle left',
    				frames: that.scene.anims.generateFrameNumbers(that.names + 'p1l', { start: 1, end: 1 }),
     			frameRate: 9,
     			repeat: -1
@@ -173,17 +173,17 @@ function Avatar (nam,scen,posx,posy,spritesheet) {
 		}
 
 
-		this.walkright=function(){
-			that.sprite.anims.play(that.names +'right',true);
+		this.walkright=function(armaequipada){
+			that.sprite.anims.play(that.names + armaequipada +' right',true);
 		}
-		this.walkleft=function(){
-			that.sprite.anims.play(that.names +'left',true);
+		this.walkleft=function(armaequipada){
+			that.sprite.anims.play(that.names + armaequipada +' left',true);
 		}
-		this.idleleft=function(){
-			that.sprite.anims.play(that.names +'idle left',true);
+		this.idleleft=function(armaequipada){
+			that.sprite.anims.play(that.names + armaequipada +' idle left',true);
 		}
-		this.idleright=function(){
-			that.sprite.anims.play(that.names +'idle right',true);
+		this.idleright=function(armaequipada){
+			that.sprite.anims.play(that.names + armaequipada +' idle right',true);
 		}
 
 
