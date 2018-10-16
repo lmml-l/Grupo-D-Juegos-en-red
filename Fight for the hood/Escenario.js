@@ -4,7 +4,7 @@ class MainEscenario extends Phaser.Scene {
 		super({key:"MainEscenario"});
         var sprite = ["Recursos/Imagenes/Sprites_Personaje/SpritePersonajeIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpritePersonajeDerecha.png",
         "Recursos/Imagenes/Sprite2.png","Recursos/Imagenes/Sprite2.png",
-        "Recursos/Imagenes/Sprite2.png","Recursos/Imagenes/Sprite2.png",
+        "Recursos/Imagenes/Sprites_Personaje/SpriteEscopetaIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpriteEscopetaDerecha.png",
         "Recursos/Imagenes/Sprites_Personaje/SpriteThomsomIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpriteThomsomDerecha.png",
         "Recursos/Imagenes/Sprite2.png","Recursos/Imagenes/Sprite2.png",
         "Recursos/Imagenes/Sprite2.png","Recursos/Imagenes/Sprite2.png"]

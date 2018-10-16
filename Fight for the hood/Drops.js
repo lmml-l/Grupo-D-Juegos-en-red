@@ -27,7 +27,7 @@ function Drops(escena, sprites) {
 
 	this.selectID = function(){
 		var name;
-		var e = Math.floor(Math.random()*1);
+		var e = Math.floor(Math.random()*5);
 		switch(e){
 			case 0:
 				name = "Escopeta";
@@ -54,7 +54,7 @@ function Drops(escena, sprites) {
 
 	this.spawnarma = function(){
 		var armapos = that.initPos();
-		var armapw = that.scene.physics.add.sprite(armapos[0],armapos[1], that.selectID()).setScale(0.1);
+		var armapw = that.scene.physics.add.sprite(armapos[0],armapos[1], that.selectID()).setScale(0.05);
 		that.sprite.push(armapw)
 		//var i = Math.floor(Math.random(5));
 		//var s = that.sprite[i];

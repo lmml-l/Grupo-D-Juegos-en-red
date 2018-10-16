@@ -19,8 +19,8 @@ var controles2 = {
 	movizq: Phaser.Input.Keyboard.KeyCodes.A,
 	movabajo: Phaser.Input.Keyboard.KeyCodes.S,
 	disparo: Phaser.Input.Keyboard.KeyCodes.SPACE,
-	recarma: Phaser.Input.Keyboard.KeyCodes.R,
-	recargar: Phaser.Input.Keyboard.KeyCodes.E,
+	recarma: Phaser.Input.Keyboard.KeyCodes.E,
+	recargar: Phaser.Input.Keyboard.KeyCodes.R,
 	escudo: Phaser.Input.Keyboard.KeyCodes.SHIFT
 }
 
@@ -44,6 +44,8 @@ function Jugador(avatar,controles){
 	var keyrecarma;
 	var keyescudo;
 
+	var keyrecarmasoltada;
+
 	this.preload=function(){
 		that.avatar.preload();
 	}
@@ -62,7 +64,10 @@ function Jugador(avatar,controles){
 	}
 
 	this.selectarma = function(armasdrops,offset){
-        for(var i = 0 ; i < armasdrops.sprite.length ; i++){
+		var i = 0
+		var armaactual = this.arma;
+		var cambiadoarma = false;
+        while((i < armasdrops.sprite.length)&& (!cambiadoarma) ){
            //console.log("res:" + (Math.abs(armasdrops.sprite[i].x-that.avatar.sprite.x)))
             if((Math.abs(armasdrops.sprite[i].x-that.avatar.sprite.x))< offset){
                 if((Math.abs(armasdrops.sprite[i].y-that.avatar.sprite.y))<offset){
@@ -70,12 +75,16 @@ function Jugador(avatar,controles){
                     var armarecogida = armasdrops.sprite[i];
                     armarecogida.destroy();
                     armasdrops.sprite.splice(i,1);
-
+                    cambiadoarma=true;
                 }
                 else{
                     this.arma="";
                 }
             }
+            else{
+                this.arma="";
+            }
+            i++;
         }
     }
 	
@@ -132,13 +141,22 @@ function Jugador(avatar,controles){
 		}
 	}
 	this.cambiararma = function(dropss){
-		if(keyrecarma.isDown){
+
+		if((keyrecarma.isDown) && (keyrecarmasoltada)){
 			that.selectarma(dropss,100);
+			keyrecarmasoltada = false;
 		}
 	}
+	this.teclasoltada = function(){
+		if(keyrecarma.isUp){
+			keyrecarmasoltada=true;
+		}
+	}
+
 	this.update=function(dropss){
 		that.gravedad();
 		that.controldepersonaje();
+		that.teclasoltada();
 		that.cambiararma(dropss);
 	}
 
