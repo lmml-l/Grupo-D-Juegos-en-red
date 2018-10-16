@@ -1,9 +1,14 @@
+'use strict'
+
+    var victorias=new Array(2); //Almacena el nº de partidas ganadas por cada jugador
+    victorias[0]=0; victorias[1]=0;
+
 class MainEscenario extends Phaser.Scene {
-    
+
 	constructor(){
 		super({key:"MainEscenario"});
         var sprite = ["Recursos/Imagenes/Sprites_Personaje/SpritePersonajeIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpritePersonajeDerecha.png",
-        "Recursos/Imagenes/Sprites_Personaje/SpritePistolaIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpritePistolaDerecha.png",
+        "Recursos/Imagenes/Sprite2.png","Recursos/Imagenes/Sprite2.png",
         "Recursos/Imagenes/Sprites_Personaje/SpriteEscopetaIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpriteEscopetaDerecha.png",
         "Recursos/Imagenes/Sprites_Personaje/SpriteThomsomIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpriteThomsomDerecha.png",
         "Recursos/Imagenes/Sprite2.png","Recursos/Imagenes/Sprite2.png",
@@ -25,6 +30,8 @@ class MainEscenario extends Phaser.Scene {
         this.pared;
 
         this.drops = new Drops(this,spritearmas);
+        //this.partida = new Partida(this);
+        //this.partida = new Partida(this,spritearmas);
        
 
 	}
@@ -50,7 +57,7 @@ preload(){
     this.jugador.preload();
     this.jugador1.preload();
     this.drops.preload();
-
+    //this.partida.preload();
 
 	this.load.image('fondo', 'Recursos/Imagenes/stage.png');
 	this.load.image('plat2', 'Recursos/Imagenes/plat2.png'); //atravesables
@@ -106,7 +113,6 @@ create(){
     //plataformas invisibles
     //escaleras de emergencia
     //izquierda 
-    this.plataformas.create(319, 63,  'plat2').alpha=0;
     this.plataformas.create(319, 153, 'plat2').alpha=0;
     this.plataformas.create(319, 241, 'plat2').alpha=0;
     this.plataformas.create(319, 328, 'plat2').alpha=0;
@@ -143,7 +149,9 @@ create(){
     //AHORA SE HACEN LO MISMO PARA EL PERSONAJE DOS
     this.suelo2.create(512, 592, 'sueloPixel').alpha=0;
 
-    this.plataformas2.create(319, 63,  'plat2').alpha=0;
+
+    //plataformas
+    //izquierda
     this.plataformas2.create(319, 153, 'plat2').alpha=0;
     this.plataformas2.create(319, 241, 'plat2').alpha=0;
     this.plataformas2.create(319, 328, 'plat2').alpha=0;
@@ -189,9 +197,7 @@ create(){
     this.physics.add.collider(this.jugador1.avatar.sprite,this.plataformas2); //con plataformas
     this.physics.add.collider(this.jugador1.avatar.sprite, this.pared2); //con la pared derecha
     this.jugador1.avatar.sprite.body.collideWorldBounds = true; //con bordes
-    //las plataformas no son colisionables desde abajo (si ejecuta estalla)
-    //this.plataformas.setAll('body.collideDown', false);
-    //plataformas.collideDown=false; //este no hace nada, pero no estalla
+ 
 
     //time event spawndrop
     var that = this;
@@ -205,12 +211,38 @@ create(){
         callback: that.drops.spawnarma })
 	}
 
-    
+
 update(){
     this.jugador.update(this.drops);
     this.jugador1.update(this.drops);
     this.atravesarplataformaspersonaje(this.jugador.avatar.sprite,this.plataformas);
     this.atravesarplataformaspersonaje(this.jugador1.avatar.sprite,this.plataformas2);
+    //this.update(this.partida);
+    this.checkPartida();
     
     }
+
+//Comprobamos las condiciones para ganar
+checkPartida(){
+    //Si algún jugador llega a 3 victorias gana la partida
+    if(victorias[0]=3){ //jugador 0
+        //FUNCIÓN DE GANAR (TEXTO EN PANTALLA O MENÚ?)
+        victorias[0]=0;
+    }
+    if(victorias[1]=3){ //jugador 1
+        //FUNCIÓN DE GANAR (TEXTO EN PANTALLA EN O MENÚ?)
+         victorias[1]=0;
+    }
+
+    //Si algún jugador se queda sin vida
+    if(this.jugador.vida===0){  //jugador 0
+        victorias[0]=+1;
+        this.scene.restart();
+    }
+    if(this.jugador1.vida===0){ //jugador 1
+        victorias[1]=+1;
+        this.scene.restart();
+    }
+}
+
 }
