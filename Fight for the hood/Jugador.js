@@ -132,7 +132,7 @@ function Jugador(avatar,controles){
 		}
 	}
 	this.cambiararma = function(dropss){
-		if(keyrecargar.isDown){
+		if(keyrecarma.isDown){
 			that.selectarma(dropss,100);
 		}
 	}
