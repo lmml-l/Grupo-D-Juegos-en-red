@@ -1,3 +1,4 @@
+'use strict'
 function Drops(escena, sprites) {
 		this.scene = escena;
 		this.pistola = sprites[0];

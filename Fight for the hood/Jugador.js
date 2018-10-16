@@ -1,4 +1,4 @@
-//La clase jugadro sera un controlador de personaje
+//La clase jugador sera un controlador de personaje
 'use strict'
 
 
