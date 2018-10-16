@@ -52,6 +52,7 @@ function Jugador(avatar,controles){
 	this.create=function(){
 		that.avatar.animaciones();
 		that.avatar.spawnavatar();
+		that.avatar.walkright(that.arma);
 
 	   keysalto = this.avatar.scene.input.keyboard.addKey(that.controles.salto);
 	   keymovder = this.avatar.scene.input.keyboard.addKey(that.controles.movder);
@@ -113,11 +114,11 @@ function Jugador(avatar,controles){
 		}
 		else{
 			//var animacionactual = that.avatar.getanim(); 
-			if(animacionactual == (that.avatar.names + that.arma + ' left')){
+			if(animacionactual.includes(' left')){
 				that.avatar.stopanim();
 				that.avatar.idleleft(that.arma);
 			}
-			else if(animacionactual == (that.avatar.names + that.arma + ' right')){
+			else if(animacionactual.includes(' right')){
 				that.avatar.stopanim();
 				that.avatar.idleright(that.arma);
 			}
