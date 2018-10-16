@@ -19,14 +19,14 @@ function Avatar (nam,scen,posx,posy,spritesheet) {
 			that.scene.load.spritesheet(that.names +'p1r',that.hojadespritesheet[1],{ frameWidth: 87, frameHeight: 133 });
 			that.scene.load.spritesheet(that.names +'p1lp',that.hojadespritesheet[2],{ frameWidth: 87, frameHeight: 134 });
 			that.scene.load.spritesheet(that.names +'p1rp',that.hojadespritesheet[3],{ frameWidth: 87, frameHeight: 134 });
-			that.scene.load.spritesheet(that.names +'p1le',that.hojadespritesheet[4],{ frameWidth: 111, frameHeight: 138 });
-			that.scene.load.spritesheet(that.names +'p1re',that.hojadespritesheet[5],{ frameWidth: 111, frameHeight: 138 });
+			that.scene.load.spritesheet(that.names +'p1le',that.hojadespritesheet[4],{ frameWidth: 110, frameHeight: 135 });
+			that.scene.load.spritesheet(that.names +'p1re',that.hojadespritesheet[5],{ frameWidth: 110, frameHeight: 135 });
 			that.scene.load.spritesheet(that.names +'p1lt',that.hojadespritesheet[6],{ frameWidth: 87, frameHeight: 134 });
 			that.scene.load.spritesheet(that.names +'p1rt',that.hojadespritesheet[7],{ frameWidth: 87, frameHeight: 134 });
-			that.scene.load.spritesheet(that.names +'p1lpa',that.hojadespritesheet[8],{ frameWidth: 130, frameHeight: 161 });
-			that.scene.load.spritesheet(that.names +'p1rpa',that.hojadespritesheet[9],{ frameWidth: 130, frameHeight: 161 });
-			that.scene.load.spritesheet(that.names +'p1lb',that.hojadespritesheet[10],{ frameWidth: 130, frameHeight: 161 });
-			that.scene.load.spritesheet(that.names +'p1rb',that.hojadespritesheet[11],{ frameWidth: 130, frameHeight: 161 });
+			that.scene.load.spritesheet(that.names +'p1lpa',that.hojadespritesheet[8],{ frameWidth: 87, frameHeight: 133 });
+			that.scene.load.spritesheet(that.names +'p1rpa',that.hojadespritesheet[9],{ frameWidth: 87, frameHeight: 133 });
+			that.scene.load.spritesheet(that.names +'p1lb',that.hojadespritesheet[10],{ frameWidth: 111, frameHeight: 134 });
+			that.scene.load.spritesheet(that.names +'p1rb',that.hojadespritesheet[11],{ frameWidth: 111, frameHeight: 134 });
 			//that.scene.game.load.start();
 		}
 
