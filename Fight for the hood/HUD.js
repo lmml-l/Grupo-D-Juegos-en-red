@@ -9,6 +9,9 @@
    	    this.Armas = {"",""};
    
 		this.Escenario = escena; 
+		this.Fondo;
+		this.Vida;
+		this.Municion;
 
 		this.ArmasMostradas = new Array(2);
 
@@ -33,7 +36,7 @@
 		
 	}
     
-    this.RecibirArma = function(arrayjugadores){
+    this.RecibirArma = function(arrayjugadores){   //Recoge las dos armas.
     	that.Armas[0] = arrayjugadores[0];
     	that.Armas[1] = arrayjugadores[1];
 
@@ -47,14 +50,14 @@
 	{
 
 		that.Escenario.add.sprite(512, 215, 'FondoHUD');   //Sprite del  HUD en el escenario.		
-		this.ArmasMostradas.that.Escenario.add.image(400, 300, this.Armas[0]); //Sprite arma1.       
-	    this.ArmasMostradas.that.Escenario.add.image(400, 300, this.Armas[1]); //Sprite arma2.        
+		this.ArmasMostradas = that.Escenario.add.image(400, 300, this.Armas[0]); //Sprite arma1.       
+	    this.ArmasMostradas = that.Escenario.add.image(400, 300, this.Armas[1]); //Sprite arma2.        
 
-		this.add.image(400, 300, 'sky');
-		this.munucion.create();
+		
+		//this.Municion
+		
 
-		this.add.image(400, 300, 'sky');
-		this.arma.create();
+		
 
 		
 		
