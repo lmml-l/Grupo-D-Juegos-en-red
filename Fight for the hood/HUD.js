@@ -1,37 +1,54 @@
 'use strict'
-class HUD extends Phaser.Scene {
-	constructor(){
-		super({key:"HUD"});
-		//this.vida = new                       //Recibe la vida de la clase personaje 
-		//this.munición = new                   //Recibe la munición de la clase arma
-		this.arma = new Arma (this.escena,arma);//Recibe el arma de la clase arma
 
-		
-		
-	}
+
+
+
+
+
+   function HUD(escena, sprites) {
+   	    this.Armas = {"",""};
+   
+		this.Escenario = escena; 
+
+		this.ArmasMostradas = new Array(2);
+
+		var that = this;	
+
+
+
+
+}
+    
+
+
+
 	preload ()
 	{
-		this.load.image('arma1', 'Recursos/Imagenes/...');      //Carga cada cosa del HUD
-		this.load.image('arma2', 'Recursos/Imagenes/...'); 
-		this.load.image('arma3', 'Recursos/Imagenes/...'); 
-		this.load.image('arma4', 'Recursos/Imagenes/...'); 
-		this.load.image('arma5', 'Recursos/Imagenes/...');     
-		this.load.image('municion', 'Recursos/Imagenes/...');
-		this.load.image('vida', 'Recursos/Imagenes/');
-		this.load.image('FondoHUD', 'Recursos/Imagenes/...');
-		
+		that.Escenario.load.image('Pistola', spritearmas[0]);
+		that.Escenario.load.image('Escopeta', spritearmas[1]);
+		that.Escenario.load.image('Subfusil', spritearmas[2]);
+		that.Escenario.load.image('Puñoamericano', spritearmas[3]);
+		that.Escenario.load.image('Bate', spritearmas[4]);
+		that.Escenario.load.image("", );
 		
 	}
+    
+    this.RecibirArma = function(arrayjugadores){
+    	that.Armas[0] = arrayjugadores[0];
+    	that.Armas[1] = arrayjugadores[1];
+
+
+    };
+
+
+
 
 	create ()
 	{
 
-
-		
-		this.add.sprite(512, 215, 'FondoHUD'); //sprite del escenario
-		
-		this.add.image(400, 300, 'sky');           
-		this.vida.create();
+		that.Escenario.add.sprite(512, 215, 'FondoHUD');   //Sprite del  HUD en el escenario.		
+		this.ArmasMostradas.that.Escenario.add.image(400, 300, this.Armas[0]); //Sprite arma1.       
+	    this.ArmasMostradas.that.Escenario.add.image(400, 300, this.Armas[1]); //Sprite arma2.        
 
 		this.add.image(400, 300, 'sky');
 		this.munucion.create();
@@ -54,4 +71,3 @@ class HUD extends Phaser.Scene {
 	  	this.vida.update()
 
 	}
-}
