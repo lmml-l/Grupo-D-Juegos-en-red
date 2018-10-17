@@ -31,16 +31,18 @@ function Avatar (nam,scen,posx,posy,spritesheet) {
 		}
 
 		this.animaciones=function(){
+		var e = that.scene.anims.generateFrameNumbers(that.names + 'p1l', { start: 0, end: 2 })
 		that.scene.anims.create({
     			key: that.names +' left',
-   				frames: that.scene.anims.generateFrameNumbers(that.names + 'p1l', { start: 0, end: 2 }),
+   				frames: [e[0],e[1],e[2],e[1]],
     			frameRate: 9,
     			repeat: -1
 			});
 
+		var t = that.scene.anims.generateFrameNumbers(that.names + 'p1r', { start: 0, end: 2 })
 		that.scene.anims.create({
     			key: that.names + ' right',
-   				frames: that.scene.anims.generateFrameNumbers(that.names + 'p1r', { start: 0, end: 2 }),
+   				frames: [t[0],t[1],t[2],t[1]],
     			frameRate: 9,
     			repeat: -1
 			})
