@@ -49,10 +49,15 @@ function Jugador(avatar,controles){
 	this.preload=function(){
 		that.avatar.preload();
 	}
-	this.create=function(){
+	this.create=function(lado){
 		that.avatar.animaciones();
 		that.avatar.spawnavatar();
-		that.avatar.walkright(that.arma);
+		if(lado=="right"){
+			that.avatar.walkright(that.arma);
+		}
+		else if(lado=="left"){
+			that.avatar.walkleft(that.arma);
+		}
 
 	   keysalto = this.avatar.scene.input.keyboard.addKey(that.controles.salto);
 	   keymovder = this.avatar.scene.input.keyboard.addKey(that.controles.movder);

@@ -185,8 +185,8 @@ create(){
     this.plataformas2.create(60, 385, 'cartelPixel').alpha=0; //izquierdo
     this.plataformas2.create(726, 443, 'cartelPixel').alpha=0; //derecho
 
-    this.jugador.create();
-    this.jugador1.create();
+    this.jugador.create("right");
+    this.jugador1.create("left");
     //colisiones jugador 1
     this.physics.add.collider(this.jugador.avatar.sprite, this.suelo); //con suelo
     this.physics.add.collider(this.jugador.avatar.sprite,this.plataformas); //con plataformas
