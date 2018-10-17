@@ -17,7 +17,7 @@ class MainEscenario extends Phaser.Scene {
         var spritearmas = ["Recursos/Imagenes/Sprites_Armas/Pistola/PistolaPixelizada.png",
         "Recursos/Imagenes/Sprites_Armas/Escopeta/EscopetaPixelizada.png",
         "Recursos/Imagenes/Sprites_Armas/Thompson/ThompsonPixelizado.png",
-        "Recursos/Imagenes/Sprites_Armas/Puno_Americano/PunoAmericanoPixelizado.png",
+        "Recursos/Imagenes/Sprites_Armas/Puno_Americano/PuñoAmericanoPixelizado.png",
         "Recursos/Imagenes/Sprites_Armas/Bate_de_Beisbol/BateBeisbolPixelizado.png"]
 
         this.avatar = new Avatar("a",this,400,400,sprite);
