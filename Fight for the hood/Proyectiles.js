@@ -39,23 +39,32 @@ function Proyectiles (escena, jugador, sprites){
 		switch(select){
 			case "Escopeta":
 				if(that.jugador.avatar.sprite.texture.key.includes('left')){
-
+					for(var i = 0; i < balas.length ; i++){
+						balas[i].setRotation((225-(i*(11.25))).DEG_TO_RAD);
+					}
 				}else if(that.jugador.avatar.sprite.texture.key.includes('right')){
-
+					for(var i = 0; i < balas.length ; i++){
+						balas[i].setRotation((315+(i*(11.25))).DEG_TO_RAD);
+					}
 				}
 			break;
 			case "Pistola":
 				if(that.jugador.avatar.sprite.texture.key.includes('left')){
-
+				
 				}else if(that.jugador.avatar.sprite.texture.key.includes('right')){
 					
 				}
 			break;
 			case "Subfusil":
+				
 				if(that.jugador.avatar.sprite.texture.key.includes('left')){
-
+					for(var i = 0; i < balas.length ; i++){
+						
+					}
 				}else if(that.jugador.avatar.sprite.texture.key.includes('right')){
-					
+					for(var i = 0; i < balas.length ; i++){
+						
+					}
 				}
 			break;
 		}
@@ -77,7 +86,7 @@ function Proyectiles (escena, jugador, sprites){
 			break;
 			case 'Subfusil':
 				var ráfaga = new Array(3);
-				for(var i< i<3; i++){
+				for(var i = 0; i<3; i++){
 					ráfaga[i] = that.scene.physics.add.sprite(that.checkpos()[0],that.checkpos()[1],'Bala').setScale(1);
 				}	
 				balas=ráfaga;
