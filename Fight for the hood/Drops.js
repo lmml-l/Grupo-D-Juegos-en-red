@@ -70,13 +70,14 @@ function Drops(escena, sprites) {
 		var armapos = that.initPos();
 		var check = true;
 		var i = 0;
-		while(check = true && i<that.sprite.length){
+		while(check && i<that.sprite.length){
 			if(that.sprite[i].x == armapos[0] && that.sprite[i].y == armapos[1]){
 				check = false;
 			}
 			i++;
 		}
-		if(check=true){
+
+		if(check){
 		var armapw = that.scene.physics.add.sprite(armapos[0],armapos[1], that.selectID()).setScale(1);
 		that.sprite.push(armapw)
 		}
@@ -93,7 +94,7 @@ function Drops(escena, sprites) {
 			s.destroy();
 		}
 		
-		return armapw;
+		//return armapw;
 	}
 
 	/*this.printWeapon = function(idarma){
