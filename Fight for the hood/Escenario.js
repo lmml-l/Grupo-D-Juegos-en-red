@@ -28,6 +28,7 @@ class MainEscenario extends Phaser.Scene {
         this.suelo;
         this.tanque;
         this.pared;
+        this.dropzone;
 
         this.drops = new Drops(this,spritearmas);
         //this.partida = new Partida(this);
@@ -73,6 +74,8 @@ preload(){
     this.load.image('tuboPixel', 'Recursos/Imagenes/tuboPixel.png');
     this.load.image('tanquePixel', 'Recursos/Imagenes/tanquePixel.png');
     this.load.image('paredPixel', 'Recursos/Imagenes/paredPixel.png');
+    this.load.image('dropzonePixel', 'Recursos/Imagenes/dropzone.png');
+
 
 }
 
@@ -102,10 +105,11 @@ create(){
     this.suelo2 = this.physics.add.staticGroup();
     this.tanque2 = this.physics.add.staticGroup();
     this.pared2 = this.physics.add.staticGroup();
+    this.dropzone = this.physics.add.staticGroup();
 
 	//Suelo
     //platformas.create(x, y, 'suelo').setScale(2).refreshBody();
-    this.suelo.create(512, 592, 'sueloPixel').alpha=0;
+    this.suelo.create(512, 585, 'sueloPixel').alpha=0;
 
 
     //LAS COORDENADAS SON RESPECTO A LA VENTANA DEL TAMAÑO DEL ESCENARIO
@@ -134,7 +138,7 @@ create(){
     this.plataformas.create(624, 192, 'techoCpixel').alpha=0;
     this.plataformas.create(824, 130, 'techoDpixel').alpha=0;
     //pared derecha
-    this.pared.create(925, 215, 'paredPixel').alpha=0;
+    this.pared.create(972, 215, 'paredPixel').alpha=0;
     //toldos
     this.plataformas.create(159, 480, 'toldoLPixel').alpha=0; //izquierdo
     this.plataformas.create(878, 480, 'toldoRPixel').alpha=0; //derecho
@@ -147,7 +151,7 @@ create(){
     this.plataformas.create(726, 443, 'cartelPixel').alpha=0; //derecho
 
     //AHORA SE HACEN LO MISMO PARA EL PERSONAJE DOS
-    this.suelo2.create(512, 592, 'sueloPixel').alpha=0;
+    this.suelo2.create(512, 585, 'sueloPixel').alpha=0;
 
 
     //plataformas
@@ -173,7 +177,7 @@ create(){
     this.plataformas2.create(624, 192, 'techoCpixel').alpha=0;
     this.plataformas2.create(824, 130, 'techoDpixel').alpha=0;
     //pared derecha
-    this.pared2.create(925, 215, 'paredPixel').alpha=0;
+    this.pared2.create(972, 215, 'paredPixel').alpha=0;
     //toldos
     this.plataformas2.create(159, 480, 'toldoLPixel').alpha=0; //izquierdo
     this.plataformas2.create(878, 480, 'toldoRPixel').alpha=0; //derecho
@@ -185,6 +189,14 @@ create(){
     this.plataformas2.create(60, 385, 'cartelPixel').alpha=0; //izquierdo
     this.plataformas2.create(726, 443, 'cartelPixel').alpha=0; //derecho
 
+    //zonas de dropeo
+    this.dropzone.create(130, 302,'dropzonePixel');
+    this.dropzone.create(500, 56,'dropzonePixel');
+    this.dropzone.create(455, 265,'dropzonePixel'); 
+    this.dropzone.create(857, 128,'dropzonePixel');
+    this.dropzone.create(686, 353,'dropzonePixel');
+
+    //jugadores
     this.jugador.create("right");
     this.jugador1.create("left");
     //colisiones jugador 1
@@ -197,7 +209,8 @@ create(){
     this.physics.add.collider(this.jugador1.avatar.sprite,this.plataformas2); //con plataformas
     this.physics.add.collider(this.jugador1.avatar.sprite, this.pared2); //con la pared derecha
     this.jugador1.avatar.sprite.body.collideWorldBounds = true; //con bordes
- 
+    //colisiones entre jugadores
+    this.physics.add.collider(this.jugador.avatar.sprite, this.jugador1.avatar.sprite);
 
     //time event spawndrop
     var that = this;
