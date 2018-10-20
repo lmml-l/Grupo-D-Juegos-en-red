@@ -24,14 +24,15 @@ var controles2 = {
 	escudo: Phaser.Input.Keyboard.KeyCodes.SHIFT
 }
 
-function Jugador(avatar,controles){
+function Jugador(avatar,controles,proyectiles){
 	this.avatar = avatar;
 	this.arma ="";
 	this.escudo;
 	this.controles=controles;
 	this.vida=100;
+	this.proyectiles = proyectiles;
 
-	
+
 
 	var that = this;
 
@@ -45,9 +46,11 @@ function Jugador(avatar,controles){
 	var keyescudo;
 
 	var keyrecarmasoltada;
+	var keydispararsoltada;
 
 	this.preload=function(){
 		that.avatar.preload();
+		that.proyectiles.preload(that.avatar.scene);
 	}
 	this.create=function(lado){
 		that.avatar.animaciones();
@@ -133,17 +136,19 @@ function Jugador(avatar,controles){
 		if(keysalto.isDown && that.avatar.sprite.body.touching.down){
 			that.avatar.vely(-375);
 		}
-		if(keymovabajo.isDown){
-
-		}
-		if(keydisparo.isDown){
-
-		}
+		//if(keymovabajo.isDown){
+		//}
+		
 		if(keyescudo.isDown){
 			
 		}
 		if(keyrecarma.isDown){
 			
+		}
+	}
+	this.disparar = function (arma,scene,avatar){
+		if((keydisparo.isDown) && (keydispararsoltada)){
+			that.proyectiles.create(arma,scene,avatar);
 		}
 	}
 	this.cambiararma = function(dropss){
@@ -157,6 +162,9 @@ function Jugador(avatar,controles){
 		if(keyrecarma.isUp){
 			keyrecarmasoltada=true;
 		}
+		if(keydisparo.isUp){
+			 keydispararsoltada=true;
+		}
 	}
 
 	this.update=function(dropss){
@@ -164,6 +172,7 @@ function Jugador(avatar,controles){
 		that.controldepersonaje();
 		that.teclasoltada();
 		that.cambiararma(dropss);
+		that.disparar(that.arma,that.avatar.scene,that.avatar);
 	}
 
 }

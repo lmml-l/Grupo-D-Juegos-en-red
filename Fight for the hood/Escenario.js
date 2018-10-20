@@ -20,10 +20,13 @@ class MainEscenario extends Phaser.Scene {
         "Recursos/Imagenes/Sprites_Armas/Puno_Americano/PuñoAmericanoPixelizado.png",
         "Recursos/Imagenes/Sprites_Armas/Bate_de_Beisbol/BateBeisbolPixelizado.png"]
 
+        var spriteproyectiles = []
         this.avatar = new Avatar("a",this,400,400,sprite);
         this.avatar1 = new Avatar("b",this,600,400,sprite);
-        this.jugador = new Jugador(this.avatar,controles2);
-        this.jugador1 = new Jugador(this.avatar1,controles1); //elegir controles 1 o controles 2
+        this.proyectiles = new Proyectiles(spriteproyectiles);
+        this.jugador = new Jugador(this.avatar,controles2,proyectiles);
+        this.jugador1 = new Jugador(this.avatar1,controles1,proyectiles); //elegir controles 1 o controles 2
+       
         this.plataformas;
         this.suelo;
         this.tanque;
@@ -57,6 +60,7 @@ preload(){
     this.jugador.preload();
     this.jugador1.preload();
     this.drops.preload();
+
     //this.partida.preload();
 
 	this.load.image('fondo', 'Recursos/Imagenes/stage.png');
@@ -197,7 +201,7 @@ create(){
     this.physics.add.collider(this.jugador1.avatar.sprite,this.plataformas2); //con plataformas
     this.physics.add.collider(this.jugador1.avatar.sprite, this.pared2); //con la pared derecha
     this.jugador1.avatar.sprite.body.collideWorldBounds = true; //con bordes
- 
+
 
     //time event spawndrop
     var that = this;
