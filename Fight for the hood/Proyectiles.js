@@ -1,7 +1,13 @@
 'use strict'
+
+var proyectilesenescane = new Array();
+
 function Proyectiles (sprites){
 	this.proyec = sprites;
 	//this.jugador = player;
+
+	
+
 	var that = this;
 	
 
@@ -16,45 +22,40 @@ function Proyectiles (sprites){
 
 	this.checkpos=function(avatar){
 		var pos = new Array(2);
-		if(avatar.sprite.texture.key.includes('left')){
-			pos[0]=(avatar.sprite.x - ((avatar.sprite.anims.currentFrame.width)/2));
-		}else if(avatar.sprite.texture.key.includes('right')){
-			pos[0]=(avatar.sprite.x + ((avatar.sprite.anims.currentFrame.width)/2));
+		if(avatar.getanim().includes('left')){
+			pos[0]=(avatar.sprite.x - ((avatar.sprite.anims.currentFrame.frame.width)/2));
+		}else if(avatar.getanim().includes('right')){
+			pos[0]=(avatar.sprite.x + ((avatar.sprite.anims.currentFrame.frame.width)/2));
 		}
 
 		pos[1] = avatar.sprite.y;
 
 		return pos;
 	}
-	this.crearproyectiles=function(arma,scene){
+	this.crearproyectiles=function(arma,scene,avatar){
 		var balas;
 		switch(arma){
 			case 'Escopeta':
 				var perdigones = new Array(8);
 				for(var i=0; i<8; i++){
-					perdigones[i] = scene.physics.add.sprite(that.checkpos()[0],that.checkpos()[1],'Perdigón').setScale(1);
+					perdigones[i] = scene.physics.add.sprite(that.checkpos(avatar)[0],that.checkpos(avatar)[1],'Perdigón').setScale(1);
 				}
 				balas=perdigones;
 			break;
 			case 'Pistola':
-				balas = avatar.scene.physics.add.sprite(that.checkpos()[0],that.checkpos()[1],'Bala').setScale(1);
+				balas = avatar.scene.physics.add.sprite(that.checkpos(avatar)[0],that.checkpos(avatar)[1],'Bala').setScale(1);
 			break;
 			case 'Subfusil':
-				//var ráfaga = new Array(3);
-				//for(var i = 0; i<3; i++){
-					//ráfaga[i] = that.scene.physics.add.sprite(that.checkpos()[0],that.checkpos()[1],'Bala').setScale(1);
-				//}	
-				//balas=ráfaga;
-				balas= scene.physics.add.sprite(that.checkpos()[0],that.checkpos()[1],'Bala').setScale(1);
+				balas= scene.physics.add.sprite(that.checkpos(avatar)[0],that.checkpos(avatar)[1],'Bala').setScale(1);
 			break;
 			case 'Bate':
-				balas = scene.physics.add.sprite(that.checkpos()[0],that.checkpos()[1],'GolpeBate').setScale(1);
+				balas = scene.physics.add.sprite(that.checkpos(avatar)[0],that.checkpos(avatar)[1],'GolpeBate').setScale(1);
 			break;
 			case 'Puñoamericano':
-				balas = scene.physics.add.sprite(that.checkpos()[0],that.checkpos()[1],'GolpePuñoA').setScale(1);
+				balas = scene.physics.add.sprite(that.checkpos(avatar)[0],that.checkpos(avatar)[1],'GolpePuñoA').setScale(1);
 			break;
 			case '':
-				balas = scene.physics.add.sprite(that.checkpos()[0],that.checkpos()[1],'GolpePuño').setScale(1);
+				balas = scene.physics.add.sprite(that.checkpos(avatar)[0],that.checkpos(avatar)[1],'GolpePuño').setScale(1);
 			break;
 			default:
 
@@ -65,77 +66,82 @@ function Proyectiles (sprites){
 		//var select;
 		switch(arma){
 			case "Escopeta":
-				if(avatar.sprite.texture.key.includes('left')){
+				if(avatar.getanim().includes('left')){
 					for(var i = 0; i < balas.length ; i++){
-						var vector = new Vector2(1,0);
-						var matrix = new Matrix3();
+						var vector = new Phaser.Math.Vector2(1,0);
+						var matrix = new Phaser.Math.Matrix3();
 						var angle = (225-(i*(11.25))).DEG_TO_RAD;
-						var array = [Math.cos(angle),-1*Math.sen(angle),0,Math.sen(angle),Math.cos(angle),0,0,0,1];
+						var array = [Math.cos(angle),-1*Math.sin(angle),0,Math.sin(angle),Math.cos(angle),0,0,0,1];
 						matrix.fromArray(array);
 						console.log(matrix);
 						vector.transformMat3(matrix);
 
-						balas[i].setRotation(angle);
-						balas[i].setVelocity(vector*5);
+						//balas[i].setRotation(angle);
+						balas[i].setVelocity(-20,0);
 					}
-				}else if(avatar.sprite.texture.key.includes('right')){
+				}else if(avatar.getanim().includes('right')){
 					for(var i = 0; i < balas.length ; i++){
-						var vector = new Vector2(1,0);
-						var matrix = new Matrix3();
+						var vector = new Phaser.Math.Vector2(1,0);
+						var matrix = new Phaser.Math.Matrix3();
 						var angle = (315+(i*(11.25))).DEG_TO_RAD;
-						var array = [Math.cos(angle),-1*Math.sen(angle),0,Math.sen(angle),Math.cos(angle),0,0,0,1];
+						var array = [Math.cos(angle),-1*Math.sin(angle),0,Math.sin(angle),Math.cos(angle),0,0,0,1];
 						matrix.fromArray(array);
 						console.log(matrix);
 						vector.transformMat3(matrix);
 
-						balas[i].setRotation(angle);
-						balas[i].setVelocity(vector*5);
+						//balas[i].setRotation(angle);
+						balas[i].setVelocity((vector.normalize())*5);
 					}
 				}
 			break;
 			case "Pistola":
-				if(avatar.sprite.texture.key.includes('left')){
+				if(avatar.getanim().includes('left')){
 					var vector = new Vector2(-1,0);
 					balas.setVelocity(vector*5);
 
-				}else if(avatar.sprite.texture.key.includes('right')){
+				}else if(avatar.getanim().includes('right')){
 					var vector = new Vector2(1,0);
 					balas.setVelocity(vector*5);
 				}
 			break;
 			case "Subfusil":
 				
-				if(avatar.sprite.texture.key.includes('left')){
+				if(avatar.getanim().includes('left')){
 					var vector = new Vector2(-1,0);
 					balas.setVelocity(vector*5);
-				}else if(avatar.sprite.texture.key.includes('right')){
+				}else if(avatar.getanim().includes('right')){
 					var vector = new Vector2(1,0);
 					balas.setVelocity(vector*5);
 				}
 			break;
 			default:
 		}
+
+		return balas;
 	}
 
 
 	
 	this.create = function(arma,scene,avatar){
+		 
+
 		switch(arma){
 			case 'Subfusil':
-			
-			that.fisicasproyectil(arma,avatar,that.crearproyectiles(arma,scene));
+
+			proyectilesenescane.push(that.fisicasproyectil(arma,avatar,that.crearproyectiles(arma,scene,avatar)));
 			scene.time.addEvent(
 				{delay:5 ,repeat:2 ,
-        		callback: function(){that.fisicasproyectil(arma,avatar,that.crearproyectiles(arma,scene))}});
+        		callback: function(){proyectilesenescane.push(that.fisicasproyectil(arma,avatar,that.crearproyectiles(arma,scene,avatar)))}});
 
 			break;
 			default:
-			that.fisicasproyectil(arma,avatar,that.crearproyectiles(arma,scene));
+			proyectilesenescane.push(that.fisicasproyectil(arma,avatar,that.crearproyectiles(arma,scene,avatar)));
 		}
-		
 
 	}
 	this.update=function(){
-
+		for(var i = 0 ; i < proyectilesenescane; i++){
+			proyectilesenescane[i].update();
+		}
 	}
 }

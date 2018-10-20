@@ -20,12 +20,17 @@ class MainEscenario extends Phaser.Scene {
         "Recursos/Imagenes/Sprites_Armas/Puno_Americano/PuñoAmericanoPixelizado.png",
         "Recursos/Imagenes/Sprites_Armas/Bate_de_Beisbol/BateBeisbolPixelizado.png"]
 
-        var spriteproyectiles = []
+        var spriteproyectiles = ["Recursos/Imagenes/Sprites_Armas/Pistola/PistolaPixelizada.png",
+        "Recursos/Imagenes/Sprites_Armas/Escopeta/EscopetaPixelizada.png",
+        "Recursos/Imagenes/Sprites_Armas/Thompson/ThompsonPixelizado.png",
+        "Recursos/Imagenes/Sprites_Armas/Puno_Americano/PuñoAmericanoPixelizado.png",
+        "Recursos/Imagenes/Sprites_Armas/Bate_de_Beisbol/BateBeisbolPixelizado.png"]
+        
         this.avatar = new Avatar("a",this,400,400,sprite);
         this.avatar1 = new Avatar("b",this,600,400,sprite);
         this.proyectiles = new Proyectiles(spriteproyectiles);
-        this.jugador = new Jugador(this.avatar,controles2,proyectiles);
-        this.jugador1 = new Jugador(this.avatar1,controles1,proyectiles); //elegir controles 1 o controles 2
+        this.jugador = new Jugador(this.avatar,controles2,this.proyectiles);
+        this.jugador1 = new Jugador(this.avatar1,controles1,this.proyectiles); //elegir controles 1 o controles 2
        
         this.plataformas;
         this.suelo;
@@ -213,12 +218,10 @@ create(){
     this.physics.add.collider(this.jugador1.avatar.sprite,this.plataformas2); //con plataformas
     this.physics.add.collider(this.jugador1.avatar.sprite, this.pared2); //con la pared derecha
     this.jugador1.avatar.sprite.body.collideWorldBounds = true; //con bordes
-<<<<<<< HEAD
 
-=======
+
     //colisiones entre jugadores
     this.physics.add.collider(this.jugador.avatar.sprite, this.jugador1.avatar.sprite);
->>>>>>> ff0bf56421017b9db8cef51a6c674f0f359da9ee
 
     //time event spawndrop
     var that = this;

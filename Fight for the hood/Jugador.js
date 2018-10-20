@@ -149,6 +149,9 @@ function Jugador(avatar,controles,proyectiles){
 	this.disparar = function (arma,scene,avatar){
 		if((keydisparo.isDown) && (keydispararsoltada)){
 			that.proyectiles.create(arma,scene,avatar);
+			
+			//that.proyectiles.fisicasproyectil(arma,avatar,balass);
+			keydispararsoltada = false;
 		}
 	}
 	this.cambiararma = function(dropss){
@@ -170,9 +173,12 @@ function Jugador(avatar,controles,proyectiles){
 	this.update=function(dropss){
 		that.gravedad();
 		that.controldepersonaje();
-		that.teclasoltada();
+		
 		that.cambiararma(dropss);
 		that.disparar(that.arma,that.avatar.scene,that.avatar);
+
+		that.teclasoltada();
+		//that.proyectiles.update();
 	}
 
 }
