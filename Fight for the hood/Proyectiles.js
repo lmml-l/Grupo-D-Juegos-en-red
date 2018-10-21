@@ -68,50 +68,50 @@ function Proyectiles (sprites){
 			case "Escopeta":
 				if(avatar.getanim().includes('left')){
 					for(var i = 0; i < balas.length ; i++){
-						var vector = new Phaser.Math.Vector2(1,0);
+						var vector = new Phaser.Math.Vector3(1,0,1);
 						var matrix = new Phaser.Math.Matrix3();
-						var angle = (225-(i*(11.25))).DEG_TO_RAD;
+						var angle = Phaser.Math.DEG_TO_RAD * (135+(i*(11.25)));
 						var array = [Math.cos(angle),-1*Math.sin(angle),0,Math.sin(angle),Math.cos(angle),0,0,0,1];
 						matrix.fromArray(array);
-						console.log(matrix);
+						//console.log(matrix);
 						vector.transformMat3(matrix);
 
-						//balas[i].setRotation(angle);
-						balas[i].setVelocity(-20,0);
+
+						balas[i].setVelocity(vector.x,vector.y);
 					}
 				}else if(avatar.getanim().includes('right')){
 					for(var i = 0; i < balas.length ; i++){
-						var vector = new Phaser.Math.Vector2(1,0);
+						var vector = new Phaser.Math.Vector2(1,0,1);
 						var matrix = new Phaser.Math.Matrix3();
-						var angle = (315+(i*(11.25))).DEG_TO_RAD;
+						var angle = Phaser.Math.DEG_TO_RAD * (45-(i*(11.25)));
 						var array = [Math.cos(angle),-1*Math.sin(angle),0,Math.sin(angle),Math.cos(angle),0,0,0,1];
 						matrix.fromArray(array);
-						console.log(matrix);
+						//console.log(matrix);
 						vector.transformMat3(matrix);
 
-						//balas[i].setRotation(angle);
-						balas[i].setVelocity((vector.normalize())*5);
+
+						balas[i].setVelocity(vector.x,vector.y);
 					}
 				}
 			break;
 			case "Pistola":
 				if(avatar.getanim().includes('left')){
-					var vector = new Vector2(-1,0);
-					balas.setVelocity(vector*5);
+					var vector = new Phaser.Math.Vector2(-1,0);
+					balas.setVelocity(vector.x,vector.y);
 
 				}else if(avatar.getanim().includes('right')){
-					var vector = new Vector2(1,0);
-					balas.setVelocity(vector*5);
+					var vector = new Phaser.Math.Vector2(1,0);
+					balas.setVelocity(vector.x,vector.y);
 				}
 			break;
 			case "Subfusil":
 				
 				if(avatar.getanim().includes('left')){
-					var vector = new Vector2(-1,0);
-					balas.setVelocity(vector*5);
+					var vector = new Phaser.Math.Vector2(-1,0);
+					balas.setVelocity(vector.x,vector.y);
 				}else if(avatar.getanim().includes('right')){
-					var vector = new Vector2(1,0);
-					balas.setVelocity(vector*5);
+					var vector = new Phaser.Math.Vector2(1,0);
+					balas.setVelocity(vector.x,vector.y);
 				}
 			break;
 			default:
