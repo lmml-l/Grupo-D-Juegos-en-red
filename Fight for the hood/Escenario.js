@@ -20,8 +20,8 @@ class MainEscenario extends Phaser.Scene {
         "Recursos/Imagenes/Sprites_Armas/Puno_Americano/PuñoAmericanoPixelizado.png",
         "Recursos/Imagenes/Sprites_Armas/Bate_de_Beisbol/BateBeisbolPixelizado.png"]
 
-        var spriteproyectiles = ["Recursos/Imagenes/Sprites_Armas/Pistola/PistolaPixelizada.png",
-        "Recursos/Imagenes/Sprites_Armas/Escopeta/EscopetaPixelizada.png",
+        var spriteproyectiles = ["Recursos/Imagenes/Sprites_Proyectiles/balaEscopeta.png",
+        "Recursos/Imagenes/Sprites_Proyectiles/bala.png",
         "Recursos/Imagenes/Sprites_Armas/Thompson/ThompsonPixelizado.png",
         "Recursos/Imagenes/Sprites_Armas/Puno_Americano/PuñoAmericanoPixelizado.png",
         "Recursos/Imagenes/Sprites_Armas/Bate_de_Beisbol/BateBeisbolPixelizado.png"]

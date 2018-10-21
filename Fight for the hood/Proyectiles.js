@@ -128,10 +128,10 @@ function Proyectiles (sprites){
 		switch(arma){
 			case 'Subfusil':
 
-			proyectilesenescane.push(that.fisicasproyectil(arma,avatar,that.crearproyectiles(arma,scene,avatar)));
+			var disp = function(){proyectilesenescane.push(that.fisicasproyectil(arma,avatar,that.crearproyectiles(arma,scene,avatar)))};
+			disp();
 			scene.time.addEvent(
-				{delay:5 ,repeat:2 ,
-        		callback: function(){proyectilesenescane.push(that.fisicasproyectil(arma,avatar,that.crearproyectiles(arma,scene,avatar)))}});
+				{delay:50 , repeat:2, callback: disp });
 
 			break;
 			default:
