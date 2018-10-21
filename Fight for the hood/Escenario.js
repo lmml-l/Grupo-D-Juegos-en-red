@@ -84,6 +84,7 @@ preload(){
     this.load.image('tanquePixel', 'Recursos/Imagenes/tanquePixel.png');
     this.load.image('paredPixel', 'Recursos/Imagenes/paredPixel.png');
     this.load.image('dropzonePixel', 'Recursos/Imagenes/dropzone.png');
+    this.load.image('HUD', 'Recursos/Imagenes/HUD.png');
 
 
 }
@@ -101,8 +102,8 @@ create(){
 
 
 		//this.Escenario(); (No se sabe si funciona así)
-		this.add.sprite(512, 215, 'fondo'); //sprite del escenario
-        
+		this.add.sprite(512, 215, 'fondo');
+        this.add.sprite(512, 685, 'HUD'); //sprite del HUD
 		//this.add.sprite(0, 0, 'Plat2')
 
 	this.plataformas = this.physics.add.staticGroup();  //Hace solidas las plataformas
