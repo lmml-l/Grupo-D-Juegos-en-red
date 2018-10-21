@@ -1,14 +1,14 @@
 'use strict'
 
    function HUD(escena, sprites) {
-   	    this.Armas = {"",""};
+   	    this.Armas = ["",""];
    
 		this.Escenario = escena; 
 		this.Fondo;
 		this.vida = vida;
 		this.Municion=30;
 		this.ArmasMostradas = new Array(2);
-
+      
 		var that = this;
 
 }
@@ -18,13 +18,14 @@
 
 //Hacer una función que reciba cada vez que dispares una vez y se reduzca.
 
-	preload ()
+	this.preload=function(Escenario)
 	{
-		that.Escenario.load.image('Pistola', spritearmas[0]);
-		that.Escenario.load.image('Escopeta', spritearmas[1]);
-		that.Escenario.load.image('Subfusil', spritearmas[2]);
-		that.Escenario.load.image('Puñoamericano', spritearmas[3]);
-		that.Escenario.load.image('Bate', spritearmas[4]);
+		Escenario.load.image('Pistola', that.spritearmas[0]);
+		Escenario.load.image('Escopeta', that.spritearmas[1]);
+		Escenario.load.image('Subfusil', that.spritearmas[2]);
+		Escenario.load.image('Puñoamericano', that.spritearmas[3]);
+		Escenario.load.image('Bate', that.spritearmas[4]);
+		this.load.image('FondoHUD', 'Recursos/Imagenes/HUD.png');
 		//that.Escenario.load.image("", );		
 	}
     
@@ -37,12 +38,12 @@
     }
 
 
-	create ()
+	this.create = function(scene, Escenario, escena)
 	{
 
-		that.Escenario.add.sprite(512, 215, 'FondoHUD');   //Sprite del  HUD en el escenario.		
-		this.ArmasMostradas[0] = that.Escenario.add.image(150, 200, this.Armas[0]); //Sprite arma1.       
-	    this.ArmasMostradas[1] = that.Escenario.add.image(400, 300, this.Armas[1]); //Sprite arma2.
+		this.Fondo.create(350, 220, 'FondoHUD');   //Sprite del  HUD en el escenario.		
+		//this.ArmasMostradas[0] = that.Escenario.add.image(150, 200, this.Armas[0]); //Sprite arma1.       
+	    //this.ArmasMostradas[1] = that.Escenario.add.image(400, 300, this.Armas[1]); //Sprite arma2.
 
 		
 		//this.Municion		
@@ -53,7 +54,8 @@
 
 	update ()
 	{
-	  	this.ArmasMostradas[0].sprite(150,200,this.Armas[0]);
-	  	this.ArmasMostradas[1].sprite(400,300,this.Armas[1]);
+		
+	  	//this.ArmasMostradas[0].sprite(150,200,this.Armas[0]);
+	  	//this.ArmasMostradas[1].sprite(400,300,this.Armas[1]);
 	  	
 	}
