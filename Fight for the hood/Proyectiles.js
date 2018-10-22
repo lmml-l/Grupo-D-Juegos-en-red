@@ -20,14 +20,70 @@ function Proyectiles (sprites){
 
 	this.checkpos=function(avatar){
 		var pos = new Array(2);
-		if(avatar.getanim().includes('left')){
-			pos[0]=(avatar.sprite.x - ((avatar.sprite.anims.currentFrame.frame.width)/2));
-		}else if(avatar.getanim().includes('right')){
-			pos[0]=(avatar.sprite.x + ((avatar.sprite.anims.currentFrame.frame.width)/2));
+		var offset = 5;    //esto es la medida en píxeles      0,18 cm aprox
+		switch(arma){
+			case 'Escopeta':
+				if(avatar.getanim().includes('left')){
+					pos[0]=(avatar.sprite.x - ((avatar.sprite.anims.currentFrame.frame.width)/2) - offset);
+				}else if(avatar.getanim().includes('right')){
+					pos[0]=(avatar.sprite.x + ((avatar.sprite.anims.currentFrame.frame.width)/2) + offset);
+				}
+				print(avatar.sprite.anims.currentFrame.frame.width);
+				pos[1] = avatar.sprite.y + 14;    //pixeles     0,49 cm aprox
+
+			break;
+
+			case 'Pistola':
+				if(avatar.getanim().includes('left')){
+					pos[0]=(avatar.sprite.x - ((avatar.sprite.anims.currentFrame.frame.width)/2) - offset);
+				}else if(avatar.getanim().includes('right')){
+					pos[0]=(avatar.sprite.x + ((avatar.sprite.anims.currentFrame.frame.width)/2) + offset);
+				}
+				print(avatar.sprite.anims.currentFrame.frame.width);
+				pos[1] = avatar.sprite.y - 2;    //pixeles     0,07 cm aprox
+
+			break;
+
+			case 'Subfusil':
+				if(avatar.getanim().includes('left')){
+					pos[0]=(avatar.sprite.x - ((avatar.sprite.anims.currentFrame.frame.width)/2) - offset);
+				}else if(avatar.getanim().includes('right')){
+					pos[0]=(avatar.sprite.x + ((avatar.sprite.anims.currentFrame.frame.width)/2) + offset);
+				}
+				print(avatar.sprite.anims.currentFrame.frame.width);
+				pos[1] = avatar.sprite.y + 11;   //pixeles     0,39
+			break;
+
+			case 'Bate':
+				if(avatar.getanim().includes('left')){
+					pos[0]=(avatar.sprite.x - ((avatar.sprite.anims.currentFrame.frame.width)/2));
+				}else if(avatar.getanim().includes('right')){
+					pos[0]=(avatar.sprite.x + ((avatar.sprite.anims.currentFrame.frame.width)/2));
+				}
+
+				pos[1] = avatar.sprite.y;
+			break;
+
+			case 'Puñoamericano':
+				if(avatar.getanim().includes('left')){
+					pos[0]=(avatar.sprite.x - ((avatar.sprite.anims.currentFrame.frame.width)/2));
+				}else if(avatar.getanim().includes('right')){
+					pos[0]=(avatar.sprite.x + ((avatar.sprite.anims.currentFrame.frame.width)/2));
+				}
+
+				pos[1] = avatar.sprite.y;
+			break;
+			
+			case '':
+				if(avatar.getanim().includes('left')){
+					pos[0]=(avatar.sprite.x - ((avatar.sprite.anims.currentFrame.frame.width)/2));
+				}else if(avatar.getanim().includes('right')){
+					pos[0]=(avatar.sprite.x + ((avatar.sprite.anims.currentFrame.frame.width)/2));
+				}
+
+				pos[1] = avatar.sprite.y;
+			break;
 		}
-
-		pos[1] = avatar.sprite.y;
-
 		return pos;
 	}
 	this.crearproyectiles=function(arma,scene,avatar){
