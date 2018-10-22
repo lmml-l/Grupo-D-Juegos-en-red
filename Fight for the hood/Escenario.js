@@ -258,7 +258,7 @@ create(){
             //that.physics.add.overlap(that.jugador.avatar.sprite,obj); 
       //  }
 
-    var dropevent = this.time.addEvent({delay:10000 ,loop:true ,
+    var dropevent = this.time.addEvent({delay:5000 ,loop:true ,
         callback: that.drops.spawnarma })
 	}
 

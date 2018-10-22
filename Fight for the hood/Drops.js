@@ -13,7 +13,7 @@ function Drops(escena, sprites) {
 		//posición aleatoria
 		var r = Math.floor(Math.random() * 5)  ; //las posiciones que sean (de momento son 2 máximos) (de 0 a 2?)
 		//posiciones de los drops
-		var pos1 = new Array(135, 492);
+		var pos1 = new Array(135, 292);
 		var pos2 = new Array(505, 46);
 		var pos3 = new Array(460, 255);
 		var pos4 = new Array(862, 118);
