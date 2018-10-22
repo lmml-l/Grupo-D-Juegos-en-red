@@ -64,7 +64,8 @@ colisionesbalasjugador(jugador,balast){
         }
 
         if(!colisionexistente){
-            colisionesjugadoresbalas.push(this.physics.add.collider(balast[j],jugador.avatar.sprite));
+            colisionesjugadoresbalas.push(this.physics.add.overlap(balast[j],jugador.avatar.sprite,
+                function(){balas[j].destroy();}));
         }
     }
 }
