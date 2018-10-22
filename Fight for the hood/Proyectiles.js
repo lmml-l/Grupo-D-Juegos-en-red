@@ -18,7 +18,7 @@ function Proyectiles (sprites){
 	}
 
 
-	this.checkpos=function(avatar){
+	this.checkpos=function(avatar,arma){
 		var pos = new Array(2);
 		var offset = 5;    //esto es la medida en píxeles      0,18 cm aprox
 		switch(arma){
@@ -28,7 +28,7 @@ function Proyectiles (sprites){
 				}else if(avatar.getanim().includes('right')){
 					pos[0]=(avatar.sprite.x + ((avatar.sprite.anims.currentFrame.frame.width)/2) + offset);
 				}
-				print(avatar.sprite.anims.currentFrame.frame.width);
+				
 				pos[1] = avatar.sprite.y + 14;    //pixeles     0,49 cm aprox
 
 			break;
@@ -39,7 +39,7 @@ function Proyectiles (sprites){
 				}else if(avatar.getanim().includes('right')){
 					pos[0]=(avatar.sprite.x + ((avatar.sprite.anims.currentFrame.frame.width)/2) + offset);
 				}
-				print(avatar.sprite.anims.currentFrame.frame.width);
+				
 				pos[1] = avatar.sprite.y - 2;    //pixeles     0,07 cm aprox
 
 			break;
@@ -50,7 +50,7 @@ function Proyectiles (sprites){
 				}else if(avatar.getanim().includes('right')){
 					pos[0]=(avatar.sprite.x + ((avatar.sprite.anims.currentFrame.frame.width)/2) + offset);
 				}
-				print(avatar.sprite.anims.currentFrame.frame.width);
+				
 				pos[1] = avatar.sprite.y + 11;   //pixeles     0,39
 			break;
 
@@ -92,24 +92,24 @@ function Proyectiles (sprites){
 			case 'Escopeta':
 				var perdigones = new Array(8);
 				for(var i=0; i<8; i++){
-					perdigones[i] = scene.physics.add.sprite(that.checkpos(avatar)[0],that.checkpos(avatar)[1],'Perdigón').setScale(1);
+					perdigones[i] = scene.physics.add.sprite(that.checkpos(avatar,arma)[0],that.checkpos(avatar,arma)[1],'Perdigón').setScale(1);
 				}
 				balas=perdigones;
 			break;
 			case 'Pistola':
-				balas = avatar.scene.physics.add.sprite(that.checkpos(avatar)[0],that.checkpos(avatar)[1],'Bala').setScale(1);
+				balas = avatar.scene.physics.add.sprite(that.checkpos(avatar,arma)[0],that.checkpos(avatar,arma)[1],'Bala').setScale(1);
 			break;
 			case 'Subfusil':
-				balas= scene.physics.add.sprite(that.checkpos(avatar)[0],that.checkpos(avatar)[1],'Bala').setScale(1);
+				balas= scene.physics.add.sprite(that.checkpos(avatar,arma)[0],that.checkpos(avatar,arma)[1],'Bala').setScale(1);
 			break;
 			case 'Bate':
-				balas = scene.physics.add.sprite(that.checkpos(avatar)[0],that.checkpos(avatar)[1],'GolpeBate').setScale(1);
+				balas = scene.physics.add.sprite(that.checkpos(avatar,arma)[0],that.checkpos(avatar,arma)[1],'GolpeBate').setScale(1);
 			break;
 			case 'Puñoamericano':
-				balas = scene.physics.add.sprite(that.checkpos(avatar)[0],that.checkpos(avatar)[1],'GolpePuñoA').setScale(1);
+				balas = scene.physics.add.sprite(that.checkpos(avatar,arma)[0],that.checkpos(avatar,arma)[1],'GolpePuñoA').setScale(1);
 			break;
 			case '':
-				balas = scene.physics.add.sprite(that.checkpos(avatar)[0],that.checkpos(avatar)[1],'GolpePuño').setScale(1);
+				balas = scene.physics.add.sprite(that.checkpos(avatar,arma)[0],that.checkpos(avatar,arma)[1],'GolpePuño').setScale(1);
 			break;
 			default:
 

@@ -64,8 +64,24 @@ colisionesbalasjugador(jugador,balast){
         }
 
         if(!colisionexistente){
+            var position = colisionesjugadoresbalas.length;
             colisionesjugadoresbalas.push(this.physics.add.overlap(balast[j],jugador.avatar.sprite,
-                function(){balas[j].destroy();}));
+                function(){ 
+                   
+                    
+                    //var balasc = colisionesjugadoresbalas.splice(position,1);
+                    
+                    //console.log(balasc.object1);
+                    //balasc[0].object1.destroy();
+
+                    //var balasc = balast.splice(j,1);
+                    //console.log(balasc);
+                    //balasc[0].destroy();
+                    //console.log(balast[j]);
+                    
+                    }
+                )
+            );
         }
     }
 }
