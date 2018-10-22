@@ -3,6 +3,8 @@
     var victorias=new Array(2); //Almacena el nº de partidas ganadas por cada jugador
     victorias[0]=0; victorias[1]=0;
 
+    var colisionesjugadoresbalas = new Array();
+
 class MainEscenario extends Phaser.Scene {
 
 	constructor(){
@@ -33,7 +35,7 @@ class MainEscenario extends Phaser.Scene {
         this.proyectiles2 = new Proyectiles(spriteproyectiles);
 
         this.jugador = new Jugador(this.avatar,controles2,this.proyectiles);
-        this.jugador1 = new Jugador(this.avatar1,controles1,this.proyectiles); //elegir controles 1 o controles 2
+        this.jugador1 = new Jugador(this.avatar1,controles1,this.proyectiles2); //elegir controles 1 o controles 2
        
         this.plataformas;
         this.suelo;
@@ -45,9 +47,30 @@ class MainEscenario extends Phaser.Scene {
         //this.partida = new Partida(this);
         //this.partida = new Partida(this,spritearmas);
        
+       
 
 	}
 
+colisionesbalasjugador(jugador,balast){
+    for(var j=0; j < balast.length ; j++){
+        var i = 0;
+        var colisionexistente = false;
+
+        while((i < colisionesjugadoresbalas.length) && (!colisionexistente)){
+            if(colisionesjugadoresbalas[i].object1 == balast[j]){
+                    colisionexistente=true;
+            }
+            i++;
+        }
+
+        if(!colisionexistente){
+            colisionesjugadoresbalas.push(this.physics.add.collider(balast[j],jugador.avatar.sprite));
+        }
+    }
+}
+colisionesbalaescenario(plataformas,balas){
+
+}
 atravesarplataformaspersonaje(jugador,plataforma){
         var array = plataforma.getChildren();
         for(var i = 0; i<plataforma.getLength(); i++){
@@ -245,6 +268,9 @@ update(){
     this.jugador1.update(this.drops);
     this.atravesarplataformaspersonaje(this.jugador.avatar.sprite,this.plataformas);
     this.atravesarplataformaspersonaje(this.jugador1.avatar.sprite,this.plataformas2);
+    
+    this.colisionesbalasjugador(this.jugador,this.jugador1.proyectiles.proyectilesenescane);
+    this.colisionesbalasjugador(this.jugador1,this.jugador.proyectiles.proyectilesenescane);
     //this.update(this.partida);
     this.checkPartida();
     
