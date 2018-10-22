@@ -68,7 +68,7 @@ function Proyectiles (sprites){
 			case "Escopeta":
 				if(avatar.getanim().includes('left')){
 					for(var i = 0; i < balas.length ; i++){
-						var vector = new Phaser.Math.Vector3(1,0,1);
+						var vector = new Phaser.Math.Vector3(100,0,1);
 						var matrix = new Phaser.Math.Matrix3();
 						var angle = Phaser.Math.DEG_TO_RAD * (135+(i*(11.25)));
 						var array = [Math.cos(angle),-1*Math.sin(angle),0,Math.sin(angle),Math.cos(angle),0,0,0,1];
@@ -81,7 +81,7 @@ function Proyectiles (sprites){
 					}
 				}else if(avatar.getanim().includes('right')){
 					for(var i = 0; i < balas.length ; i++){
-						var vector = new Phaser.Math.Vector2(1,0,1);
+						var vector = new Phaser.Math.Vector2(100,0,1);
 						var matrix = new Phaser.Math.Matrix3();
 						var angle = Phaser.Math.DEG_TO_RAD * (45-(i*(11.25)));
 						var array = [Math.cos(angle),-1*Math.sin(angle),0,Math.sin(angle),Math.cos(angle),0,0,0,1];
@@ -96,21 +96,21 @@ function Proyectiles (sprites){
 			break;
 			case "Pistola":
 				if(avatar.getanim().includes('left')){
-					var vector = new Phaser.Math.Vector2(-1,0);
+					var vector = new Phaser.Math.Vector2(-100,0);
 					balas.setVelocity(vector.x,vector.y);
 
 				}else if(avatar.getanim().includes('right')){
-					var vector = new Phaser.Math.Vector2(1,0);
+					var vector = new Phaser.Math.Vector2(100,0);
 					balas.setVelocity(vector.x,vector.y);
 				}
 			break;
 			case "Subfusil":
 				
 				if(avatar.getanim().includes('left')){
-					var vector = new Phaser.Math.Vector2(-1,0);
+					var vector = new Phaser.Math.Vector2(-100,0);
 					balas.setVelocity(vector.x,vector.y);
 				}else if(avatar.getanim().includes('right')){
-					var vector = new Phaser.Math.Vector2(1,0);
+					var vector = new Phaser.Math.Vector2(100,0);
 					balas.setVelocity(vector.x,vector.y);
 				}
 			break;
@@ -131,7 +131,7 @@ function Proyectiles (sprites){
 			var disp = function(){proyectilesenescane.push(that.fisicasproyectil(arma,avatar,that.crearproyectiles(arma,scene,avatar)))};
 			disp();
 			scene.time.addEvent(
-				{delay:50 , repeat:2, callback: disp });
+				{delay:500 , repeat:1, callback: disp });
 
 			break;
 			default:
