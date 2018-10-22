@@ -1,11 +1,9 @@
 'use strict'
-
-var proyectilesenescane = new Array();
-
+  
 function Proyectiles (sprites){
 	this.proyec = sprites;
 	//this.jugador = player;
-
+	this.proyectilesenescane = new Array();
 	
 
 	var that = this;
@@ -128,20 +126,18 @@ function Proyectiles (sprites){
 		switch(arma){
 			case 'Subfusil':
 
-			var disp = function(){proyectilesenescane.push(that.fisicasproyectil(arma,avatar,that.crearproyectiles(arma,scene,avatar)))};
+			var disp = function(){that.proyectilesenescane.push(that.fisicasproyectil(arma,avatar,that.crearproyectiles(arma,scene,avatar)))};
 			disp();
 			scene.time.addEvent(
 				{delay:500 , repeat:1, callback: disp });
 
 			break;
 			default:
-			proyectilesenescane.push(that.fisicasproyectil(arma,avatar,that.crearproyectiles(arma,scene,avatar)));
+			that.proyectilesenescane.push(that.fisicasproyectil(arma,avatar,that.crearproyectiles(arma,scene,avatar)));
 		}
 
 	}
 	this.update=function(){
-		for(var i = 0 ; i < proyectilesenescane; i++){
-			proyectilesenescane[i].update();
-		}
+	
 	}
 }

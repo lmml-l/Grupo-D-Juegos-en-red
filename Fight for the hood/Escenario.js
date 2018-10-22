@@ -28,7 +28,10 @@ class MainEscenario extends Phaser.Scene {
         
         this.avatar = new Avatar("a",this,400,400,sprite);
         this.avatar1 = new Avatar("b",this,600,400,sprite);
+
         this.proyectiles = new Proyectiles(spriteproyectiles);
+        this.proyectiles2 = new Proyectiles(spriteproyectiles);
+
         this.jugador = new Jugador(this.avatar,controles2,this.proyectiles);
         this.jugador1 = new Jugador(this.avatar1,controles1,this.proyectiles); //elegir controles 1 o controles 2
        
