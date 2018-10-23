@@ -20,38 +20,37 @@ function Proyectiles (sprites){
 
 	this.checkpos=function(avatar,arma){
 		var pos = new Array(2);
-		var offset = 5;    //esto es la medida en píxeles      0,18 cm aprox
 		switch(arma){
 			case 'Escopeta':
 				if(avatar.getanim().includes('left')){
-					pos[0]=(avatar.sprite.x - ((avatar.sprite.anims.currentFrame.frame.width)/2) - offset);
+					pos[0]=(avatar.sprite.x - ((avatar.sprite.anims.currentFrame.frame.width)/2) - 56); //pixeles     1,975 cm aprox
 				}else if(avatar.getanim().includes('right')){
-					pos[0]=(avatar.sprite.x + ((avatar.sprite.anims.currentFrame.frame.width)/2) + offset);
+					pos[0]=(avatar.sprite.x + ((avatar.sprite.anims.currentFrame.frame.width)/2) + 56); 
 				}
 				
-				pos[1] = avatar.sprite.y + 14;    //pixeles     0,49 cm aprox
+				pos[1] = avatar.sprite.y + 16.5;    //pixeles     0,582 cm aprox
 
 			break;
 
 			case 'Pistola':
 				if(avatar.getanim().includes('left')){
-					pos[0]=(avatar.sprite.x - ((avatar.sprite.anims.currentFrame.frame.width)/2) - offset);
+					pos[0]=(avatar.sprite.x - ((avatar.sprite.anims.currentFrame.frame.width)/2) - 25.5); //pixeles     0,9 cm aprox
 				}else if(avatar.getanim().includes('right')){
-					pos[0]=(avatar.sprite.x + ((avatar.sprite.anims.currentFrame.frame.width)/2) + offset);
+					pos[0]=(avatar.sprite.x + ((avatar.sprite.anims.currentFrame.frame.width)/2) + 25.5); 
 				}
 				
-				pos[1] = avatar.sprite.y - 2;    //pixeles     0,07 cm aprox
+				pos[1] = avatar.sprite.y + 3;    //pixeles     0,105 cm aprox
 
 			break;
 
 			case 'Subfusil':
 				if(avatar.getanim().includes('left')){
-					pos[0]=(avatar.sprite.x - ((avatar.sprite.anims.currentFrame.frame.width)/2) - offset);
+					pos[0]=(avatar.sprite.x - ((avatar.sprite.anims.currentFrame.frame.width)/2) - 43.5); //pixeles     1,535 cm aprox
 				}else if(avatar.getanim().includes('right')){
-					pos[0]=(avatar.sprite.x + ((avatar.sprite.anims.currentFrame.frame.width)/2) + offset);
+					pos[0]=(avatar.sprite.x + ((avatar.sprite.anims.currentFrame.frame.width)/2) + 43.5); 
 				}
 				
-				pos[1] = avatar.sprite.y + 11;   //pixeles     0,39
+				pos[1] = avatar.sprite.y + 12;   //pixeles     0,42
 			break;
 
 			case 'Bate':
