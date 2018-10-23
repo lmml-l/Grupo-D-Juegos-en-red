@@ -25,9 +25,9 @@ class MainEscenario extends Phaser.Scene {
 
         var spriteproyectiles = ["Recursos/Imagenes/Sprites_Proyectiles/balaEscopeta.png",
         "Recursos/Imagenes/Sprites_Proyectiles/bala.png",
-        "Recursos/Imagenes/Sprites_Armas/Thompson/ThompsonPixelizado.png",
-        "Recursos/Imagenes/Sprites_Armas/Puno_Americano/PuñoAmericanoPixelizado.png",
-        "Recursos/Imagenes/Sprites_Armas/Bate_de_Beisbol/BateBeisbolPixelizado.png"]
+        "Recursos/Imagenes/Sprites_Proyectiles/GolpeBatePixelizadoAjustado.png",
+        "Recursos/Imagenes/Sprites_Proyectiles/GolpePuño.png",
+        "Recursos/Imagenes/Sprites_Proyectiles/GolpePuño.png"]
         
         this.avatar = new Avatar("a",this,400,400,sprite);
         this.avatar1 = new Avatar("b",this,600,400,sprite);
@@ -373,7 +373,7 @@ create(){
             //that.physics.add.overlap(that.jugador.avatar.sprite,obj); 
       //  }
 
-    var dropevent = this.time.addEvent({delay:5000 ,loop:true ,
+    var dropevent = this.time.addEvent({delay:3500 ,loop:true ,
         callback: that.drops.spawnarma })
 	}
 
