@@ -179,6 +179,12 @@ function Proyectiles (sprites){
 		 
 
 		switch(arma){
+			case 'Escopeta':
+			var balasdeescopetaarray = that.fisicasproyectil(arma,avatar,that.crearproyectiles(arma,scene,avatar));
+			for(var i = 0 ; i< balasdeescopetaarray.length ; i++){
+				that.proyectilesenescane.push(balasdeescopetaarray[i]);
+			}
+			break;
 			case 'Subfusil':
 
 			var disp = function(){that.proyectilesenescane.push(that.fisicasproyectil(arma,avatar,that.crearproyectiles(arma,scene,avatar)))};

@@ -57,31 +57,18 @@ colisionesbalasjugador(jugador,balast){
         var colisionexistente = false;
 
         while((i < colisionesjugadoresbalas.length) && (!colisionexistente)){
-            if(colisionesjugadoresbalas[i].object1 == balast[j]){
+            if(colisionesjugadoresbalas[i].object1 === balast[j]){
                     colisionexistente=true;
             }
             i++;
         }
 
         if(!colisionexistente){
-            var position = colisionesjugadoresbalas.length;
-            colisionesjugadoresbalas.push(this.physics.add.overlap(balast[j],jugador.avatar.sprite,
-                function(){ 
-                   
-                    
-                    //var balasc = colisionesjugadoresbalas.splice(position,1);
-                    
-                    //console.log(balasc.object1);
-                    //balasc[0].object1.destroy();
-
-                    //var balasc = balast.splice(j,1);
-                    //console.log(balasc);
-                    //balasc[0].destroy();
-                    //console.log(balast[j]);
-                    
-                    }
-                )
-            );
+            var funcioncallback = function(obj1,obje2){obj1.destroy();};
+            
+            var colisionActual = this.physics.add.overlap(balast[j],jugador.avatar.sprite,funcioncallback);
+                
+            colisionesjugadoresbalas.push(colisionActual);
         }
     }
 }
