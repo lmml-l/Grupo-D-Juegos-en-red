@@ -23,9 +23,9 @@ function Proyectiles (sprites){
 		switch(arma){
 			case 'Escopeta':
 				if(avatar.getanim().includes('left')){
-					pos[0]=(avatar.sprite.x - 40); //pixeles     1,975 cm aprox
+					pos[0]=(avatar.sprite.x - 30); //pixeles     1,975 cm aprox
 				}else if(avatar.getanim().includes('right')){
-					pos[0]=(avatar.sprite.x + 40); 
+					pos[0]=(avatar.sprite.x + 30); 
 				}
 				
 				pos[1] = avatar.sprite.y + 8;    //pixeles     0,582 cm aprox
