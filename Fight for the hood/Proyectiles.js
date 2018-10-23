@@ -23,9 +23,9 @@ function Proyectiles (sprites){
 		switch(arma){
 			case 'Escopeta':
 				if(avatar.getanim().includes('left')){
-					pos[0]=(avatar.sprite.x - ((avatar.sprite.anims.currentFrame.frame.width)/2) - 56); //pixeles     1,975 cm aprox
+					pos[0]=(avatar.sprite.x - 56); //pixeles     1,975 cm aprox
 				}else if(avatar.getanim().includes('right')){
-					pos[0]=(avatar.sprite.x + ((avatar.sprite.anims.currentFrame.frame.width)/2) + 56); 
+					pos[0]=(avatar.sprite.x + 56); 
 				}
 				
 				pos[1] = avatar.sprite.y + 16.5;    //pixeles     0,582 cm aprox
@@ -34,9 +34,9 @@ function Proyectiles (sprites){
 
 			case 'Pistola':
 				if(avatar.getanim().includes('left')){
-					pos[0]=(avatar.sprite.x - ((avatar.sprite.anims.currentFrame.frame.width)/2) - 25.5); //pixeles     0,9 cm aprox
+					pos[0]=(avatar.sprite.x - 25.5); //pixeles     0,9 cm aprox
 				}else if(avatar.getanim().includes('right')){
-					pos[0]=(avatar.sprite.x + ((avatar.sprite.anims.currentFrame.frame.width)/2) + 25.5); 
+					pos[0]=(avatar.sprite.x + 25.5); 
 				}
 				
 				pos[1] = avatar.sprite.y + 3;    //pixeles     0,105 cm aprox
@@ -45,9 +45,9 @@ function Proyectiles (sprites){
 
 			case 'Subfusil':
 				if(avatar.getanim().includes('left')){
-					pos[0]=(avatar.sprite.x - ((avatar.sprite.anims.currentFrame.frame.width)/2) - 43.5); //pixeles     1,535 cm aprox
+					pos[0]=(avatar.sprite.x - 43.5); //pixeles     1,535 cm aprox
 				}else if(avatar.getanim().includes('right')){
-					pos[0]=(avatar.sprite.x + ((avatar.sprite.anims.currentFrame.frame.width)/2) + 43.5); 
+					pos[0]=(avatar.sprite.x + 43.5); 
 				}
 				
 				pos[1] = avatar.sprite.y + 12;   //pixeles     0,42
