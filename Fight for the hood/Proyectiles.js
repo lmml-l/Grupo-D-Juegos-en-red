@@ -23,12 +23,12 @@ function Proyectiles (sprites){
 		switch(arma){
 			case 'Escopeta':
 				if(avatar.getanim().includes('left')){
-					pos[0]=(avatar.sprite.x - 56); //pixeles     1,975 cm aprox
+					pos[0]=(avatar.sprite.x - 40); //pixeles     1,975 cm aprox
 				}else if(avatar.getanim().includes('right')){
-					pos[0]=(avatar.sprite.x + 56); 
+					pos[0]=(avatar.sprite.x + 40); 
 				}
 				
-				pos[1] = avatar.sprite.y + 16.5;    //pixeles     0,582 cm aprox
+				pos[1] = avatar.sprite.y + 8;    //pixeles     0,582 cm aprox
 
 			break;
 
@@ -45,12 +45,12 @@ function Proyectiles (sprites){
 
 			case 'Subfusil':
 				if(avatar.getanim().includes('left')){
-					pos[0]=(avatar.sprite.x - 43.5); //pixeles     1,535 cm aprox
+					pos[0]=(avatar.sprite.x - 35); //pixeles     1,535 cm aprox
 				}else if(avatar.getanim().includes('right')){
-					pos[0]=(avatar.sprite.x + 43.5); 
+					pos[0]=(avatar.sprite.x + 35); 
 				}
 				
-				pos[1] = avatar.sprite.y + 12;   //pixeles     0,42
+				pos[1] = avatar.sprite.y + 6;   //pixeles     0,42
 			break;
 
 			case 'Bate':
