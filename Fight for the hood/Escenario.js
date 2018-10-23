@@ -4,6 +4,7 @@
     victorias[0]=0; victorias[1]=0;
 
     var colisionesjugadoresbalas = new Array();
+    var colisionesescenariobalas = new Array();
 
 class MainEscenario extends Phaser.Scene {
 
@@ -64,7 +65,21 @@ colisionesbalasjugador(jugador,balast){
         }
 
         if(!colisionexistente){
-            var funcioncallback = function(obj1,obje2){obj1.destroy();};
+            var funcioncallback = function(obj1,obje2){
+                for(var jd = 0 ; jd < balast.length ; jd++){
+                    if(balast[jd] === obj1){
+                        balast.splice(jd,1);
+                    }
+                }
+
+                for(var jd = 0 ; jd < colisionesjugadoresbalas.length ; jd++ ){
+                    if(colisionesjugadoresbalas[jd].object1 === obj1){
+                        colisionesjugadoresbalas.splice(jd,1);
+                    }
+                }
+
+                obj1.destroy();
+            };
             
             var colisionActual = this.physics.add.overlap(balast[j],jugador.avatar.sprite,funcioncallback);
                 
@@ -72,8 +87,37 @@ colisionesbalasjugador(jugador,balast){
         }
     }
 }
-colisionesbalaescenario(plataformas,balas){
+colisionesbalaescenario(plataformas,balast){
+    for(var j = 0 ; j < balast.length ; j++){
+        var i = 0;
+        var colisionexistente = false;
 
+        while((i < colisionesescenariobalas.length) && (!colisionexistente)){
+            if(colisionesescenariobalas[i].object1 === balast[j]){
+                    colisionexistente=true;
+            }
+            i++;
+        }
+        if(!colisionexistente){
+            var funcioncallback = function(obj1,obj2){
+                for(var jd = 0 ; jd < balast.length ; jd++){
+                    if(balast[jd] === obj1){
+                        balast.splice(jd,1);
+                    }
+                }
+
+                for(var jd = 0 ; jd < colisionesescenariobalas.length ; jd++ ){
+                    if(colisionesescenariobalas[jd].object1 === obj1){
+                        colisionesescenariobalas.splice(jd,1);
+                    }
+                }
+                obj1.destroy();
+            };
+
+            var colisionActual = this.physics.add.overlap(balast[j],plataformas,funcioncallback);
+            colisionesescenariobalas.push(colisionActual);
+        }   
+    }
 }
 atravesarplataformaspersonaje(jugador,plataforma){
         var array = plataforma.getChildren();
@@ -136,15 +180,21 @@ create(){
         this.add.sprite(512, 685, 'HUD'); //sprite del HUD
 		//this.add.sprite(0, 0, 'Plat2')
 
-	this.plataformas = this.physics.add.staticGroup();  //Hace solidas las plataformas
+	this.plataformas = this.physics.add.staticGroup();  //Hace solidas las plataformas enfocadas al primer personaje
     this.suelo = this.physics.add.staticGroup();
     this.tanque = this.physics.add.staticGroup();
     this.pared = this.physics.add.staticGroup();
     
-    this.plataformas2 = this.physics.add.staticGroup();  //Hace solidas las plataformas
+    this.plataformas2 = this.physics.add.staticGroup();  //Hace solidas las plataformas enfocadas al segundo personaje
     this.suelo2 = this.physics.add.staticGroup();
     this.tanque2 = this.physics.add.staticGroup();
     this.pared2 = this.physics.add.staticGroup();
+    
+    this.plataformas3 = this.physics.add.staticGroup();  //Hace solidas las plataformas enfocadas a las balas
+    this.suelo3 = this.physics.add.staticGroup();
+    this.tanque3 = this.physics.add.staticGroup();
+    this.pared3 = this.physics.add.staticGroup();
+
     this.dropzone = this.physics.add.staticGroup();
 
 	//Suelo
@@ -193,7 +243,6 @@ create(){
     //AHORA SE HACEN LO MISMO PARA EL PERSONAJE DOS
     this.suelo2.create(512, 585, 'sueloPixel').alpha=0;
 
-
     //plataformas
     //izquierda
     this.plataformas2.create(319, 153, 'plat2').alpha=0;
@@ -229,12 +278,55 @@ create(){
     this.plataformas2.create(60, 385, 'cartelPixel').alpha=0; //izquierdo
     this.plataformas2.create(726, 443, 'cartelPixel').alpha=0; //derecho
 
+    this.suelo2.create(512, 585, 'sueloPixel').alpha=0;
+
+    //AHORA LAS PLATAFORMAS PARA LAS COLISIONES DE LAS BALAS.
+    //plataformas
+    //izquierda
+    this.plataformas3.create(319, 153, 'plat2').alpha=0;
+    this.plataformas3.create(319, 241, 'plat2').alpha=0;
+    this.plataformas3.create(319, 328, 'plat2').alpha=0;
+    this.plataformas3.create(319, 416, 'plat2').alpha=0;
+    //derecha
+    this.plataformas3.create(866, 141, 'plat2').alpha=0;
+    this.plataformas3.create(866, 229, 'plat2').alpha=0;
+    this.plataformas3.create(866, 317, 'plat2').alpha=0;
+    this.plataformas3.create(866, 404, 'plat2').alpha=0;
+    //sueltas
+    this.plataformas3.create(455, 276, 'platShort').alpha=0;
+    this.plataformas3.create(520, 362, 'platShort').alpha=0;
+    this.plataformas3.create(520, 468, 'platShort').alpha=0;
+    this.plataformas3.create(686, 276, 'platShort').alpha=0;
+    this.plataformas3.create(686, 364, 'platShort').alpha=0;
+    //techos
+    this.plataformas3.create(158, 305, 'techoApixel').alpha=0;
+    this.plataformas3.create(376, 60, 'techoBpixel').alpha=0;
+    this.plataformas3.create(624, 192, 'techoCpixel').alpha=0;
+    this.plataformas3.create(824, 130, 'techoDpixel').alpha=0;
+    //pared derecha
+    this.pared3.create(972, 215, 'paredPixel').alpha=0;
+    //toldos
+    this.plataformas3.create(159, 480, 'toldoLPixel').alpha=0; //izquierdo
+    this.plataformas3.create(878, 480, 'toldoRPixel').alpha=0; //derecho
+    //tubería
+    this.plataformas3.create(605, 116, 'tuboPixel').alpha=0;
+    //tanque de agua
+    this.tanque3.create(831, 97, 'tanquePixel').alpha=0;
+    //cartel
+    this.plataformas3.create(60, 385, 'cartelPixel').alpha=0; //izquierdo
+    this.plataformas3.create(726, 443, 'cartelPixel').alpha=0; //derecho
+
+    this.suelo3.create(512, 585, 'sueloPixel').alpha=0;
+
+
     //zonas de dropeo
     this.dropzone.create(130, 302,'dropzonePixel');
     this.dropzone.create(500, 56,'dropzonePixel');
     this.dropzone.create(455, 265,'dropzonePixel'); 
     this.dropzone.create(857, 128,'dropzonePixel');
     this.dropzone.create(686, 353,'dropzonePixel');
+
+    
 
     //jugadores
     this.jugador.create("right");
@@ -275,6 +367,11 @@ update(){
     
     this.colisionesbalasjugador(this.jugador,this.jugador1.proyectiles.proyectilesenescane);
     this.colisionesbalasjugador(this.jugador1,this.jugador.proyectiles.proyectilesenescane);
+
+    this.colisionesbalaescenario(this.plataformas3,this.jugador.proyectiles.proyectilesenescane);
+    this.colisionesbalaescenario(this.plataformas3,this.jugador1.proyectiles.proyectilesenescane);
+    this.colisionesbalaescenario(this.suelo3,this.jugador.proyectiles.proyectilesenescane);
+    this.colisionesbalaescenario(this.suelo3,this.jugador1.proyectiles.proyectilesenescane);
     //this.update(this.partida);
     this.checkPartida();
     
