@@ -6,6 +6,10 @@
     var colisionesjugadoresbalas = new Array();
     var colisionesescenariobalas = new Array();
 
+class MainEscenario extends Phaser.Scene {
+
+	constructor(){
+		super({key:"MainEscenario"});
         var sprite = ["Recursos/Imagenes/Sprites_Personaje/SpritePersonajeIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpritePersonajeDerecha.png",
         "Recursos/Imagenes/Sprites_Personaje/SpritePistolaIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpritePistolaDerecha.png",
         "Recursos/Imagenes/Sprites_Personaje/SpriteEscopetaIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpriteEscopetaDerecha.png",
@@ -24,13 +28,10 @@
         "Recursos/Imagenes/Sprites_Proyectiles/GolpeBatePixelizadoAjustado.png",
         "Recursos/Imagenes/Sprites_Proyectiles/GolpePuño.png",
         "Recursos/Imagenes/Sprites_Proyectiles/GolpePuño.png"]
-
-
-class MainEscenario extends Phaser.Scene {
-
-	constructor(){
-		super({key:"MainEscenario"});
-
+         var Hud = ["Recursos/Imagenes/HUD.png"]
+        
+    
+        this.hud = new HUD (Hud);
         
         this.avatar = new Avatar("a",this,400,400,sprite);
         this.avatar1 = new Avatar("b",this,600,400,sprite);
@@ -48,8 +49,6 @@ class MainEscenario extends Phaser.Scene {
         this.dropzone;
 
         this.drops = new Drops(this,spritearmas);
-
-        var that = this;
         //this.partida = new Partida(this);
         //this.partida = new Partida(this,spritearmas);
        
@@ -101,10 +100,8 @@ colisionesbalasjugador(jugador,balast){
                         colisionesjugadoresbalas.splice(jd,1);
                     }
                 }
-                //destruye la bala
+
                 obj1.destroy();
-                //reduce vida
-                jugador.vida=jugador.vida-5; console.log(jugador.vida);
             };
             
             var colisionActual = this.physics.add.overlap(balast[j],jugador.avatar.sprite,funcioncallback);
@@ -190,7 +187,7 @@ preload(){
 }
 
 create(){
-
+    //var that = this;
 
 	//var plataformas;
 	//var suelo;
@@ -203,7 +200,7 @@ create(){
 
 		//this.Escenario(); (No se sabe si funciona así)
 		this.add.sprite(512, 215, 'fondo');
-        this.add.sprite(512, 685, 'HUD'); //sprite del HUD
+        //this.add.sprite(512, 685, 'HUD'); //sprite del HUD
 		//this.add.sprite(0, 0, 'Plat2')
 
 	this.plataformas = this.physics.add.staticGroup();  //Hace solidas las plataformas enfocadas al primer personaje
@@ -418,12 +415,11 @@ checkPartida(){
     //Si algún jugador se queda sin vida
     if(this.jugador.vida===0){  //jugador 0
         victorias[0]=+1;
-        //this.scene.restart();
+        this.scene.restart();
     }
     if(this.jugador1.vida===0){ //jugador 1
         victorias[1]=+1;
-        //this.scene.restart();
-
+        this.scene.restart();
     }
 }
 
