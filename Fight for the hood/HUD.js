@@ -5,8 +5,8 @@
    
 		this.Escenario = escena; 
 		this.Fondo;
-		this.vida = vida;
-		this.Municion=30;
+		//this.vida = vida;
+		//this.Municion=30;
 		this.ArmasMostradas = new Array(2);
       
 		var that = this;
@@ -20,12 +20,12 @@
 
 	this.preload=function(Escenario)
 	{
-		Escenario.load.image('Pistola', that.spritearmas[0]);
-		Escenario.load.image('Escopeta', that.spritearmas[1]);
-		Escenario.load.image('Subfusil', that.spritearmas[2]);
-		Escenario.load.image('Puñoamericano', that.spritearmas[3]);
-		Escenario.load.image('Bate', that.spritearmas[4]);
-		this.load.image('FondoHUD', 'Recursos/Imagenes/HUD.png');
+		that.Escenario.load.image('Pistola', that.spritearmas[0]);
+		that.Escenario.load.image('Escopeta', that.spritearmas[1]);
+		that.Escenario.load.image('Subfusil', that.spritearmas[2]);
+		that.Escenario.load.image('Puñoamericano', that.spritearmas[3]);
+		that.Escenario.load.image('Bate', that.spritearmas[4]);
+		that.Escenario.load.image('FondoHUD', 'Recursos/Imagenes/HUD.png');
 		//that.Escenario.load.image("", );		
 	}
     
@@ -38,12 +38,12 @@
     }
 
 
-	this.create = function(scene, Escenario, escena)
+	create ()
 	{
 
-		this.Fondo.create(350, 220, 'FondoHUD');   //Sprite del  HUD en el escenario.		
-		//this.ArmasMostradas[0] = that.Escenario.add.image(150, 200, this.Armas[0]); //Sprite arma1.       
-	    //this.ArmasMostradas[1] = that.Escenario.add.image(400, 300, this.Armas[1]); //Sprite arma2.
+		that.Fondo.create(512, 685, 'FondoHUD');   //Sprite del  HUD en el escenario.		
+		that.ArmasMostradas[0] = that.Escenario.add.image(512, 685, this.Armas[0]); //Sprite arma1.       
+	    that.ArmasMostradas[1] = that.Escenario.add.image(512, 685, this.Armas[1]); //Sprite arma2.
 
 		
 		//this.Municion		
@@ -55,7 +55,8 @@
 	update ()
 	{
 		
-	  	//this.ArmasMostradas[0].sprite(150,200,this.Armas[0]);
-	  	//this.ArmasMostradas[1].sprite(400,300,this.Armas[1]);
+	  	this.ArmasMostradas[0].sprite(512, 685,this.Armas[0]);
+	  	this.ArmasMostradas[1].sprite(512, 685,this.Armas[1]);
+	  	
 	  	
 	}

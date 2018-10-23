@@ -28,6 +28,10 @@ class MainEscenario extends Phaser.Scene {
         "Recursos/Imagenes/Sprites_Proyectiles/GolpeBatePixelizadoAjustado.png",
         "Recursos/Imagenes/Sprites_Proyectiles/GolpePuño.png",
         "Recursos/Imagenes/Sprites_Proyectiles/GolpePuño.png"]
+         var Hud = ["Recursos/Imagenes/HUD.png"]
+        
+    
+        this.hud = new HUD (Hud);
         
         this.avatar = new Avatar("a",this,400,400,sprite);
         this.avatar1 = new Avatar("b",this,600,400,sprite);
@@ -196,7 +200,7 @@ create(){
 
 		//this.Escenario(); (No se sabe si funciona así)
 		this.add.sprite(512, 215, 'fondo');
-        this.add.sprite(512, 685, 'HUD'); //sprite del HUD
+        //this.add.sprite(512, 685, 'HUD'); //sprite del HUD
 		//this.add.sprite(0, 0, 'Plat2')
 
 	this.plataformas = this.physics.add.staticGroup();  //Hace solidas las plataformas enfocadas al primer personaje
