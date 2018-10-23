@@ -41,9 +41,9 @@
 	create ()
 	{
 
-		that.Fondo.create(512, 685, 'FondoHUD');   //Sprite del  HUD en el escenario.		
-		that.ArmasMostradas[0] = that.Escenario.add.image(512, 685, this.Armas[0]); //Sprite arma1.       
-	    that.ArmasMostradas[1] = that.Escenario.add.image(512, 685, this.Armas[1]); //Sprite arma2.
+		//that.Fondo.create(512, 685, 'FondoHUD');   //Sprite del  HUD en el escenario.		
+		//that.ArmasMostradas[0] = that.Escenario.add.image(512, 685, this.Armas[0]); //Sprite arma1.       
+	    //that.ArmasMostradas[1] = that.Escenario.add.image(512, 685, this.Armas[1]); //Sprite arma2.
 
 		
 		//this.Municion		
@@ -55,8 +55,8 @@
 	update ()
 	{
 		
-	  	this.ArmasMostradas[0].sprite(512, 685,this.Armas[0]);
-	  	this.ArmasMostradas[1].sprite(512, 685,this.Armas[1]);
+	  	//this.ArmasMostradas[0].sprite(512, 685,this.Armas[0]);
+	  	//this.ArmasMostradas[1].sprite(512, 685,this.Armas[1]);
 	  	
 	  	
 	}

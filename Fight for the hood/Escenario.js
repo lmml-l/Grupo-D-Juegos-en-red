@@ -31,7 +31,7 @@ class MainEscenario extends Phaser.Scene {
          var Hud = ["Recursos/Imagenes/HUD.png"]
         
     
-        this.hud = new HUD (Hud);
+        //this.hud = new HUD (Hud);
         
         this.avatar = new Avatar("a",this,400,400,sprite);
         this.avatar1 = new Avatar("b",this,600,400,sprite);
@@ -102,6 +102,7 @@ colisionesbalasjugador(jugador,balast){
                 }
 
                 obj1.destroy();
+                jugador.vida=jugador.vida-5; console.log(jugador.vida);
             };
             
             var colisionActual = this.physics.add.overlap(balast[j],jugador.avatar.sprite,funcioncallback);
@@ -377,7 +378,7 @@ create(){
             //that.physics.add.overlap(that.jugador.avatar.sprite,obj); 
       //  }
 
-    var dropevent = this.time.addEvent({delay:3500 ,loop:true ,
+        var dropevent = this.time.addEvent({delay:3500 ,loop:true ,
         callback: that.drops.spawnarma })
 	}
 
@@ -419,6 +420,8 @@ checkPartida(){
     }
     if(this.jugador1.vida===0){ //jugador 1
         victorias[1]=+1;
+        game.anims.boot();
+        //this.anims = new AnimationManager(game);
         this.scene.restart();
     }
 }
