@@ -53,7 +53,26 @@ class MainEscenario extends Phaser.Scene {
 	}
 
 colisionesbalasjugador(jugador,balast){
+    var s = 0;
+    while(s < balast.length){
+        if(balast[s]==undefined){
+            balast.splice(s,1);
+        }else{
+            s++;
+        }
+    };
+
+    var t = 0;
+    while(t < colisionesjugadoresbalas.length){
+        if(colisionesjugadoresbalas[t].object1==undefined){
+            colisionesjugadoresbalas.splice(t,1);
+        }else{
+            t++;
+        }
+    };
+
     for(var j=0; j < balast.length ; j++){
+
         var i = 0;
         var colisionexistente = false;
 

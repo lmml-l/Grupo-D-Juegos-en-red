@@ -182,19 +182,32 @@ function Proyectiles (sprites){
 			case 'Escopeta':
 			var balasdeescopetaarray = that.fisicasproyectil(arma,avatar,that.crearproyectiles(arma,scene,avatar));
 			for(var i = 0 ; i< balasdeescopetaarray.length ; i++){
-				that.proyectilesenescane.push(balasdeescopetaarray[i]);
+				var balaescopeta = balasdeescopetaarray[i];
+				that.proyectilesenescane.push(balaescopeta);
 			}
+				scene.time.addEvent({delay:700, callback:function(){
+					for(var i = 0 ; i< balasdeescopetaarray.length ; i++){
+						balasdeescopetaarray[i].destroy();
+					}
+				}});
 			break;
 			case 'Subfusil':
+			
+			var disp = function(){
+				var balasubfusil = that.fisicasproyectil(arma,avatar,that.crearproyectiles(arma,scene,avatar))
+				that.proyectilesenescane.push(balasubfusil);
+				scene.time.addEvent({delay:2000, callback: function(){balasubfusil.destroy()}});
+			};
 
-			var disp = function(){that.proyectilesenescane.push(that.fisicasproyectil(arma,avatar,that.crearproyectiles(arma,scene,avatar)))};
 			disp();
 			scene.time.addEvent(
 				{delay:500 , repeat:1, callback: disp });
 
 			break;
 			default:
-			that.proyectilesenescane.push(that.fisicasproyectil(arma,avatar,that.crearproyectiles(arma,scene,avatar)));
+			var baladefault = that.fisicasproyectil(arma,avatar,that.crearproyectiles(arma,scene,avatar))
+			that.proyectilesenescane.push(baladefault);
+			scene.time.addEvent({delay:1000, callback: function(){baladefault.destroy()}});
 		}
 
 	}
