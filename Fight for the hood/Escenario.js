@@ -132,7 +132,8 @@ colisionesbalaescenario(plataformas,balast){
 
                 for(var jd = 0 ; jd < colisionesescenariobalas.length ; jd++ ){
                     if(colisionesescenariobalas[jd].object1 === obj1){
-                        colisionesescenariobalas.splice(jd,1);
+                        var a = colisionesescenariobalas.splice(jd,1);
+                        a.destroy();
                     }
                 }
                 obj1.destroy();
@@ -420,6 +421,8 @@ checkPartida(){
         this.jugador.vida=100;
         this.jugador.arma="";
         this.jugador1.arma="";
+        colisionesjugadoresbalas = new Array();
+        colisionesescenariobalas = new Array();
         this.time.removeAllEvents();
         
         //colisionesjugadoresbalas = new Array();
