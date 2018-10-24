@@ -1,62 +1,35 @@
 'use strict'
-
-   function HUD(escena, sprites) {
-   	    this.Armas = ["",""];
-   
-		this.Escenario = escena; 
-		this.Fondo;
-		//this.vida = vida;
-		//this.Municion=30;
-		this.ArmasMostradas = new Array(2);
-      
+   function HUD(escena, sprites,jugadores){
+   	    this.spritearmas = sprites;
+   	    this.scene = escena;
+   	    this.jugadores = jugadores;
+		this.Municiones = new Array(2);
+		this.ArmasMostradas = new Array(2);     
 		var that = this;
 
+
+
+	this.preload=function(){   // Preload de todas las armas en un sprite de armas.
+		that.scene.load.image(' Pistola', that.spritearmas[0]);
+		that.scene.load.image(' Escopeta', that.spritearmas[1]);
+		that.scene.load.image(' Subfusil', that.spritearmas[2]);
+		that.scene.load.image(' Puñoamericano', that.spritearmas[3]);
+		that.scene.load.image(' Bate', that.spritearmas[4]);
+		that.scene.load.image(' ', that.spritearmas[5]);		
+	}
+
+	this.create = function (){
+		that.ArmasMostradas[0] = that.scene.add.sprite(100, 700, " "+ this.jugadores[0].arma).setScale(2); //Crea el sprite arma del jugador 1.       
+	    that.ArmasMostradas[1] = that.scene.add.sprite(930, 700, " "+ this.jugadores[1].arma).setScale(2); //Crea el sprite del arma del juagdor 2.
+        that.Municiones = that.scene.add.text(908, 735, this.jugadores[0].Municiones).setScale(2);  //Crea la munición del jugador 1.
+        that.Municiones = that.scene.add.text(70, 735, this.jugadores[1].Municiones).setScale(2);   //Crea la munición del jugador 2.
+	}
+
+
+	this.update = function(){
+	  	that.ArmasMostradas[0].setTexture(" "+ this.jugadores[0].arma); 
+	  	that.ArmasMostradas[1].setTexture(" "+ this.jugadores[1].arma);
+	  	
+	}
 }
-    
 
-
-
-//Hacer una función que reciba cada vez que dispares una vez y se reduzca.
-
-	this.preload=function(Escenario)
-	{
-		that.Escenario.load.image('Pistola', that.spritearmas[0]);
-		that.Escenario.load.image('Escopeta', that.spritearmas[1]);
-		that.Escenario.load.image('Subfusil', that.spritearmas[2]);
-		that.Escenario.load.image('Puñoamericano', that.spritearmas[3]);
-		that.Escenario.load.image('Bate', that.spritearmas[4]);
-		that.Escenario.load.image('FondoHUD', 'Recursos/Imagenes/HUD.png');
-		//that.Escenario.load.image("", );		
-	}
-    
-
-    this.RecibirArma = function(arrayjugadores){  //Recoge las dos armas.
-
-    	that.Armas[0] = arrayjugadores[0];
-    	that.Armas[1] = arrayjugadores[1];
-
-    }
-
-
-	create ()
-	{
-
-		//that.Fondo.create(512, 685, 'FondoHUD');   //Sprite del  HUD en el escenario.		
-		//that.ArmasMostradas[0] = that.Escenario.add.image(512, 685, this.Armas[0]); //Sprite arma1.       
-	    //that.ArmasMostradas[1] = that.Escenario.add.image(512, 685, this.Armas[1]); //Sprite arma2.
-
-		
-		//this.Municion		
-		//this.avatar.walkright();
-		//this.sprite = new Phaser.Gameobjects.Sprite(this,100,100,'p1l',2).setScale(4);
-		//var a = this.add.image(150,150,'p1l').setScale(1);
-	}
-
-	update ()
-	{
-		
-	  	//this.ArmasMostradas[0].sprite(512, 685,this.Armas[0]);
-	  	//this.ArmasMostradas[1].sprite(512, 685,this.Armas[1]);
-	  	
-	  	
-	}
