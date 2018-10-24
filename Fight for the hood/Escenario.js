@@ -6,11 +6,7 @@
     var colisionesjugadoresbalas = new Array();
     var colisionesescenariobalas = new Array();
 
-class MainEscenario extends Phaser.Scene {
-
-	constructor(){
-		super({key:"MainEscenario"});
-        var sprite = ["Recursos/Imagenes/Sprites_Personaje/SpritePersonajeIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpritePersonajeDerecha.png",
+      var sprite = ["Recursos/Imagenes/Sprites_Personaje/SpritePersonajeIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpritePersonajeDerecha.png",
         "Recursos/Imagenes/Sprites_Personaje/SpritePistolaIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpritePistolaDerecha.png",
         "Recursos/Imagenes/Sprites_Personaje/SpriteEscopetaIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpriteEscopetaDerecha.png",
         "Recursos/Imagenes/Sprites_Personaje/SpriteThomsomIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpriteThomsomDerecha.png",
@@ -29,7 +25,11 @@ class MainEscenario extends Phaser.Scene {
         "Recursos/Imagenes/Sprites_Proyectiles/GolpePuño.png",
         "Recursos/Imagenes/Sprites_Proyectiles/GolpePuño.png"]
          var Hud = ["Recursos/Imagenes/HUD.png"]
-        
+         
+class MainEscenario extends Phaser.Scene {
+
+	constructor(){
+		super({key:"MainEscenario"});
     
         //this.hud = new HUD (Hud);
         
@@ -416,14 +416,35 @@ checkPartida(){
     //Si algún jugador se queda sin vida
     if(this.jugador.vida===0){  //jugador 0
         victorias[0]=+1;
+        this.jugador1.vida=100;
+        this.jugador.vida=100;
+        this.jugador.arma="";
+        this.jugador1.arma="";
+        this.time.removeAllEvents();
+        
+        //colisionesjugadoresbalas = new Array();
+        //colisionesescenariobalas = new Array();
+
+        this.drops = new Drops(this,spritearmas);
         this.scene.restart();
+    
     }
     if(this.jugador1.vida===0){ //jugador 1
         victorias[1]=+1;
-        game.anims.boot();
-        //this.anims = new AnimationManager(game);
+        this.jugador1.vida=100;
+        this.jugador.vida=100;
+        this.jugador.arma="";
+        this.jugador1.arma="";
+
+        //colisionesjugadoresbalas = new Array();
+        //colisionesescenariobalas = new Array();
+
+        this.drops = new Drops(this,spritearmas);
+        this.time.removeAllEvents();
         this.scene.restart();
     }
+        
+        
 }
 
 }
