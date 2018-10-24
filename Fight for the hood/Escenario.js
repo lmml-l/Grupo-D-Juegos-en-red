@@ -25,7 +25,7 @@
         "Recursos/Imagenes/Sprites_Proyectiles/GolpeBatePixelizadoAjustado.png",
         "Recursos/Imagenes/Sprites_Proyectiles/GolpePuño.png",
         "Recursos/Imagenes/Sprites_Proyectiles/GolpePuño.png"]
-         var Hud = ["Recursos/Imagenes/HUD.png"]
+        var Hud = ["Recursos/Imagenes/HUD.png"]
          
 class MainEscenario extends Phaser.Scene {
 
@@ -50,6 +50,8 @@ class MainEscenario extends Phaser.Scene {
         this.dropzone;
 
         this.drops = new Drops(this,spritearmas);
+
+        this.hud = new HUD (this, Hud , [this.jugador,this.jugador1]);
         //this.partida = new Partida(this);
         //this.partida = new Partida(this,spritearmas);
        
@@ -434,6 +436,7 @@ create(){
     //colisiones entre jugadores
     this.physics.add.collider(this.jugador.avatar.sprite, this.jugador1.avatar.sprite);
 
+    this.hud.create();
     //time event spawndrop
     var that = this;
     //var functionevent = function(){
@@ -463,45 +466,7 @@ update(){
     this.colisionesbalaescenario(this.plataformas3,this.jugador1.proyectiles.proyectilesenescane);
     this.colisionesbalaescenario(this.suelo3,this.jugador.proyectiles.proyectilesenescane);
     this.colisionesbalaescenario(this.suelo3,this.jugador1.proyectiles.proyectilesenescane);
+
+    this.hud.update();
     }
-
-<<<<<<< HEAD
-    //Si algún jugador se queda sin vida
-    if(this.jugador.vida===0){  //jugador 0
-        victorias[0]=+1;
-        this.jugador1.vida=100;
-        this.jugador.vida=100;
-        this.jugador.arma="";
-        this.jugador1.arma="";
-        colisionesjugadoresbalas = new Array();
-        colisionesescenariobalas = new Array();
-        this.time.removeAllEvents();
-        
-        //colisionesjugadoresbalas = new Array();
-        //colisionesescenariobalas = new Array();
-
-        this.drops = new Drops(this,spritearmas);
-        this.scene.restart();
-    
-    }
-    if(this.jugador1.vida===0){ //jugador 1
-        victorias[1]=+1;
-        this.jugador1.vida=100;
-        this.jugador.vida=100;
-        this.jugador.arma="";
-        this.jugador1.arma="";
-
-        //colisionesjugadoresbalas = new Array();
-        //colisionesescenariobalas = new Array();
-
-        this.drops = new Drops(this,spritearmas);
-        this.time.removeAllEvents();
-        this.scene.restart();
-    }
-        
-        
-}
-=======
->>>>>>> 88bbbe10623ed913d2584ae1a7362a8339b1608c
-
 }
