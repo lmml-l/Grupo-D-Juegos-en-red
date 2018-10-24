@@ -25,15 +25,19 @@
         "Recursos/Imagenes/Sprites_Proyectiles/GolpeBatePixelizadoAjustado.png",
         "Recursos/Imagenes/Sprites_Proyectiles/GolpePuño.png",
         "Recursos/Imagenes/Sprites_Proyectiles/GolpePuño.png"]
-        var Hud = ["Recursos/Imagenes/HUD.png"]
+        
+        var Hud = ["Recursos/Imagenes/Sprites_Armas/Pistola/PistolaPixelizada.png",
+        "Recursos/Imagenes/Sprites_Armas/Escopeta/EscopetaPixelizada.png",
+        "Recursos/Imagenes/Sprites_Armas/Thompson/ThompsonPixelizado.png",
+        "Recursos/Imagenes/Sprites_Armas/Puno_Americano/PuñoAmericanoPixelizado.png",
+        "Recursos/Imagenes/Sprites_Armas/Bate_de_Beisbol/BateBeisbolPixelizado.png",
+        "Recursos/Imagenes/Sprites_Armas/Bate_de_Beisbol/BateBeisbolPixelizado.png"]
          
 class MainEscenario extends Phaser.Scene {
 
 	constructor(){
 		super({key:"MainEscenario"});
-    
-        //this.hud = new HUD (Hud);
-        
+           
         this.avatar = new Avatar("a",this,400,400,sprite);
         this.avatar1 = new Avatar("b",this,600,400,sprite);
 
@@ -197,8 +201,8 @@ colisionesbalaescenario(plataformas,balast){
 
                 for(var jd = 0 ; jd < colisionesescenariobalas.length ; jd++ ){
                     if(colisionesescenariobalas[jd].object1 === obj1){
-                        var a = colisionesescenariobalas.splice(jd,1);
-                        a.destroy();
+                        colisionesescenariobalas.splice(jd,1);
+                       
                     }
                 }
                 obj1.destroy();
@@ -230,7 +234,7 @@ preload(){
     this.jugador.preload();
     this.jugador1.preload();
     this.drops.preload();
-
+    this.hud.preload();
     //this.partida.preload();
 
 	this.load.image('fondo', 'Recursos/Imagenes/stage.png');

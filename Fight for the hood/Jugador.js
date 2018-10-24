@@ -31,6 +31,7 @@ function Jugador(avatar,controles,proyectiles){
 	this.controles=controles;
 	this.vida=100;
 	this.proyectiles = proyectiles;
+	this.municiones = 30;
 
 
 
