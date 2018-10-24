@@ -1,5 +1,6 @@
 'use strict'
 
+    var aux=false;
     var victorias=new Array(2); //Almacena el nº de partidas ganadas por cada jugador
     victorias[0]=0; victorias[1]=0;
 
@@ -56,7 +57,69 @@ class MainEscenario extends Phaser.Scene {
 
 	}
 
+//Reiniciamos el nivel
+restartPartida(){
+        aux=false;
+        this.jugador1.vida=100;
+        this.jugador.vida=100;
+        this.jugador1.arma="";
+        this.jugador.arma="";
+        this.time.removeAllEvents();
+        //this.drops = new Drops(this,spritearmas);
+        this.scene.restart();
+}
+
+//Comprobamos las condiciones para ganar
+checkPartida(){
+    //Si algún jugador llega a 3 victorias gana la partida
+    if(victorias[0]==3){ //jugador 1
+        console.log('J1 GANA LA PARTIDA');
+        victorias[0]=0;
+    }
+    if(victorias[1]==3){ //jugador 2
+        console.log('J2 GANA LA PARTIDA');
+        victorias[1]=0;
+    }
+
+    //ESTO DA ERROR CUANDO SE EMPATA
+    //Si los dos jugadores llegan a 0 al mismo tiempo
+    if(this.jugador.vida<=0 && this.jugador1.vida<=0){
+        console.log('Ganador aleatorio');
+        var ganador = Math.floor(Math.random()*2); //se elige aleatoriamente ganador
+        //gana J1
+        if(ganador==0){
+            victorias[0]+=1;
+            console.log('Gana J1');
+            aux=true;
+        }
+        //gana J2
+        else if(ganador==1){
+            victorias[1]+=1;
+            console.log('Gana J2');
+            aux=true;
+        }
+    }
+
+    //Si algún jugador se queda sin vida
+    else if(this.jugador.vida<=0 && this.jugador1.vida>0){  //jugador 0
+        victorias[1]+=1;
+        console.log('Gana J2');
+        aux=true;
+    }
+    else if(this.jugador1.vida<=0 && this.jugador.vida>0){ //jugador 1
+        victorias[0]+=1;
+        console.log('Gana J1');
+        aux=true;
+    }
+    else{aux=false;}
+
+    if(aux){
+        this.restartPartida();
+    }         
+}
+
 colisionesbalasjugador(jugador,balast){
+    var that=this;
     var s = 0;
     while(s < balast.length){
         if(balast[s]==undefined){
@@ -103,6 +166,7 @@ colisionesbalasjugador(jugador,balast){
 
                 obj1.destroy();
                 jugador.vida=jugador.vida-5; console.log(jugador.vida);
+                that.checkPartida(); //comprueba el estatus de la partida
             };
             
             var colisionActual = this.physics.add.overlap(balast[j],jugador.avatar.sprite,funcioncallback);
@@ -397,23 +461,9 @@ update(){
     this.colisionesbalaescenario(this.plataformas3,this.jugador1.proyectiles.proyectilesenescane);
     this.colisionesbalaescenario(this.suelo3,this.jugador.proyectiles.proyectilesenescane);
     this.colisionesbalaescenario(this.suelo3,this.jugador1.proyectiles.proyectilesenescane);
-    //this.update(this.partida);
-    this.checkPartida();
-    
     }
 
-//Comprobamos las condiciones para ganar
-checkPartida(){
-    //Si algún jugador llega a 3 victorias gana la partida
-    if(victorias[0]=3){ //jugador 0
-        //FUNCIÓN DE GANAR (TEXTO EN PANTALLA O MENÚ?)
-        victorias[0]=0;
-    }
-    if(victorias[1]=3){ //jugador 1
-        //FUNCIÓN DE GANAR (TEXTO EN PANTALLA EN O MENÚ?)
-         victorias[1]=0;
-    }
-
+<<<<<<< HEAD
     //Si algún jugador se queda sin vida
     if(this.jugador.vida===0){  //jugador 0
         victorias[0]=+1;
@@ -449,5 +499,7 @@ checkPartida(){
         
         
 }
+=======
+>>>>>>> 88bbbe10623ed913d2584ae1a7362a8339b1608c
 
 }
