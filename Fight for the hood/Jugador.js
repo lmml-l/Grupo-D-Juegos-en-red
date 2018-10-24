@@ -31,7 +31,7 @@ function Jugador(avatar,controles,proyectiles){
 	this.controles=controles;
 	this.vida=100;
 	this.proyectiles = proyectiles;
-	this.municiones = 30;
+	this.municiones = "";
 
 
 
@@ -72,7 +72,27 @@ function Jugador(avatar,controles,proyectiles){
 	   keyrecarma = this.avatar.scene.input.keyboard.addKey(that.controles.recarma);
 	   keyescudo = this.avatar.scene.input.keyboard.addKey(that.controles.escudo);
 	}
-
+	this.selectmunicion = function(arma){
+		var municiones;
+		switch(arma){
+			case "Bate":
+			 	municiones = "";
+			 	break;
+			case "Puñoamericano":
+				municiones = "";
+				break;
+			case "Escopeta":
+				municiones = 24;
+				break;
+			case "Pistola":
+				municiones = 12;
+				break;
+			case "Subfusil":
+				municiones = 30;
+				break;
+		}
+		return municiones;
+	}
 	this.selectarma = function(armasdrops,offset){
 		var i = 0
 		var armaactual = this.arma;
@@ -85,14 +105,17 @@ function Jugador(avatar,controles,proyectiles){
                     var armarecogida = armasdrops.sprite[i];
                     armarecogida.destroy();
                     armasdrops.sprite.splice(i,1);
+                    this.municiones=this.selectmunicion(this.arma);
                     cambiadoarma=true;
                 }
                 else{
                     this.arma="";
+                    this.municiones=""
                 }
             }
             else{
                 this.arma="";
+                this.municiones=""
             }
             i++;
         }
@@ -148,9 +171,20 @@ function Jugador(avatar,controles,proyectiles){
 		}
 	}
 	this.disparar = function (arma,scene,avatar){
-		if((keydisparo.isDown) && (keydispararsoltada)){
+		if((keydisparo.isDown) && (keydispararsoltada) && ((this.municiones > 0 || ((this.arma=="")||(this.arma=="Bate")||(this.arma=="Puñoamericano"))))){
 			that.proyectiles.create(arma,scene,avatar);
 			
+		switch(arma){
+			case "Escopeta":
+				that.municiones -= 8;
+				break;
+			case "Pistola":
+				that.municiones -= 1;
+				break;
+			case "Subfusil":
+				that.municiones -= 3;
+				break;
+		}
 			//that.proyectiles.fisicasproyectil(arma,avatar,balass);
 			keydispararsoltada = false;
 		}

@@ -31,7 +31,7 @@
         "Recursos/Imagenes/Sprites_Armas/Thompson/ThompsonPixelizado.png",
         "Recursos/Imagenes/Sprites_Armas/Puno_Americano/PuñoAmericanoPixelizado.png",
         "Recursos/Imagenes/Sprites_Armas/Bate_de_Beisbol/BateBeisbolPixelizado.png",
-        "Recursos/Imagenes/Sprites_Armas/Bate_de_Beisbol/BateBeisbolPixelizado.png"]
+        "Recursos/Imagenes/Sprites_Armas/Puños/PuñoPixelizado.png"]
          
 class MainEscenario extends Phaser.Scene {
 
@@ -70,6 +70,8 @@ restartPartida(){
         this.jugador.vida=100;
         this.jugador1.arma="";
         this.jugador.arma="";
+        this.jugador1.municiones="";
+        this.jugador.municiones="";
         this.time.removeAllEvents();
         this.drops = new Drops(this,spritearmas);
         this.scene.restart();
