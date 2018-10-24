@@ -65,7 +65,7 @@ restartPartida(){
         this.jugador1.arma="";
         this.jugador.arma="";
         this.time.removeAllEvents();
-        //this.drops = new Drops(this,spritearmas);
+        this.drops = new Drops(this,spritearmas);
         this.scene.restart();
 }
 
@@ -166,7 +166,6 @@ colisionesbalasjugador(jugador,balast){
 
                 obj1.destroy();
                 jugador.vida=jugador.vida-5; console.log(jugador.vida);
-                that.checkPartida(); //comprueba el estatus de la partida
             };
             
             var colisionActual = this.physics.add.overlap(balast[j],jugador.avatar.sprite,funcioncallback);
@@ -444,6 +443,9 @@ create(){
 
         var dropevent = this.time.addEvent({delay:3500 ,loop:true ,
         callback: that.drops.spawnarma })
+
+        var restartescenaevent = this.time.addEvent({delay:200 ,loop:true ,
+        callback: function(){that.checkPartida()} });
 	}
 
 
