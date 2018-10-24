@@ -1,41 +1,47 @@
 class CharapterSelection extends Phaser.Scene {
 	constructor(){
 		super({key:"CharapterSelection"});
-		var sprite = ["Recursos/Imagenes/Sprite2.png","Recursos/Imagenes/Sprite2.png"]
-		this.avatar = new Avatar("a",this,400,400,sprite);
-		this.jugador = new Jugador(this.avatar,controles2);
-
-		
-		
-	}
-	preload ()
-	{
-		this.jugador.preload();
-		this.load.image('sky', 'Recursos/Imagenes/stage.png');
-		//this.load.image('p1l',"Recursos/Imagenes/HojadeSpriteBasica.png");
-		//this.load.image('p1l',"Recursos/Imagenes/HojadeSpriteBasica.png");
-		
-		
 	}
 
-	create ()
-	{
-		
-		
-		
-		this.add.image(400, 300, 'sky');
-		this.jugador.create();
+	selection(){
+		var title = this.add.image(0,this.game.canvas.height*(50/600),'title').setScale(0.25);
+		var subtitle = this.add.image(0,this.game.canvas.height*(150/600),'subtitle').setScale(0.25);
+		var character1 = this.add.image(this.game.canvas.width*(4/6),this.game.canvas.height*(4/6),'character1').setScale(0.5).setInteractive();
+		var character2 = this.add.image(this.game.canvas.width*(2/6),this.game.canvas.height*(4/6),'character2').setScale(0.5).setInteractive();
+		var p1 = this.add.image(this.game.canvas.width*(4.5/6),this.game.canvas.height*(3/6),'p1').setScale(0.25);
+		var p2 = this.add.image(this.game.canvas.width*(1.5/6),this.game.canvas.height*(3/6),'p2').setScale(0.25);
+		var checkplayer1 = false;
+		var checkplayer2 = false;
 
-		
-		
-		//this.avatar.walkright();
+		var container = this.add.container(0,0);
+		container.add(title);
+		container.add(subtitle); 
+		container.add(character1); 
+		container.add(character2);  
+		container.setX(this.game.canvas.width/2);
 
-		//this.sprite = new Phaser.Gameobjects.Sprite(this,100,100,'p1l',2).setScale(4);
-		//var a = this.add.image(150,150,'p1l').setScale(1);
+		if(checkplayer1 == true && checkplayer2 == true){
+			this.scene.start('MainEscenario');
+		}
+
 	}
 
-	update ()
-	{
-	  	this.jugador.update()
+	preload(){
+		var title = this.load.image('title','Recursos/Imagenes/Logo.png')
+		var subtitle = this.load.image('subtitle','Recursos/Imagenes/Select.png')
+		var character1 = this.load.image('character1','Recursos/Imagenes/Character1.png');
+		var character2 = this.load.image('character2','Recursos/Imagenes/Character2.png');
+		var p1 = this.load.image('p1','Recursos/Imagenes/Personaje1.png');
+		var p2 = this.load.image('p2','Recursos/Imagenes/Personaje2.png');
 	}
+
+	create(){
+		this.selection();
+		
+	}
+
+	checker(){
+		
+	}
+
 }
