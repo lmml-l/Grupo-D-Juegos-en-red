@@ -66,14 +66,15 @@ class MainEscenario extends Phaser.Scene {
 //Reiniciamos el nivel
 restartPartida(){
         aux=false;
+        this.time.clearPendingEvents();
         this.jugador1.vida=100;
         this.jugador.vida=100;
         this.jugador1.arma="";
         this.jugador.arma="";
         this.jugador1.municiones="";
         this.jugador.municiones="";
-        this.time.removeAllEvents();
-        this.drops = new Drops(this,spritearmas);
+        //this.time.removeAllEvents();
+        //this.drops = new Drops(this,spritearmas);
         this.scene.restart();
 }
 
@@ -454,7 +455,7 @@ create(){
         var dropevent = this.time.addEvent({delay:3500 ,loop:true ,
         callback: that.drops.spawnarma })
 
-        var restartescenaevent = this.time.addEvent({delay:200 ,loop:true ,
+        var restartescenaevent = this.time.addEvent({delay:300 ,loop:true ,
         callback: function(){that.checkPartida()} });
 	}
 
