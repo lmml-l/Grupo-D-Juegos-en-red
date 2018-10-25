@@ -7,9 +7,9 @@ var controles1 = {
 	movder: Phaser.Input.Keyboard.KeyCodes.RIGHT,
 	movizq: Phaser.Input.Keyboard.KeyCodes.LEFT,
 	movabajo: Phaser.Input.Keyboard.KeyCodes.DOWN,
-	disparo: Phaser.Input.Keyboard.KeyCodes.L,
+	disparo: Phaser.Input.Keyboard.KeyCodes.P,
 	recarma: Phaser.Input.Keyboard.KeyCodes.O,
-	recargar: Phaser.Input.Keyboard.KeyCodes.P,
+	//recargar: Phaser.Input.Keyboard.KeyCodes.P,
 	escudo: Phaser.Input.Keyboard.KeyCodes.R
 }
 
@@ -18,9 +18,9 @@ var controles2 = {
 	movder: Phaser.Input.Keyboard.KeyCodes.D,
 	movizq: Phaser.Input.Keyboard.KeyCodes.A,
 	movabajo: Phaser.Input.Keyboard.KeyCodes.S,
-	disparo: Phaser.Input.Keyboard.KeyCodes.SPACE,
-	recarma: Phaser.Input.Keyboard.KeyCodes.E,
-	recargar: Phaser.Input.Keyboard.KeyCodes.R,
+	disparo: Phaser.Input.Keyboard.KeyCodes.T,
+	recarma: Phaser.Input.Keyboard.KeyCodes.R,
+	//recargar: Phaser.Input.Keyboard.KeyCodes.R,
 	escudo: Phaser.Input.Keyboard.KeyCodes.SHIFT
 }
 
@@ -89,13 +89,13 @@ function Jugador(avatar,controles,proyectiles){
 				municiones = "";
 				break;
 			case "Escopeta":
-				municiones = 24;
+				municiones = 32;
 				break;
 			case "Pistola":
 				municiones = 12;
 				break;
 			case "Subfusil":
-				municiones = 30;
+				municiones = 20;
 				break;
 		}
 		return municiones;
@@ -142,17 +142,16 @@ function Jugador(avatar,controles,proyectiles){
 				that.avatar.stopanim();
 			}
 			that.avatar.walkright(that.arma);
-			that.avatar.velx(100);
+			that.avatar.velx(120);
 		}
 		else if (keymovizq.isDown){
 			if(animacionactual != that.avatar.names + that.arma + ' left' ){
 				that.avatar.stopanim();
 			}
 			that.avatar.walkleft(that.arma);
-			that.avatar.velx(-100);
+			that.avatar.velx(-120);
 		}
 		else{
-			//var animacionactual = that.avatar.getanim(); 
 			if(animacionactual.includes(' left')){
 				that.avatar.stopanim();
 				that.avatar.idleleft(that.arma);
@@ -200,7 +199,7 @@ function Jugador(avatar,controles,proyectiles){
 	this.cambiararma = function(dropss){
 
 		if((keyrecarma.isDown) && (keyrecarmasoltada)){
-			that.selectarma(dropss,100);
+			that.selectarma(dropss,60); //distancia para coger el arma
 			keyrecarmasoltada = false;
 		}
 	}
@@ -218,7 +217,6 @@ function Jugador(avatar,controles,proyectiles){
 		that.disparar(that.arma,that.avatar.scene,that.avatar);
 
 		that.teclasoltada();
-		//that.proyectiles.update();
 	}
 
 }

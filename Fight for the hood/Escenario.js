@@ -49,17 +49,11 @@ class MainEscenario extends Phaser.Scene {
         this.plataformas;
         this.suelo;
         this.tanque;
-        this.pared;
         this.dropzone;
 
         this.drops = new Drops(this,spritearmas);
 
         this.hud = new HUD (this, Hud , [this.jugador,this.jugador1]);
-        //this.partida = new Partida(this);
-        //this.partida = new Partida(this,spritearmas);
-       
-       
-
 	}
 
 //Reiniciamos el nivel
@@ -69,8 +63,6 @@ restartPartida(){
     this.time.removeAllEvents();
     this.time.addEvent({delay:1500,  //tiempo que da al reiniciar
     callback: function(){that.scene.restart()}});
-
-    //this.scene.restart();
 }
 
 //Comprobamos las condiciones para ganar
@@ -85,7 +77,6 @@ checkPartida(){
         victorias[1]=0;
     }
 
-    //ESTO DA ERROR CUANDO SE EMPATA
     //Si los dos jugadores llegan a 0 al mismo tiempo
     if(this.jugador.vida<=0 && this.jugador1.vida<=0){
         console.log('Ganador aleatorio');
@@ -114,8 +105,7 @@ checkPartida(){
         victorias[0]+=1;
         console.log('Gana J1');
         this.restartPartida();
-    }
-     
+    } 
 }
 
 colisionesbalasjugador(jugador,balast){
@@ -244,7 +234,6 @@ preload(){
     this.load.image('toldoRPixel', 'Recursos/Imagenes/toldoRPixel.png');
     this.load.image('tuboPixel', 'Recursos/Imagenes/tuboPixel.png');
     this.load.image('tanquePixel', 'Recursos/Imagenes/tanquePixel.png');
-    this.load.image('paredPixel', 'Recursos/Imagenes/paredPixel.png');
     this.load.image('dropzonePixel', 'Recursos/Imagenes/dropzone.png');
     this.load.image('HUD', 'Recursos/Imagenes/HUD.png');
 
@@ -252,45 +241,25 @@ preload(){
 }
 
 create(){
-    //var that = this;
 
-	//var plataformas;
-	//var suelo;
-    //var tanque;
-    //var pared;
-
-    //IMPORTANTE: LA POSICIÓN (0,0) ES EL CENTRO DEL ESCENARIO.
-    //            EN PHOTOSHOP ES LA ESQUINA SUPERIOR IZQUIERDA
-
-
-		//this.Escenario(); (No se sabe si funciona así)
 	this.add.sprite(512, 215, 'fondo');
-        //this.add.sprite(512, 685, 'HUD'); //sprite del HUD
-		//this.add.sprite(0, 0, 'Plat2')
 
 	this.plataformas = this.physics.add.staticGroup();  //Hace solidas las plataformas enfocadas al primer personaje
     this.suelo = this.physics.add.staticGroup();
     this.tanque = this.physics.add.staticGroup();
-    this.pared = this.physics.add.staticGroup();
     
     this.plataformas2 = this.physics.add.staticGroup();  //Hace solidas las plataformas enfocadas al segundo personaje
     this.suelo2 = this.physics.add.staticGroup();
     this.tanque2 = this.physics.add.staticGroup();
-    this.pared2 = this.physics.add.staticGroup();
     
     this.plataformas3 = this.physics.add.staticGroup();  //Hace solidas las plataformas enfocadas a las balas
     this.suelo3 = this.physics.add.staticGroup();
     this.tanque3 = this.physics.add.staticGroup();
-    this.pared3 = this.physics.add.staticGroup();
 
     this.dropzone = this.physics.add.staticGroup();
 
 	//Suelo
-    //platformas.create(x, y, 'suelo').setScale(2).refreshBody();
     this.suelo.create(512, 585, 'sueloPixel').alpha=0;
-
-
-    //LAS COORDENADAS SON RESPECTO A LA VENTANA DEL TAMAÑO DEL ESCENARIO
 
     //plataformas invisibles
     //escaleras de emergencia
@@ -314,9 +283,7 @@ create(){
     this.plataformas.create(158, 305, 'techoApixel').alpha=0;
     this.plataformas.create(376, 60, 'techoBpixel').alpha=0;
     this.plataformas.create(624, 192, 'techoCpixel').alpha=0;
-    this.plataformas.create(824, 130, 'techoDpixel').alpha=0;
-    //pared derecha
-    this.pared.create(972, 215, 'paredPixel').alpha=0;
+    this.plataformas.create(841, 130, 'techoDpixel').alpha=0;
     //toldos
     this.plataformas.create(159, 480, 'toldoLPixel').alpha=0; //izquierdo
     this.plataformas.create(878, 480, 'toldoRPixel').alpha=0; //derecho
@@ -352,9 +319,7 @@ create(){
     this.plataformas2.create(158, 305, 'techoApixel').alpha=0;
     this.plataformas2.create(376, 60, 'techoBpixel').alpha=0;
     this.plataformas2.create(624, 192, 'techoCpixel').alpha=0;
-    this.plataformas2.create(824, 130, 'techoDpixel').alpha=0;
-    //pared derecha
-    this.pared2.create(972, 215, 'paredPixel').alpha=0;
+    this.plataformas2.create(841, 130, 'techoDpixel').alpha=0;
     //toldos
     this.plataformas2.create(159, 480, 'toldoLPixel').alpha=0; //izquierdo
     this.plataformas2.create(878, 480, 'toldoRPixel').alpha=0; //derecho
@@ -390,9 +355,7 @@ create(){
     this.plataformas3.create(158, 305, 'techoApixel').alpha=0;
     this.plataformas3.create(376, 60, 'techoBpixel').alpha=0;
     this.plataformas3.create(624, 192, 'techoCpixel').alpha=0;
-    this.plataformas3.create(824, 130, 'techoDpixel').alpha=0;
-    //pared derecha
-    this.pared3.create(972, 215, 'paredPixel').alpha=0;
+    this.plataformas3.create(841, 130, 'techoDpixel').alpha=0;
     //toldos
     this.plataformas3.create(159, 480, 'toldoLPixel').alpha=0; //izquierdo
     this.plataformas3.create(878, 480, 'toldoRPixel').alpha=0; //derecho
@@ -422,14 +385,11 @@ create(){
     //colisiones jugador 1
     this.physics.add.collider(this.jugador.avatar.sprite, this.suelo); //con suelo
     this.physics.add.collider(this.jugador.avatar.sprite,this.plataformas); //con plataformas
-    this.physics.add.collider(this.jugador.avatar.sprite, this.pared); //con la pared derecha
     this.jugador.avatar.sprite.body.collideWorldBounds = true; //con bordes
     //colisiones jugador 2
     this.physics.add.collider(this.jugador1.avatar.sprite, this.suelo2); //con suelo
     this.physics.add.collider(this.jugador1.avatar.sprite,this.plataformas2); //con plataformas
-    this.physics.add.collider(this.jugador1.avatar.sprite, this.pared2); //con la pared derecha
     this.jugador1.avatar.sprite.body.collideWorldBounds = true; //con bordes
-
 
     //colisiones entre jugadores
     this.physics.add.collider(this.jugador.avatar.sprite, this.jugador1.avatar.sprite);
@@ -437,13 +397,8 @@ create(){
     this.hud.create();
     //time event spawndrop
     var that = this;
-    //var functionevent = function(){
-           // var obj = that.drops.spawnarma();
-            //that.physics.add.overlap(that.jugador1.avatar.sprite,obj); 
-            //that.physics.add.overlap(that.jugador.avatar.sprite,obj); 
-      //  }
 
-        var dropevent = this.time.addEvent({delay:3500 ,loop:true ,
+        var dropevent = this.time.addEvent({delay:2000 ,loop:true ,
         callback: function(){that.drops.spawnarma()} })
 
         var restartescenaevent = this.time.addEvent({delay:300 ,loop:true ,
