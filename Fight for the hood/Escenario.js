@@ -1,6 +1,5 @@
 'use strict'
 
-    var aux=false;
     var victorias=new Array(2); //Almacena el nº de partidas ganadas por cada jugador
     victorias[0]=0; victorias[1]=0;
 
@@ -65,17 +64,13 @@ class MainEscenario extends Phaser.Scene {
 
 //Reiniciamos el nivel
 restartPartida(){
-        aux=false;
-        this.time.clearPendingEvents();
-        this.jugador1.vida=100;
-        this.jugador.vida=100;
-        this.jugador1.arma="";
-        this.jugador.arma="";
-        this.jugador1.municiones="";
-        this.jugador.municiones="";
-        this.time.removeAllEvents();
-        //this.drops = new Drops(this,spritearmas);
-        this.scene.restart();
+    var that=this;
+    this.time.clearPendingEvents();
+    this.time.removeAllEvents();
+    this.time.addEvent({delay:1500,  //tiempo que da al reiniciar
+    callback: function(){that.scene.restart()}});
+
+    //this.scene.restart();
 }
 
 //Comprobamos las condiciones para ganar
@@ -99,13 +94,13 @@ checkPartida(){
         if(ganador==0){
             victorias[0]+=1;
             console.log('Gana J1');
-            aux=true;
+            this.restartPartida();
         }
         //gana J2
         else if(ganador==1){
             victorias[1]+=1;
             console.log('Gana J2');
-            aux=true;
+            this.restartPartida();
         }
     }
 
@@ -113,18 +108,14 @@ checkPartida(){
     else if(this.jugador.vida<=0 && this.jugador1.vida>0){  //jugador 0
         victorias[1]+=1;
         console.log('Gana J2');
-        aux=true;
+        this.restartPartida();
     }
     else if(this.jugador1.vida<=0 && this.jugador.vida>0){ //jugador 1
         victorias[0]+=1;
         console.log('Gana J1');
-        aux=true;
-    }
-    else{aux=false;}
-
-    if(aux){
         this.restartPartida();
-    }         
+    }
+     
 }
 
 colisionesbalasjugador(jugador,balast){

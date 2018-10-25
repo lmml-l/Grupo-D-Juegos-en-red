@@ -56,6 +56,9 @@ function Jugador(avatar,controles,proyectiles){
 	this.create=function(lado){
 		that.avatar.animaciones();
 		that.avatar.spawnavatar();
+		that.vida = 100;
+        that.municiones = "";
+        that.arma = "";
 		if(lado=="right"){
 			that.avatar.walkright(that.arma);
 		}
