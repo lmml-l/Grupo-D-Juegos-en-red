@@ -47,7 +47,7 @@ function Jugador(avatar,controles,proyectiles){
 	var keyescudo;
 
 	var keyrecarmasoltada;
-	var keydispararsoltada;
+	var keydispararsoltad;
 
 	this.preload=function(){
 		that.avatar.preload();
@@ -71,6 +71,10 @@ function Jugador(avatar,controles,proyectiles){
 	   keyrecargar = this.avatar.scene.input.keyboard.addKey(that.controles.recargar);
 	   keyrecarma = this.avatar.scene.input.keyboard.addKey(that.controles.recarma);
 	   keyescudo = this.avatar.scene.input.keyboard.addKey(that.controles.escudo);
+
+	   keydispararsoltad = true;
+
+
 	}
 	this.selectmunicion = function(arma){
 		var municiones;
@@ -171,7 +175,7 @@ function Jugador(avatar,controles,proyectiles){
 		}
 	}
 	this.disparar = function (arma,scene,avatar){
-		if((keydisparo.isDown) && (keydispararsoltada) && ((this.municiones > 0 || ((this.arma=="")||(this.arma=="Bate")||(this.arma=="Puñoamericano"))))){
+		if((keydisparo.isDown) && (keydispararsoltad) && ((this.municiones > 0 || ((this.arma=="")||(this.arma=="Bate")||(this.arma=="Puñoamericano"))))){
 			that.proyectiles.create(arma,scene,avatar);
 			
 		switch(arma){
@@ -186,7 +190,8 @@ function Jugador(avatar,controles,proyectiles){
 				break;
 		}
 			//that.proyectiles.fisicasproyectil(arma,avatar,balass);
-			keydispararsoltada = false;
+			keydispararsoltad = false;
+			var cooldowndisparo = that.avatar.scene.time.addEvent({delay:1000 , callback:function(){keydispararsoltad=true;}})//cooldown al disparar
 		}
 	}
 	this.cambiararma = function(dropss){
@@ -199,9 +204,6 @@ function Jugador(avatar,controles,proyectiles){
 	this.teclasoltada = function(){
 		if(keyrecarma.isUp){
 			keyrecarmasoltada=true;
-		}
-		if(keydisparo.isUp){
-			 keydispararsoltada=true;
 		}
 	}
 
