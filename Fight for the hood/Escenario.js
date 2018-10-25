@@ -73,7 +73,7 @@ restartPartida(){
         this.jugador.arma="";
         this.jugador1.municiones="";
         this.jugador.municiones="";
-        //this.time.removeAllEvents();
+        this.time.removeAllEvents();
         //this.drops = new Drops(this,spritearmas);
         this.scene.restart();
 }
@@ -273,7 +273,7 @@ create(){
 
 
 		//this.Escenario(); (No se sabe si funciona así)
-		this.add.sprite(512, 215, 'fondo');
+	this.add.sprite(512, 215, 'fondo');
         //this.add.sprite(512, 685, 'HUD'); //sprite del HUD
 		//this.add.sprite(0, 0, 'Plat2')
 
@@ -442,7 +442,7 @@ create(){
 
     //colisiones entre jugadores
     this.physics.add.collider(this.jugador.avatar.sprite, this.jugador1.avatar.sprite);
-
+    this.drops.create();
     this.hud.create();
     //time event spawndrop
     var that = this;
@@ -453,7 +453,7 @@ create(){
       //  }
 
         var dropevent = this.time.addEvent({delay:3500 ,loop:true ,
-        callback: that.drops.spawnarma })
+        callback: function(){that.drops.spawnarma()} })
 
         var restartescenaevent = this.time.addEvent({delay:300 ,loop:true ,
         callback: function(){that.checkPartida()} });

@@ -39,6 +39,10 @@ function Drops(escena, sprites) {
 
 	}
 
+	this.create = function(){
+		this.sprite = new Array();
+	}
+
 	this.selectID = function(){
 		var name;
 		var e = Math.floor(Math.random()*5);
