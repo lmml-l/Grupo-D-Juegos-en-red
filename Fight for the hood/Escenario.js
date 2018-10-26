@@ -50,6 +50,8 @@ class MainEscenario extends Phaser.Scene {
         this.suelo;
         this.tanque;
         this.dropzone;
+        this.caja;
+        this.bocaIncendio;
 
         this.drops = new Drops(this,spritearmas);
 
@@ -236,6 +238,7 @@ preload(){
     this.load.image('tanquePixel', 'Recursos/Imagenes/tanquePixel.png');
     this.load.image('dropzonePixel', 'Recursos/Imagenes/dropzone.png');
     this.load.image('HUD', 'Recursos/Imagenes/HUD.png');
+    this.load.image('cajaPixel', 'Recursos/Imagenes/caja.png');
 
 
 }
@@ -258,9 +261,12 @@ create(){
     this.tanque3 = this.physics.add.staticGroup();
 
     this.dropzone = this.physics.add.staticGroup();
+    this.caja = this.physics.add.staticGroup();
 
 	//Suelo
-    this.suelo.create(512, 585, 'sueloPixel').alpha=0;
+    this.suelo.create(512, 585, 'sueloPixel').alpha=1;
+    var sueloArray = this.suelo.getChildren();
+    sueloArray[0].body.height=13475;
 
     //plataformas invisibles
     //escaleras de emergencia
@@ -298,6 +304,8 @@ create(){
 
     //AHORA SE HACEN LO MISMO PARA EL PERSONAJE DOS
     this.suelo2.create(512, 585, 'sueloPixel').alpha=0;
+    var suelo2Array = this.suelo2.getChildren();
+    suelo2Array[0].body.height=1475;
 
     //plataformas
     //izquierda
@@ -332,7 +340,7 @@ create(){
     this.plataformas2.create(60, 385, 'cartelPixel').alpha=0; //izquierdo
     this.plataformas2.create(726, 443, 'cartelPixel').alpha=0; //derecho
 
-    this.suelo2.create(512, 585, 'sueloPixel').alpha=0;
+    //this.suelo2.create(512, 585, 'sueloPixel').alpha=0;
 
     //AHORA LAS PLATAFORMAS PARA LAS COLISIONES DE LAS BALAS.
     //plataformas
@@ -369,7 +377,6 @@ create(){
     this.plataformas3.create(726, 443, 'cartelPixel').alpha=0; //derecho
 
     this.suelo3.create(512, 585, 'sueloPixel').alpha=0;
-
 
     //zonas de dropeo
     this.dropzone.create(130, 302,'dropzonePixel');

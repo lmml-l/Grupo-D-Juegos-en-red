@@ -111,7 +111,7 @@ function Proyectiles (sprites){
 			case "Escopeta":
 				if(avatar.getanim().includes('left')){
 					for(var i = 0; i < balas.length ; i++){
-						var vector = new Phaser.Math.Vector3(220,0,1); //velocidad de disparo
+						var vector = new Phaser.Math.Vector3(420,0,1); //velocidad de disparo
 						var matrix = new Phaser.Math.Matrix3();
 						var angle = Phaser.Math.DEG_TO_RAD * (135+(i*(11.25)));
 						var array = [Math.cos(angle),-1*Math.sin(angle),0,Math.sin(angle),Math.cos(angle),0,0,0,1];
@@ -123,7 +123,7 @@ function Proyectiles (sprites){
 					}
 				}else if(avatar.getanim().includes('right')){
 					for(var i = 0; i < balas.length ; i++){
-						var vector = new Phaser.Math.Vector2(220,0,1);//velocidad de disparo
+						var vector = new Phaser.Math.Vector2(420,0,1);//velocidad de disparo
 						var matrix = new Phaser.Math.Matrix3();
 						var angle = Phaser.Math.DEG_TO_RAD * (45-(i*(11.25)));
 						var array = [Math.cos(angle),-1*Math.sin(angle),0,Math.sin(angle),Math.cos(angle),0,0,0,1];
@@ -137,21 +137,21 @@ function Proyectiles (sprites){
 			break;
 			case "Pistola":
 				if(avatar.getanim().includes('left')){
-					var vector = new Phaser.Math.Vector2(-150,0); //velocidad de disparo
+					var vector = new Phaser.Math.Vector2(-500,0); //velocidad de disparo
 					balas.setVelocity(vector.x,vector.y);
 
 				}else if(avatar.getanim().includes('right')){
-					var vector = new Phaser.Math.Vector2(150,0); //velocidad de disparo
+					var vector = new Phaser.Math.Vector2(500,0); //velocidad de disparo
 					balas.setVelocity(vector.x,vector.y);
 				}
 			break;
 			case "Subfusil":
 				
 				if(avatar.getanim().includes('left')){
-					var vector = new Phaser.Math.Vector2(-190,0); //velocidad de disparo
+					var vector = new Phaser.Math.Vector2(-800,0); //velocidad de disparo
 					balas.setVelocity(vector.x,vector.y);
 				}else if(avatar.getanim().includes('right')){
-					var vector = new Phaser.Math.Vector2(190,0); //velocidad de disparo
+					var vector = new Phaser.Math.Vector2(800,0); //velocidad de disparo
 					balas.setVelocity(vector.x,vector.y);
 				}
 			break;
@@ -176,7 +176,7 @@ function Proyectiles (sprites){
 				var balaescopeta = balasdeescopetaarray[i];
 				that.proyectilesenescane.push(balaescopeta);
 			}
-				scene.time.addEvent({delay:350, callback:function(){ //el delay es el alcance
+				scene.time.addEvent({delay:175, callback:function(){ //el delay es el alcance
 					for(var i = 0 ; i< balasdeescopetaarray.length ; i++){
 						balasdeescopetaarray[i].destroy();
 					}
@@ -187,7 +187,7 @@ function Proyectiles (sprites){
 			var disp = function(){
 				var balasubfusil = that.fisicasproyectil(arma,avatar,that.crearproyectiles(arma,scene,avatar))
 				that.proyectilesenescane.push(balasubfusil);
-				scene.time.addEvent({delay:1300, callback: function(){balasubfusil.destroy()}});
+				scene.time.addEvent({delay:300, callback: function(){balasubfusil.destroy()}});
 			};
 
 			disp();
@@ -199,7 +199,7 @@ function Proyectiles (sprites){
 			case 'Pistola':
 			var balapistola = that.fisicasproyectil(arma,avatar,that.crearproyectiles(arma,scene,avatar))
 			that.proyectilesenescane.push(balapistola);
-			scene.time.addEvent({delay:2000, callback: function(){balapistola.destroy()}});
+			scene.time.addEvent({delay:1300, callback: function(){balapistola.destroy()}});
 			break;
 			case "":
 			break;

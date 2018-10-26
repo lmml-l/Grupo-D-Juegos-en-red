@@ -95,7 +95,7 @@ function Jugador(avatar,controles,proyectiles){
 				municiones = 12;
 				break;
 			case "Subfusil":
-				municiones = 20;
+				municiones = 21;
 				break;
 		}
 		return municiones;
@@ -193,7 +193,7 @@ function Jugador(avatar,controles,proyectiles){
 		}
 			//that.proyectiles.fisicasproyectil(arma,avatar,balass);
 			keydispararsoltad = false;
-			that.avatar.scene.time.addEvent({delay:1000 , callback:function(){keydispararsoltad=true;}})//cooldown al disparar
+			that.avatar.scene.time.addEvent({delay:625 , callback:function(){keydispararsoltad=true;}})//cooldown al disparar
 		}
 	}
 	this.cambiararma = function(dropss){
