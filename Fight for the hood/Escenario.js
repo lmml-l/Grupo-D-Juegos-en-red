@@ -6,12 +6,19 @@
     var colisionesjugadoresbalas = new Array();
     var colisionesescenariobalas = new Array();
 
-      var sprite = ["Recursos/Imagenes/Sprites_Personaje/SpritePersonajeIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpritePersonajeDerecha.png",
+        var sprite = ["Recursos/Imagenes/Sprites_Personaje/SpritePersonajeIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpritePersonajeDerecha.png",
         "Recursos/Imagenes/Sprites_Personaje/SpritePistolaIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpritePistolaDerecha.png",
         "Recursos/Imagenes/Sprites_Personaje/SpriteEscopetaIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpriteEscopetaDerecha.png",
         "Recursos/Imagenes/Sprites_Personaje/SpriteThomsomIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpriteThomsomDerecha.png",
         "Recursos/Imagenes/Sprites_Personaje/SpritePersonajePuñoAmericanoIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpritePersonajePuñoAmericanoDerecha.png",
         "Recursos/Imagenes/Sprites_Personaje/SpriteBateIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpriteBateDerecha.png"]
+
+        var sprite2 = ["Recursos/Imagenes/Sprites_Personaje2/SpritePersonajeIzquierda.png","Recursos/Imagenes/Sprites_Personaje2/SpritePersonajeDerecha.png",
+        "Recursos/Imagenes/Sprites_Personaje2/SpritePistolaIzquierda.png","Recursos/Imagenes/Sprites_Personaje2/SpritePistolaDerecha.png",
+        "Recursos/Imagenes/Sprites_Personaje2/SpriteEscopetaIzquierda.png","Recursos/Imagenes/Sprites_Personaje2/SpriteEscopetaDerecha.png",
+        "Recursos/Imagenes/Sprites_Personaje2/SpriteThomsomIzquierda.png","Recursos/Imagenes/Sprites_Personaje2/SpriteThomsomDerecha.png",
+        "Recursos/Imagenes/Sprites_Personaje2/SpritePersonajePuñoAmericanoIzquierda.png","Recursos/Imagenes/Sprites_Personaje2/SpritePersonajePuñoAmericanoDerecha.png",
+        "Recursos/Imagenes/Sprites_Personaje2/SpriteBateIzquierda.png","Recursos/Imagenes/Sprites_Personaje2/SpriteBateDerecha.png"]
 
         var spritearmas = ["Recursos/Imagenes/Sprites_Armas/Pistola/PistolaPixelizada.png",
         "Recursos/Imagenes/Sprites_Armas/Escopeta/EscopetaPixelizada.png",
@@ -38,7 +45,7 @@ class MainEscenario extends Phaser.Scene {
 		super({key:"MainEscenario"});
            
         this.avatar = new Avatar("a",this,400,400,sprite);
-        this.avatar1 = new Avatar("b",this,600,400,sprite);
+        this.avatar1 = new Avatar("b",this,600,400,sprite2);
 
         this.proyectiles = new Proyectiles(spriteproyectiles);
         this.proyectiles2 = new Proyectiles(spriteproyectiles);
@@ -264,7 +271,7 @@ create(){
     this.caja = this.physics.add.staticGroup();
 
 	//Suelo
-    this.suelo.create(512, 585, 'sueloPixel').alpha=1;
+    this.suelo.create(512, 585, 'sueloPixel').alpha=0;
     var sueloArray = this.suelo.getChildren();
     sueloArray[0].body.height=13475;
 
@@ -385,6 +392,8 @@ create(){
     this.dropzone.create(857, 128,'dropzonePixel');
     this.dropzone.create(686, 353,'dropzonePixel');
 
+    //worldbounds
+    this.physics.world.setBounds(0,0,1024,585,true,true,false,true);
     
 
     //jugadores
@@ -398,6 +407,7 @@ create(){
     this.physics.add.collider(this.jugador1.avatar.sprite, this.suelo2); //con suelo
     this.physics.add.collider(this.jugador1.avatar.sprite,this.plataformas2); //con plataformas
     this.jugador1.avatar.sprite.body.collideWorldBounds = true; //con bordes
+
 
     //colisiones entre jugadores
     this.physics.add.collider(this.jugador.avatar.sprite, this.jugador1.avatar.sprite);

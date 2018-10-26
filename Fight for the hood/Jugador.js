@@ -163,7 +163,7 @@ function Jugador(avatar,controles,proyectiles){
 			that.avatar.velx(0);
 		}
 
-		if(keysalto.isDown && that.avatar.sprite.body.touching.down){
+		if(keysalto.isDown && (that.avatar.sprite.body.touching.down || that.avatar.sprite.body.onFloor())){
 			that.avatar.vely(-375);
 		}
 		//if(keymovabajo.isDown){

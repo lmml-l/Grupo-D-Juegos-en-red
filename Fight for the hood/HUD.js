@@ -4,7 +4,8 @@
    	    this.scene = escena;
    	    this.jugadores = jugadores;
 		this.Municiones = new Array(2);
-		this.ArmasMostradas = new Array(2);     
+		this.ArmasMostradas = new Array(2);
+		this.Vidas = new Array(2);    
 		var that = this;
 
 
