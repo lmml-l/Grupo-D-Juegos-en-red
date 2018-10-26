@@ -243,6 +243,7 @@ preload(){
 create(){
 
 	this.add.sprite(512, 215, 'fondo');
+	this.add.sprite(512, 681, 'HUD');
 
 	this.plataformas = this.physics.add.staticGroup();  //Hace solidas las plataformas enfocadas al primer personaje
     this.suelo = this.physics.add.staticGroup();
