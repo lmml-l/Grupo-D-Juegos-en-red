@@ -19,11 +19,11 @@
 	}
 
 	this.create = function (){
-		that.ArmasMostradas[0] = that.scene.add.sprite(100, 700, " "+ that.jugadores[0].arma).setScale(2); //Crea el sprite arma del jugador 1.       
-	    that.ArmasMostradas[1] = that.scene.add.sprite(930, 700, " "+ that.jugadores[1].arma).setScale(2); //Crea el sprite del arma del juagdor 2.
+		that.ArmasMostradas[0] = that.scene.add.sprite(140, 680, " "+ that.jugadores[0].arma).setScale(2); //Crea el sprite arma del jugador 1.       
+	    that.ArmasMostradas[1] = that.scene.add.sprite(890, 680, " "+ that.jugadores[1].arma).setScale(2); //Crea el sprite del arma del juagdor 2.
         
-        that.Municiones[0] = that.scene.add.text(70, 735, that.jugadores[1].municiones.toString()).setScale(2);   //Crea la munición del jugador 1.
-        that.Municiones[1] = that.scene.add.text(908, 735, that.jugadores[0].municiones.toString()).setScale(2);  //Crea la munición del jugador 2
+        that.Municiones[0] = that.scene.add.text(115, 716, that.jugadores[1].municiones.toString()).setScale(2);   //Crea la munición del jugador 1.
+        that.Municiones[1] = that.scene.add.text(875, 716, that.jugadores[0].municiones.toString()).setScale(2);  //Crea la munición del jugador 2
 	}
 
 
