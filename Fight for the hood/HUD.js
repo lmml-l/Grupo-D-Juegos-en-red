@@ -5,7 +5,7 @@
    	    this.jugadores = jugadores;
 		this.Municiones = new Array(2);
 		this.ArmasMostradas = new Array(2);
-		this.Vidas = new Array(2);    
+		this.BarrasVidas = new Array(2);    
 		var that = this;
 
 
@@ -24,7 +24,10 @@
 	    that.ArmasMostradas[1] = that.scene.add.sprite(890, 680, " "+ that.jugadores[1].arma).setScale(2); //Crea el sprite del arma del juagdor 2.
         
         that.Municiones[0] = that.scene.add.text(115, 716, that.jugadores[1].municiones.toString()).setScale(2);   //Crea la munición del jugador 1.
-        that.Municiones[1] = that.scene.add.text(875, 716, that.jugadores[0].municiones.toString()).setScale(2);  //Crea la munición del jugador 2
+        that.Municiones[1] = that.scene.add.text(875, 716, that.jugadores[0].municiones.toString()).setScale(2);
+
+        that.BarrasVidas[0] = that.scene.add.graphics({x:0,y:0});
+        that.BarrasVidas[1] = that.scene.add.graphics({x:0,y:0});   //Crea la munición del jugador 2
 	}
 
 
@@ -33,7 +36,17 @@
 	  	that.ArmasMostradas[1].setTexture(" "+ that.jugadores[1].arma);
 	  	that.Municiones[0].setText(that.jugadores[0].municiones.toString());
 	  	that.Municiones[1].setText(that.jugadores[1].municiones.toString());
-	  	
+
+	  	if(that.jugadores[0].vida>=0){
+	  		that.BarrasVidas[0].clear();
+	  		that.BarrasVidas[0].fillStyle(0xFFAC00, 1.0);
+	  		that.BarrasVidas[0].fillRect(10, 605,that.jugadores[0].vida*4.5,20);
+	  	}
+	  	if(that.jugadores[1].vida>=0){
+        that.BarrasVidas[1].clear();
+        that.BarrasVidas[1].fillStyle(0xFFAC00, 1.0);
+        that.BarrasVidas[1].fillRect(1010-that.jugadores[1].vida*4.5, 605,that.jugadores[1].vida*4.5,20); //volteo: desplazo tanto como reduzco
+    	}
 	}
 }
 
