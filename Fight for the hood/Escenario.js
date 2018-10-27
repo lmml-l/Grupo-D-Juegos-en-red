@@ -63,6 +63,8 @@ class MainEscenario extends Phaser.Scene {
         this.drops = new Drops(this,spritearmas);
 
         this.hud = new HUD (this, Hud , [this.jugador,this.jugador1]);
+
+        this.ganadorTexto;
 	}
 
 //Reiniciamos el nivel
@@ -76,14 +78,21 @@ restartPartida(){
 
 //Comprobamos las condiciones para ganar
 checkPartida(){
+    var that=this;
     //Si algún jugador llega a 3 victorias gana la partida
     if(victorias[0]==3){ //jugador 1
-        console.log('J1 GANA LA PARTIDA');
+        console.log('P1 GANA LA PARTIDA');
+        this.ganadorTexto.setText("P1 GANA LA PELEA"); 
         victorias[0]=0;
+        this.time.addEvent({delay:3500,  //tiempo que da al reiniciar
+        callback: function(){that.scene.start('MainMenu')}});
     }
     if(victorias[1]==3){ //jugador 2
-        console.log('J2 GANA LA PARTIDA');
+        console.log('P2 GANA LA PARTIDA');
+        this.ganadorTexto.setText("P2 GANA LA PELEA");
         victorias[1]=0;
+        this.time.addEvent({delay:3500,  //tiempo que da al reiniciar
+        callback: function(){that.scene.start('MainMenu')}});
     }
 
     //Si los dos jugadores llegan a 0 al mismo tiempo
@@ -93,26 +102,30 @@ checkPartida(){
         //gana J1
         if(ganador==0){
             victorias[0]+=1;
-            console.log('Gana J1');
+            console.log('Gana P1');
+            this.ganadorTexto.setText("GANA P1");
             this.restartPartida();
         }
         //gana J2
         else if(ganador==1){
             victorias[1]+=1;
-            console.log('Gana J2');
+            console.log('Gana P2');
+            this.ganadorTexto.setText("GANA P2");
             this.restartPartida();
         }
     }
 
     //Si algún jugador se queda sin vida
-    else if(this.jugador.vida<=0 && this.jugador1.vida>0){  //jugador 0
+    else if(this.jugador.vida<=0 && this.jugador1.vida>0){  //jugador 0 
         victorias[1]+=1;
-        console.log('Gana J2');
+        console.log('Gana P2');
+        this.ganadorTexto.setText("GANA P2");
         this.restartPartida();
     }
     else if(this.jugador1.vida<=0 && this.jugador.vida>0){ //jugador 1
         victorias[0]+=1;
-        console.log('Gana J1');
+        console.log('Gana P1');
+        this.ganadorTexto.setText("GANA P1");
         this.restartPartida();
     } 
 }
@@ -413,6 +426,8 @@ create(){
     this.physics.add.collider(this.jugador.avatar.sprite, this.jugador1.avatar.sprite);
     this.drops.create();
     this.hud.create();
+
+    this.ganadorTexto =  this.add.text(480, 250, "", { fill: '#FFAC00', font: '52px Impact', align: 'center'});
     //time event spawndrop
     var that = this;
 
