@@ -32,11 +32,11 @@
         "Recursos/Imagenes/Sprites_Proyectiles/GolpePuño.png",
         "Recursos/Imagenes/Sprites_Proyectiles/GolpePuño.png"]
         
-        var Hud = ["Recursos/Imagenes/Sprites_Armas/Pistola/PistolaPixelizada.png",
-        "Recursos/Imagenes/Sprites_Armas/Escopeta/EscopetaPixelizada.png",
-        "Recursos/Imagenes/Sprites_Armas/Thompson/ThompsonPixelizado.png",
-        "Recursos/Imagenes/Sprites_Armas/Puno_Americano/PuñoAmericanoPixelizado.png",
-        "Recursos/Imagenes/Sprites_Armas/Bate_de_Beisbol/BateBeisbolPixelizado.png",
+        var Hud = ["Recursos/Imagenes/Sprites_Armas/ArmasHUD/PistolaHUD.png",
+        "Recursos/Imagenes/Sprites_Armas/ArmasHUD/EscopetaHUD.png",
+        "Recursos/Imagenes/Sprites_Armas/ArmasHUD/ThompsonHUD.png",
+        "Recursos/Imagenes/Sprites_Armas/ArmasHUD/PuñoAmericanoHUD.png",
+        "Recursos/Imagenes/Sprites_Armas/ArmasHUD/BateHUD.png",
         "Recursos/Imagenes/Sprites_Armas/Puños/PuñoPixelizado.png"]
          
 class MainEscenario extends Phaser.Scene {
