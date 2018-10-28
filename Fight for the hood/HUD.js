@@ -28,7 +28,7 @@
 
 	    that.Clock = clock;
 
-	    that.MostrarReloj = that.scene.add.text(482,602, (Math.trunc(90 - that.Clock.getElapsedSeconds())).toString(), { fill: '#FFFFFF', font: '52px Impact', align: 'center'});
+	    that.MostrarReloj = that.scene.add.text(482,602, (Math.trunc(91 - that.Clock.getElapsedSeconds())).toString(), { fill: '#FFFFFF', font: '52px Impact', align: 'center'});
 
         //Indica municion
         that.Municiones[0] = that.scene.add.text(115, 716, that.jugadores[1].municiones.toString()).setScale(2);   //Crea la munición del jugador 1.
@@ -130,16 +130,15 @@
 	  	that.Municiones[0].setText(that.jugadores[0].municiones.toString());
 	  	that.Municiones[1].setText(that.jugadores[1].municiones.toString());
 
-	  	that.MostrarReloj.setText((Math.trunc(90 - that.Clock.getElapsedSeconds())).toString()); //90 segundos
+	  	that.MostrarReloj.setText((Math.trunc(91 - that.Clock.getElapsedSeconds())).toString()); //91 segundos
 	  	that.VictoriaUpdate();
 	  
 	  	that.BarrasVidas[0].clear();
 	  	that.BarrasVidas[0].fillStyle(0xFFAC00, 1.0);
-	  	that.BarrasVidas[0].fillRect(10, 605,that.jugadores[0].vida*4.5,20);
+	  	that.BarrasVidas[0].fillRect(460-that.jugadores[0].vida*4.5, 605,that.jugadores[0].vida*4.5,20); //volteo: desplazo tanto como reduzco
 	  	
         that.BarrasVidas[1].clear();
         that.BarrasVidas[1].fillStyle(0xFFAC00, 1.0);
-        that.BarrasVidas[1].fillRect(1010-that.jugadores[1].vida*4.5, 605,that.jugadores[1].vida*4.5,20); //volteo: desplazo tanto como reduzco
+        that.BarrasVidas[1].fillRect(560, 605,that.jugadores[1].vida*4.5,20); 
   	}
 }
-

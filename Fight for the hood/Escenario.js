@@ -130,7 +130,7 @@ checkPartida(){
     } 
 //console.log(this.Clock.getElapsedSeconds());
     //Si acaba el tiempo
-    if(90-this.Clock.getElapsedSeconds() == 0){ 
+    if(91-this.Clock.getElapsedSeconds() == 0){ 
     this.ganadorTexto.setText("SE ACABÓ\nEL TIEMPO");
     this.restartPartida();
     }
@@ -434,7 +434,7 @@ create(){
     //colisiones entre jugadores
     this.physics.add.collider(this.jugador.avatar.sprite, this.jugador1.avatar.sprite);
     this.drops.create();
-    this.Clock = this.time.addEvent({delay:90000, //90 segundos
+    this.Clock = this.time.addEvent({delay:91000, //91 segundos
     callback: function(){} });
 
     this.hud.create(this.Clock);
