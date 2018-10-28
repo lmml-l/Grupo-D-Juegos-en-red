@@ -5,7 +5,8 @@
    	    this.jugadores = jugadores;
 		this.Municiones = new Array(2);
 		this.ArmasMostradas = new Array(2);
-		this.BarrasVidas = new Array(2);  
+		this.BarrasVidas = new Array(2);
+		this.RondasVictoria = new Array(2);    
 		this.Clock;
 		this.MostrarReloj;  
 		var that = this;
@@ -29,14 +30,99 @@
 
 	    that.MostrarReloj = that.scene.add.text(482,602, (Math.trunc(90 - that.Clock.getElapsedSeconds())).toString(), { fill: '#FFFFFF', font: '52px Impact', align: 'center'});
 
-      
+        //Indica municion
         that.Municiones[0] = that.scene.add.text(115, 716, that.jugadores[1].municiones.toString()).setScale(2);   //Crea la munición del jugador 1.
         that.Municiones[1] = that.scene.add.text(875, 716, that.jugadores[0].municiones.toString()).setScale(2);
-
+        //Barras de vida
         that.BarrasVidas[0] = that.scene.add.graphics({x:0,y:0});
         that.BarrasVidas[1] = that.scene.add.graphics({x:0,y:0});   //Crea la munición del jugador 2
+        //Indica las rondas ganadas (victorias)
+        that.RondasVictoria[0] = that.scene.add.graphics({x:0,y:0});
+        that.RondasVictoria[1] = that.scene.add.graphics({x:0,y:0});
 	}
 
+	this.VictoriaUpdate = function(){
+		//Victorias J1
+  		that.RondasVictoria[0].clear();
+  		that.RondasVictoria[0].fillStyle='#FFAC00';
+
+  		if(victorias[0]==1){
+  		that.RondasVictoria[0].beginPath();
+  		that.RondasVictoria[0].arc(445, 643, 12, Phaser.Math.DegToRad(0), Phaser.Math.DegToRad(45), true, true); //dibuja círculo
+  		that.RondasVictoria[0].closePath();
+  		that.RondasVictoria[0].fillPath();
+  		}
+  		if(victorias[0]==2){
+  		//victoria 1
+  		that.RondasVictoria[0].beginPath();
+  		that.RondasVictoria[0].arc(445, 643, 12, Phaser.Math.DegToRad(0), Phaser.Math.DegToRad(45), true, true); //dibuja círculo
+  		that.RondasVictoria[0].closePath();
+  		that.RondasVictoria[0].fillPath();
+  		//victoria 2
+  		that.RondasVictoria[0].beginPath();
+  		that.RondasVictoria[0].arc(415, 643, 12, Phaser.Math.DegToRad(0), Phaser.Math.DegToRad(45), true, true); //dibuja círculo
+  		that.RondasVictoria[0].closePath();
+  		that.RondasVictoria[0].fillPath();
+  		}
+  		if(victorias[0]==3){
+  		//victoria 1
+  		that.RondasVictoria[0].beginPath();
+  		that.RondasVictoria[0].arc(445, 643, 12, Phaser.Math.DegToRad(0), Phaser.Math.DegToRad(45), true, true); //dibuja círculo
+  		that.RondasVictoria[0].closePath();
+  		that.RondasVictoria[0].fillPath();
+  		//victoria 2
+  		that.RondasVictoria[0].beginPath();
+  		that.RondasVictoria[0].arc(415, 643, 12, Phaser.Math.DegToRad(0), Phaser.Math.DegToRad(45), true, true); //dibuja círculo
+  		that.RondasVictoria[0].closePath();
+  		that.RondasVictoria[0].fillPath();
+  		//victoria 3
+  		that.RondasVictoria[0].beginPath();
+  		that.RondasVictoria[0].arc(385, 643, 12, Phaser.Math.DegToRad(0), Phaser.Math.DegToRad(45), true, true); //dibuja círculo
+  		that.RondasVictoria[0].closePath();
+  		that.RondasVictoria[0].fillPath();
+  		}
+
+
+  		//Victorias J2
+  		that.RondasVictoria[1].clear();
+  		that.RondasVictoria[1].fillStyle='#FFAC00'; //575,605,635
+
+  		if(victorias[1]==1){
+  		that.RondasVictoria[1].beginPath();
+  		that.RondasVictoria[1].arc(575, 643, 12, Phaser.Math.DegToRad(0), Phaser.Math.DegToRad(45), true, true); //dibuja círculo
+  		that.RondasVictoria[1].closePath();
+  		that.RondasVictoria[1].fillPath();
+  		}
+  		if(victorias[1]==2){
+  		//victoria 1
+  		that.RondasVictoria[1].beginPath();
+  		that.RondasVictoria[1].arc(575, 643, 12, Phaser.Math.DegToRad(0), Phaser.Math.DegToRad(45), true, true); //dibuja círculo
+  		that.RondasVictoria[1].closePath();
+  		that.RondasVictoria[1].fillPath();
+  		//victoria 2
+  		that.RondasVictoria[1].beginPath();
+  		that.RondasVictoria[1].arc(605, 643, 12, Phaser.Math.DegToRad(0), Phaser.Math.DegToRad(45), true, true); //dibuja círculo
+  		that.RondasVictoria[1].closePath();
+  		that.RondasVictoria[1].fillPath();
+  		}
+  		if(victorias[1]==3){
+  		//victoria 1
+  		that.RondasVictoria[1].beginPath();
+  		that.RondasVictoria[1].arc(575, 643, 12, Phaser.Math.DegToRad(0), Phaser.Math.DegToRad(45), true, true); //dibuja círculo
+  		that.RondasVictoria[1].closePath();
+  		that.RondasVictoria[1].fillPath();
+  		//victoria 2
+  		that.RondasVictoria[1].beginPath();
+  		that.RondasVictoria[1].arc(605, 643, 12, Phaser.Math.DegToRad(0), Phaser.Math.DegToRad(45), true, true); //dibuja círculo
+  		that.RondasVictoria[1].closePath();
+  		that.RondasVictoria[1].fillPath();
+  		//victoria 3
+  		that.RondasVictoria[1].beginPath();
+  		that.RondasVictoria[1].arc(635, 643, 12, Phaser.Math.DegToRad(0), Phaser.Math.DegToRad(45), true, true); //dibuja círculo
+  		that.RondasVictoria[1].closePath();
+  		that.RondasVictoria[1].fillPath();
+	}
+}
 
 	this.update = function(){
 	  	that.ArmasMostradas[0].setTexture(" "+ that.jugadores[0].arma); 
@@ -45,17 +131,15 @@
 	  	that.Municiones[1].setText(that.jugadores[1].municiones.toString());
 
 	  	that.MostrarReloj.setText((Math.trunc(90 - that.Clock.getElapsedSeconds())).toString()); //90 segundos
-
+	  	that.VictoriaUpdate();
 	  
 	  	that.BarrasVidas[0].clear();
 	  	that.BarrasVidas[0].fillStyle(0xFFAC00, 1.0);
 	  	that.BarrasVidas[0].fillRect(10, 605,that.jugadores[0].vida*4.5,20);
 	  	
-	  	
         that.BarrasVidas[1].clear();
         that.BarrasVidas[1].fillStyle(0xFFAC00, 1.0);
         that.BarrasVidas[1].fillRect(1010-that.jugadores[1].vida*4.5, 605,that.jugadores[1].vida*4.5,20); //volteo: desplazo tanto como reduzco
-  
-	}
+  	}
 }
 
