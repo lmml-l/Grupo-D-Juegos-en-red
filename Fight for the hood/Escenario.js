@@ -178,6 +178,9 @@ colisionesbalasjugador(jugador,balast){
 
                 obj1.destroy();
                 jugador.vida=jugador.vida-5; console.log(jugador.vida);
+                if(jugador.vida<0){
+                    jugador.vida=0;
+                }
             };
             
             var colisionActual = this.physics.add.overlap(balast[j],jugador.avatar.sprite,funcioncallback);

@@ -37,16 +37,16 @@
 	  	that.Municiones[0].setText(that.jugadores[0].municiones.toString());
 	  	that.Municiones[1].setText(that.jugadores[1].municiones.toString());
 
-	  	if(that.jugadores[0].vida>=0){
-	  		that.BarrasVidas[0].clear();
-	  		that.BarrasVidas[0].fillStyle(0xFFAC00, 1.0);
-	  		that.BarrasVidas[0].fillRect(10, 605,that.jugadores[0].vida*4.5,20);
-	  	}
-	  	if(that.jugadores[1].vida>=0){
+	  
+	  	that.BarrasVidas[0].clear();
+	  	that.BarrasVidas[0].fillStyle(0xFFAC00, 1.0);
+	  	that.BarrasVidas[0].fillRect(10, 605,that.jugadores[0].vida*4.5,20);
+	  	
+	  	
         that.BarrasVidas[1].clear();
         that.BarrasVidas[1].fillStyle(0xFFAC00, 1.0);
         that.BarrasVidas[1].fillRect(1010-that.jugadores[1].vida*4.5, 605,that.jugadores[1].vida*4.5,20); //volteo: desplazo tanto como reduzco
-    	}
+  
 	}
 }
 
