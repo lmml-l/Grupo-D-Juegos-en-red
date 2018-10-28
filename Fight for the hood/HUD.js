@@ -21,13 +21,13 @@
 		that.scene.load.image(' ', that.spritearmas[5]);		
 	}
 
-	this.create = function (){
+	this.create = function (clock){
 		that.ArmasMostradas[0] = that.scene.add.sprite(140, 680, " "+ that.jugadores[0].arma); //Crea el sprite arma del jugador 1.       
 	    that.ArmasMostradas[1] = that.scene.add.sprite(890, 680, " "+ that.jugadores[1].arma); //Crea el sprite del arma del juagdor 2.
 
-	    that.Clock = that.scene.time.addEvent({delay:120000});
+	    that.Clock = clock;
 
-	    that.MostrarReloj = that.scene.add.text(476,605, (Math.trunc(120 - that.Clock.getElapsedSeconds())).toString(), { fill: '#FFFFFF', font: '52px Impact', align: 'center'});
+	    that.MostrarReloj = that.scene.add.text(482,602, (Math.trunc(90 - that.Clock.getElapsedSeconds())).toString(), { fill: '#FFFFFF', font: '52px Impact', align: 'center'});
 
       
         that.Municiones[0] = that.scene.add.text(115, 716, that.jugadores[1].municiones.toString()).setScale(2);   //Crea la munición del jugador 1.
@@ -44,7 +44,7 @@
 	  	that.Municiones[0].setText(that.jugadores[0].municiones.toString());
 	  	that.Municiones[1].setText(that.jugadores[1].municiones.toString());
 
-	  	that.MostrarReloj.setText((Math.trunc(120 - that.Clock.getElapsedSeconds())).toString());
+	  	that.MostrarReloj.setText((Math.trunc(90 - that.Clock.getElapsedSeconds())).toString()); //90 segundos
 
 	  
 	  	that.BarrasVidas[0].clear();

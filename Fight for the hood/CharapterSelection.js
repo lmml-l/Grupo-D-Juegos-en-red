@@ -27,14 +27,14 @@ class CharapterSelection extends Phaser.Scene {
 		var subtitle = this.add.image(this.game.canvas.width*(3/6),this.game.canvas.height*(250/600),'subtitle').setScale(0.75);
 		var character1 = this.add.image(this.game.canvas.width*(4/6),this.game.canvas.height*(4/6),'character1').setScale(1).setInteractive();
 		var character2 = this.add.image(this.game.canvas.width*(2/6),this.game.canvas.height*(4/6),'character2').setScale(1).setInteractive();
-
+		
 		this.pmap1.push(character1);
 		this.pmap1.push(character2);
 		this.pmap2.push(character2);
 		this.pmap2.push(character1);
 
-		this.p1 = this.add.image((pmap1[posArrayP1].x - 50), (pmap1[posArrayP1].y - 50),'P1').setScale(1);
-		this.p2 = this.add.image((pmap2[posArrayP2].x + 50), (pmap2[posArrayP2].y - 50),'P2').setScale(1);
+		this.p1 = this.add.image((this.pmap1[this.posArrayP1].x - 50), (this.pmap1[this.posArrayP1].y - 50),'P1').setScale(1);
+		this.p2 = this.add.image((this.pmap2[this.posArrayP2].x + 50), (this.pmap2[this.posArrayP2].y - 50),'P2').setScale(1);
 
 		var container = this.add.container(0,0);
 		container.add(title);
@@ -88,22 +88,22 @@ class CharapterSelection extends Phaser.Scene {
 	*/
 
 	actualizarP1P2(){
-		this.p1.setPosition(pmap1[posArrayP1].x - 50, pmap1[posArrayP1].y - 50);
-		this.p2.setPosition(pmap2[posArrayP2].x + 50, pmap2[posArrayP2].y - 50);
+		this.p1.setPosition(this.pmap1[this.posArrayP1].x - 50, this.pmap1[this.posArrayP1].y - 50);
+		this.p2.setPosition(this.pmap2[this.posArrayP2].x + 50, this.pmap2[this.posArrayP2].y - 50);
 	}
 
 	actualizarPosArray(){
-		if(Phaser.Input.Keyboard.KeyCodes.RIGHT.isDown && (posArrayP2<2) && this.checkplayer2){
+		if(Phaser.Input.Keyboard.KeyCodes.RIGHT.isDown && (this.posArrayP2<2) && this.checkplayer2){
 			this.posArrayP2++;
-		}else if(Phaser.Input.Keyboard.KeyCodes.LEFT.isDown && (posArrayP2>0) && this.checkplayer2){
+		}else if(Phaser.Input.Keyboard.KeyCodes.LEFT.isDown && (this.posArrayP2>0) && this.checkplayer2){
 			this.posArrayP2--;
 		}else if(Phaser.Input.Keyboard.KeyCodes.P.isDown){
 			this.checkplayer2 = true;
 		}
 
-		if(Phaser.Input.Keyboard.KeyCodes.A.isDown && (posArrayP1<2) && this.checkplayer1){
+		if(Phaser.Input.Keyboard.KeyCodes.A.isDown && (this.posArrayP1<2) && this.checkplayer1){
 			this.posArrayP1++;
-		}else if(Phaser.Input.Keyboard.KeyCodes.D.isDown && (posArrayP1>0) && this.checkplayer1){
+		}else if(Phaser.Input.Keyboard.KeyCodes.D.isDown && (this.posArrayP1>0) && this.checkplayer1){
 			this.posArrayP1--;
 		}else if(Phaser.Input.Keyboard.KeyCodes.T.isDown){
 			this.checkplayer1 = true;
@@ -111,15 +111,15 @@ class CharapterSelection extends Phaser.Scene {
 	}
 
 	scenechange(){
-		if(checkplayer1 == true && checkplayer2 == true){
+		if(this.checkplayer1 == true && this.checkplayer2 == true){
 			this.scene.start('MainEscenario');
 		}else{
-			actualizarPosArray();
+			this.actualizarPosArray();
 		}
 	}
 
 	update(){
-		scenechange();
-		actualizarP1P2();
+		this.scenechange();
+		this.actualizarP1P2();
 	}
 }

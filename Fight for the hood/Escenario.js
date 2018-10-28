@@ -81,15 +81,15 @@ checkPartida(){
     var that=this;
     //Si algún jugador llega a 3 victorias gana la partida
     if(victorias[0]==3){ //jugador 1
-        console.log('P1 GANA LA PARTIDA');
-        this.ganadorTexto.setText("P1 GANA LA PELEA"); 
+        console.log('J1 GANA LA PARTIDA');
+        this.ganadorTexto.setText("J1 GANA LA PELEA"); 
         victorias[0]=0;
         this.time.addEvent({delay:3500,  //tiempo que da al reiniciar
         callback: function(){that.scene.start('MainMenu')}});
     }
     if(victorias[1]==3){ //jugador 2
-        console.log('P2 GANA LA PARTIDA');
-        this.ganadorTexto.setText("P2 GANA LA PELEA");
+        console.log('J2 GANA LA PARTIDA');
+        this.ganadorTexto.setText("J2 GANA LA PELEA");
         victorias[1]=0;
         this.time.addEvent({delay:3500,  //tiempo que da al reiniciar
         callback: function(){that.scene.start('MainMenu')}});
@@ -102,15 +102,15 @@ checkPartida(){
         //gana J1
         if(ganador==0){
             victorias[0]+=1;
-            console.log('Gana P1');
-            this.ganadorTexto.setText("GANA P1");
+            console.log('Gana J1');
+            this.ganadorTexto.setText("GANA J1");
             this.restartPartida();
         }
         //gana J2
         else if(ganador==1){
             victorias[1]+=1;
-            console.log('Gana P2');
-            this.ganadorTexto.setText("GANA P2");
+            console.log('Gana J2');
+            this.ganadorTexto.setText("GANA J2");
             this.restartPartida();
         }
     }
@@ -118,16 +118,22 @@ checkPartida(){
     //Si algún jugador se queda sin vida
     else if(this.jugador.vida<=0 && this.jugador1.vida>0){  //jugador 0 
         victorias[1]+=1;
-        console.log('Gana P2');
-        this.ganadorTexto.setText("GANA P2");
+        console.log('Gana J2');
+        this.ganadorTexto.setText("GANA J2");
         this.restartPartida();
     }
     else if(this.jugador1.vida<=0 && this.jugador.vida>0){ //jugador 1
         victorias[0]+=1;
-        console.log('Gana P1');
-        this.ganadorTexto.setText("GANA P1");
+        console.log('Gana J1');
+        this.ganadorTexto.setText("GANA J1");
         this.restartPartida();
     } 
+//console.log(this.Clock.getElapsedSeconds());
+    //Si acaba el tiempo
+    if(90-this.Clock.getElapsedSeconds() == 0){ 
+    this.ganadorTexto.setText("SE ACABÓ\nEL TIEMPO");
+    this.restartPartida();
+    }
 }
 
 colisionesbalasjugador(jugador,balast){
@@ -428,14 +434,18 @@ create(){
     //colisiones entre jugadores
     this.physics.add.collider(this.jugador.avatar.sprite, this.jugador1.avatar.sprite);
     this.drops.create();
-    this.hud.create();
+    this.Clock = this.time.addEvent({delay:90000, //90 segundos
+    callback: function(){} });
+
+    this.hud.create(this.Clock);
 
     this.ganadorTexto =  this.add.text(480, 250, "", { fill: '#FFAC00', font: '52px Impact', align: 'center'});
+
     //time event spawndrop
     var that = this;
 
         var dropevent = this.time.addEvent({delay:2000 ,loop:true ,
-        callback: function(){that.drops.spawnarma()} })
+        callback: function(){that.drops.spawnarma()} });
 
         var restartescenaevent = this.time.addEvent({delay:300 ,loop:true ,
         callback: function(){that.checkPartida()} });

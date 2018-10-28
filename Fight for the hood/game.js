@@ -11,7 +11,7 @@ var config = {
         }
     },
     //Orden de escenas
-    scene: [CharapterSelection,MainEscenario,MainMenu] 
+    scene: [MainEscenario,CharapterSelection,MainMenu] 
 };
 
 var game = new Phaser.Game(config);
