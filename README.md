@@ -14,27 +14,14 @@
 - Disparar
 - Munición del arma
 - Atacar cuerpo a cuerpo
-- Escudo
 - Barra de vida
 - Subir y bajar plataformas metálicas
 
 *Dinámica:* Los personajes se presentarán en el mapa sin armas y aparecerán una serie de drops o armas en el entorno que podrán recoger para atacar a su contrincante.
 Los objetos recogidos volverán a aparecer en un tiempo aleatorio, mientras que las soltadas por el jugador desaparecen a los pocos segundos.
-Las armas de fuego tendrán munición finita y escasa. Se tendrán barras de vida que se reducirán si el jugador logra dañar al oponente, en función del arma empleada. Cuando no se tiene arma, se podrán usar los puños para empujar al rival. 
-Ambos luchadores pueden defenderse con un *escudo* esférico, que se dañará al ser impactado hasta romperse. No te podrás mover al usar el escudo.
-Durante el combate, se podrá interacturar con algunas elementos del escenario, algunos aleatorios, para perjudicar al rival, o bien evitar peligros.
-Existe un tiempo límite por ronda; si vence éste sin ganador se produce un evento de desempate, sin tiempo, en el que vendrá la policía e irá dispararando aleatoriamente por el escenario, hasta finalizar la ronda.
-La partida se gana cuando el rival tenga la barra de vida a cero, en una competición al mejor de cinco rondas (hay que ganar tres rondas).
+Las armas de fuego tendrán munición finita y escasa. Se tendrán barras de vida que se reducirán si el jugador logra dañar al oponente, en función del arma empleada. 
 
-*Elementos externos:*
-Para evitar bloqueos en el flujo de partida, tendremos elementos interaccionables y eventos aleatorios.
-
-- Boca de incendio: al destruírse crearán chorros de agua que empujarán a los jugadores
-- Tanque de combustible: al destruírse estalla e incendia el alrededor
-- Tendido de alta tensión averiado: se activa sólo en ocasiones y daña al personaje si está cerca
-- Mafiosos: pueden aparecer en ventanas y disparar
-- Jauría de perros: aparecen en el callejón y atacan a quien esté
-- Más por determinar
+La partida se gana cuando el rival tenga la barra de vida a cero, en una competición al mejor de tres rondas (hay que ganar tres rondas).
 
 *Armas plantedas:*
 - Fusil tipo Thompson
@@ -56,17 +43,35 @@ El estilo visual de este juego estará basado en la estética de los beat'm up d
 (Sega, Streets of Rage, 1991)
 
 
-**Nombre del juego:** Mafia fsafasfas
+**Nombre del juego:** Fight for the Hood
 
 **Descripción del juego:** Juego tipo lucha con temática de mafias, Shooter de plataformas, tipo Brawlhalla, el juego contará con diversidad de mafias y armas, el juego será de dos jugadores en un mapa PvP, (uno contra uno).   El primer mapa será un callejón con escaleras típicas de New York en un barrio marginal [...]
 
 **Mecánicas del jugador:**  Moverse, saltar, recoger objetos, tirar objetos, disparar, atacar cuerpo a cuerpo.
 El personaje se presentará en el mapa sin armas, y aparecerán una serie de drops o armas en el entorno que podrá recoger para disparar a su contrincante, las armas tendrán munición que se agotará y los personajes tendrán barras de vida que se reducirán si el jugador logra impactar sus disparos al personaje del oponente, en función del arma y sus características predefinidas (daño) están reducirán una cantidad de vida variable, hasta que esta baje a 0 y entonces uno de los jugadores habrá ganado.
 
+**Controles del juego:**
+ 
+ El jugador 1, contralará su avatar medianta las  teclas A,W,S,D, típicas de cualquier videojuego donde W, será saltar, A movimiento izquierda, D movimiento derecha y S, hacia abajo, los botónes de acción de este jugador son R, para recoger arma y soltar, y T para usar el arma.
+ 
+ 
+El jugador 2, contralará su avatar medianta las  teclas  de flecha ←,↑,↓,→ donde la flecha arriba ↑, será saltar, la flecha izquierda  ← movimiento izquierda, la flecha derecha → movimiento derecha y la flecha abajo ↓, hacia abajo, los botónes de acción de este jugador son O, para recoger arma y soltar, y P para usar el arma.
+
 **Diagrama de secuencia del juego:**
 
 ![...](https://image.ibb.co/ePtZ9U/Diagrama_de_secuencia_b_sico.png)
 
+El juego comienza con una imagen de la pantalla de inicio donde encontramos las siguientes funcionalidades, Jugar en local, jugar online y controles, en esta parte solo funcionará la opción de jugar en local ya que es lo que pide esta fase 2:
+
+![...](https://gyazo.com/344655b706b24a1c690981acd292d32c.png)
+
+Desde esta pantalla podremos acceder a la selección de personajes del juego donde salen los dos avatares y cada jugador podrá elegir su personaje:
+
+![...](https://i.gyazo.com/b6870b967be395cbc71d0f2047bd33ff.png)
+
+Lo que nos lleva a la pantalla del juego donde nos encontramos con varios elementos del juego, como son los avatares de los jugadores (J1 Y J2), las armas que aparecerán de manera aleatoria por las plataformas para poder ser recogidas, y luego nos encontramos con el HUD, donde encontramos las barras de vida de los dos jugadores, el arma actual de cada jugador, la munición actual del arma, el número de victorias que lleva cada jugador (en forma de círculo relleno de color amarillo) y el tiempo para que finalice la partida.
+
+![...](https://gyazo.com/2b12fc98ff9cafcd43ddcff82e4dec1b.png)
 
 **Integrantes del equipo de desarrollo:**  
 **Nombre:** Alejandro José Carrillo Ezcurra  **Correo:**  aj.carrilloe@alumnos.urjc.es   **Cuenta GitHub:** Tenusiano
