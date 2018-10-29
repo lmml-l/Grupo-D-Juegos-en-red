@@ -38,27 +38,28 @@
         "Recursos/Imagenes/Sprites_Armas/ArmasHUD/PuñoAmericanoHUD.png",
         "Recursos/Imagenes/Sprites_Armas/ArmasHUD/BateHUD.png",
         "Recursos/Imagenes/Sprites_Armas/Puños/PuñoPixelizado.png"]
+
+
+//La clase escenario sirve para colocar los elementos de la partida y como controlador de la misma
          
 class MainEscenario extends Phaser.Scene {
 
 	constructor(){
 		super({key:"MainEscenario"});
-           
+        
+        //Posicionamos los personajes
         this.avatar = new Avatar("a",this,400,400,sprite);
         this.avatar1 = new Avatar("b",this,600,400,sprite2);
-
+        //Asociamos proyectiles
         this.proyectiles = new Proyectiles(spriteproyectiles);
         this.proyectiles2 = new Proyectiles(spriteproyectiles);
-
+        //Creamos controladores (jugadores) para cada personaje
         this.jugador = new Jugador(this.avatar,controles2,this.proyectiles);
         this.jugador1 = new Jugador(this.avatar1,controles1,this.proyectiles2); //elegir controles 1 o controles 2
-       
+        
         this.plataformas;
         this.suelo;
-        this.tanque;
         this.dropzone;
-        this.caja;
-        this.bocaIncendio;
 
         this.drops = new Drops(this,spritearmas);
 
@@ -72,7 +73,7 @@ restartPartida(){
     var that=this;
     this.time.clearPendingEvents();
     this.time.removeAllEvents();
-    this.time.addEvent({delay:1500,  //tiempo que da al reiniciar
+    this.time.addEvent({delay:1500,  //tiempo que tarda hasta reiniciar
     callback: function(){that.scene.restart()}});
 }
 
@@ -80,57 +81,56 @@ restartPartida(){
 checkPartida(){
     var that=this;
     //Si algún jugador llega a 3 victorias gana la partida
-    if(victorias[0]==3){ //jugador 1
+    if(victorias[0]==3){                                //jugador 1
         console.log('J1 GANA LA PARTIDA');
-        this.ganadorTexto.setText("J1 GANA LA PELEA"); 
+        this.ganadorTexto.setText("J1 GANA LA PELEA");  //texto en pantalla
         victorias[0]=0;
-        this.time.addEvent({delay:3500,  //tiempo que da al reiniciar
-        callback: function(){that.scene.start('MainMenu')}});
+        this.time.addEvent({delay:3000,                 //tiempo que tarda hasta reiniciar
+        callback: function(){that.restartPartida()}});
     }
-    if(victorias[1]==3){ //jugador 2
+    if(victorias[1]==3){                                //jugador 2
         console.log('J2 GANA LA PARTIDA');
-        this.ganadorTexto.setText("J2 GANA LA PELEA");
+        this.ganadorTexto.setText("J2 GANA LA PELEA");  //texto en pantalla
         victorias[1]=0;
-        this.time.addEvent({delay:3500,  //tiempo que da al reiniciar
-        callback: function(){that.scene.start('MainMenu')}});
+        this.time.addEvent({delay:3000,                 //tiempo que tarda hasta reiniciar
+        callback: function(){that.restartPartida()}});  
     }
 
     //Si los dos jugadores llegan a 0 al mismo tiempo
     if(this.jugador.vida<=0 && this.jugador1.vida<=0){
         console.log('Ganador aleatorio');
-        var ganador = Math.floor(Math.random()*2); //se elige aleatoriamente ganador
+        var ganador = Math.floor(Math.random()*2);      //se elige aleatoriamente ganador
         //gana J1
         if(ganador==0){
-            victorias[0]+=1;
+            victorias[0]+=1;                            //suma una victoria
             console.log('Gana J1');
             this.ganadorTexto.setText("GANA J1");
-            this.restartPartida();
+            this.restartPartida();                      //reinicia el nivel
         }
         //gana J2
         else if(ganador==1){
-            victorias[1]+=1;
+            victorias[1]+=1;                            //suma una victoria
             console.log('Gana J2');
             this.ganadorTexto.setText("GANA J2");
-            this.restartPartida();
+            this.restartPartida();                      //reinicia el nivel
         }
     }
 
     //Si algún jugador se queda sin vida
-    else if(this.jugador.vida<=0 && this.jugador1.vida>0){  //jugador 0 
+    else if(this.jugador.vida<=0 && this.jugador1.vida>0){  //jugador 1
         victorias[1]+=1;
         console.log('Gana J2');
         this.ganadorTexto.setText("GANA J2");
         this.restartPartida();
     }
-    else if(this.jugador1.vida<=0 && this.jugador.vida>0){ //jugador 1
+    else if(this.jugador1.vida<=0 && this.jugador.vida>0){ //jugador 2
         victorias[0]+=1;
         console.log('Gana J1');
         this.ganadorTexto.setText("GANA J1");
         this.restartPartida();
     } 
-//console.log(this.Clock.getElapsedSeconds());
     //Si acaba el tiempo
-    if(91-this.Clock.getElapsedSeconds() == 0){ 
+    if(91-this.Clock.getElapsedSeconds() == 0){         //comprobación de reloj (diferencia de tiempo) 
     this.ganadorTexto.setText("SE ACABÓ\nEL TIEMPO");
     this.restartPartida();
     }
@@ -195,6 +195,7 @@ colisionesbalasjugador(jugador,balast){
         }
     }
 }
+
 colisionesbalaescenario(plataformas,balast){
     for(var j = 0 ; j < balast.length ; j++){
         var i = 0;
@@ -217,7 +218,6 @@ colisionesbalaescenario(plataformas,balast){
                 for(var jd = 0 ; jd < colisionesescenariobalas.length ; jd++ ){
                     if(colisionesescenariobalas[jd].object1 === obj1){
                         colisionesescenariobalas.splice(jd,1);
-                       
                     }
                 }
                 obj1.destroy();
@@ -228,16 +228,15 @@ colisionesbalaescenario(plataformas,balast){
         }   
     }
 }
+
 atravesarplataformaspersonaje(jugador,plataforma){
         var array = plataforma.getChildren();
-        for(var i = 0; i<plataforma.getLength(); i++){
+        for(var i = 0; i<plataforma.getLength(); i++){  //colisión desde abajo
             if(jugador.y < array[i].y){
-                //console.log("Toca por arriba")
-                array[i].enableBody();
+                array[i].enableBody();                  //activamos la colisión (no atravesable)
             }
             else{
-                //console.log("Toca por abajo")
-                array[i].disableBody();
+                array[i].disableBody();                 //desactivamos la colisión (atravesable)
             }
         }
         
@@ -245,18 +244,19 @@ atravesarplataformaspersonaje(jugador,plataforma){
 
 
 preload(){
-
+    //carga de hojas de sprites
     this.jugador.avatar.hojadespritesheet = sprite;
     this.jugador1.avatar.hojadespritesheet = sprite2;
-
+    //carga de recursos de los personajes, HUD y drops
     this.jugador.preload();
     this.jugador1.preload();
     this.drops.preload();
     this.hud.preload();
-    //this.partida.preload();
 
+
+    //SPRITES
 	this.load.image('fondo', 'Recursos/Imagenes/stage.png');
-	this.load.image('plat2', 'Recursos/Imagenes/plat2.png'); //atravesables
+	this.load.image('plat2', 'Recursos/Imagenes/plat2.png');
     this.load.image('platShort', 'Recursos/Imagenes/platShort.png');
     this.load.image('sueloPixel', 'Recursos/Imagenes/sueloPixel.png');
     this.load.image('techoApixel', 'Recursos/Imagenes/techoApixel.png');
@@ -267,12 +267,8 @@ preload(){
     this.load.image('toldoLPixel', 'Recursos/Imagenes/toldoLPixel.png');
     this.load.image('toldoRPixel', 'Recursos/Imagenes/toldoRPixel.png');
     this.load.image('tuboPixel', 'Recursos/Imagenes/tuboPixel.png');
-    this.load.image('tanquePixel', 'Recursos/Imagenes/tanquePixel.png');
     this.load.image('dropzonePixel', 'Recursos/Imagenes/dropzone.png');
     this.load.image('HUD', 'Recursos/Imagenes/HUD.png');
-    this.load.image('cajaPixel', 'Recursos/Imagenes/caja.png');
-
-
 }
 
 create(){
@@ -280,27 +276,25 @@ create(){
 	this.add.sprite(512, 215, 'fondo');
 	this.add.sprite(512, 681, 'HUD');
 
-	this.plataformas = this.physics.add.staticGroup();  //Hace solidas las plataformas enfocadas al primer personaje
+	this.plataformas = this.physics.add.staticGroup();  //Hace sólidas las plataformas enfocadas al primer personaje
     this.suelo = this.physics.add.staticGroup();
-    this.tanque = this.physics.add.staticGroup();
     
-    this.plataformas2 = this.physics.add.staticGroup();  //Hace solidas las plataformas enfocadas al segundo personaje
+    this.plataformas2 = this.physics.add.staticGroup();  //Hace sólidas las plataformas enfocadas al segundo personaje
     this.suelo2 = this.physics.add.staticGroup();
-    this.tanque2 = this.physics.add.staticGroup();
     
-    this.plataformas3 = this.physics.add.staticGroup();  //Hace solidas las plataformas enfocadas a las balas
+    this.plataformas3 = this.physics.add.staticGroup();  //Hace sólidas las plataformas enfocadas a las balas
     this.suelo3 = this.physics.add.staticGroup();
-    this.tanque3 = this.physics.add.staticGroup();
 
     this.dropzone = this.physics.add.staticGroup();
-    this.caja = this.physics.add.staticGroup();
 
 	//Suelo
     this.suelo.create(512, 585, 'sueloPixel').alpha=0;
     var sueloArray = this.suelo.getChildren();
     sueloArray[0].body.height=13475;
 
-    //plataformas invisibles
+    //las plataformas son sprites invisibles encima del fondo
+
+    //COLISIONES PARA EL PERSONAJE 2
     //escaleras de emergencia
     //izquierda 
     this.plataformas.create(319, 153, 'plat2').alpha=0;
@@ -328,13 +322,12 @@ create(){
     this.plataformas.create(878, 480, 'toldoRPixel').alpha=0; //derecho
     //tubería
     this.plataformas.create(605, 116, 'tuboPixel').alpha=0;
-    //tanque de agua
-    this.tanque.create(831, 97, 'tanquePixel').alpha=0;
+    
     //cartel
     this.plataformas.create(60, 385, 'cartelPixel').alpha=0; //izquierdo
     this.plataformas.create(726, 443, 'cartelPixel').alpha=0; //derecho
 
-    //AHORA SE HACEN LO MISMO PARA EL PERSONAJE DOS
+    //COLISIONES PARA EL PERSONAJE 2
     this.suelo2.create(512, 585, 'sueloPixel').alpha=0;
     var suelo2Array = this.suelo2.getChildren();
     suelo2Array[0].body.height=1475;
@@ -366,15 +359,13 @@ create(){
     this.plataformas2.create(878, 480, 'toldoRPixel').alpha=0; //derecho
     //tubería
     this.plataformas2.create(605, 116, 'tuboPixel').alpha=0;
-    //tanque de agua
-    this.tanque2.create(831, 97, 'tanquePixel').alpha=0;
     //cartel
     this.plataformas2.create(60, 385, 'cartelPixel').alpha=0; //izquierdo
     this.plataformas2.create(726, 443, 'cartelPixel').alpha=0; //derecho
 
     //this.suelo2.create(512, 585, 'sueloPixel').alpha=0;
 
-    //AHORA LAS PLATAFORMAS PARA LAS COLISIONES DE LAS BALAS.
+    //COLISIONES PARA LAS BALAS
     //plataformas
     //izquierda
     this.plataformas3.create(319, 153, 'plat2').alpha=0;
@@ -402,11 +393,9 @@ create(){
     this.plataformas3.create(878, 480, 'toldoRPixel').alpha=0; //derecho
     //tubería
     this.plataformas3.create(605, 116, 'tuboPixel').alpha=0;
-    //tanque de agua
-    this.tanque3.create(831, 97, 'tanquePixel').alpha=0;
     //cartel
-    this.plataformas3.create(60, 385, 'cartelPixel').alpha=0; //izquierdo
-    this.plataformas3.create(726, 443, 'cartelPixel').alpha=0; //derecho
+    this.plataformas3.create(60, 385, 'cartelPixel').alpha=0;   //izquierdo
+    this.plataformas3.create(726, 443, 'cartelPixel').alpha=0;  //derecho
 
     this.suelo3.create(512, 585, 'sueloPixel').alpha=0;
 
@@ -417,21 +406,21 @@ create(){
     this.dropzone.create(857, 128,'dropzonePixel');
     this.dropzone.create(686, 353,'dropzonePixel');
 
-    //worldbounds
-    this.physics.world.setBounds(0,0,1024,585,true,true,false,true);
+    //límites del mundo (worldbounds)
+    this.physics.world.setBounds(0,0,1024,585,true,true,false,true); //desactivada la colisión en el margen superior
     
 
     //jugadores
     this.jugador.create("right");
     this.jugador1.create("left");
     //colisiones jugador 1
-    this.physics.add.collider(this.jugador.avatar.sprite, this.suelo); //con suelo
-    this.physics.add.collider(this.jugador.avatar.sprite,this.plataformas); //con plataformas
-    this.jugador.avatar.sprite.body.collideWorldBounds = true; //con bordes
+    this.physics.add.collider(this.jugador.avatar.sprite, this.suelo);          //con suelo
+    this.physics.add.collider(this.jugador.avatar.sprite,this.plataformas);     //con plataformas
+    this.jugador.avatar.sprite.body.collideWorldBounds = true;                  //con bordes
     //colisiones jugador 2
-    this.physics.add.collider(this.jugador1.avatar.sprite, this.suelo2); //con suelo
-    this.physics.add.collider(this.jugador1.avatar.sprite,this.plataformas2); //con plataformas
-    this.jugador1.avatar.sprite.body.collideWorldBounds = true; //con bordes
+    this.physics.add.collider(this.jugador1.avatar.sprite, this.suelo2);        //con suelo
+    this.physics.add.collider(this.jugador1.avatar.sprite,this.plataformas2);   //con plataformas
+    this.jugador1.avatar.sprite.body.collideWorldBounds = true;                 //con bordes
 
 
     //colisiones entre jugadores
@@ -440,7 +429,7 @@ create(){
     this.Clock = this.time.addEvent({delay:91000, //91 segundos
     callback: function(){} });
 
-    this.hud.create(this.Clock);
+    this.hud.create(this.Clock); //carga el HUD con la información del cronómetro
 
     this.ganadorTexto =  this.add.text(480, 250, "", { fill: '#FFAC00', font: '52px Impact', align: 'center'});
 
@@ -455,7 +444,7 @@ create(){
 	}
 
 
-update(){
+update(){ //actualizaciones
     this.jugador.update(this.drops);
     this.jugador1.update(this.drops);
     this.atravesarplataformaspersonaje(this.jugador.avatar.sprite,this.plataformas);

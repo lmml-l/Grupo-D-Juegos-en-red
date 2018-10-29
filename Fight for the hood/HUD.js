@@ -1,14 +1,15 @@
 'use strict'
+	//El HUD (HEAD-UP DISPLAY) muestra en la parte baja de la pantalla la barra de vida, tiempo restante, arma escogida y rondas ganadas
    function HUD(escena, sprites,jugadores){
    	this.spritearmas = sprites;
    	this.scene = escena;
    	this.jugadores = jugadores;
-		this.Municiones = new Array(2);
-		this.ArmasMostradas = new Array(2);
-		this.BarrasVidas = new Array(2);
-		this.RondasVictoria = new Array(2);    
-		this.Clock;
-		this.MostrarReloj;  
+		this.Municiones = new Array(2);			//munición de cada jugador
+		this.ArmasMostradas = new Array(2);		//arma seleccionada
+		this.BarrasVidas = new Array(2);		//vida restante
+		this.RondasVictoria = new Array(2);    	//rondas ganadas por cada jugador
+		this.Clock;								//tiempo restante
+		this.MostrarReloj;  					//visualización del tiempo
 		var that = this;
 
 
@@ -26,12 +27,12 @@
 		that.ArmasMostradas[0] = that.scene.add.sprite(140, 680, " "+ that.jugadores[0].arma); //Crea el sprite arma del jugador 1.       
 	    that.ArmasMostradas[1] = that.scene.add.sprite(890, 680, " "+ that.jugadores[1].arma); //Crea el sprite del arma del juagdor 2.
 
-	    that.Clock = clock;
+	    that.Clock = clock; //temporizador controlado por el Escenario (escena)
 
 	    that.MostrarReloj = that.scene.add.text(482,602, (Math.trunc(91 - that.Clock.getElapsedSeconds())).toString(), { fill: '#FFFFFF', font: '52px Impact', align: 'center'});
 
-        //Indica municion
-        that.Municiones[0] = that.scene.add.text(115, 716, that.jugadores[1].municiones.toString()).setScale(2);   //Crea la munición del jugador 1.
+        //Indica munición
+        that.Municiones[0] = that.scene.add.text(115, 716, that.jugadores[1].municiones.toString()).setScale(2);   	//Crea la munición del jugador 1
         that.Municiones[1] = that.scene.add.text(875, 716, that.jugadores[0].municiones.toString()).setScale(2);
         //Barras de vida
         that.BarrasVidas[0] = that.scene.add.graphics({x:0,y:0});
@@ -42,6 +43,8 @@
 	}
 
 	this.VictoriaUpdate = function(){
+		//Se indican las rondas ganadas con tantos círculos como victorias obtenidas
+
 		//Victorias J1
   		that.RondasVictoria[0].clear();
   		that.RondasVictoria[0].fillStyle='#FFAC00';

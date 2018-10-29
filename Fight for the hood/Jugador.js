@@ -1,7 +1,8 @@
 //La clase jugador sera un controlador de personaje
 'use strict'
 
-
+//Teclas para controlar a los personajes
+//Jugador 1
 var controles1 = {
 	salto: Phaser.Input.Keyboard.KeyCodes.UP,
 	movder: Phaser.Input.Keyboard.KeyCodes.RIGHT,
@@ -12,7 +13,7 @@ var controles1 = {
 	//recargar: Phaser.Input.Keyboard.KeyCodes.P,
 	escudo: Phaser.Input.Keyboard.KeyCodes.R
 }
-
+//Jugador 2
 var controles2 = {
 	salto: Phaser.Input.Keyboard.KeyCodes.W,
 	movder: Phaser.Input.Keyboard.KeyCodes.D,
@@ -36,7 +37,7 @@ function Jugador(avatar,controles,proyectiles){
 
 
 	var that = this;
-
+	//acciones
 	var keysalto;
 	var keymovder;
 	var keymovizq;
@@ -49,6 +50,7 @@ function Jugador(avatar,controles,proyectiles){
 	var keyrecarmasoltada;
 	var keydispararsoltad;
 
+	//carga el avatar y los proyectiles
 	this.preload=function(){
 		that.avatar.preload();
 		that.proyectiles.preload(that.avatar.scene);
@@ -56,9 +58,10 @@ function Jugador(avatar,controles,proyectiles){
 	this.create=function(lado){
 		that.avatar.animaciones();
 		that.avatar.spawnavatar();
-		that.vida = 100;
-        that.municiones = "";
-        that.arma = "";
+		that.vida = 100;			//vida del personaje
+        that.municiones = "";		//munición vacía por defecto
+        that.arma = "";				//desarmado por defecto
+        //animación de andar según orientación
 		if(lado=="right"){
 			that.avatar.walkright(that.arma);
 		}
@@ -66,19 +69,22 @@ function Jugador(avatar,controles,proyectiles){
 			that.avatar.walkleft(that.arma);
 		}
 
-	   keysalto = this.avatar.scene.input.keyboard.addKey(that.controles.salto);
-	   keymovder = this.avatar.scene.input.keyboard.addKey(that.controles.movder);
-	   keymovizq = this.avatar.scene.input.keyboard.addKey(that.controles.movizq);
-	   keymovabajo = this.avatar.scene.input.keyboard.addKey(that.controles.movabajo);
-	   keydisparo = this.avatar.scene.input.keyboard.addKey(that.controles.disparo);
-	   keyrecargar = this.avatar.scene.input.keyboard.addKey(that.controles.recargar);
-	   keyrecarma = this.avatar.scene.input.keyboard.addKey(that.controles.recarma);
-	   keyescudo = this.avatar.scene.input.keyboard.addKey(that.controles.escudo);
+		//asocia acciones a teclas
+	   	keysalto = this.avatar.scene.input.keyboard.addKey(that.controles.salto);
+	   	keymovder = this.avatar.scene.input.keyboard.addKey(that.controles.movder);
+	   	keymovizq = this.avatar.scene.input.keyboard.addKey(that.controles.movizq);
+	   	keymovabajo = this.avatar.scene.input.keyboard.addKey(that.controles.movabajo);
+	   	keydisparo = this.avatar.scene.input.keyboard.addKey(that.controles.disparo);
+	   	keyrecargar = this.avatar.scene.input.keyboard.addKey(that.controles.recargar);
+	   	keyrecarma = this.avatar.scene.input.keyboard.addKey(that.controles.recarma);
+	   	keyescudo = this.avatar.scene.input.keyboard.addKey(that.controles.escudo);
 
-	   keydispararsoltad = true;
+	   	keydispararsoltad = true;
 
 
 	}
+	//marca la cantidad de munición con la que cuenta cada arma
+	//las armas cuerpo a cuerpo no necesitan munición
 	this.selectmunicion = function(arma){
 		var municiones;
 		switch(arma){
@@ -100,12 +106,12 @@ function Jugador(avatar,controles,proyectiles){
 		}
 		return municiones;
 	}
+	//gestiona el cambio de arma en partida
 	this.selectarma = function(armasdrops,offset){
 		var i = 0
 		var armaactual = this.arma;
 		var cambiadoarma = false;
         while((i < armasdrops.sprite.length)&& (!cambiadoarma) ){
-           //console.log("res:" + (Math.abs(armasdrops.sprite[i].x-that.avatar.sprite.x)))
             if((Math.abs(armasdrops.sprite[i].x-that.avatar.sprite.x))< offset){
                 if((Math.abs(armasdrops.sprite[i].y-that.avatar.sprite.y))<offset){
                     that.arma = armasdrops.sprite[i].texture.key;
@@ -128,6 +134,8 @@ function Jugador(avatar,controles,proyectiles){
         }
     }
 	
+	//el personaje es empujado hacia abajo, excepto si está tocando algo por debajo
+	//simulación de la gravedad
 	this.gravedad=function(){
 		if(that.avatar.sprite.body.touching.down){
 			that.avatar.vely(0);
@@ -135,6 +143,8 @@ function Jugador(avatar,controles,proyectiles){
 			that.avatar.vely(that.avatar.getvely()+ 9.8);
 		}
 	}
+
+	//control del personaje según la tecla y orientación
 	this.controldepersonaje = function(){
 		var animacionactual = that.avatar.getanim();
 		if(keymovder.isDown){
@@ -166,8 +176,6 @@ function Jugador(avatar,controles,proyectiles){
 		if(keysalto.isDown && (that.avatar.sprite.body.touching.down || that.avatar.sprite.body.onFloor())){
 			that.avatar.vely(-375);
 		}
-		//if(keymovabajo.isDown){
-		//}
 		
 		if(keyescudo.isDown){
 			
@@ -176,6 +184,9 @@ function Jugador(avatar,controles,proyectiles){
 			
 		}
 	}
+
+	//disparo según arma y orientación
+	//disminución de munición
 	this.disparar = function (arma,scene,avatar){
 		if((keydisparo.isDown) && (keydispararsoltad) && ((this.municiones > 0 || ((this.arma=="")||(this.arma=="Bate")||(this.arma=="Puñoamericano"))))){
 			that.proyectiles.create(arma,scene,avatar);
@@ -191,7 +202,6 @@ function Jugador(avatar,controles,proyectiles){
 				that.municiones -= 3;
 				break;
 		}
-			//that.proyectiles.fisicasproyectil(arma,avatar,balass);
 			keydispararsoltad = false;
 			that.avatar.scene.time.addEvent({delay:625 , callback:function(){keydispararsoltad=true;}})//cooldown al disparar
 		}

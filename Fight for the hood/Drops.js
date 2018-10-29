@@ -1,4 +1,6 @@
 'use strict'
+//Controla las armas que aparecen sueltas por el escenario (drops)
+//Las armas se colocan aleatoriamente en cinco posiciones fijas
 function Drops(escena, sprites) {
 		this.scene = escena;
 		this.pistola = sprites[0];
@@ -11,7 +13,7 @@ function Drops(escena, sprites) {
 
 	this.initPos = function(){
 		//posición aleatoria
-		var r = Math.floor(Math.random() * 5)  ; //las posiciones que sean (de momento son 2 máximos) (de 0 a 2?)
+		var r = Math.floor(Math.random() * 5)  ; //5 posiciones aleatorias de drop
 		//posiciones de los drops
 		var pos1 = new Array(135, 292);
 		var pos2 = new Array(505, 46);
@@ -22,10 +24,8 @@ function Drops(escena, sprites) {
 		var arrayPos = new Array(pos1, pos2, pos3, pos4, pos5);
 		//asignación de posición
 		var rPos = arrayPos[r];
-		//comprobación de posición no ocupada
 		
 		return rPos;
-		//that.game.setGravity(-0.98);
 	}
 	
 	this.preload = function(){
@@ -43,6 +43,7 @@ function Drops(escena, sprites) {
 		this.sprite = new Array();
 	}
 
+	//selecciona aleatoriamente el arma que aparecerá
 	this.selectID = function(){
 		var name;
 		var e = Math.floor(Math.random()*5);
@@ -74,6 +75,9 @@ function Drops(escena, sprites) {
 		var armapos = that.initPos();
 		var check = true;
 		var i = 0;
+
+		//comprueba que la posición marcada en initPos() no está ocupada
+		//si es válida se añade a la escena
 		while(check && i<that.sprite.length){
 			if(that.sprite[i].x == armapos[0] && that.sprite[i].y == armapos[1]){
 				check = false;
@@ -86,7 +90,7 @@ function Drops(escena, sprites) {
 		that.sprite.push(armapw)
 		}
 		
-
+		//se descarta el arma que no se añade
 		if(that.sprite.length > 5){
 			var s = that.sprite.shift();
 			s.destroy();

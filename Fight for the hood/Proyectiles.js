@@ -2,7 +2,6 @@
   
 function Proyectiles (sprites){
 	this.proyec = sprites;
-	//this.jugador = player;
 	this.proyectilesenescane = new Array();
 	
 
@@ -10,6 +9,7 @@ function Proyectiles (sprites){
 	
 
 	this.preload=function(scene){
+		//cada tipo de proyectil se agrupa en un array
 		scene.load.image('Perdigón', that.proyec[0]);
 		scene.load.image('Bala', that.proyec[1]);
 		scene.load.image('GolpeBate', that.proyec[2]);
@@ -17,8 +17,8 @@ function Proyectiles (sprites){
 		scene.load.image('GolpePuño', that.proyec[4]);
 	}
 
-
-	this.checkpos=function(avatar,arma){
+	//marca el sentido del disparo según la orientáción del personaje
+	this.checkpos=function(avatar,arma){ 
 		var pos = new Array(2);
 		switch(arma){
 			case 'Escopeta':
@@ -78,6 +78,8 @@ function Proyectiles (sprites){
 		}
 		return pos;
 	}
+
+	//asocia las balas a los distintos tipos de disparo
 	this.crearproyectiles=function(arma,scene,avatar){
 		var balas;
 		switch(arma){
@@ -105,6 +107,8 @@ function Proyectiles (sprites){
 		}
 		return balas;
 	}
+
+	//velocidad y dirección de disparo
 	this.fisicasproyectil=function(arma,avatar,balas){
 		//var select;
 		switch(arma){
@@ -165,9 +169,8 @@ function Proyectiles (sprites){
 	}
 
 
-	
+	//añade balas a la escena según el arma
 	this.create = function(arma,scene,avatar){
-		 
 
 		switch(arma){
 			case 'Escopeta':

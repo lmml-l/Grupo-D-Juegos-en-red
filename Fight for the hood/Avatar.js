@@ -1,11 +1,9 @@
-
 'use strict';
 
-function Avatar (nam,scen,posx,posy,spritesheet) {
+//Define al personaje (avatar)
+function Avatar (nam,scen,posx,posy,spritesheet) { //parámetros marcados desde Escenario (la escena de la partida)
 		
 		this.names = nam;
-		//this.left=spritesheet[0];
-		//this.right=spritesheet[1];
 		this.hojadespritesheet=spritesheet;
 		this.x=posx;
 		this.y=posy;
@@ -28,9 +26,9 @@ function Avatar (nam,scen,posx,posy,spritesheet) {
 			that.scene.load.spritesheet(that.names +'p1rpa',that.hojadespritesheet[9],{ frameWidth: 87, frameHeight: 133 });
 			that.scene.load.spritesheet(that.names +'p1lb',that.hojadespritesheet[10],{ frameWidth: 111, frameHeight: 134 });
 			that.scene.load.spritesheet(that.names +'p1rb',that.hojadespritesheet[11],{ frameWidth: 111, frameHeight: 134 });
-			//that.scene.game.load.start();
 		}
 
+		//Animaciones del personaje
 		this.animaciones=function(){
 		var e = that.scene.anims.generateFrameNumbers(that.names + 'p1l', { start: 0, end: 2 })
 		that.scene.anims.create({
@@ -184,6 +182,8 @@ function Avatar (nam,scen,posx,posy,spritesheet) {
     			repeat: -1
 			})
 		}
+
+		//Activación de animaciones
 		this.spawnavatar=function(){
 			that.sprite = that.scene.physics.add.sprite(that.x,that.y,that.names + 'p1l').setScale(0.40);
 		}
@@ -209,6 +209,8 @@ function Avatar (nam,scen,posx,posy,spritesheet) {
 		this.getanim=function(){
 			return that.sprite.anims.getCurrentKey();
 		}
+
+		//Velocidad
 		this.velx=function(vel){
 			that.sprite.body.velocity.x=vel;
 		}
