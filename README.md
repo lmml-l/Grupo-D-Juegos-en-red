@@ -24,11 +24,11 @@ Las armas de fuego tendrán munición finita y escasa. Se tendrán barras de vid
 La partida se gana cuando el rival tenga la barra de vida a cero, en una competición al mejor de tres rondas (hay que ganar tres rondas).
 
 *Armas plantedas:*
-- Fusil tipo Thompson
-- Pistola
-- Escopeta
-- Puño americano
-- Bate de baseball
+- Fusil tipo Thompson: Disparo a ráfagas de tres balas.
+- Pistola: Disparo individual semiautomático
+- Escopeta: Disparo en ráfaga de corta distancia y mucho daño
+- Puño americano: Ataque cuerpo a cuerpo cercano
+- Bate de baseball: Ataque cuerpo a cuerpo cercano
 
 **Referencias artísticas**
 El estilo visual de este juego estará basado en la estética de los beat'm up de los años 90, imitando la manera de la textura, iluminación y calles. El movimiento de los personajes, sin embargo, se ajustará únicamente al eje horizontal y vertical, sin profundidad. Los personajes tampoco ocuparán tanto espacio en pantalla, para dar algo más de protagonismo a los elementos del escenario.
