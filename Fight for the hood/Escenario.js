@@ -246,6 +246,9 @@ atravesarplataformaspersonaje(jugador,plataforma){
 
 preload(){
 
+    this.jugador.avatar.hojadespritesheet = sprite;
+    this.jugador1.avatar.hojadespritesheet = sprite2;
+
     this.jugador.preload();
     this.jugador1.preload();
     this.drops.preload();

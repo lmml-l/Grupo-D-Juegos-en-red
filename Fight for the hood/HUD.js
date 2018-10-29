@@ -1,8 +1,8 @@
 'use strict'
    function HUD(escena, sprites,jugadores){
-   	    this.spritearmas = sprites;
-   	    this.scene = escena;
-   	    this.jugadores = jugadores;
+   	this.spritearmas = sprites;
+   	this.scene = escena;
+   	this.jugadores = jugadores;
 		this.Municiones = new Array(2);
 		this.ArmasMostradas = new Array(2);
 		this.BarrasVidas = new Array(2);

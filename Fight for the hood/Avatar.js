@@ -15,6 +15,7 @@ function Avatar (nam,scen,posx,posy,spritesheet) {
 		var that = this;
 
 		this.preload=function(){
+			
 			that.scene.load.spritesheet(that.names +'p1l',that.hojadespritesheet[0],{ frameWidth: 87, frameHeight: 133 });
 			that.scene.load.spritesheet(that.names +'p1r',that.hojadespritesheet[1],{ frameWidth: 87, frameHeight: 133 });
 			that.scene.load.spritesheet(that.names +'p1lp',that.hojadespritesheet[2],{ frameWidth: 87, frameHeight: 134 });

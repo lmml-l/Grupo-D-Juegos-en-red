@@ -25,14 +25,17 @@ class CharapterSelection extends Phaser.Scene {
 	}
 
 	selection(){
+
+
 		this.checkplayer1 = false;
 		this.checkplayer2 = false;
 
 		this.posArrayP1=0;
 		this.posArrayP2=1;
 
+
 		var title = this.add.image(this.game.canvas.width*(3/6),this.game.canvas.height*(100/600),'title').setScale(0.5);
-		var subtitle = this.add.image(this.game.canvas.width*(3/6),this.game.canvas.height*(250/600),'subtitle').setScale(0.75);
+		var subtitle = this.add.image(this.game.canvas.width*(3/6),this.game.canvas.height*(250/600),'subtitle').setScale(1);
 		var character2 = this.add.image(this.game.canvas.width*(4/6),this.game.canvas.height*(4/6),'character1').setScale(1).setInteractive();
 		var character1 = this.add.image(this.game.canvas.width*(2/6),this.game.canvas.height*(4/6),'character2').setScale(1).setInteractive();
 		
@@ -57,6 +60,9 @@ class CharapterSelection extends Phaser.Scene {
 		this.izquierda2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
 		this.confirmar1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
 		this.confirmar2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.T);
+
+		this.confirmar1.isDown=false;
+		this.confirmar2.isDown=false;
 		//initPos();
 
 		/*
@@ -75,7 +81,27 @@ class CharapterSelection extends Phaser.Scene {
 		this.pos2[1]=that.game.canvas.height*(3/6);
 	}
 	*/
+	seleccionaravatar(posArray){
+		var spriteHojalocal;
 
+		if(posArray==0){
+			spriteHojalocal = ["Recursos/Imagenes/Sprites_Personaje2/SpritePersonajeIzquierda.png","Recursos/Imagenes/Sprites_Personaje2/SpritePersonajeDerecha.png",
+        "Recursos/Imagenes/Sprites_Personaje2/SpritePistolaIzquierda.png","Recursos/Imagenes/Sprites_Personaje2/SpritePistolaDerecha.png",
+        "Recursos/Imagenes/Sprites_Personaje2/SpriteEscopetaIzquierda.png","Recursos/Imagenes/Sprites_Personaje2/SpriteEscopetaDerecha.png",
+        "Recursos/Imagenes/Sprites_Personaje2/SpriteThomsomIzquierda.png","Recursos/Imagenes/Sprites_Personaje2/SpriteThomsomDerecha.png",
+        "Recursos/Imagenes/Sprites_Personaje2/SpritePersonajePuñoAmericanoIzquierda.png","Recursos/Imagenes/Sprites_Personaje2/SpritePersonajePuñoAmericanoDerecha.png",
+        "Recursos/Imagenes/Sprites_Personaje2/SpriteBateIzquierda.png","Recursos/Imagenes/Sprites_Personaje2/SpriteBateDerecha.png"]
+
+		}else if(posArray==1){
+			spriteHojalocal = ["Recursos/Imagenes/Sprites_Personaje/SpritePersonajeIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpritePersonajeDerecha.png",
+        "Recursos/Imagenes/Sprites_Personaje/SpritePistolaIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpritePistolaDerecha.png",
+        "Recursos/Imagenes/Sprites_Personaje/SpriteEscopetaIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpriteEscopetaDerecha.png",
+        "Recursos/Imagenes/Sprites_Personaje/SpriteThomsomIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpriteThomsomDerecha.png",
+        "Recursos/Imagenes/Sprites_Personaje/SpritePersonajePuñoAmericanoIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpritePersonajePuñoAmericanoDerecha.png",
+        "Recursos/Imagenes/Sprites_Personaje/SpriteBateIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpriteBateDerecha.png"]
+		}
+		return spriteHojalocal;
+	}
 	preload(){
 		var title = this.load.image('title','Recursos/Imagenes/Logo.png');
 		var subtitle = this.load.image('subtitle','Recursos/Imagenes/subtitle.png');
@@ -111,18 +137,17 @@ class CharapterSelection extends Phaser.Scene {
 			this.posArrayP2--;
 		}else if(this.confirmar1.isDown){
 			this.checkplayer2 = true;
+			sprite2=this.seleccionaravatar(this.posArrayP2);
 			
 		}
 
 		if(this.derecha2.isDown && (this.posArrayP1<1) && !this.checkplayer1 ){
 			this.posArrayP1++;
-			console.log("aaaa")
 		}else if(this.izquierda2.isDown && (this.posArrayP1>0) && !this.checkplayer1){
 			this.posArrayP1--;
-			console.log("aaaa")
 		}else if(this.confirmar2.isDown){
 			this.checkplayer1 = true;
-			
+			sprite=this.seleccionaravatar(this.posArrayP1);
 		}
 		//console.log("aaaa")
 	}
