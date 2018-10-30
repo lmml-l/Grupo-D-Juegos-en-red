@@ -56,8 +56,8 @@ class MainMenu extends Phaser.Scene {
 		this.arriba2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
 		this.abajo1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
 		this.abajo2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
-		this.go1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.T);
-		this.go2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
+		this.go1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
+		this.go2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
 		this.go1.isDown=false;
 		this.go2.isDown=false;
