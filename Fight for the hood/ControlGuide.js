@@ -1,3 +1,4 @@
+//Muestra los controles del juego. Funcionamiento análogo al resto de menús (menu.js y CharapterSelection.js)
 class ControlGuide extends Phaser.Scene {
 	constructor(){
 		super({key:"ControlGuide"});
@@ -17,11 +18,8 @@ class ControlGuide extends Phaser.Scene {
 
 		this.back1.isDown=false;
 		this.back2.isDown=false;
-
-
-
-		
 	}
+
 	preload(){
 		var controls = this.load.image('controls','Recursos/Imagenes/GuiaControles.png');
 	}
@@ -39,7 +37,6 @@ class ControlGuide extends Phaser.Scene {
 		if(this.back2.isDown){
 			this.check = true;
 		}
-		//console.log("aaaa")
 	}
 
 	scenechange(){

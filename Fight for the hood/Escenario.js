@@ -1,5 +1,7 @@
 'use strict'
 
+    //DEFINICIÓN DE VARIABLES GLOBALES
+    //----------------------------------------------------------------------------------------
     var victorias=new Array(2); //Almacena el nº de partidas ganadas por cada jugador
     victorias[0]=0; victorias[1]=0;
 
@@ -38,10 +40,9 @@
         "Recursos/Imagenes/Sprites_Armas/ArmasHUD/PuñoAmericanoHUD.png",
         "Recursos/Imagenes/Sprites_Armas/ArmasHUD/BateHUD.png",
         "Recursos/Imagenes/Sprites_Armas/Puños/PuñoPixelizado.png"]
-
+//----------------------------------------------------------------------------------------
 
 //La clase escenario sirve para colocar los elementos de la partida y como controlador de la misma
-         
 class MainEscenario extends Phaser.Scene {
 
 	constructor(){
@@ -56,7 +57,7 @@ class MainEscenario extends Phaser.Scene {
         //Creamos controladores (jugadores) para cada personaje
         this.jugador = new Jugador(this.avatar,controles2,this.proyectiles);
         this.jugador1 = new Jugador(this.avatar1,controles1,this.proyectiles2); //elegir controles 1 o controles 2
-        
+        //creamos objetos
         this.plataformas;
         this.suelo;
         this.dropzone;
@@ -65,7 +66,10 @@ class MainEscenario extends Phaser.Scene {
 
         this.hud = new HUD (this, Hud , [this.jugador,this.jugador1]);
 
+        //textos
         this.ganadorTexto;
+        this.finTiempoTexto;
+        this.finPartidaTexto;
 	}
 
 //Reiniciamos el nivel
@@ -81,38 +85,38 @@ restartPartida(){
 checkPartida(){
     var that=this;
     //Si algún jugador llega a 3 victorias gana la partida
-    if(victorias[0]==3){                                //jugador 1
+    if(victorias[0]==3){                                    //jugador 1
         console.log('J1 GANA LA PARTIDA');
-        this.ganadorTexto.setText("J1 GANA LA PELEA");  //texto en pantalla
-        victorias[0]=0;
-        this.time.addEvent({delay:3000,                 //tiempo que tarda hasta reiniciar
+        this.finPartidaTexto.setText("J1 GANA LA PELEA");   //texto en pantalla
+        victorias[0]=0; victorias[1]=0;                     //reseteo de rondasw
+        this.time.addEvent({delay:3000,                     //tiempo que tarda hasta reiniciar
         callback: function(){that.restartPartida()}});
     }
-    if(victorias[1]==3){                                //jugador 2
+    if(victorias[1]==3){                                    //jugador 2
         console.log('J2 GANA LA PARTIDA');
-        this.ganadorTexto.setText("J2 GANA LA PELEA");  //texto en pantalla
-        victorias[1]=0;
-        this.time.addEvent({delay:3000,                 //tiempo que tarda hasta reiniciar
+        this.finPartidaTexto.setText("J2 GANA LA PELEA");   //texto en pantalla
+        victorias[0]=0; victorias[1]=0;                     //reseteo de rondas
+        this.time.addEvent({delay:3000,                     //tiempo que tarda hasta reiniciar
         callback: function(){that.restartPartida()}});  
     }
 
     //Si los dos jugadores llegan a 0 al mismo tiempo
     if(this.jugador.vida<=0 && this.jugador1.vida<=0){
         console.log('Ganador aleatorio');
-        var ganador = Math.floor(Math.random()*2);      //se elige aleatoriamente ganador
+        var ganador = Math.floor(Math.random()*2);          //se elige aleatoriamente ganador
         //gana J1
         if(ganador==0){
-            victorias[0]+=1;                            //suma una victoria
+            victorias[0]+=1;                                //suma una victoria
             console.log('Gana J1');
             this.ganadorTexto.setText("GANA J1");
-            this.restartPartida();                      //reinicia el nivel
-        }
+            this.restartPartida();                          //reinicia el nivel
+        }   
         //gana J2
         else if(ganador==1){
-            victorias[1]+=1;                            //suma una victoria
+            victorias[1]+=1;                                //suma una victoria
             console.log('Gana J2');
             this.ganadorTexto.setText("GANA J2");
-            this.restartPartida();                      //reinicia el nivel
+            this.restartPartida();                          //reinicia el nivel
         }
     }
 
@@ -123,22 +127,24 @@ checkPartida(){
         this.ganadorTexto.setText("GANA J2");
         this.restartPartida();
     }
-    else if(this.jugador1.vida<=0 && this.jugador.vida>0){ //jugador 2
+    else if(this.jugador1.vida<=0 && this.jugador.vida>0){  //jugador 2
         victorias[0]+=1;
         console.log('Gana J1');
         this.ganadorTexto.setText("GANA J1");
         this.restartPartida();
     } 
     //Si acaba el tiempo
-    if(91-this.Clock.getElapsedSeconds() == 0){         //comprobación de reloj (diferencia de tiempo) 
-    this.ganadorTexto.setText("SE ACABÓ\nEL TIEMPO");
+    if(91-this.Clock.getElapsedSeconds() == 0){             //comprobación de reloj (diferencia de tiempo) 
+    this.finTiempoTexto.setText("SE ACABÓ\nEL TIEMPO");
     this.restartPartida();
     }
 }
 
+
 colisionesbalasjugador(jugador,balast){
     var that=this;
-    var s = 0;
+    var s = 0; //índice para recorrer el array
+    //limpia el array de balas no definidas
     while(s < balast.length){
         if(balast[s]==undefined){
             balast.splice(s,1);
@@ -147,7 +153,8 @@ colisionesbalasjugador(jugador,balast){
         }
     };
 
-    var t = 0;
+    var t = 0; //índice para recorrer el array
+    //limpia el array de colisiones cuyo primer objeto es una bala no definida
     while(t < colisionesjugadoresbalas.length){
         if(colisionesjugadoresbalas[t].object1==undefined){
             colisionesjugadoresbalas.splice(t,1);
@@ -156,32 +163,35 @@ colisionesbalasjugador(jugador,balast){
         }
     };
 
+    //recorre el array de balas
     for(var j=0; j < balast.length ; j++){
 
         var i = 0;
         var colisionexistente = false;
-
+        //comprueba que la bala no tiene colisiones definidas con los personajes
         while((i < colisionesjugadoresbalas.length) && (!colisionexistente)){
             if(colisionesjugadoresbalas[i].object1 === balast[j]){
                     colisionexistente=true;
             }
             i++;
         }
-
+        //si no está en el array de colisiones, se añade
         if(!colisionexistente){
+            //esta función se llama cuando se produce una colisión entre la bala y el personaje
             var funcioncallback = function(obj1,obje2){
+                //limpia el array de balas
                 for(var jd = 0 ; jd < balast.length ; jd++){
                     if(balast[jd] === obj1){
                         balast.splice(jd,1);
                     }
                 }
-
+                //limpia el array de colisiones
                 for(var jd = 0 ; jd < colisionesjugadoresbalas.length ; jd++ ){
                     if(colisionesjugadoresbalas[jd].object1 === obj1){
                         colisionesjugadoresbalas.splice(jd,1);
                     }
                 }
-
+                //se borra la bala y se quita vida al personaje
                 obj1.destroy();
                 jugador.vida=jugador.vida-5; console.log(jugador.vida);
                 if(jugador.vida<0){
@@ -189,13 +199,16 @@ colisionesbalasjugador(jugador,balast){
                 }
             };
             
+            //añade la colisión
             var colisionActual = this.physics.add.overlap(balast[j],jugador.avatar.sprite,funcioncallback);
-                
+            //almacena la colisión en el array
             colisionesjugadoresbalas.push(colisionActual);
         }
     }
 }
 
+//misma estructura que la anterior
+//entre balas y plataformas del escenario
 colisionesbalaescenario(plataformas,balast){
     for(var j = 0 ; j < balast.length ; j++){
         var i = 0;
@@ -229,17 +242,17 @@ colisionesbalaescenario(plataformas,balast){
     }
 }
 
+//permite al personaje atravesar una plataforma exclusivamente saltando de abajo a arriba
 atravesarplataformaspersonaje(jugador,plataforma){
         var array = plataforma.getChildren();
         for(var i = 0; i<plataforma.getLength(); i++){  //colisión desde abajo
             if(jugador.y < array[i].y){
-                array[i].enableBody();                  //activamos la colisión (no atravesable)
+                array[i].enableBody();                  //activamos el body (no atravesable)
             }
             else{
-                array[i].disableBody();                 //desactivamos la colisión (atravesable)
+                array[i].disableBody();                 //desactivamos el body (atravesable)
             }
         }
-        
     }
 
 
@@ -276,7 +289,7 @@ create(){
 	this.add.sprite(512, 215, 'fondo');
 	this.add.sprite(512, 681, 'HUD');
 
-	this.plataformas = this.physics.add.staticGroup();  //Hace sólidas las plataformas enfocadas al primer personaje
+	this.plataformas = this.physics.add.staticGroup();   //Hace sólidas las plataformas enfocadas al primer personaje
     this.suelo = this.physics.add.staticGroup();
     
     this.plataformas2 = this.physics.add.staticGroup();  //Hace sólidas las plataformas enfocadas al segundo personaje
@@ -285,7 +298,7 @@ create(){
     this.plataformas3 = this.physics.add.staticGroup();  //Hace sólidas las plataformas enfocadas a las balas
     this.suelo3 = this.physics.add.staticGroup();
 
-    this.dropzone = this.physics.add.staticGroup();
+    this.dropzone = this.physics.add.staticGroup();     //Gace sólido la zona de drop (aparición de arma)
 
 	//Suelo
     this.suelo.create(512, 585, 'sueloPixel').alpha=0;
@@ -399,7 +412,7 @@ create(){
 
     this.suelo3.create(512, 585, 'sueloPixel').alpha=0;
 
-    //zonas de dropeo
+    //zonas de dropeo (aparición de armas)
     this.dropzone.create(130, 302,'dropzonePixel');
     this.dropzone.create(500, 56,'dropzonePixel');
     this.dropzone.create(455, 265,'dropzonePixel'); 
@@ -429,9 +442,13 @@ create(){
     this.Clock = this.time.addEvent({delay:91000, //91 segundos
     callback: function(){} });
 
-    this.hud.create(this.Clock); //carga el HUD con la información del cronómetro
+    //carga el HUD con la información del cronómetro
+    this.hud.create(this.Clock); 
 
-    this.ganadorTexto =  this.add.text(480, 250, "", { fill: '#FFAC00', font: '52px Impact', align: 'center'});
+    //colocación de textos
+    this.ganadorTexto =     this.add.text(480, 250, "", { fill: '#FFAC00', font: '52px Impact', align: 'center'});
+    this.finPartidaTexto =  this.add.text(400, 250, "", { fill: '#E85C0D', font: '52px Impact', align: 'center'});
+    this.finTiempoTexto =   this.add.text(480, 250, "", { fill: '#FFAC00', font: '52px Impact', align: 'center'});
 
     //time event spawndrop
     var that = this;

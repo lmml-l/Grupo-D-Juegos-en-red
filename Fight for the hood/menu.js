@@ -1,3 +1,4 @@
+//Pantalla inicial. Da acceso a la selección de personajes, pantalla de controles y, en versiones futuras, juego online
 class MainMenu extends Phaser.Scene {
 	constructor(){
 		super({key:"MainMenu"});
@@ -15,35 +16,35 @@ class MainMenu extends Phaser.Scene {
 		this.lock2;
 		this.lock3;
 		this.lock4;
+
+		this.textoControles;
+		this.textoVersion;
 	}
 	
 	menu(){
-
+		//bloqueos de botón (obliga a soltar la tecla)
 		this.lock1 = true;
 		this.lock2 = true;
 		this.lock3 = true;
 		this.lock4 = true;
 		this.check = false;
 
+		//índice de la seleccion
 		this.posArray=0;
 
+		//creación de las imágenes
 		var title = this.add.image(0,this.game.canvas.height*(150/600),'title').setScale(0.5);
 		var buttonlocal = this.add.image(0,this.game.canvas.height*(3/6),'buttonlocal').setScale(0.5).setInteractive();
 		var buttononline = this.add.image(0,this.game.canvas.height*(4/6),'buttononline').setScale(0.5).setInteractive();
 		var controles = this.add.image(0,(this.game.canvas.height*(5/6)),'controles').setScale(0.5).setInteractive();
-		
+		//se añaden al array
 		this.smap.push(buttonlocal);
 		this.smap.push(buttononline);
 		this.smap.push(controles);
-
+		//sprite que indica la selección
 		this.selector = this.add.sprite((this.smap[this.posArray].x + 800), this.smap[this.posArray].y, 'Selector').setScale(1);
 
-		/*
-		buttonlocal.on('pointerdown', function(event){this.scene.start('CharapterSelection')},this); 
-		buttononline.on('pointerdown', function(event){this.scene.start('CharapterSelection')},this);
-		controles.on('pointerdown', function(event){this.scene.start('CharapterSelection')},this); 
-		*/
-	
+		//engloba los botones
 		var container = this.add.container(this.game.canvas.width/2, 0);
 		container.add(title);
 		container.add(buttonlocal); 
@@ -51,14 +52,14 @@ class MainMenu extends Phaser.Scene {
 		container.add(controles);  
 		container.setX(this.game.canvas.width/2);
 
-
+		//teclas disponibles
 		this.arriba1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
 		this.arriba2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
 		this.abajo1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
 		this.abajo2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
 		this.go1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
 		this.go2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-
+		//inicializa las teclas a no pulsadas (para evitar acarreros de pantallas anteriores)
 		this.go1.isDown=false;
 		this.go2.isDown=false;
 
@@ -75,8 +76,12 @@ class MainMenu extends Phaser.Scene {
 
 	create(){
 		this.menu();
+		//textos de apoyo
+		this.textoControles = this.add.text(50, 710, "Selecciona con flechas/WASD y espacio/enter", { fill: '#FFDA43', font: '16px Lucida Console', align: 'center'});
+		this.textoVersion = this.add.text(760, 710, "v.0.2 preAlpha fase 2", { fill: '#F4FFF3', font: '16px Lucida Console', align: 'center'});
 	}
 
+	//comprueba que la tecla no está siendo apretada
 	teclasoltada(){
 		if(this.arriba1.isUp){
 			this.lock1=true;
@@ -117,9 +122,9 @@ class MainMenu extends Phaser.Scene {
 		}else if(this.go2.isDown){
 			this.check = true;
 		}
-		//console.log("aaaa")
 	}
 
+	//da paso a la pantalla seleccionada
 	scenechange(){
 		if(this.posArray<2 && this.check){
 			this.scene.start('CharapterSelection');

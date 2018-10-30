@@ -29,7 +29,7 @@
 
 	    that.Clock = clock; //temporizador controlado por el Escenario (escena)
 
-	    that.MostrarReloj = that.scene.add.text(482,602, (Math.trunc(91 - that.Clock.getElapsedSeconds())).toString(), { fill: '#FFFFFF', font: '52px Impact', align: 'center'});
+	    that.MostrarReloj = that.scene.add.text(484,602, (Math.trunc(91 - that.Clock.getElapsedSeconds())).toString(), { fill: '#FFFFFF', font: '52px Impact', align: 'center'});
 
         //Indica munición
         that.Municiones[0] = that.scene.add.text(115, 716, that.jugadores[1].municiones.toString()).setScale(2);   	//Crea la munición del jugador 1
@@ -126,14 +126,14 @@
   		that.RondasVictoria[1].fillPath();
 	}
 }
-
+	//actualización de todos los valores
 	this.update = function(){
 	  	that.ArmasMostradas[0].setTexture(" "+ that.jugadores[0].arma); 
 	  	that.ArmasMostradas[1].setTexture(" "+ that.jugadores[1].arma);
 	  	that.Municiones[0].setText(that.jugadores[0].municiones.toString());
 	  	that.Municiones[1].setText(that.jugadores[1].municiones.toString());
 
-	  	that.MostrarReloj.setText((Math.trunc(91 - that.Clock.getElapsedSeconds())).toString()); //91 segundos
+	  	that.MostrarReloj.setText((Math.trunc(91 - that.Clock.getElapsedSeconds())).toString()); //91 segundos (para que aparezcan en pantalla '90' segundos)
 	  	that.VictoriaUpdate();
 	  
 	  	that.BarrasVidas[0].clear();

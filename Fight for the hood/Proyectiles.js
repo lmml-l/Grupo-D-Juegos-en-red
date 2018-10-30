@@ -195,7 +195,7 @@ function Proyectiles (sprites){
 
 			disp();
 			scene.time.addEvent(
-				{delay:500 , repeat:1, callback: disp });
+				{delay:150 , repeat:1, callback: disp }); //tiempo entre balas por ráfagas
 
 			break;
 
