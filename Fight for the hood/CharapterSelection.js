@@ -100,7 +100,7 @@ class CharapterSelection extends Phaser.Scene {
 	create(){
 		this.selection();
 		//indicación de los controles
-		this.textoControles = this.add.text(10, 625, "Control\n           J1: WASD    T\n          J2:←↑→↓     P", { fill: '#FF8D24', font: '32px Times New Roman', align: 'center'});
+		this.textoControles = this.add.text(10, 625, "Control\n           J1: W,D     T\n           J2: ←,→    P", { fill: '#FF8D24', font: '32px Times New Roman', align: 'center'});
 	}
 
 	//actualiza las imágenes de los iconos J1 y J2
