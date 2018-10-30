@@ -79,6 +79,7 @@ Menús:
 - En la pantalla de controles, teclas Enter o Back para salir.
 
 En partida:
+
 J1: W          -> Saltar
     A          -> Mover a la izquierda
     D          -> Mover a la derecha
