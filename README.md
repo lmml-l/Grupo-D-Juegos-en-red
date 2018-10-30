@@ -5,7 +5,10 @@
 **Nombre del juego:** Fight for the hood
 
 **Diseño del juego**
-@ -14,21 +13,34 @@
+
+- Moviento
+- Salto
+- Recoger/Tirar objetos
 - Disparar
 - Munición del arma
 - Atacar cuerpo a cuerpo
@@ -48,7 +51,7 @@ Para evitar bloqueos en el flujo de partida, tendremos elementos interaccionable
 
 **Referencias artísticas**
 El estilo visual de este juego estará basado en la estética de los beat'm up de los años 90, imitando la manera de la textura, iluminación y calles. El movimiento de los personajes, sin embargo, se ajustará únicamente al eje horizontal y vertical, sin profundidad. Los personajes tampoco ocuparán tanto espacio en pantalla, para dar algo más de protagonismo a los elementos del escenario.
-@ -43,36 +55,6 @@ El estilo visual de este juego estará basado en la estética de los beat'm up d
+El estilo visual de este juego estará basado en la estética de los beat'm up d
 (Sega, Streets of Rage, 1991)
 
 
