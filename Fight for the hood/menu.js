@@ -23,7 +23,7 @@ class MainMenu extends Phaser.Scene {
 		this.lock2 = true;
 		this.lock3 = true;
 		this.lock4 = true;
-		this.check = true;
+		this.check = false;
 
 		this.posArray=0;
 
@@ -80,11 +80,14 @@ class MainMenu extends Phaser.Scene {
 	teclasoltada(){
 		if(this.arriba1.isUp){
 			this.lock1=true;
-		}else if(this.arriba2.isUp){
+		}
+		if(this.arriba2.isUp){
 			this.lock2=true;
-		}else if(this.abajo1.isUp){
+		}
+		if(this.abajo1.isUp){
 			this.lock3=true;
-		}else if(this.abajo2.isUp){
+		}
+		if(this.abajo2.isUp){
 			this.lock4=true;
 		}
 	}
@@ -128,9 +131,9 @@ class MainMenu extends Phaser.Scene {
 
 	update(){
 		this.scenechange();
-		this.teclasoltada();
 		this.actualizarSelector();
 		this.actualizarPosArray();
+		this.teclasoltada();
 
 	}
 }
