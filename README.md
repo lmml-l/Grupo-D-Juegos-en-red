@@ -1,5 +1,6 @@
 # Grupo D Juegos en red 
 
+**--------------------------------------------FASE 1--------------------------------------------**
 
 **Nombre del juego:** Fight for the hood
 
@@ -42,44 +43,88 @@ El estilo visual de este juego estará basado en la estética de los beat'm up d
 
 (Sega, Streets of Rage, 1991)
 
+**--------------------------------------------FIN DE FASE 1--------------------------------------------**
 
-**Nombre del juego:** Fight for the Hood
+**FASE 2**
 
-**Descripción del juego:** Juego tipo lucha con temática de mafias, Shooter de plataformas, tipo Brawlhalla, el juego contará con diversidad de mafias y armas, el juego será de dos jugadores en un mapa PvP, (uno contra uno).   El primer mapa será un callejón con escaleras típicas de New York en un barrio marginal [...]
+*Nombre del juego:* Fight for the Hood
 
-**Mecánicas del jugador:**  Moverse, saltar, recoger objetos, tirar objetos, disparar, atacar cuerpo a cuerpo.
-El personaje se presentará en el mapa sin armas, y aparecerán una serie de drops o armas en el entorno que podrá recoger para disparar a su contrincante, las armas tendrán munición que se agotará y los personajes tendrán barras de vida que se reducirán si el jugador logra impactar sus disparos al personaje del oponente, en función del arma y sus características predefinidas (daño) están reducirán una cantidad de vida variable, hasta que esta baje a 0 y entonces uno de los jugadores habrá ganado.
+**Organización de trabajo**
 
-**Controles del juego:**
+En GitHub tenemos asignados dos ramas (*branches*) dentro del repositorio.
+
+Hemos ido subiendo los archivos y modificaciones necesarias diariamente en la rama **Pruebas** y las versiones finales de cada fase, realizadas con *merges*,  en la rama **master**.
+
+Esto no quiere decir que hayamos hecho un commit por fase (de hecho, la rama Pruebas alcanza los 240 commits), sino que distinguimos los commits rutinarios y los finales para evitar confusiones.
+
+
+**Diseño del juego**
+
+*Mecánicas:*  Moverse, saltar, recoger objetos, tirar objetos, disparar, atacar cuerpo a cuerpo.
+
+- El personaje se presentará en el mapa sin armas, y aparecerán una serie de drops o armas en el entorno que podrá recoger para disparar a su contrincante.
+- Los personajes tendrán barras de vida que se reducirán si el jugador logra impactar sus ataques al oponente.
+- Las armas son de cuerpo a cuerpo o de fuego, éstas con munición limitada.
+- Cada arma tiene unas propiedades distintas (cadencia, alcance, velocidad de la bala...).
+
+*Dinámica:*
+- El objetivo del juego es dejar sin vida al oponente.
+- La partida se gana al mejor de cinco rondas. Es necesario ganar tres combates para obtener la victoria.
+- Tiempo máximo de 90 segundos. Se reinicia la partida si el contador llega a cero.
+
+*Controles del juego:*
  
- El jugador 1, contralará su avatar medianta las  teclas A,W,S,D, típicas de cualquier videojuego donde W, será saltar, A movimiento izquierda, D movimiento derecha y S, hacia abajo, los botónes de acción de este jugador son R, para recoger arma y soltar, y T para usar el arma.
- 
- 
-El jugador 2, contralará su avatar medianta las  teclas  de flecha ←,↑,↓,→ donde la flecha arriba ↑, será saltar, la flecha izquierda  ← movimiento izquierda, la flecha derecha → movimiento derecha y la flecha abajo ↓, hacia abajo, los botónes de acción de este jugador son O, para recoger arma y soltar, y P para usar el arma.
+Menús:
+- Indistintamente las teclas W y S o las flechas arriba(↑) y abajo(↓) para subir o bajar el índice de selección.
+- En la pantalla de controles, teclas Enter o Back para salir.
 
-**Diagrama de secuencia del juego:**
+En partida:
+J1: W          -> Saltar
+    A          -> Mover a la izquierda
+    D          -> Mover a la derecha
+    R          -> Coger/Soltar arma
+    T          -> Atacar
+    
+J2: ↑Arriba    -> Saltar
+    ←Izquierda -> Izquierda, 
+    →Derecha   -> Mover a la derecha
+    O          -> Coger/Soltar arma
+    P          -> Atacar
 
-![...](https://image.ibb.co/ePtZ9U/Diagrama_de_secuencia_b_sico.png)
+**Diagrama de navegación, secuencia del juego y pantallas:**
 
-El juego comienza con una imagen de la pantalla de inicio donde encontramos las siguientes funcionalidades, Jugar en local, jugar online y controles, en esta parte solo funcionará la opción de jugar en local ya que es lo que pide esta fase 2:
+![...](https://i.imgur.com/ZUyX79J.png)
 
-![...](https://gyazo.com/344655b706b24a1c690981acd292d32c.png)
+El juego comienza la pantalla de inicio donde podremos seleccionar con el teclado las siguientes funcionalidades: *jugar en local*, *jugar online* y *controles*.
+- *Jugar en local*: Dirige a un menú de selección de selección de personajes para una partida local.
+- *Jugar online*: En futuras fases dirigirá a una partida multijugador en línea. Al no estar implementado, funciona igual que el anterior.
+- *Controles*: Indica las teclas y su función.
 
-Desde esta pantalla podremos acceder a la selección de personajes del juego donde salen los dos avatares y cada jugador podrá elegir su personaje:
+![...](https://i.imgur.com/j6UoskT.jpg)
 
-![...](https://i.gyazo.com/b6870b967be395cbc71d0f2047bd33ff.png)
+En la pantalla de controles se indican las teclas para cada jugador y su función. Su única interacción es retroceder a la pantalla anterior.
 
-Lo que nos lleva a la pantalla del juego donde nos encontramos con varios elementos del juego, como son los avatares de los jugadores (J1 Y J2), las armas que aparecerán de manera aleatoria por las plataformas para poder ser recogidas, y luego nos encontramos con el HUD, donde encontramos las barras de vida de los dos jugadores, el arma actual de cada jugador, la munición actual del arma, el número de victorias que lleva cada jugador (en forma de círculo relleno de color amarillo) y el tiempo para que finalice la partida.
+![...](https://i.imgur.com/mvQt6lM.jpg)
+
+Desde esta pantalla podremos acceder a la selección de personajes. Cada jugador mueve su icono correspondiente (*J1* o *J2*) hacia el sprite del personaje deseado. Una vez los dos confirmen su selección, que no se podrá cambiar, se inicia la partida.
+
+![...](https://i.imgur.com/KKcfNzv.jpg)
+
+En la pantalla de juego los jugadores podrán manejar a sus avatares entre las plataformas -atravesables desde abajo- y edificios del escenario. En unas zonas marcadas, irán apareciendo aleatoriamente distintas armas. Los jugadores podrán atacar con ellas o soltarlas cuando necesiten. En la parte baja, se encuentra una zona (HUD) con información de partida, como la vida, tiempo restante o rondas ganadas.
+
+En esta captura se enumeran los elementos de la pantalla de juego:
 
 ![...](https://gyazo.com/2b12fc98ff9cafcd43ddcff82e4dec1b.png)
 
+
 **Integrantes del equipo de desarrollo:**  
+
+**Nombre:** Luis Miguel Moreno López **Correo** lm.moreno.2016@alumnos.urjc.es           **Cuenta GitHub:** lmml-l
+
+**Nombre:** Denis Gudiña Nuñez  **Correo:**  d.gudina.2016@alumnos.urjc.es               **Cuenta GitHub:**  KaptainSportaco
+
+**Nombre:** Fernando Moreno Díaz **Correo** f.moreno.2016@alumnos.urjc.es                **Cuenta GitHub:** FernandoMoreno98
+
 **Nombre:** Alejandro José Carrillo Ezcurra  **Correo:**  aj.carrilloe@alumnos.urjc.es   **Cuenta GitHub:** Tenusiano
-
-**Nombre:** Denis Gudiña Nuñez  **Correo:**  d.gudina.2016@alumnos.urjc.es   **Cuenta GitHub:**  KaptainSportaco
-
-**Nombre:** Luis Miguel Moreno López **Correo** lm.moreno.2016@alumnos.urjc.es **Cuenta GitHub:** lmml-l
-
-**Nombre:** Fernando Moreno Díaz **Correo** f.moreno.2016@alumnos.urjc.es **Cuenta GitHub:** FernandoMoreno98
 
 
