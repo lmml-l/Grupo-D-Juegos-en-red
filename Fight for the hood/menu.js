@@ -11,11 +11,19 @@ class MainMenu extends Phaser.Scene {
 		this.arriba2;
 		this.abajo2;
 		this.go2;
+		this.lock1;
+		this.lock2;
+		this.lock3;
+		this.lock4;
 	}
 	
 	menu(){
 
-		this.check = false;
+		this.lock1 = true;
+		this.lock2 = true;
+		this.lock3 = true;
+		this.lock4 = true;
+		this.check = true;
 
 		this.posArray=0;
 
@@ -69,24 +77,40 @@ class MainMenu extends Phaser.Scene {
 		this.menu();
 	}
 
+	teclasoltada(){
+		if(this.arriba1.isUp){
+			this.lock1=true;
+		}else if(this.arriba2.isUp){
+			this.lock2=true;
+		}else if(this.abajo1.isUp){
+			this.lock3=true;
+		}else if(this.abajo2.isUp){
+			this.lock4=true;
+		}
+	}
+
 	actualizarSelector(){
 		this.selector.setPosition(this.smap[this.posArray].x + 800, this.smap[this.posArray].y);
 	}
 
 	actualizarPosArray(){	
-		if(this.abajo1.isDown && (this.posArray<2) && !this.check){
+		if(this.abajo1.isDown && (this.posArray<2) && !this.check && this.lock3){
 			this.posArray++;
-		}else if(this.arriba1.isDown && (this.posArray>0) && !this.check){
+			this.lock3=false;
+		}else if(this.arriba1.isDown && (this.posArray>0) && !this.check && this.lock1){
 			this.posArray--;
+			this.lock1=false;
 		}else if(this.go1.isDown){
 			this.check = true;
 			
 		}
 
-		if(this.abajo2.isDown && (this.posArray<2) && !this.check){
+		if(this.abajo2.isDown && (this.posArray<2) && !this.check && this.lock4){
 			this.posArray++;
-		}else if(this.arriba2.isDown && (this.posArray>0) && !this.check){
+			this.lock4=false;
+		}else if(this.arriba2.isDown && (this.posArray>0) && !this.check && this.lock2){
 			this.posArray--;
+			this.lock2=false;
 		}else if(this.go2.isDown){
 			this.check = true;
 		}
@@ -96,7 +120,7 @@ class MainMenu extends Phaser.Scene {
 	scenechange(){
 		if(this.posArray<2 && this.check){
 			this.scene.start('CharapterSelection');
-		}else if(this.posArray=2 && this.check){
+		}else if(this.posArray==2 && this.check){
 			this.scene.start('ControlGuide');
 		}
 	}
@@ -104,6 +128,7 @@ class MainMenu extends Phaser.Scene {
 
 	update(){
 		this.scenechange();
+		this.teclasoltada();
 		this.actualizarSelector();
 		this.actualizarPosArray();
 

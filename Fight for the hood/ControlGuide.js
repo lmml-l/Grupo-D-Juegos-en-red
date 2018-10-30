@@ -12,7 +12,7 @@ class ControlGuide extends Phaser.Scene {
 
 		var controls = this.add.image(this.game.canvas.width/2,this.game.canvas.height/2,'controls').setScale(1);
 
-		this.back1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.BACK);
+		this.back1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.BACKSPACE);
 		this.back2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
 
 		this.back1.isDown=false;
