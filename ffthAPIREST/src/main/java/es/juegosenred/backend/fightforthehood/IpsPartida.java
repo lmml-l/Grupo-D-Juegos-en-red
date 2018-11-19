@@ -29,7 +29,9 @@ public class IpsPartida {
 		ArrayList<String> ips = mymatch.getIpsPartida();
 		if(ips.size()==2) {
 			if(ips.get(0).equals(myip)){
-				
+				return new ResponseEntity<>(ips.get(1), HttpStatus.OK);
+			}else {
+				return new ResponseEntity<>(ips.get(0), HttpStatus.OK);
 			}
 		}
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
