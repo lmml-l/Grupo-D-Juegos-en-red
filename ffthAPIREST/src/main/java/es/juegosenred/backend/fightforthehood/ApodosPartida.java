@@ -30,3 +30,4 @@ public class ApodosPartida {
 		return new ResponseEntity<>(mymatch.getListadeapodos().get(ip), HttpStatus.OK);
 	}
 }
+
