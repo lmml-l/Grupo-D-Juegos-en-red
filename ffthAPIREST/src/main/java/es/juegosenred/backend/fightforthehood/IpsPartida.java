@@ -18,12 +18,14 @@ public class IpsPartida {
 	@Autowired
 	private MyMatch mymatch;
 	
-	@GetMapping
+	
+	@GetMapping("/idlist")
 	public ResponseEntity<ArrayList<String>> getIps(){
 		return new ResponseEntity<>(mymatch.getIpsPartida(), HttpStatus.OK);
 	}
 	
-	@GetMapping
+	
+	@GetMapping("/idrival")
 	public ResponseEntity<String> getRivalIp(HttpServletRequest request){ 
 		String myip = request.getRemoteAddr();
 		ArrayList<String> ips = mymatch.getIpsPartida();
@@ -36,7 +38,8 @@ public class IpsPartida {
 		}
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
-	@GetMapping
+	
+	@GetMapping("/idmy")
 	public ResponseEntity<String> getMyIp(HttpServletRequest request){
 		return new ResponseEntity<>(request.getRemoteAddr(), HttpStatus.OK);
 	}
