@@ -126,8 +126,10 @@ class MainMenu extends Phaser.Scene {
 
 	//da paso a la pantalla seleccionada
 	scenechange(){
-		if(this.posArray<2 && this.check){
+		if(this.posArray==0 && this.check){
 			this.scene.start('CharapterSelection');
+		}else if(this.posArray==1 && this.check){
+			this.scene.start('Lobby');
 		}else if(this.posArray==2 && this.check){
 			this.scene.start('ControlGuide');
 		}

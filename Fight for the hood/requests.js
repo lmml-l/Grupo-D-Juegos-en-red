@@ -25,7 +25,7 @@ function getApodo(mymatch, ip) {
             "Content-Type": "application/json"
         }
     }).done(function (data) {
-        console.log("Obtener apodo: " + data)
+        console.log("Apodo: " + data)
     })
 }
 
