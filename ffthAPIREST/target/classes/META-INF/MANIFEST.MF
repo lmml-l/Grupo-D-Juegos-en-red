@@ -1,10 +1,11 @@
 Manifest-Version: 1.0
-Implementation-Title: fightforthehood
+Implementation-Title: fireforthehood
 Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: lm.moreno.2016
+Built-By: teresa
 Implementation-Vendor-Id: es.juegosenred.backend
-Build-Jdk: 1.8.0_172
-Implementation-URL: http://maven.apache.org
+Build-Jdk: 1.8.0_191
+Implementation-URL: http://projects.spring.io/spring-boot/firefortheho
+ od/
 Created-By: Maven Integration for Eclipse
 Implementation-Vendor: Pivotal Software, Inc.
 

@@ -3,12 +3,10 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>es.juegosenred.backend</groupId>
-  <artifactId>fightforthehood</artifactId>
+  <artifactId>fireforthehood</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
   
-  <name>fightforthehood</name>
-  <url>http://maven.apache.org</url>
   
   <parent>
 	<groupId>org.springframework.boot</groupId>
@@ -28,8 +26,11 @@
     <dependency>
     <groupId>org.springframework.boot</groupId>
 	<artifactId>spring-boot-starter-web</artifactId>
-	</dependency>
-	
+  </dependency>
+  <dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-devtools</artifactId>
+  </dependency>
 	<dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>

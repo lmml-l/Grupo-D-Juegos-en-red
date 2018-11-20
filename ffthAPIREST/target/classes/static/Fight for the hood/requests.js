@@ -49,7 +49,7 @@ function getMyIP(request) {
     $.ajax({
         method: 'GET',
         url: 'http://localhost:8080/FightForTheHood/',
-        data: JSON.stringify("\n  IP: " + request.getRemoteAddr(),
+        data: JSON.stringify("\n  IP: " + request.getRemoteAddr()),
         processData: false,
         headers: {
             "Content-Type": "application/json"
@@ -89,7 +89,7 @@ function getIPs(mymatch) {
     })
 }
 
-/*//Delete item from server
+/*Delete item from server
 function deleteItem() {
     $.ajax({
         method: 'DELETE',
@@ -97,4 +97,5 @@ function deleteItem() {
     }).done(function (item) {
         console.log("Deleted item " + itemId)
     })
-}
+    */
+//}
