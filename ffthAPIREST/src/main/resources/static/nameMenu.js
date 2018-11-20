@@ -1,14 +1,18 @@
 //Pantalla para preguntar por el nombre del jugador
 //Ese dato se envía al servidor y se pasa a buscar partida
+
+var NombreFinal;
+
 class nameMenu extends Phaser.Scene {
 	constructor(){
 		super({key:"nameMenu"});
 		this.nombre;
 		this.escape;
-		this.enter;
+		this.enter;		
 		this.textoPregunta;
 		this.textoRepetir;
 		this.textoSalir;
+		this.textoNombre;
 
 	}
 
@@ -18,35 +22,42 @@ class nameMenu extends Phaser.Scene {
 
 	//botón para retroceder
 	retroceder(){
-		if(escape.isDown){
+		if(this.escape.isDown){
 		this.scene.start('MainMenu');
+		this.escape.isDown=false;
 		}
 	}
 
 	aceptar(){
-		if(enter.isDown){
-			this.nombre =this.nombreBox.value; //??
-			nombre.appendChild();
+		if(this.enter.isDown){
 			this.scene.start('Lobby');
+			this.enter.isDown=false;
+			NombreFinal = textoNombre.text;
 		}
 	}
 
 	create(){
-		this.nombre="Anónimo"; //nombre por defecto si no se pone nada
+		//nombre por defecto si no se pone nada
 
 		this.escape = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);	//tecla para salir
 		this.enter  = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER); //tecla para aceptar
 
-		this.textoVersion = this.add.text(500, 500, "¿Cómo te llamas?", { fill: '#F4FFF3', font: '16px Lucida Console', align: 'center'});
+		this.textoVersion = this.add.text(400, 500, "¿Cómo te llamas?", { fill: '#F4FFF3', font: '16px Lucida Console', align: 'center'});
 		this.textoVersion = this.add.text(50, 700, "Pulse ENTER para aceptar", { fill: '#F4FFF3', font: '16px Lucida Console', align: 'center'});
 		this.textoVersion = this.add.text(50, 730, "Pulse ESC para salir", { fill: '#F4FFF3', font: '16px Lucida Console', align: 'center'});
-
-		//caja para introducir el nombre
-		this.nombreBox = document.createElement("INPUT");
-		nombreBox.setAttribute("type", "text");
-		nombreBox.setAttribute("value", "Introduzca su nombre");
-		this.nombre = prompt("Introduzca su nombre","Anónimo");
+		this.textoNombre = this.add.text(400, 200, "Anónimo", { fill: '#F4FFF3', font: '16px Lucida Console', align: 'center'});
 		
+		var that = this;
+		this.input.keyboard.on('keydown',function(event){
+			if(event.keyCode === 8 && that.textoNombre.text.length>0){
+				that.textoNombre.text = that.textoNombre.text.substr(0,that.textoNombre.text.length-1)
+			}
+			else if(event.keyCode == 32 || event.keyCode >=48 && event.keyCode < 90){
+				that.textoNombre.text += event.key;
+			}
+
+		}
+		)
 	}
 
 	update(){

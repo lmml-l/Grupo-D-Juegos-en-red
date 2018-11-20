@@ -129,7 +129,7 @@ class MainMenu extends Phaser.Scene {
 		if(this.posArray==0 && this.check){
 			this.scene.start('CharapterSelection');
 		}else if(this.posArray==1 && this.check){
-			this.scene.start('Lobby');
+			this.scene.start('nameMenu');
 		}else if(this.posArray==2 && this.check){
 			this.scene.start('ControlGuide');
 		}
