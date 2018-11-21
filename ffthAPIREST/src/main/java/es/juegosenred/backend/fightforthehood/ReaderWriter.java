@@ -1,115 +1,116 @@
 package es.juegosenred.backend.fightforthehood;
 
-//faltan los imports
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 
-//public class ReaderWriter {
 
-	//String[] apodosindex = new String[10];
+public class ReaderWriter {
+
+    String [] apodosindex = new String[10];
+
+    public ReaderWriter(String [] apodos){
+        apodosindex = apodos;
+    }
             
 
-      //  public String[] init(String[] apodosindex){
-    //    	for(int i=0; i<10; i++){
-        		//apodosindex[i]=null;
-        	//}
-        //	return apodosindex;
-       // }    
-
-//        public String[] Lector()
-  //      {
-    //        String line;
-      //      String text = "";
-        //    char spacer = ',';
-            //try
-           // {
-                //Ubicación del fichero
-               // StreamReader sr = new StreamReader("./Assets/Scripts/Q_TableFactory/QTable.txt");
-
-              //  line = sr.ReadLine();
-                //line = sr.ReadLine();
-                
-               // while (line != null)
-                //{
-                    
-               //     System.Console.WriteLine(line);
-
-                 //   text+=(line);
-
-                   // line = sr.ReadLine();
-               // }
-
-                
-                //sr.Close();
-                //System.Console.ReadLine();
-/*
-            }catch (FileNotFoundException e){
-                System.Console.WriteLine("Exception: " + e.Message);
-
-            }finally{
-                System.Console.WriteLine("||---------------||");
+        public String[] init(String[] apodosindex){
+            for(int i=0; i<10; i++){
+                apodosindex[i]=null;
             }
+            return apodosindex;
+        }    
 
-            string[] tablevalues = text.Split(spacer);
-
-            
-            int posarray = 0;
-               for(int s = 0; s < Q_tableMatrix.GetLength(0); s++)
-                {
-                    for(int j = 0; j < Q_tableMatrix.GetLength(1); j++)
-                    {
-                        Q_tableMatrix[s, j] = float.Parse(tablevalues[posarray]);
-                        posarray++;
-                    }
-                }
-            
-            return Q_tableMatrix;
+        public void resetArchive(File file){
+            file.delete();
+            file = new File("apodosindex.txt");
         }
 
-        public void Escritor(String[] apodosindex, MyInfo my info)
-        {
-          
-            try
-            {
-               	File file = new File("./Grupo-D-Juegos-en-red/apodosindex.txt");
-                FileWriter fw = new FileWriter(file, true);
-                PrintWriter pw = new PrintWriter(fw);
+        public String[] Lector(){
+            String line;
+            String text = "";
+            String spacer = ",";
+            try{
 
+                FileReader fr = new FileReader("apodosindex.txt");
+                BufferedReader br = new BufferedReader(fr);
+
+                line = br.readLine();
+                
+                while (line != null){
+                    
+                    System.out.print(line);
+
+                    text+=(line);
+
+                    line = br.readLine();
+                }
+
+                
+                br.close();
+
+
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+
+            String[] apodossplit = text.split(spacer);
+            String[] listapodos = new String[10];
+
+               for(int i = 0; i < listapodos.length; i++){
+                    listapodos[i] = apodossplit[i];
+                }
+            
+            return listapodos;
+        }
+
+        public void Escritor(String[] apodosindex, MyInfo myinfo){
+          
+            File file = new File("apodosindex.txt");
+            FileWriter fw;
+            PrintWriter pw;
+            
+            try{
+                
+                fw = new FileWriter(file);
+                pw = new PrintWriter(fw);
                 for (int i = 0; i < 10; i++) {
                     if(apodosindex[i]==null){
-                    	apodosindex[i]= myinfo.getApodo();
-                    	pw.println(myinfo.getApodo());
+                        apodosindex[i]= myinfo.getApodo();
+                        pw.println(myinfo.getApodo() + ",");
                     }else if(apodosindex[9]!=null){
-                    	for(int i = 1; i < 9; i++){
-                    		apodosindex[i]=apodosindex[i+1];
-                    	}
-                    	apodosindex[9]=myinfo.getApodo();
-                    	file.delete();
-                    	file = new File("./Grupo-D-Juegos-en-red/apodosindex.txt");
-                    	/*fw = new FileWriter(file, true);
-                    	pw = new PrintWriter(fw);
+                        for(int j = 1; j < 9; j++){
+                            apodosindex[j]=apodosindex[j+1];
+                        }
+                        apodosindex[9]=myinfo.getApodo();
+                        resetArchive(file);
 
-                    	for(int i = 0; i < 10; i++){
-                    		pw.println(apodosindex[i]);
-                    	} 
+                        for(int k = 0; k < 10; k++){
+                            pw.println(apodosindex[k] + ",");
+                        } 
                     }
                 }
-                 
+                 pw.close();
             }
             catch (Exception e)
             {
                 e.printStackTrace();
 
             }
-            finally
+            /*finally
             {
                try {
            
-		           if (null != fw)
-		              fw.close();
-		       }catch (Exception e2) {
-		              e2.printStackTrace();
-		       }
+                   if (null != fw)
+                      fw.close();
+               }catch (Exception e2) {
+                      e2.printStackTrace();
+               }
 
-            }
+            }*/
         }
-	
-}*/
+    
+}
