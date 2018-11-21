@@ -129,6 +129,37 @@ En esta captura se enumeran los elementos de la pantalla de juego:
 
 ![...](https://gyazo.com/2b12fc98ff9cafcd43ddcff82e4dec1b.png)
 
+**--------------------------------------------FIN DE FASE 2--------------------------------------------**
+
+**--------------------------------------------FASE 3--------------------------------------------**
+
+En esta fase se ha implementado la  API REST para el servidor mediante SpringBoot
+
+*Nombre del juego:* Fight for the Hood
+
+**Organización de trabajo**
+
+En GitHub tenemos asignados dos ramas (*branches*) dentro del repositorio.
+
+Hemos ido subiendo los archivos y modificaciones necesarias diariamente en la rama **Pruebas** y las versiones finales de cada fase, realizadas con *merges*,  en la rama **master**.
+
+Este proceso ha sido igual que en las fases anteriores, (donde se superaron más de 240 commits).
+
+**Secuencias, Diagramas de navegación y de clases:**
+
+Las pantallas de navegación(secuencias) del juego son las mismas que las de la fase anterior con excepción de que ahora el modo online, sale una pantalla para seleccionar tu nombre, que te dirige a un lobby abstracto donde empezarás la partida igual que si jugarás en local.
+
+Para ello mostramos el nuevo diagrama de navegación del juego: 
+
+![...](https://cdn.discordapp.com/attachments/506061008255582209/514547689459810325/Sin_titulo-1.png)
+
+En la implementación del API REST encontramos el siguiente diagrama de clases explicativo: 
+
+![...](https://i.gyazo.com/cc9800cfb906ce4342e22a8392c97ec3.png)
+
+Por lo que respecta a esta fase, no se han realizado cambios mayores a destacar.
+
+**--------------------------------------------FIN FASE 3--------------------------------------------**
 
 **Integrantes del equipo de desarrollo:**  
 
