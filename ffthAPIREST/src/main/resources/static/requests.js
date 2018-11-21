@@ -69,12 +69,13 @@ function getListaApodos(mymatch) {
 }
 
 //Conseguir lista de IPs
-function getIPs(arrayips) {
+function getIPs(arraips) {
     $.ajax({
         method: 'GET',
         url: 'http://localhost:8080/ips/idlist',
     }).done(function (data) {
         console.log("IPs en partida: " + data)
+        arraips(data);
     })
 }
 

@@ -1,6 +1,7 @@
 package es.juegosenred.backend.fightforthehood;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -22,7 +23,7 @@ public class IpsPartida {
 	
 	@GetMapping("/idlist")
 	@ResponseStatus(HttpStatus.CREATED)
-	public ArrayList<String> getIps(){
+	public Collection<String> getIps(){
 		return mymatch.getIpsPartida();
 	}
 	

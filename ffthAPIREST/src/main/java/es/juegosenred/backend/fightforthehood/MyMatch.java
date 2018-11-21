@@ -11,6 +11,7 @@ public class MyMatch {
 	public MyMatch() {
 		IpsPartida = new ArrayList<>();
 		IpsPartida.add("SoyFalange");
+		IpsPartida.add("SoyFalange2");
 	}
 
 	public MyMatch(ArrayList<String> ipsPartida) {

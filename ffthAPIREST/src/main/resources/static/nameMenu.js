@@ -20,16 +20,6 @@ class nameMenu extends Phaser.Scene {
 
 	}
 
-	getIPs(arrayips) {
-    $.ajax({
-        method: 'GET',
-        url: 'http://localhost:8080/ips/idlist',
-    }).done(function (data) {
-        console.log("IPs en partida: " + data)
-        arrayips = data;
-    })
-	}
-
 	//botón para retroceder
 	retroceder(){
 		if(this.escape.isDown){
@@ -40,12 +30,19 @@ class nameMenu extends Phaser.Scene {
 
 	aceptar(){
 		if(this.enter.isDown){
-			var array;
-			var arrayips = getIPs(array);
-			if(arrayips.length){
+			var array = new Array();
+			getIPs((function (ips) {
+        	for (var i = 0; i < ips.length; i++) {
+            	array.push(ips[i]);
+        	}}));
+
+
+			console.log(array.length);
+
+			if(array.length < 2){
 			this.scene.start('Lobby');
 			this.enter.isDown=false;
-			NombreFinal = textoNombre.text;
+			NombreFinal = this.textoNombre.text;
 			}
 		}
 	}
