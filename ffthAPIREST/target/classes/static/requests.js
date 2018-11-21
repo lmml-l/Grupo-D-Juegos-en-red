@@ -75,6 +75,7 @@ function getIPs(arraips) {
         url: 'http://localhost:8080/ips/idlist',
     }).done(function (data) {
         console.log("IPs en partida: " + data)
+        console.log(data)
         arraips(data);
     })
 }

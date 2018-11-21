@@ -2,45 +2,45 @@ package es.juegosenred.backend.fightforthehood;
 
 //faltan los imports
 
-public class ReaderWriter {
+//public class ReaderWriter {
 
-	String[] apodosindex = new String[10];
+	//String[] apodosindex = new String[10];
             
 
-        public String[] init(String[] apodosindex){
-        	for(int i=0; i<10; i++){
-        		apodosindex[i]==null;
-        	}
-        	return apodosindex;
-        }    
+      //  public String[] init(String[] apodosindex){
+    //    	for(int i=0; i<10; i++){
+        		//apodosindex[i]=null;
+        	//}
+        //	return apodosindex;
+       // }    
 
-        public String[] Lector()
-        {
-            string line;
-            string text = "";
-            char spacer = ',';
-            try
-            {
+//        public String[] Lector()
+  //      {
+    //        String line;
+      //      String text = "";
+        //    char spacer = ',';
+            //try
+           // {
                 //Ubicación del fichero
-                StreamReader sr = new StreamReader("./Assets/Scripts/Q_TableFactory/QTable.txt");
+               // StreamReader sr = new StreamReader("./Assets/Scripts/Q_TableFactory/QTable.txt");
 
-                line = sr.ReadLine();
-                line = sr.ReadLine();
+              //  line = sr.ReadLine();
+                //line = sr.ReadLine();
                 
-                while (line != null)
-                {
+               // while (line != null)
+                //{
                     
-                    System.Console.WriteLine(line);
+               //     System.Console.WriteLine(line);
 
-                    text+=(line);
+                 //   text+=(line);
 
-                    line = sr.ReadLine();
-                }
+                   // line = sr.ReadLine();
+               // }
 
                 
-                sr.Close();
-                System.Console.ReadLine();
-
+                //sr.Close();
+                //System.Console.ReadLine();
+/*
             }catch (FileNotFoundException e){
                 System.Console.WriteLine("Exception: " + e.Message);
 
@@ -85,7 +85,7 @@ public class ReaderWriter {
                     	file.delete();
                     	file = new File("./Grupo-D-Juegos-en-red/apodosindex.txt");
                     	/*fw = new FileWriter(file, true);
-                    	pw = new PrintWriter(fw);*/
+                    	pw = new PrintWriter(fw);
 
                     	for(int i = 0; i < 10; i++){
                     		pw.println(apodosindex[i]);
@@ -112,4 +112,4 @@ public class ReaderWriter {
             }
         }
 	
-}
+}*/

@@ -13,7 +13,8 @@ class nameMenu extends Phaser.Scene {
 		this.textoRepetir;
 		this.textoSalir;
 		this.textoNombre;
-
+		this.ipsjugadoressala;
+		this.arrayjugadores;
 	}
 
 	preload(){
@@ -28,22 +29,18 @@ class nameMenu extends Phaser.Scene {
 		}
 	}
 
+	
 	aceptar(){
 		if(this.enter.isDown){
-			var array = new Array();
-			getIPs((function (ips) {
-        	for (var i = 0; i < ips.length; i++) {
-            	array.push(ips[i]);
-        	}}));
-
-
-			console.log(array.length);
-
-			if(array.length < 2){
+			if(this.arrayjugadores.length < 2){
 			this.scene.start('Lobby');
 			this.enter.isDown=false;
 			NombreFinal = this.textoNombre.text;
 			}
+			else{
+				console.log("Servidor lleno");
+			}
+			
 		}
 	}
 
@@ -59,6 +56,10 @@ class nameMenu extends Phaser.Scene {
 		this.textoNombre = this.add.text(400, 200, "Anónimo", { fill: '#F4FFF3', font: '16px Lucida Console', align: 'center'});
 		
 		var that = this;
+		getIPs(function(arrayjugadores){that.ipsjugadoressala = arrayjugadores})
+		
+		
+		
 		this.input.keyboard.on('keydown',function(event){
 			if(event.keyCode === 8 && that.textoNombre.text.length>0){
 				that.textoNombre.text = that.textoNombre.text.substr(0,that.textoNombre.text.length-1)
@@ -74,6 +75,9 @@ class nameMenu extends Phaser.Scene {
 	update(){
 		this.retroceder();
 		this.aceptar();
+		var that = this;
+		getIPs(function(arrayjugadores){that.ipsjugadoressala = arrayjugadores})
+		console.log(this.ipsjugadoressala);
 	}
 }
 

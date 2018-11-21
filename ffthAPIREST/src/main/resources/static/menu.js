@@ -128,10 +128,16 @@ class MainMenu extends Phaser.Scene {
 	scenechange(){
 		if(this.posArray==0 && this.check){
 			this.scene.start('CharapterSelection');
+			this.go1.isDown=false;
+			this.go2.isDown=false;
 		}else if(this.posArray==1 && this.check){
 			this.scene.start('nameMenu');
+			this.go1.isDown=false;
+			this.go2.isDown=false;
 		}else if(this.posArray==2 && this.check){
 			this.scene.start('ControlGuide');
+			this.go1.isDown=false;
+			this.go2.isDown=false;
 		}
 	}
 
