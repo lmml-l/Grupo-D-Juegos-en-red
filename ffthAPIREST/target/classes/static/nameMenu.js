@@ -1,5 +1,8 @@
 //Pantalla para preguntar por el nombre del jugador
 //Ese dato se envía al servidor y se pasa a buscar partida
+
+var NombreFinal;
+
 class nameMenu extends Phaser.Scene {
 	constructor(){
 		super({key:"nameMenu"});
@@ -17,6 +20,16 @@ class nameMenu extends Phaser.Scene {
 
 	}
 
+	getIPs(arrayips) {
+    $.ajax({
+        method: 'GET',
+        url: 'http://localhost:8080/ips/idlist',
+    }).done(function (data) {
+        console.log("IPs en partida: " + data)
+        arrayips = data;
+    })
+	}
+
 	//botón para retroceder
 	retroceder(){
 		if(this.escape.isDown){
@@ -27,8 +40,13 @@ class nameMenu extends Phaser.Scene {
 
 	aceptar(){
 		if(this.enter.isDown){
+			var array;
+			var arrayips = getIPs(array);
+			if(arrayips.length){
 			this.scene.start('Lobby');
 			this.enter.isDown=false;
+			NombreFinal = textoNombre.text;
+			}
 		}
 	}
 
@@ -42,12 +60,6 @@ class nameMenu extends Phaser.Scene {
 		this.textoVersion = this.add.text(50, 700, "Pulse ENTER para aceptar", { fill: '#F4FFF3', font: '16px Lucida Console', align: 'center'});
 		this.textoVersion = this.add.text(50, 730, "Pulse ESC para salir", { fill: '#F4FFF3', font: '16px Lucida Console', align: 'center'});
 		this.textoNombre = this.add.text(400, 200, "Anónimo", { fill: '#F4FFF3', font: '16px Lucida Console', align: 'center'});
-
-		//caja para introducir el nombre
-		this.nombreBox = document.createElement("INPUT");
-		this.nombreBox.setAttribute("type", "text");
-		this.nombreBox.setAttribute("value", "Introduzca su nombre");
-		this.nombre = prompt("Introduzca su nombre","Anónimo");
 		
 		var that = this;
 		this.input.keyboard.on('keydown',function(event){

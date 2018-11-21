@@ -20,6 +20,16 @@ class nameMenu extends Phaser.Scene {
 
 	}
 
+	getIPs(arrayips) {
+    $.ajax({
+        method: 'GET',
+        url: 'http://localhost:8080/ips/idlist',
+    }).done(function (data) {
+        console.log("IPs en partida: " + data)
+        arrayips = data;
+    })
+	}
+
 	//botón para retroceder
 	retroceder(){
 		if(this.escape.isDown){
@@ -30,9 +40,13 @@ class nameMenu extends Phaser.Scene {
 
 	aceptar(){
 		if(this.enter.isDown){
+			var array;
+			var arrayips = getIPs(array);
+			if(arrayips.length){
 			this.scene.start('Lobby');
 			this.enter.isDown=false;
 			NombreFinal = textoNombre.text;
+			}
 		}
 	}
 

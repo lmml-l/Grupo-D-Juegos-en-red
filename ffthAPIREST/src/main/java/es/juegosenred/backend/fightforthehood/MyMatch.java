@@ -10,6 +10,7 @@ public class MyMatch {
 	
 	public MyMatch() {
 		IpsPartida = new ArrayList<>();
+		IpsPartida.add("SoyFalange");
 	}
 
 	public MyMatch(ArrayList<String> ipsPartida) {

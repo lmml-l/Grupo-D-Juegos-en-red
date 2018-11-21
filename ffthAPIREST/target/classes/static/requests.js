@@ -34,8 +34,6 @@ function getRivalIp(mymatch) {
     $.ajax({
         method: 'GET',
         url: 'http://localhost:8080/FightForTheHood/',
-        data: JSON.stringify(mymatch.getIpsPartida().get()),
-        processData: false,
         headers: {
             "Content-Type": "application/json"
         }
@@ -49,8 +47,6 @@ function getMyIP(request) {
     $.ajax({
         method: 'GET',
         url: 'http://localhost:8080/FightForTheHood/',
-        data: JSON.stringify("\n  IP: " + request.getRemoteAddr()),
-        processData: false,
         headers: {
             "Content-Type": "application/json"
         }
@@ -64,8 +60,6 @@ function getListaApodos(mymatch) {
     $.ajax({
         method: 'GET',
         url: 'http://localhost:8080/FightForTheHood/',
-        data: JSON.stringify(mymatch.getListadeapodos().values()),
-        processData: false,
         headers: {
             "Content-Type": "application/json"
         }
@@ -75,15 +69,10 @@ function getListaApodos(mymatch) {
 }
 
 //Conseguir lista de IPs
-function getIPs(mymatch) {
+function getIPs(arrayips) {
     $.ajax({
         method: 'GET',
-        url: 'http://localhost:8080/FightForTheHood/',
-        data: JSON.stringify(mymatch.getIpsPartida()),
-        processData: false,
-        headers: {
-            "Content-Type": "application/json"
-        }
+        url: 'http://localhost:8080/ips/idlist',
     }).done(function (data) {
         console.log("IPs en partida: " + data)
     })
