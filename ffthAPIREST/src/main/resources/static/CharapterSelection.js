@@ -24,6 +24,10 @@ class CharapterSelection extends Phaser.Scene {
 		this.textoControles;
 		this.fondo;
 
+		this.ready = new Array(2);
+		this.ready1;
+		this.ready2;
+
 		var that = this;
 	}
 
@@ -99,8 +103,8 @@ class CharapterSelection extends Phaser.Scene {
 		//var subtitle = this.load.image('subtitle','Recursos/Imagenes/subtitle.png');
 		var character1 = this.load.image('character1','Recursos/Imagenes/Character1.png');
 		var character2 = this.load.image('character2','Recursos/Imagenes/Character2.png');
-		var p1 = this.load.image('P1','Recursos/Imagenes/J1.png');
-		var p2 = this.load.image('P2','Recursos/Imagenes/J2.png');
+		var p1 		   = this.load.image('P1','Recursos/Imagenes/J1.png');
+		var p2 		   = this.load.image('P2','Recursos/Imagenes/J2.png');
 		this.load.image('menuCharacterFondo','Recursos/Imagenes/menuCharacterFondo.png');
 	}
 
@@ -109,11 +113,20 @@ class CharapterSelection extends Phaser.Scene {
 		this.selection();
 		this.textModo = this.add.text(50, 50, "Local mode", { fill: '#F4FFF3', font: '20px Impact', align: 'center'});
 		//indicación de los controles
-		this.textoControles = this.add.text(470, 540, "control\nselect\naccept", { fill: '#FFFFFF', font: '30px Impact', align: 'center'});
+		this.textoControles = this.add.text(470, 540, "\nselect\naccept", { fill: '#FFFFFF', font: '30px Impact', align: 'center'});
+		this.textoControles = this.add.text(470, 540, "control", { fill: '#FFAC00', font: '30px Impact', align: 'center'});
 		this.textoControles = this.add.text(300, 540, "\nW,D\nSPACE", { fill: '#FFAC00', font: '32px Impact', align: 'center'});
 		this.textoControles = this.add.text(650, 540, "\n←,→\nENTER", { fill: '#FFAC00', font: '32px Impact', align: 'center'});
-		this.subtitulo = this.add.text(360, 350, "CHOOSE YOUR FIGHTER", { fill: '#FFAC00', font: '38px Impact', align: 'center'});
-		this.textoSalir    = this.add.text(50, 730, "ESC to exit", { fill: '#F4FFF3', font: '24px Impact', align: 'center'});
+		this.subtitulo 		= this.add.text(360, 350, "CHOOSE YOUR FIGHTER", { fill: '#FFAC00', font: '38px Impact', align: 'center'});
+		this.textoSalir     = this.add.text(50, 730, "ESC to exit", { fill: '#F4FFF3', font: '24px Impact', align: 'center'});
+	
+		//indicación de si está listo el jugador
+		this.ready[0]="";
+		this.ready[1]="READY";
+
+		//texto invisible
+		this.ready1 =this.add.text(0, 0, this.ready[0], { fill: '#F4FFF3', font: '24px Impact', align: 'center'});
+		this.ready1 =this.add.text(0, 0, this.ready[0], { fill: '#F4FFF3', font: '24px Impact', align: 'center'});
 	}
 
 	//actualiza las imágenes de los iconos J1 y J2
@@ -130,6 +143,7 @@ class CharapterSelection extends Phaser.Scene {
 			this.posArrayP2--; //mueve cursor a la izquierda
 		}else if(this.confirmar1.isDown){
 			this.checkplayer2 = true; //confirmación y bloqueo
+			this.ready1 = this.add.text(650, 540, "\n\n\n"+this.ready[1], { fill: '#FFFFFF', font: '32px Impact', align: 'center'});
 			sprite2=this.seleccionaravatar(this.posArrayP2);
 		}
 
@@ -139,6 +153,7 @@ class CharapterSelection extends Phaser.Scene {
 			this.posArrayP1--; //mueve cursor a la izquierda
 		}else if(this.confirmar2.isDown){
 			this.checkplayer1 = true; //confirmación y bloqueo
+			this.ready2 = this.add.text(300, 540, "\n\n\n"+this.ready[1], { fill: '#FFFFFF', font: '32px Impact', align: 'center'});
 			sprite=this.seleccionaravatar(this.posArrayP1);
 		}
 	}
