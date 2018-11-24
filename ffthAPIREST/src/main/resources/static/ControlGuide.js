@@ -3,38 +3,33 @@ class ControlGuide extends Phaser.Scene {
 	constructor(){
 		super({key:"ControlGuide"});
 		this.check;
-		this.back1;
-		this.back2;
+		this.salir; //salir con escape
+		this.fondo;
 	}
 	
 	controlmenu(){
 
 		this.check = false;
 
-		var controls = this.add.image(this.game.canvas.width/2,this.game.canvas.height/2,'controls').setScale(1);
+		//var controls = this.add.image(this.game.canvas.width/2,this.game.canvas.height/2,'controls').setScale(1);
 
-		this.back1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.BACKSPACE);
-		this.back2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
+		this.salir = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
 
-		this.back1.isDown=false;
-		this.back2.isDown=false;
+		this.salir.isDown=false;
 	}
 
 	preload(){
-		var controls = this.load.image('controls','Recursos/Imagenes/GuiaControles.png');
+		//var controls = this.load.image('controls','Recursos/Imagenes/GuiaControles.png');
+		this.load.image('menuControlFondo','Recursos/Imagenes/menuLobbyFondo.png');
 	}
 
 	create(){
+		this.fondo = this.add.image(this.game.canvas.width/2,this.game.canvas.height/2,'menuControlFondo').setScale(1.3);
 		this.controlmenu();
 	}
 
 	actualizarPosArray(){	
-		if(this.back1.isDown){
-			this.check = true;
-			
-		}
-
-		if(this.back2.isDown){
+		if(this.salir.isDown){
 			this.check = true;
 		}
 	}
@@ -44,7 +39,6 @@ class ControlGuide extends Phaser.Scene {
 			this.scene.start('MainMenu');
 		}
 	}
-
 
 	update(){
 		this.scenechange();
