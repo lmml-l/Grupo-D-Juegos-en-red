@@ -10,7 +10,7 @@ import java.io.PrintWriter;
 
 public class ReaderWriter {
 
-    String [] apodosindex = new String[10];
+    String [] apodosindex = new String[5];
 
     public ReaderWriter(String [] apodos){
         apodosindex = apodos;
@@ -18,7 +18,7 @@ public class ReaderWriter {
             
 
         public String[] init(String[] apodosindex){
-            for(int i=0; i<10; i++){
+            for(int i=0; i<5; i++){
                 apodosindex[i]=null;
             }
             return apodosindex;
@@ -58,7 +58,7 @@ public class ReaderWriter {
             }
 
             String[] apodossplit = text.split(spacer);
-            String[] listapodos = new String[10];
+            String[] listapodos = new String[5];
 
                for(int i = 0; i < listapodos.length; i++){
                     listapodos[i] = apodossplit[i];
@@ -77,18 +77,18 @@ public class ReaderWriter {
                 
                 fw = new FileWriter(file);
                 pw = new PrintWriter(fw);
-                for (int i = 0; i < 10; i++) {
+                for (int i = 0; i < 5; i++) {
                     if(apodosindex[i]==null){
                         apodosindex[i]= myinfo.getApodo();
                         pw.println(myinfo.getApodo() + ",");
-                    }else if(apodosindex[9]!=null){
-                        for(int j = 1; j < 9; j++){
+                    }else if(apodosindex[4]!=null){
+                        for(int j = 1; j < 4; j++){
                             apodosindex[j]=apodosindex[j+1];
                         }
-                        apodosindex[9]=myinfo.getApodo();
+                        apodosindex[4]=myinfo.getApodo();
                         resetArchive(file);
 
-                        for(int k = 0; k < 10; k++){
+                        for(int k = 0; k < 5; k++){
                             pw.println(apodosindex[k] + ",");
                         } 
                     }
