@@ -3,38 +3,40 @@ class ControlGuide extends Phaser.Scene {
 	constructor(){
 		super({key:"ControlGuide"});
 		this.check;
-		this.back1;
-		this.back2;
+		this.salir; //salir con escape
+		this.texto
+		this.fondoSalir;
 	}
 	
 	controlmenu(){
 
 		this.check = false;
 
-		var controls = this.add.image(this.game.canvas.width/2,this.game.canvas.height/2,'controls').setScale(1);
+		//var controls = this.add.image(this.game.canvas.width/2,this.game.canvas.height/2,'controls').setScale(1);
 
-		this.back1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.BACKSPACE);
-		this.back2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
+		this.salir = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
 
-		this.back1.isDown=false;
-		this.back2.isDown=false;
+		this.salir.isDown=false;
 	}
 
 	preload(){
-		var controls = this.load.image('controls','Recursos/Imagenes/GuiaControles.png');
+		//var controls = this.load.image('controls','Recursos/Imagenes/GuiaControles.png');
+		this.load.image('menuControlFondo','Recursos/Imagenes/menuControlesFondo.png');
+		//IMAGEN DEL TECLADO PROVENIENTE DE https://beconnected.esafety.gov.au/topic-library/essentials/the-absolute-basics/what-is-a-computer/what-is-a-keyboard#
 	}
 
 	create(){
+		this.fondo 		= this.add.image(this.game.canvas.width/2,this.game.canvas.height/2,'menuControlFondo').setScale(1.3);
 		this.controlmenu();
+		this.texto 		= this.add.text(200, 500, "Player 1\nA,S\nW\nR\nT", { fill: '#FFAC00', font: '28px Impact', align: 'left'});
+		this.texto 		= this.add.text(400, 500, "Controls\nMove\nJump\nGrap/Drop Weapon\nShoot", { fill: '#FFFFFF', font: '28px Impact', align: 'center'});
+		this.texto 		= this.add.text(700, 500, "Player 2\n←,→\n↑\nO\nP", { fill: '#3FAEFF', font: '28px Impact', align: 'right'});
+
+		this.textoSalir = this.add.text(50, 730, "ESC to exit", { fill: '#F4FFF3', font: '24px Impact', align: 'center'});
 	}
 
 	actualizarPosArray(){	
-		if(this.back1.isDown){
-			this.check = true;
-			
-		}
-
-		if(this.back2.isDown){
+		if(this.salir.isDown){
 			this.check = true;
 		}
 	}
@@ -44,7 +46,6 @@ class ControlGuide extends Phaser.Scene {
 			this.scene.start('MainMenu');
 		}
 	}
-
 
 	update(){
 		this.scenechange();
