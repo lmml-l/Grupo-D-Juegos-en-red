@@ -20,10 +20,13 @@ class Lobby extends Phaser.Scene {
 		this.scene;
 		this.fondo;
 		this.salir;
+		//this.archive;
 	}
 	
 	controlmenu(){
 
+		//this.archive = new ReaderWriter(//conseguir esta vaina con un getter primero ----> historialPartidas);
+		
 		this.check1 = false;
 		this.check2 = false;
 
@@ -111,6 +114,8 @@ class Lobby extends Phaser.Scene {
 	scenechange(){
 		if(this.check1){
 			this.scene.start('MainMenu');
+			//this.archive.Escritor(historialPartidas, myinfo, rivalinfo);
+			//hacer un put del historialPartidas para guardarlo en servidor
 		}
 
 	}

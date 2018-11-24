@@ -14,38 +14,28 @@ public class ReaderWriter {
 
     public ReaderWriter(String [] apodos){
         apodosindex = apodos;
-    }
-            
-
-        public String[] init(String[] apodosindex){
-            for(int i=0; i<5; i++){
-                apodosindex[i]=null;
-            }
-            return apodosindex;
-        }    
+    }   
 
         public void resetArchive(File file){
             file.delete();
             file = new File("apodosindex.txt");
         }
 
-        public String[] Lector(){
+        public String[] Lector(String[] apodosindex){
             String line;
-            String text = "";
-            String spacer = ",";
+            String [] apodosarchive = new String[5];
+            int i = 0;
             try{
 
                 FileReader fr = new FileReader("apodosindex.txt");
                 BufferedReader br = new BufferedReader(fr);
 
                 line = br.readLine();
-                
+                apodosarchive[i] = line;
                 while (line != null){
                     
-                    System.out.print(line);
-
-                    text+=(line);
-
+                    System.out.println(line);
+                    apodosarchive[i] = line;
                     line = br.readLine();
                 }
 
@@ -57,21 +47,16 @@ public class ReaderWriter {
                 e.printStackTrace();
             }
 
-            String[] apodossplit = text.split(spacer);
-            String[] listapodos = new String[5];
-
-               for(int i = 0; i < listapodos.length; i++){
-                    listapodos[i] = apodossplit[i];
-                }
-            
-            return listapodos;
+            apodosindex = apodosarchive;
+            return apodosindex;
         }
 
-        public void Escritor(String[] apodosindex, MyInfo myinfo){
+        public String[] Escritor(String[] apodosindex, MyInfo myinfo, MyInfo rival){
           
             File file = new File("apodosindex.txt");
             FileWriter fw;
             PrintWriter pw;
+            String thismatchinfo = myinfo.getApodo() + "-" + rival.getApodo();
             
             try{
                 
@@ -79,17 +64,17 @@ public class ReaderWriter {
                 pw = new PrintWriter(fw);
                 for (int i = 0; i < 5; i++) {
                     if(apodosindex[i]==null){
-                        apodosindex[i]= myinfo.getApodo();
-                        pw.println(myinfo.getApodo() + ",");
+                        apodosindex[i]= thismatchinfo;
+                        pw.println(thismatchinfo);
                     }else if(apodosindex[4]!=null){
                         for(int j = 1; j < 4; j++){
                             apodosindex[j]=apodosindex[j+1];
                         }
-                        apodosindex[4]=myinfo.getApodo();
+                        apodosindex[4]=thismatchinfo;
                         resetArchive(file);
 
                         for(int k = 0; k < 5; k++){
-                            pw.println(apodosindex[k] + ",");
+                            pw.println(apodosindex[k]);
                         } 
                     }
                 }
@@ -100,6 +85,8 @@ public class ReaderWriter {
                 e.printStackTrace();
 
             }
+            
+            return apodosindex;
             /*finally
             {
                try {
