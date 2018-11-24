@@ -115,7 +115,7 @@ class CharapterSelection extends Phaser.Scene {
 		//indicación de los controles
 		this.textoControles = this.add.text(470, 540, "\nselect\naccept", { fill: '#FFFFFF', font: '30px Impact', align: 'center'});
 		this.textoControles = this.add.text(470, 540, "control", { fill: '#FFAC00', font: '30px Impact', align: 'center'});
-		this.textoControles = this.add.text(300, 540, "\nW,D\nSPACE", { fill: '#FFAC00', font: '32px Impact', align: 'center'});
+		this.textoControles = this.add.text(300, 540, "\nA,D\nSPACE", { fill: '#FFAC00', font: '32px Impact', align: 'center'});
 		this.textoControles = this.add.text(650, 540, "\n←,→\nENTER", { fill: '#FFAC00', font: '32px Impact', align: 'center'});
 		this.subtitulo 		= this.add.text(360, 350, "CHOOSE YOUR FIGHTER", { fill: '#FFAC00', font: '38px Impact', align: 'center'});
 		this.textoSalir     = this.add.text(50, 730, "ESC to exit", { fill: '#F4FFF3', font: '24px Impact', align: 'center'});

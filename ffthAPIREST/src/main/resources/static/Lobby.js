@@ -35,7 +35,7 @@ class Lobby extends Phaser.Scene {
 		this.estadoConexion[1]="connected";
 
 		//Buscando jugador o ya encontrado
-		this.estadoBusqueda[0]="Searching for rivals...";
+		this.estadoBusqueda[0]="Looking for rivals...";
 		this.estadoBusqueda[1]="READY\nPRESS SPACE TO GO";
 
 		//Textos
