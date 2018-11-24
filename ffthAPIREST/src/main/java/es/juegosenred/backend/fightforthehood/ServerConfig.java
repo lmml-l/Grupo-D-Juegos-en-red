@@ -1,4 +1,5 @@
-package es.sidelab.EscapeBandages;
+package es.juegosenred.backend.fightforthehood;
+
 
 import org.springframework.context.annotation.*;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
