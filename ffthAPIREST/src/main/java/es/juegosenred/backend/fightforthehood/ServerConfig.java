@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 // Importamos una serie de bibliotecas para evitar el CORS POLICY 
 @Configuration
-public class ServerConfiguration {
+public class ServerConfig {
 
     @Bean
     public WebMvcConfigurer corsConfigurer() {
