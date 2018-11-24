@@ -29,22 +29,24 @@ public class IpsPartida {
 	
 	
 	@GetMapping("/idrival")
-	public ResponseEntity<String> getRivalIp(HttpServletRequest request){ 
+	@ResponseStatus(HttpStatus.CREATED)
+	public String getRivalIp(HttpServletRequest request){ 
 		String myip = request.getRemoteAddr();
 		ArrayList<String> ips = mymatch.getIpsPartida();
 		if(ips.size()==2) {
 			if(ips.get(0).equals(myip)){
-				return new ResponseEntity<>(ips.get(1), HttpStatus.OK);
+				return (ips.get(1));
 			}else {
-				return new ResponseEntity<>(ips.get(0), HttpStatus.OK);
+				return (ips.get(0));
 			}
 		}
-		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		return null;
 	}
 	
 	@GetMapping("/idmy")
-	public ResponseEntity<String> getMyIp(HttpServletRequest request){
-		return new ResponseEntity<>(request.getRemoteAddr(), HttpStatus.OK);
+	@ResponseStatus(HttpStatus.CREATED)
+	public String getMyIp(HttpServletRequest request){
+		return request.getRemoteAddr();
 	}
 	
 }

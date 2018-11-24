@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -19,6 +20,7 @@ public class ApodosPartida {
 	
 	
 	@GetMapping("/apodolist")
+	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<ArrayList<String>> getApodos(){
 		ArrayList<String> llistadeapodos = (ArrayList<String>) mymatch.getListadeapodos().values();
 		return new ResponseEntity<ArrayList<String>>(llistadeapodos,HttpStatus.OK);
@@ -26,8 +28,9 @@ public class ApodosPartida {
 	
 	
 	@GetMapping("/apodolist/{ip}")
-	public ResponseEntity<String> getapodo(@PathVariable String ip){
-		return new ResponseEntity<>(mymatch.getListadeapodos().get(ip), HttpStatus.OK);
+	@ResponseStatus(HttpStatus.CREATED)
+	public String getapodo(@PathVariable String ip){
+		return mymatch.getListadeapodos().get(ip);
 	}
 }
 

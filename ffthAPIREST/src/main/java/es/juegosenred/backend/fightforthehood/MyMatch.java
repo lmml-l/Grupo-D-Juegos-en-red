@@ -7,11 +7,18 @@ public class MyMatch {
 	
 	private ArrayList<String> IpsPartida ;
 	private HashMap<String,String> listadeapodos;
+	private ArrayList<String> historial;
 	
+	public ArrayList<String> getHistorial() {
+		return historial;
+	}
+
+	public void setHistorial(ArrayList<String> historial) {
+		this.historial = historial;
+	}
+
 	public MyMatch() {
 		IpsPartida = new ArrayList<>();
-		IpsPartida.add("SoyFalange");
-		IpsPartida.add("SoyFalange2");
 	}
 
 	public MyMatch(ArrayList<String> ipsPartida) {

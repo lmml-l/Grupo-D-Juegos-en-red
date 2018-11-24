@@ -10,6 +10,7 @@ function postMyInfo(myinfo) {
             "Content-Type": "application/json"
         }
     }).done(function (data) {
+        request(data);
         console.log("Player data  IP/Apodo: " + data);
     })
 }
@@ -25,6 +26,7 @@ function getApodo(mymatch, ip) {
             "Content-Type": "application/json"
         }
     }).done(function (data) {
+        request(data);
         console.log("Apodo: " + data)
     })
 }
@@ -38,6 +40,7 @@ function getRivalIp(mymatch) {
             "Content-Type": "application/json"
         }
     }).done(function (data) {
+        request(data);
         console.log("IP Rival: " + data)
     })
 }
@@ -51,12 +54,13 @@ function getMyIP(request) {
             "Content-Type": "application/json"
         }
     }).done(function (data) {
+        request(data);
         console.log("IP Propia: " + data)
     })
 }
 
 //Conseguir lista de apodos
-function getListaApodos(mymatch) {
+function getListaApodos(request) {
     $.ajax({
         method: 'GET',
         url: 'http://localhost:8080/FightForTheHood/',
@@ -64,6 +68,7 @@ function getListaApodos(mymatch) {
             "Content-Type": "application/json"
         }
     }).done(function (data) {
+        request(data);
         console.log("Listado Últimos Jugadores: " + data)
     })
 }
