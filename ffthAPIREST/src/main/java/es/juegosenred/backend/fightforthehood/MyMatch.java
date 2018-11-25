@@ -3,6 +3,8 @@ package es.juegosenred.backend.fightforthehood;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.springframework.stereotype.Component;
+
 public class MyMatch {
 	
 	private ArrayList<String> IpsPartida ;

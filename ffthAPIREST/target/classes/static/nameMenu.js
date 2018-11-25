@@ -53,6 +53,7 @@ class nameMenu extends Phaser.Scene {
 			this.enter.isDown=false;
 
 			if(this.ipsjugadoressala.length < 2){ //Hay espacio en partida
+				addPlayertoRoom(myinfo.ip);
 				this.scene.start('Lobby');
 			}
 			else{
@@ -79,6 +80,11 @@ class nameMenu extends Phaser.Scene {
 		var that = this;
 		getIPs(function(arrayjugadores){that.ipsjugadoressala = arrayjugadores})
 		getMyIP(function(data){ip = data});
+
+		this.time.addEvent({delay:400 , callback: function(){console.log(ip+"abc")}})
+		
+		this.time.addEvent({delay:500,  //tiempo que tarda hasta reiniciar
+    	callback: function(){getApodo(function(data){that.textoNombre.text=data},ip)}})
 		
 			this.input.keyboard.on('keydown',function(event){
 			if(that.textoNombre.text === "Insert your name" &&  event.keyCode >=48 && event.keyCode < 90 || event.keyCode == 32){

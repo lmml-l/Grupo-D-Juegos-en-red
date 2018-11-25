@@ -3,7 +3,7 @@
 function putMyInfo(myinfo) {
     $.ajax({
         method: "PUT",
-        url: 'http://localhost:8080/myinfo',
+        url: 'http://localhost:8080/myinfo/' + myinfo.ip,
         data: JSON.stringify(myinfo),
         processData: false,
         headers: {
@@ -13,6 +13,21 @@ function putMyInfo(myinfo) {
         console.log("Player data  IP/Apodo: " + JSON.stringify(myinfo));
     })
 }
+
+function addPlayertoRoom (ip) {
+    $.ajax({
+        method: "PUT",
+        url: 'http://localhost:8080/ips/id',
+        data: JSON.stringify(ip),
+        processData: false,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).done(function () {
+        console.log("Ip del jugador añadido " + JSON.stringify(ip));
+    })
+}
+
 function getMyInfo(request) {
     $.ajax({
         method: 'GET',
@@ -28,18 +43,14 @@ function getMyInfo(request) {
 
 
 //Conseguir apodo 
-function getApodo(mymatch, ip) {
+function getApodo(request,ip) {
     $.ajax({
         method: 'GET',
-        url: 'http://localhost:8080/FightForTheHood/',
-        data: JSON.stringify(mymatch.getListadeapodos().get(ip)),
-        processData: false, 
-        headers: {
-            "Content-Type": "application/json"
-        }
+        url: 'http://localhost:8080/apodos/apodolist/'+ ip,
     }).done(function (data) {
         request(data);
         console.log("Apodo: " + data)
+        console.log("IPsdsdsd: "+ip)
     })
 }
 
