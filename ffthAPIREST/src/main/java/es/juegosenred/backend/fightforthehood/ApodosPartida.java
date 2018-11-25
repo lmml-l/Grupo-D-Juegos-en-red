@@ -21,9 +21,9 @@ public class ApodosPartida {
 	
 	@GetMapping("/apodolist")
 	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<ArrayList<String>> getApodos(){
+	public ArrayList<String> getApodos(){
 		ArrayList<String> llistadeapodos = (ArrayList<String>) mymatch.getListadeapodos().values();
-		return new ResponseEntity<ArrayList<String>>(llistadeapodos,HttpStatus.OK);
+		return llistadeapodos;
 	}
 	
 	

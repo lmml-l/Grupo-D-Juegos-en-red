@@ -19,6 +19,8 @@ public class MyMatch {
 
 	public MyMatch() {
 		IpsPartida = new ArrayList<>();
+		listadeapodos = new HashMap<>();
+		historial = new ArrayList<>();
 	}
 
 	public MyMatch(ArrayList<String> ipsPartida) {

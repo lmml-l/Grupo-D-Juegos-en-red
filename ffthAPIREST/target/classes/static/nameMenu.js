@@ -4,6 +4,7 @@
 var NombreFinal;
 var ip;
 
+
 class nameMenu extends Phaser.Scene {
 	constructor(){
 		super({key:"nameMenu"});
@@ -39,9 +40,18 @@ class nameMenu extends Phaser.Scene {
 					this.textoNombre.text="Anonymous";
 				}
 			NombreFinal = this.textoNombre.text;
-			getMyIP(function(data){ip = data});
-			this.enter.isDown=false;
 			
+
+			var myinfo =
+			{
+				ip: ip,
+				apodo: NombreFinal
+			}
+
+			putMyInfo(myinfo);
+
+			this.enter.isDown=false;
+
 			if(this.ipsjugadoressala.length < 2){ //Hay espacio en partida
 				this.scene.start('Lobby');
 			}
@@ -68,7 +78,7 @@ class nameMenu extends Phaser.Scene {
 		
 		var that = this;
 		getIPs(function(arrayjugadores){that.ipsjugadoressala = arrayjugadores})
-		
+		getMyIP(function(data){ip = data});
 		
 			this.input.keyboard.on('keydown',function(event){
 			if(that.textoNombre.text === "Insert your name" &&  event.keyCode >=48 && event.keyCode < 90 || event.keyCode == 32){

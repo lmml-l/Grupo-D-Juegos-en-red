@@ -1,18 +1,31 @@
 
 //Añadir informacion propia
-function postMyInfo(ip,name) {
+function putMyInfo(myinfo) {
     $.ajax({
-        method: "POST",
+        method: "PUT",
         url: 'http://localhost:8080/myinfo',
-        data: JSON.stringify(ip + name),
+        data: JSON.stringify(myinfo),
         processData: false,
         headers: {
             "Content-Type": "application/json"
         }
     }).done(function () {
-        console.log("Player data  IP/Apodo: " + data);
+        console.log("Player data  IP/Apodo: " + JSON.stringify(myinfo));
     })
 }
+function getMyInfo(request) {
+    $.ajax({
+        method: 'GET',
+        url: 'http://localhost:8080/myinfo',
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).done(function (data) {
+        request(data);
+        console.log("Info: " + data)
+    })
+}
+
 
 //Conseguir apodo 
 function getApodo(mymatch, ip) {
