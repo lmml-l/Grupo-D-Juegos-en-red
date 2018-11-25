@@ -1,16 +1,15 @@
 
 //Añadir informacion propia
-function postMyInfo(myinfo) {
+function postMyInfo(ip,name) {
     $.ajax({
         method: "POST",
-        url: 'http://localhost:8080/FightForTheHood/',
-        data: JSON.stringify(myinfo.getIp() + myinfo.getApodo()),
+        url: 'http://localhost:8080/myinfo',
+        data: JSON.stringify(ip + name),
         processData: false,
         headers: {
             "Content-Type": "application/json"
         }
-    }).done(function (data) {
-        request(data);
+    }).done(function () {
         console.log("Player data  IP/Apodo: " + data);
     })
 }
@@ -49,7 +48,7 @@ function getRivalIp(mymatch) {
 function getMyIP(request) {
     $.ajax({
         method: 'GET',
-        url: 'http://localhost:8080/FightForTheHood/',
+        url: 'http://localhost:8080/ip/myip',
         headers: {
             "Content-Type": "application/json"
         }

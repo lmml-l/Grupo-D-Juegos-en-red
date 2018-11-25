@@ -1,4 +1,5 @@
-º
+package es.juegosenred.backend.fightforthehood;
+
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
@@ -15,7 +16,7 @@ public class ServerManager {
     
     private final static int port = 8080;
     
-    @GetMapping
+    @GetMapping("/myip")
     private String getServerHostAddress() {
         return getAddress();
     }
@@ -44,7 +45,7 @@ public class ServerManager {
                     if(!address.isLoopbackAddress() && !address.isLinkLocalAddress()) {
 
                         //La podemos devolver si no se referencia a si mismo
-                        ret = address.getServerHostAddress();
+                        ret = address.getHostAddress();
                     }
                 }
                 

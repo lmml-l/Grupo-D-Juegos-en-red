@@ -35,16 +35,15 @@ class nameMenu extends Phaser.Scene {
 	
 	aceptar(){
 		if(this.enter.isDown){
-			if(this.ipsjugadoressala.length < 2){ //Hay espacio en partida
-				if(this.textoNombre.text==="Insert your name"){ //Nombre anónimo
+			if(this.textoNombre.text==="Insert your name"){ //Nombre anónimo
 					this.textoNombre.text="Anonymous";
 				}
-			
-			this.enter.isDown=false;
 			NombreFinal = this.textoNombre.text;
-			getMyIp(function(data){ip = data});
+			getMyIP(function(data){ip = data});
+			this.enter.isDown=false;
 			
-			this.scene.start('Lobby');
+			if(this.ipsjugadoressala.length < 2){ //Hay espacio en partida
+				this.scene.start('Lobby');
 			}
 			else{
 				console.log("The server is full");
