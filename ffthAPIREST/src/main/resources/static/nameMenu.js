@@ -56,6 +56,9 @@ class nameMenu extends Phaser.Scene {
 			if(this.ipsjugadoressala.length < 2){ //Hay espacio en partida
 				addPlayertoRoom(myinfo.ip);
 				getIPs(function(arrayjugadores){that.ipsjugadoressala = arrayjugadores})
+				if(this.ipsjugadoressala.length == 1){
+					addMatchtoHistory(myinfo.ip + " vs " + this.ipsjugadoressala[0]);
+				}
 				this.scene.start('Lobby');
 			}
 			else{

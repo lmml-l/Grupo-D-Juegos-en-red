@@ -90,6 +90,7 @@ class Lobby extends Phaser.Scene {
 		this.back.isDown=false;
 	}
 
+	/*
 	enfrentamientoactual(){
 		if(ipsLobby.length == 2){
 			if(partidaactual != ipsLobby){//partida actual se refiere a las ips que hemos mandado antes al historial
@@ -98,6 +99,7 @@ class Lobby extends Phaser.Scene {
 			}
 		}
 	}
+	*/
 
 	preload(){
 		this.load.image('menuLobbyFondo','Recursos/Imagenes/menuLobbyFondo.png');
@@ -109,8 +111,8 @@ class Lobby extends Phaser.Scene {
 		this.controlmenu();
 		var that = this;
 		//window.setInterval(that.enfrentamientoactual(),1);
-		this.time.addEvent({delay:260, loop:true ,//se tarda un poco en actualizar en nombre del primer jugador de la sala
-    	callback: function(){that.enfrentamientoactual()}})
+		//this.time.addEvent({delay:260, loop:true ,//se tarda un poco en actualizar en nombre del primer jugador de la sala
+    	//callback: function(){that.enfrentamientoactual()}})
 	}
 
 	actualizarPosArray(){	

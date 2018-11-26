@@ -60,11 +60,11 @@ class Lobby extends Phaser.Scene {
 
 		//Historial de partidas
 		this.textoPartidas = this.add.text(50, 580, "Last matches:", 		   { fill: '#FFAC00', font: '24px Impact', align: 'center'});
-		this.textoPartidas = this.add.text(50, 600, this.historialPartidas[0], { fill: '#F4FFF3', font: '20px Impact', align: 'center'}); //0
-		this.textoPartidas = this.add.text(50, 620, this.historialPartidas[1], { fill: '#F4FFF3', font: '20px Impact', align: 'center'}); //1
-		this.textoPartidas = this.add.text(50, 640, this.historialPartidas[2], { fill: '#F4FFF3', font: '20px Impact', align: 'center'}); //2
-		this.textoPartidas = this.add.text(50, 660, this.historialPartidas[3], { fill: '#F4FFF3', font: '20px Impact', align: 'center'}); //3
-		this.textoPartidas = this.add.text(50, 680, this.historialPartidas[4], { fill: '#F4FFF3', font: '20px Impact', align: 'center'}); //4
+		this.textoPartidas1 = this.add.text(50, 600, this.historialPartidas[0], { fill: '#F4FFF3', font: '20px Impact', align: 'center'}); //0
+		this.textoPartidas2 = this.add.text(50, 620, this.historialPartidas[1], { fill: '#F4FFF3', font: '20px Impact', align: 'center'}); //1
+		this.textoPartidas3 = this.add.text(50, 640, this.historialPartidas[2], { fill: '#F4FFF3', font: '20px Impact', align: 'center'}); //2
+		this.textoPartidas4 = this.add.text(50, 660, this.historialPartidas[3], { fill: '#F4FFF3', font: '20px Impact', align: 'center'}); //3
+		this.textoPartidas5 = this.add.text(50, 680, this.historialPartidas[4], { fill: '#F4FFF3', font: '20px Impact', align: 'center'}); //4
 		
 		//ejemplo para la maquetación con textos fijos
 		////////////////////////
@@ -100,7 +100,7 @@ class Lobby extends Phaser.Scene {
 		}
 	}
 	*/
-	
+
 	preload(){
 		this.load.image('menuLobbyFondo','Recursos/Imagenes/menuLobbyFondo.png');
 	}
@@ -111,8 +111,8 @@ class Lobby extends Phaser.Scene {
 		this.controlmenu();
 		var that = this;
 		//window.setInterval(that.enfrentamientoactual(),1);
-		this.time.addEvent({delay:260, loop:true ,//se tarda un poco en actualizar en nombre del primer jugador de la sala
-    	callback: function(){that.enfrentamientoactual()}})
+		//this.time.addEvent({delay:260, loop:true ,//se tarda un poco en actualizar en nombre del primer jugador de la sala
+    	//callback: function(){that.enfrentamientoactual()}})
 	}
 
 	actualizarPosArray(){	
