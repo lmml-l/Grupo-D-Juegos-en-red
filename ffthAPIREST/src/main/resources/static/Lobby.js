@@ -1,5 +1,6 @@
 
-var ipsLobby;
+var ipsLobby = new Array();
+var partidaactual;
 class Lobby extends Phaser.Scene {
 	constructor(){
 		super({key:"Lobby"});
@@ -89,6 +90,17 @@ class Lobby extends Phaser.Scene {
 		this.back.isDown=false;
 	}
 
+	/*
+	enfrentamientoactual(){
+		if(ipsLobby.length == 2){
+			if(partidaactual != ipsLobby){//partida actual se refiere a las ips que hemos mandado antes al historial
+				addMatchtoHistory(ipsLobby[0] + " vs " + ipsLobby[1]);
+				partidaactual=ipsLobby
+			}
+		}
+	}
+	*/
+	
 	preload(){
 		this.load.image('menuLobbyFondo','Recursos/Imagenes/menuLobbyFondo.png');
 	}
@@ -97,7 +109,10 @@ class Lobby extends Phaser.Scene {
 		this.fondo = this.add.image(this.game.canvas.width/2,this.game.canvas.height/2,'menuLobbyFondo').setScale(1.3);
 		this.escape = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);	//tecla para salir
 		this.controlmenu();
-
+		var that = this;
+		//window.setInterval(that.enfrentamientoactual(),1);
+		this.time.addEvent({delay:260, loop:true ,//se tarda un poco en actualizar en nombre del primer jugador de la sala
+    	callback: function(){that.enfrentamientoactual()}})
 	}
 
 	actualizarPosArray(){	
@@ -122,7 +137,7 @@ class Lobby extends Phaser.Scene {
 		}
 
 	}
-
+	
 
 	update(){
 		this.retroceder();
@@ -130,26 +145,26 @@ class Lobby extends Phaser.Scene {
 
 		var that=this;
 		
-		getIPs(function(arrayjugadores){ipsLobby= arrayjugadores});
+		getIPs(function(arrayjugadores){ipsLobby= arrayjugadores});//ips jugadores en la sala
 
-		this.time.addEvent({delay:200, callback: function(){console.log(ipsLobby[0] + "ipsenlobby");
-		console.log(ipsLobby);}})
-		
-
-		this.time.addEvent({delay:250,  //tiempo que tarda hasta reiniciar
+		this.time.addEvent({delay:250,  //se tarda un poco en actualizar en nombre del primer jugador de la sala
     	callback: function(){getApodo(function(data){that.nombreRival[0]=data},ipsLobby[0].substring(1,ipsLobby[0].length-1));}})
 
-		var url2 = function(){if(ipsLobby[1]==null){
+		//Como no se sabe si hay un segundo jugador para poner el nombre se comprueba si existe o no , y en funcion de eso se cambia que url debe coger
+		var url2 = function(){if(ipsLobby[1]==null){ 
 			return ipsLobby[1];
 		}else{
 			return ipsLobby[1].substring(1,ipsLobby[1].length-1);
 		}}
 
+		//Se tarda un tiempo en tener el segundo nombre por eso se tarda en actualizar
     	this.time.addEvent({delay:250,  //tiempo que tarda hasta reiniciar
     	callback: function(){getApodo(function(data){that.nombreRival[1]=data},url2());}})
 		
-
+    	//Se cambian los contenidos de los  textos que muestran los nombres por los apodos de los jugadores actuales.
 		this.texts[2].text=this.nombreRival[0];
 		this.texts[3].text=this.nombreRival[1];
+
+		
 	}
 }

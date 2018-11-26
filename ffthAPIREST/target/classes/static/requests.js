@@ -28,6 +28,20 @@ function addPlayertoRoom (ip) {
     })
 }
 
+function addMatchtoHistory(match) {
+    $.ajax({
+        method: "PUT",
+        url: 'http://localhost:8080/lastmatch',
+        data: JSON.stringify(match),
+        processData: false,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).done(function () {
+        console.log("Ip del jugador añadido " + JSON.stringify(match));
+    })
+}
+
 function getMyInfo(request) {
     $.ajax({
         method: 'GET',
@@ -54,20 +68,6 @@ function getApodo(request,ip) {
     })
 }
 
-//Conseguir ip del rival
-function getRivalIp(mymatch) {
-    $.ajax({
-        method: 'GET',
-        url: 'http://localhost:8080/FightForTheHood/',
-        headers: {
-            "Content-Type": "application/json"
-        }
-    }).done(function (data) {
-        request(data);
-        console.log("IP Rival: " + data)
-    })
-}
-
 //Conseguir IP propia
 function getMyIP(request) {
     $.ajax({
@@ -79,20 +79,6 @@ function getMyIP(request) {
     }).done(function (data) {
         request(data);
         console.log("IP Propia: " + data)
-    })
-}
-
-//Conseguir lista de apodos
-function getListaApodos(request) {
-    $.ajax({
-        method: 'GET',
-        url: 'http://localhost:8080/FightForTheHood/',
-        headers: {
-            "Content-Type": "application/json"
-        }
-    }).done(function (data) {
-        request(data);
-        console.log("Listado Últimos Jugadores: " + data)
     })
 }
 

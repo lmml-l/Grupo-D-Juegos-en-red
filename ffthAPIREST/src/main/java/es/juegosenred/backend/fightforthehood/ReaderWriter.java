@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 
 public class ReaderWriter {
@@ -51,34 +52,25 @@ public class ReaderWriter {
             return apodosindex;
         }
 
-        public String[] Escritor(String[] apodosindex, MyInfo myinfo, MyInfo rival){
+        public static ArrayList<String> Escritor(ArrayList<String> historial){
           
             File file = new File("apodosindex.txt");
             FileWriter fw;
-            PrintWriter pw;
-            String thismatchinfo = myinfo.getApodo() + "-" + rival.getApodo();
+            //PrintWriter pw;
             
             try{
                 
                 fw = new FileWriter(file);
-                pw = new PrintWriter(fw);
-                for (int i = 0; i < 5; i++) {
-                    if(apodosindex[i]==null){
-                        apodosindex[i]= thismatchinfo;
-                        pw.println(thismatchinfo);
-                    }else if(apodosindex[4]!=null){
-                        for(int j = 1; j < 4; j++){
-                            apodosindex[j]=apodosindex[j+1];
-                        }
-                        apodosindex[4]=thismatchinfo;
-                        resetArchive(file);
-
-                        for(int k = 0; k < 5; k++){
-                            pw.println(apodosindex[k]);
-                        } 
-                    }
+                //pw = new PrintWriter(fw);
+                int i = 0;
+                while (i < 5 && i<historial.size()) {
+                	if(historial.get(historial.size() - (i+1)) != null) {
+                		fw.write(historial.get(historial.size() - (i+1))+"\n");
+                	}
+                	i++;
                 }
-                 pw.close();
+                fw.close();
+                //pw.close();
             }
             catch (Exception e)
             {
@@ -86,7 +78,7 @@ public class ReaderWriter {
 
             }
             
-            return apodosindex;
+            return historial;
             /*finally
             {
                try {

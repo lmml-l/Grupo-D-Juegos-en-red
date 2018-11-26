@@ -29,8 +29,17 @@ public class IpsPartida {
 	public Collection<String> getIps(){
 		return mymatch.getIpsPartida();
 	}
+
+	@PutMapping("/id")
+	@ResponseStatus(HttpStatus.CREATED)
+	public String putIp(@RequestBody String ip){
+		if(mymatch.getIpsPartida().size()<2) {
+			mymatch.getIpsPartida().add(ip);
+		}
+		return ip;
+	}
 	
-	
+	/*
 	@GetMapping("/idrival")
 	@ResponseStatus(HttpStatus.CREATED)
 	public String getRivalIp(HttpServletRequest request){ 
@@ -45,18 +54,13 @@ public class IpsPartida {
 		}
 		return null;
 	}
+	*/
 	
+	/*
 	@GetMapping("/idmy")
 	@ResponseStatus(HttpStatus.CREATED)
 	public String getMyIp(HttpServletRequest request){
 		return request.getRemoteAddr();
 	}
-	
-	@PutMapping("/id")
-	@ResponseStatus(HttpStatus.CREATED)
-	public String putIp(@RequestBody String ip){	
-		mymatch.getIpsPartida().add(ip);
-		return ip;
-	}
-	
+	*/
 }
