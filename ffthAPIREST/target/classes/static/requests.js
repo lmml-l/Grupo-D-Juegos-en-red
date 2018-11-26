@@ -101,9 +101,12 @@ function getIPs(arraips) {
     $.ajax({
         method: 'GET',
         url: 'http://localhost:8080/ips/idlist',
+        headers: {
+            "Content-Type": "application/json"
+        }
     }).done(function (data) {
         console.log("IPs en partida: " + data)
-        console.log(data)
+        
         arraips(data);
     })
 }

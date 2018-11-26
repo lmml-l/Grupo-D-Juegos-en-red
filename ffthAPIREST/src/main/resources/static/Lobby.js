@@ -1,3 +1,5 @@
+
+var ipsLobby;
 class Lobby extends Phaser.Scene {
 	constructor(){
 		super({key:"Lobby"});
@@ -67,7 +69,7 @@ class Lobby extends Phaser.Scene {
 		////////////////////////
 		this.texts[0] = this.add.text(312, 400, "" ,{ fill: '#FFFFFF', font: '36px Impact', align: 'center'});
 		this.texts[1] = this.add.text(490, 370, "VS", { fill: '#FFFFFF', font: '54px Impact', align: 'center'});
-		this.texts[2] = this.add.text(80, 370, "Fulanito123456", { fill: '#FFAC00', font: '54px Impact', align: 'center'}); //máximo de 15 letras
+		this.texts[2] = this.add.text(80, 370, this.nombreRival[0], { fill: '#FFAC00', font: '54px Impact', align: 'center'}); //máximo de 15 letras
 		this.texts[3] = this.add.text(600, 370, this.nombreRival[1], { fill: '#FFAC00', font: '54px Impact', align: 'center'});
 		this.texts[4] = this.add.text(320, 190, "PREPARE TO FIGHT!", { fill: '#FFFFFF', font: '54px Impact', align: 'center'});
 		////////////////////////
@@ -95,6 +97,7 @@ class Lobby extends Phaser.Scene {
 		this.fondo = this.add.image(this.game.canvas.width/2,this.game.canvas.height/2,'menuLobbyFondo').setScale(1.3);
 		this.escape = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);	//tecla para salir
 		this.controlmenu();
+
 	}
 
 	actualizarPosArray(){	
@@ -124,5 +127,29 @@ class Lobby extends Phaser.Scene {
 	update(){
 		this.retroceder();
 		this.scenechange();
+
+		var that=this;
+		
+		getIPs(function(arrayjugadores){ipsLobby= arrayjugadores});
+
+		this.time.addEvent({delay:200, callback: function(){console.log(ipsLobby[0] + "ipsenlobby");
+		console.log(ipsLobby);}})
+		
+
+		this.time.addEvent({delay:250,  //tiempo que tarda hasta reiniciar
+    	callback: function(){getApodo(function(data){that.nombreRival[0]=data},ipsLobby[0].substring(1,ipsLobby[0].length-1));}})
+
+		var url2 = function(){if(ipsLobby[1]==null){
+			return ipsLobby[1];
+		}else{
+			return ipsLobby[1].substring(1,ipsLobby[1].length-1);
+		}}
+
+    	this.time.addEvent({delay:250,  //tiempo que tarda hasta reiniciar
+    	callback: function(){getApodo(function(data){that.nombreRival[1]=data},url2());}})
+		
+
+		this.texts[2].text=this.nombreRival[0];
+		this.texts[3].text=this.nombreRival[1];
 	}
 }
