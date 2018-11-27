@@ -97,32 +97,6 @@ function getIPs(arraips) {
     })
 }
 
-function getServerStatus(error) {
-    $.ajax({
-        method: 'GET',
-        url: 'http://localhost:8080/ip/myip',
-        headers: {
-            "Content-Type": "application/json"
-        }
-    }).fail(function (data) {
-        console.log("Error: Servidor desconectado")
-        error()
-    })
-}
-
-function getLastMatches(matches){
-	$.ajax({
-		method: 'GET',
-        url: 'http://localhost:8080/lastmatches',
-        headers: {
-            "Content-Type": "application/json"
-        }
-	}).done(function (data) {
-        console.log("Partidos: " + data);
-        matches(data)
-    })
-}
-
 /*Delete item from server
 function deleteItem() {
     $.ajax({

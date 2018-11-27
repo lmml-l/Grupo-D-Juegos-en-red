@@ -23,9 +23,12 @@ class Lobby extends Phaser.Scene {
 		this.scene;
 		this.fondo;
 		this.salir;
+		//this.archive;
 	}
 	
 	controlmenu(){
+
+		//this.archive = new ReaderWriter(//conseguir esta vaina con un getter primero ----> historialPartidas);
 		
 		this.check1 = false;
 		this.check2 = false;
@@ -48,20 +51,20 @@ class Lobby extends Phaser.Scene {
 		this.textoBusqueda = this.add.text(380, 480, this.estadoBusqueda[1], { fill: '#FFFFFF', font: '36px Impact', align: 'center'});
 
 		//PARTIDAS DE PRUEBA/////////////////////////////
-		/*this.historialPartidas[0]="soyFalangista - pene";
+		this.historialPartidas[0]="soyFalangista - pene";
 		this.historialPartidas[1]="CarreroBlanco - Caudillo";
 		this.historialPartidas[2]="Luismi - LaChupa";
 		this.historialPartidas[3]="pollaGorda - elrubius69";
-		this.historialPartidas[4]="Murcia - soterrada";*/
+		this.historialPartidas[4]="Murcia - soterrada";
 		/////////////////////////////////////////////////
 
 		//Historial de partidas
 		this.textoPartidas = this.add.text(50, 580, "Last matches:", 		   { fill: '#FFAC00', font: '24px Impact', align: 'center'});
-		this.textoPartidas1 = this.add.text(50, 600, this.archive[0], { fill: '#F4FFF3', font: '20px Impact', align: 'center'}); //0
-		this.textoPartidas2 = this.add.text(50, 620, this.archive[1], { fill: '#F4FFF3', font: '20px Impact', align: 'center'}); //1
-		this.textoPartidas3 = this.add.text(50, 640, this.archive[2], { fill: '#F4FFF3', font: '20px Impact', align: 'center'}); //2
-		this.textoPartidas4 = this.add.text(50, 660, this.archive[3], { fill: '#F4FFF3', font: '20px Impact', align: 'center'}); //3
-		this.textoPartidas5 = this.add.text(50, 680, this.archive[4], { fill: '#F4FFF3', font: '20px Impact', align: 'center'}); //4
+		this.textoPartidas1 = this.add.text(50, 600, this.historialPartidas[0], { fill: '#F4FFF3', font: '20px Impact', align: 'center'}); //0
+		this.textoPartidas2 = this.add.text(50, 620, this.historialPartidas[1], { fill: '#F4FFF3', font: '20px Impact', align: 'center'}); //1
+		this.textoPartidas3 = this.add.text(50, 640, this.historialPartidas[2], { fill: '#F4FFF3', font: '20px Impact', align: 'center'}); //2
+		this.textoPartidas4 = this.add.text(50, 660, this.historialPartidas[3], { fill: '#F4FFF3', font: '20px Impact', align: 'center'}); //3
+		this.textoPartidas5 = this.add.text(50, 680, this.historialPartidas[4], { fill: '#F4FFF3', font: '20px Impact', align: 'center'}); //4
 		
 		//ejemplo para la maquetación con textos fijos
 		////////////////////////
@@ -129,7 +132,8 @@ class Lobby extends Phaser.Scene {
 	scenechange(){
 		if(this.check1){
 			this.scene.start('MainMenu');
-			this.putLastMatch(mymatch.getIpsPartida().get(0) + " - " + mymatch.getIpsPartida().get(1));
+			//this.archive.Escritor(historialPartidas, myinfo, rivalinfo);
+			//hacer un put del historialPartidas para guardarlo en servidor
 		}
 
 	}
