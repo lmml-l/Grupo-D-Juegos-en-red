@@ -21,15 +21,13 @@ class MainMenu extends Phaser.Scene {
 		this.textoVersion;
 		this.fondo;
 		
-		//this.archive;
+		this.archive = new Array(5);
 	}
 	
 	menu(){
 		
 
-		//Lista de partidas para usar posteriormente
-		//this.archive = new ReaderWriter(//conseguir esta vaina con un getter primero ----> historialPartidas);
-		//this.archive.Lector(historialPartidas);
+		this.getLastMatches(archive);
 		
 		//bloqueos de botón (obliga a soltar la tecla)
 		this.lock1 = true;
