@@ -127,6 +127,11 @@ class CharapterSelection extends Phaser.Scene {
 		//texto invisible
 		this.ready1 =this.add.text(0, 0, this.ready[0], { fill: '#F4FFF3', font: '24px Impact', align: 'center'});
 		this.ready1 =this.add.text(0, 0, this.ready[0], { fill: '#F4FFF3', font: '24px Impact', align: 'center'});
+	
+		var that=this;
+		//comprobación del estado del servidor
+		this.time.addEvent({delay:100, loop:true,
+    	callback: function(){getServerStatus(function(){that.scene.start('EscenarioError');})}})
 	}
 
 	//actualiza las imágenes de los iconos J1 y J2

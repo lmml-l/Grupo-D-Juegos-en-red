@@ -47,7 +47,7 @@ class Lobby extends Phaser.Scene {
 		//Textos
 		this.textModo      = this.add.text(50, 50, "Online Mode", { fill: '#F4FFF3', font: '20px Impact', align: 'center'});
 		this.textoSalir    = this.add.text(50, 730, "ESC to exit", { fill: '#F4FFF3', font: '24px Impact', align: 'center'});
-		this.textoConexion = this.add.text(650, 730, "Connection status: " + this.estadoConexion[0], { fill: '#F4FFF3', font: '24px Impact', align: 'center'});
+		this.textoConexion = this.add.text(650, 730, "Connection status: " + this.estadoConexion[1], { fill: '#F4FFF3', font: '24px Impact', align: 'center'});
 		this.textoBusqueda = this.add.text(380, 480, this.estadoBusqueda[1], { fill: '#FFFFFF', font: '36px Impact', align: 'center'});
 
 		//PARTIDAS POR DEFECTO/////////////////////////////
@@ -66,7 +66,6 @@ class Lobby extends Phaser.Scene {
 		this.textoPartidas4 = this.add.text(50, 660, this.historialPartidas[3], { fill: '#F4FFF3', font: '20px Impact', align: 'center'}); //3
 		this.textoPartidas5 = this.add.text(50, 680, this.historialPartidas[4], { fill: '#F4FFF3', font: '20px Impact', align: 'center'}); //4
 		
-		//ejemplo para la maquetación con textos fijos
 		////////////////////////
 		this.texts[0] = this.add.text(312, 400, "" ,{ fill: '#FFFFFF', font: '36px Impact', align: 'center'});
 		this.texts[1] = this.add.text(490, 370, "VS", { fill: '#FFFFFF', font: '54px Impact', align: 'center'});
@@ -109,39 +108,23 @@ class Lobby extends Phaser.Scene {
 		this.fondo = this.add.image(this.game.canvas.width/2,this.game.canvas.height/2,'menuLobbyFondo').setScale(1.3);
 		this.escape = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);	//tecla para salir
 		this.controlmenu();
+
 		var that = this;
-		//window.setInterval(that.enfrentamientoactual(),1);
-		//this.time.addEvent({delay:260, loop:true ,//se tarda un poco en actualizar en nombre del primer jugador de la sala
-    	//callback: function(){that.enfrentamientoactual()}})
+		//comprobación del estado del servidor
+		this.time.addEvent({delay:100, loop:true,
+    	callback: function(){getServerStatus(function(){that.scene.start('EscenarioError');})}})
+
 	}
 
-	/*
-	actualizarPosArray(){	
-		if(this.back.isDown){
-			this.check1 = true;
-		}
-	}
-	*/
 	//botón para retroceder
 	retroceder(){
 		if(this.escape.isDown){
 			deletePlayerofRoom(ip) //borro la ip de la lista con los jugadores en la sala
 			this.scene.start('MainMenu');
 			this.escape.isDown=false;
-			
 		}
 	}
 
-	/*
-	scenechange(){
-		if(this.check1){
-			this.scene.start('MainMenu');
-			//this.archive.Escritor(historialPartidas, myinfo, rivalinfo);
-			//hacer un put del historialPartidas para guardarlo en servidor
-		}
-
-	}
-	*/
 
 	update(){
 		this.retroceder();
@@ -172,20 +155,20 @@ class Lobby extends Phaser.Scene {
 		this.time.addEvent({delay:250,  //tiempo que tarda hasta reiniciar
     	callback: function(){getHistorial(function(data){that.historialPartidas = data})}})
 
-    	if(this.historialPartidas[0]!= null){
-    		this.textoPartidas1.text = this.historialPartidas[0]
+    	if(this.historialPartidas[this.historialPartidas.length-1]!= null){
+    		this.textoPartidas1.text = this.historialPartidas[this.historialPartidas.length-1]
     	}
-		if(this.historialPartidas[1]!= null){
-    		this.textoPartidas2.text = this.historialPartidas[1]
+		if(this.historialPartidas[this.historialPartidas.length-2]!= null){
+    		this.textoPartidas2.text = this.historialPartidas[this.historialPartidas.length-2]
     	}
-    	if(this.historialPartidas[2]!= null){
-    		this.textoPartidas3.text = this.historialPartidas[2]
+    	if(this.historialPartidas[this.historialPartidas.length-3]!= null){
+    		this.textoPartidas3.text = this.historialPartidas[this.historialPartidas.length-3]
     	}
-    	if(this.historialPartidas[3]!= null){
-    		this.textoPartidas4.text = this.historialPartidas[3]
+    	if(this.historialPartidas[this.historialPartidas.length-4]!= null){
+    		this.textoPartidas4.text = this.historialPartidas[this.historialPartidas.length-4]
     	}
-    	if(this.historialPartidas[4]!= null){
-    		this.textoPartidas5.text = this.historialPartidas[4]
+    	if(this.historialPartidas[this.historialPartidas.length-5]!= null){
+    		this.textoPartidas5.text = this.historialPartidas[this.historialPartidas.length-5]
     	}
 		
 	}

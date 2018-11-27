@@ -99,6 +99,22 @@ function getMyIP(request) {
     })
 }
 
+//Saber estado de la conexión con el servidor
+function getServerStatus(error) {
+    $.ajax({
+        method: 'GET',
+        url: 'http://' + IPserver + '/historial',
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).fail(function (data) {
+        console.log("Error: Servidor desconectado")
+        error()
+    })
+}
+
+
+
 //Conseguir lista de IPs
 function getIPs(arraips) {
     $.ajax({

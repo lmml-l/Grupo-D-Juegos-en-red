@@ -104,6 +104,11 @@ class nameMenu extends Phaser.Scene {
 			}
 		}
 		)
+
+		var that=this;
+		//comprobación del estado del servidor
+		this.time.addEvent({delay:100, loop:true,
+    	callback: function(){getServerStatus(function(){that.scene.start('EscenarioError');})}})
 	}
 
 	update(){
@@ -112,6 +117,10 @@ class nameMenu extends Phaser.Scene {
 		var that = this;
 		getIPs(function(arrayjugadores){that.ipsjugadoressala = arrayjugadores})
 		console.log(this.ipsjugadoressala);
+
+		//comprobación del estado del servidor
+		this.time.addEvent({delay:100,
+    	callback: function(){getServerStatus(function(){that.scene.start('EscenarioError');})}})
 	}
 }
 

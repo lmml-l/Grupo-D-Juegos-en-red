@@ -10,7 +10,16 @@ public class MyMatch {
 	private ArrayList<String> IpsPartida ;
 	private HashMap<String,String> listadeapodos;
 	private ArrayList<String> historial;
+	private ArrayList<String> ipconectados;
 	
+	public ArrayList<String> getIpconectados() {
+		return ipconectados;
+	}
+
+	public void setIpconectados(ArrayList<String> ipconectados) {
+		this.ipconectados = ipconectados;
+	}
+
 	public ArrayList<String> getHistorial() {
 		return historial;
 	}

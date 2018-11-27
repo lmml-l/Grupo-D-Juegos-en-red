@@ -33,6 +33,11 @@ class ControlGuide extends Phaser.Scene {
 		this.texto 		= this.add.text(700, 500, "Player 2\n←,→\n↑\nO\nP", { fill: '#3FAEFF', font: '28px Impact', align: 'right'});
 
 		this.textoSalir = this.add.text(50, 730, "ESC to exit", { fill: '#F4FFF3', font: '24px Impact', align: 'center'});
+	
+		var that=this;
+		//comprobación del estado del servidor
+		this.time.addEvent({delay:100, loop:true,
+    	callback: function(){getServerStatus(function(){that.scene.start('EscenarioError');})}})
 	}
 
 	actualizarPosArray(){	

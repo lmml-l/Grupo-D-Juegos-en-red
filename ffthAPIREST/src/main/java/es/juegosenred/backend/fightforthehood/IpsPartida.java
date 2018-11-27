@@ -39,6 +39,20 @@ public class IpsPartida {
 		return ip;
 	}
 	
+	@PutMapping("/ipconectados")
+	@ResponseStatus(HttpStatus.CREATED)
+	public String putIpConectada(@RequestBody String ip){
+			mymatch.getIpconectados().add(ip);
+		return ip;
+	}
+	
+	@PutMapping("/ipconectadosclear")
+	@ResponseStatus(HttpStatus.CREATED)
+	public String clearIpConectada(){
+			mymatch.getIpconectados().clear();
+		return null;
+	}
+	
 	@PutMapping("/deleteid")
 	@ResponseStatus(HttpStatus.CREATED)
 	public String deleteId (@RequestBody String ip){
