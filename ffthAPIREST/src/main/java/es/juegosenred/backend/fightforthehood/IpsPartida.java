@@ -39,6 +39,14 @@ public class IpsPartida {
 		return ip;
 	}
 	
+	@PutMapping("/deleteid")
+	@ResponseStatus(HttpStatus.CREATED)
+	public String deleteId (@RequestBody String ip){
+		if(mymatch.getIpsPartida().size()<2) {
+			mymatch.getIpsPartida().remove(ip);
+		}
+		return ip;
+	}
 	/*
 	@GetMapping("/idrival")
 	@ResponseStatus(HttpStatus.CREATED)

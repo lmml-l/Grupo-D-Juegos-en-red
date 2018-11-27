@@ -28,6 +28,20 @@ function addPlayertoRoom (ip) {
     })
 }
 
+function deletePlayerofRoom (ip) {
+    $.ajax({
+        method: "PUT",
+        url: 'http://localhost:8080/ips/deleteid',
+        data: JSON.stringify(ip),
+        processData: false,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).done(function () {
+        console.log("Ip del jugador borrado" + JSON.stringify(ip));
+    })
+}
+
 function addMatchtoHistory(match) {
     $.ajax({
         method: "PUT",
@@ -94,6 +108,19 @@ function getIPs(arraips) {
         console.log("IPs en partida: " + data)
         
         arraips(data);
+    })
+}
+
+function getHistorial(request) {
+    $.ajax({
+        method: 'GET',
+        url: 'http://localhost:8080/historial',
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).done(function (data) {
+        console.log("IPs en partida: " + data)
+        request(data);
     })
 }
 

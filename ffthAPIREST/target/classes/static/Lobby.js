@@ -50,12 +50,12 @@ class Lobby extends Phaser.Scene {
 		this.textoConexion = this.add.text(650, 730, "Connection status: " + this.estadoConexion[0], { fill: '#F4FFF3', font: '24px Impact', align: 'center'});
 		this.textoBusqueda = this.add.text(380, 480, this.estadoBusqueda[1], { fill: '#FFFFFF', font: '36px Impact', align: 'center'});
 
-		//PARTIDAS DE PRUEBA/////////////////////////////
-		this.historialPartidas[0]="soyFalangista - pene";
-		this.historialPartidas[1]="CarreroBlanco - Caudillo";
-		this.historialPartidas[2]="Luismi - LaChupa";
-		this.historialPartidas[3]="pollaGorda - elrubius69";
-		this.historialPartidas[4]="Murcia - soterrada";
+		//PARTIDAS POR DEFECTO/////////////////////////////
+		this.historialPartidas[0]="-";
+		this.historialPartidas[1]="-";
+		this.historialPartidas[2]="-";
+		this.historialPartidas[3]="-";
+		this.historialPartidas[4]="-";
 		/////////////////////////////////////////////////
 
 		//Historial de partidas
@@ -115,20 +115,24 @@ class Lobby extends Phaser.Scene {
     	//callback: function(){that.enfrentamientoactual()}})
 	}
 
+	/*
 	actualizarPosArray(){	
 		if(this.back.isDown){
 			this.check1 = true;
 		}
 	}
-
+	*/
 	//botón para retroceder
 	retroceder(){
 		if(this.escape.isDown){
+			deletePlayerofRoom(ip) //borro la ip de la lista con los jugadores en la sala
 			this.scene.start('MainMenu');
 			this.escape.isDown=false;
+			
 		}
 	}
 
+	/*
 	scenechange(){
 		if(this.check1){
 			this.scene.start('MainMenu');
@@ -137,11 +141,11 @@ class Lobby extends Phaser.Scene {
 		}
 
 	}
-	
+	*/
 
 	update(){
 		this.retroceder();
-		this.scenechange();
+		//this.scenechange();
 
 		var that=this;
 		
@@ -165,6 +169,24 @@ class Lobby extends Phaser.Scene {
 		this.texts[2].text=this.nombreRival[0];
 		this.texts[3].text=this.nombreRival[1];
 
+		this.time.addEvent({delay:250,  //tiempo que tarda hasta reiniciar
+    	callback: function(){getHistorial(function(data){that.historialPartidas = data})}})
+
+    	if(this.historialPartidas[0]!= null){
+    		this.textoPartidas1.text = this.historialPartidas[0]
+    	}
+		if(this.historialPartidas[1]!= null){
+    		this.textoPartidas2.text = this.historialPartidas[1]
+    	}
+    	if(this.historialPartidas[2]!= null){
+    		this.textoPartidas3.text = this.historialPartidas[2]
+    	}
+    	if(this.historialPartidas[3]!= null){
+    		this.textoPartidas4.text = this.historialPartidas[3]
+    	}
+    	if(this.historialPartidas[4]!= null){
+    		this.textoPartidas5.text = this.historialPartidas[4]
+    	}
 		
 	}
 }
