@@ -1,5 +1,7 @@
 package es.juegosenred.backend.fightforthehood;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -16,10 +18,16 @@ public class HistorialController {
 	
 	@PutMapping("/lastmatch")
 	@ResponseStatus(HttpStatus.CREATED)
-	public String putIp(@RequestBody String batalla){	
-	mymatch.getHistorial().add(batalla);
+	public String putIp(@RequestBody ArrayList<String> ips){
+	String [] apodoss = new String[2] ;
+	System.out.println(ips.size());
+	System.out.println(ips.get(0));
+	System.out.println(ips.get(1));
+	apodoss[0] = mymatch.getListadeapodos().get(ips.get(0));
+	apodoss[1] = mymatch.getListadeapodos().get(ips.get(1).substring(1,ips.get(1).length()-1));
+	mymatch.getHistorial().add(apodoss[0] + "vs" + apodoss[1]);
 	ReaderWriter.Escritor(mymatch.getHistorial());
 	System.out.println(mymatch.getHistorial().size());
-	return batalla;
+	return (apodoss[0] + "vs" + apodoss[1]);
 	}
 }

@@ -57,7 +57,8 @@ class nameMenu extends Phaser.Scene {
 				addPlayertoRoom(myinfo.ip);
 				getIPs(function(arrayjugadores){that.ipsjugadoressala = arrayjugadores})
 				if(this.ipsjugadoressala.length == 1){
-					addMatchtoHistory(myinfo.ip + " vs " + this.ipsjugadoressala[0]);
+					var arrayconips = [myinfo.ip,this.ipsjugadoressala[0]];
+					addMatchtoHistory(arrayconips);
 				}
 				this.scene.start('Lobby');
 			}

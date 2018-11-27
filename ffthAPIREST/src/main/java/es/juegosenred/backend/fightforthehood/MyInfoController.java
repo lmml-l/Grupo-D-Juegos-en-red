@@ -23,7 +23,8 @@ public class MyInfoController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public MyInfo putMyInfo(@RequestBody MyInfo myinfo, @PathVariable String ip ){	
 		mymatch.getListadeapodos().put(myinfo.getIp(), myinfo.getApodo());
-		//System.out.println(mymatch.getListadeapodos().get(myinfo.getIp()));
+		System.out.println(myinfo.getIp());
+		System.out.println(mymatch.getListadeapodos().get(myinfo.getIp()));
 		return myinfo;
 	}
 	
