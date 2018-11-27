@@ -42,9 +42,7 @@ public class IpsPartida {
 	@PutMapping("/deleteid")
 	@ResponseStatus(HttpStatus.CREATED)
 	public String deleteId (@RequestBody String ip){
-		if(mymatch.getIpsPartida().size()<2) {
-			mymatch.getIpsPartida().remove(ip);
-		}
+		mymatch.getIpsPartida().remove(ip);
 		return ip;
 	}
 	/*
@@ -64,11 +62,11 @@ public class IpsPartida {
 	}
 	*/
 	
-	/*
-	@GetMapping("/idmy")
+	
+	@GetMapping("/ip/myip")
 	@ResponseStatus(HttpStatus.CREATED)
 	public String getMyIp(HttpServletRequest request){
 		return request.getRemoteAddr();
 	}
-	*/
+	
 }

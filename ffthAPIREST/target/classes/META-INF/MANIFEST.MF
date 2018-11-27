@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Implementation-Title: fireforthehood
 Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: Usuario
+Built-By: f.moreno.2016
 Implementation-Vendor-Id: es.juegosenred.backend
-Build-Jdk: 1.8.0_101
+Build-Jdk: 1.8.0_172
 Implementation-URL: http://projects.spring.io/spring-boot/firefortheho
  od/
 Created-By: Maven Integration for Eclipse

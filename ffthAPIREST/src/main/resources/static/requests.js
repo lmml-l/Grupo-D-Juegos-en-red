@@ -1,9 +1,12 @@
 
+//Variable con la dirección IP del servidor
+var IPserver = location.host;
+
 //Añadir informacion propia
 function putMyInfo(myinfo) {
     $.ajax({
         method: "PUT",
-        url: 'http://localhost:8080/myinfo/' + myinfo.ip,
+        url: 'http://'+ IPserver+ '/myinfo/' + myinfo.ip,
         data: JSON.stringify(myinfo),
         processData: false,
         headers: {
@@ -17,7 +20,7 @@ function putMyInfo(myinfo) {
 function addPlayertoRoom (ip) {
     $.ajax({
         method: "PUT",
-        url: 'http://localhost:8080/ips/id',
+        url: 'http://'+ IPserver +'/ips/id',
         data: JSON.stringify(ip),
         processData: false,
         headers: {
@@ -31,7 +34,7 @@ function addPlayertoRoom (ip) {
 function deletePlayerofRoom (ip) {
     $.ajax({
         method: "PUT",
-        url: 'http://localhost:8080/ips/deleteid',
+        url: 'http://' + IPserver + '/ips/deleteid',
         data: JSON.stringify(ip),
         processData: false,
         headers: {
@@ -45,7 +48,7 @@ function deletePlayerofRoom (ip) {
 function addMatchtoHistory(match) {
     $.ajax({
         method: "PUT",
-        url: 'http://localhost:8080/lastmatch',
+        url: 'http://' + IPserver + '/lastmatch',
         data: JSON.stringify(match),
         processData: false,
         headers: {
@@ -59,7 +62,7 @@ function addMatchtoHistory(match) {
 function getMyInfo(request) {
     $.ajax({
         method: 'GET',
-        url: 'http://localhost:8080/myinfo',
+        url: 'http://' + IPserver + '/myinfo',
         headers: {
             "Content-Type": "application/json"
         }
@@ -74,7 +77,7 @@ function getMyInfo(request) {
 function getApodo(request,ip) {
     $.ajax({
         method: 'GET',
-        url: 'http://localhost:8080/apodos/apodolist/'+ ip,
+        url: 'http://' + IPserver + '/apodos/apodolist/'+ ip,
     }).done(function (data) {
         request(data);
         console.log("Apodo: " + data)
@@ -86,7 +89,7 @@ function getApodo(request,ip) {
 function getMyIP(request) {
     $.ajax({
         method: 'GET',
-        url: 'http://localhost:8080/ip/myip',
+        url: 'https://ipapi.co/json/',
         headers: {
             "Content-Type": "application/json"
         }
@@ -100,7 +103,7 @@ function getMyIP(request) {
 function getIPs(arraips) {
     $.ajax({
         method: 'GET',
-        url: 'http://localhost:8080/ips/idlist',
+        url: 'http://' + IPserver + '/ips/idlist',
         headers: {
             "Content-Type": "application/json"
         }
@@ -114,7 +117,7 @@ function getIPs(arraips) {
 function getHistorial(request) {
     $.ajax({
         method: 'GET',
-        url: 'http://localhost:8080/historial',
+        url: 'http://' + IPserver + '/historial',
         headers: {
             "Content-Type": "application/json"
         }

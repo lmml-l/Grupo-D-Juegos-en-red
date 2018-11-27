@@ -15,12 +15,12 @@ public class ServerManager {
      //Puerto que  tiene el juego.
     
     private final static int port = 8080;
-    
+    /*
     @GetMapping("/myip")
     private String getServerHostAddress() {
         return getAddress();
     }
-
+*/
     /**
      * String que contiene la IP a la que se puede conectar o la dirección de localhost si no se puede obtener.
      */

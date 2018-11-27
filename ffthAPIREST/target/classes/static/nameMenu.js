@@ -85,7 +85,7 @@ class nameMenu extends Phaser.Scene {
 		
 		var that = this;
 		getIPs(function(arrayjugadores){that.ipsjugadoressala = arrayjugadores})
-		getMyIP(function(data){ip = data});
+		getMyIP(function(data){ip = data.ip});
 
 		this.time.addEvent({delay:400 , callback: function(){console.log(ip+"abc")}})
 		
