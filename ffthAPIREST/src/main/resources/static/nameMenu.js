@@ -4,7 +4,7 @@
 var NombreFinal;
 var ip;
 
-
+var genteensala;
 class nameMenu extends Phaser.Scene {
 	constructor(){
 		super({key:"nameMenu"});
@@ -35,6 +35,7 @@ class nameMenu extends Phaser.Scene {
 
 	
 	aceptar(){
+
 		if(this.enter.isDown){
 			if(this.textoNombre.text==="Insert your name"){ //Nombre anónimo
 					this.textoNombre.text="Anonymous";
@@ -109,6 +110,8 @@ class nameMenu extends Phaser.Scene {
 		//comprobación del estado del servidor
 		this.time.addEvent({delay:100, loop:true,
     	callback: function(){getServerStatus(function(){that.scene.start('EscenarioError');})}})
+
+
 	}
 
 	update(){
@@ -121,6 +124,8 @@ class nameMenu extends Phaser.Scene {
 		//comprobación del estado del servidor
 		this.time.addEvent({delay:100,
     	callback: function(){getServerStatus(function(){that.scene.start('EscenarioError');})}})
+
+
 	}
 }
 

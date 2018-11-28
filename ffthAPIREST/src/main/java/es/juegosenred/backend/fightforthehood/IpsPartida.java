@@ -68,6 +68,15 @@ public class IpsPartida {
 		mymatch.getIpsPartida().remove(ip);
 		return ip;
 	}
+	
+	@PutMapping("/id")
+	@ResponseStatus(HttpStatus.CREATED)
+	public String putIp(@RequestBody String ip){
+		if(mymatch.getIpsPartida().size()<2) {
+			mymatch.getIpsPartida().add(ip);			
+		}
+		return ip;
+	}
 	/*
 	@GetMapping("/idrival")
 	@ResponseStatus(HttpStatus.CREATED)
