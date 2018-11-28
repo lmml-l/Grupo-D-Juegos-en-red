@@ -11,16 +11,7 @@ public class MyMatch {
 	private HashMap<String,String> listadeapodos;
 	private ArrayList<String> historial;
 	private ArrayList<String> ipconectados;
-	private ArrayList<Boolean> readyornot;
 	
-	public ArrayList<Boolean> getReadyornot() {
-		return readyornot;
-	}
-
-	public void setReadyornot(ArrayList<Boolean> readyornot) {
-		this.readyornot = readyornot;
-	}
-
 	public ArrayList<String> getIpconectados() {
 		return ipconectados;
 	}
