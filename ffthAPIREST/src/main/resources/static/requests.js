@@ -188,7 +188,7 @@ function putcheckReady (check) {
     $.ajax({
         method: "PUT",
         url: 'http://'+ IPserver +'/checker',
-        data: JSON.stringify(check),
+        data: check,
         processData: false,
         headers: {
             "Content-Type": "application/json"
