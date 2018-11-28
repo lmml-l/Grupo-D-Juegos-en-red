@@ -29,7 +29,14 @@ public class IpsPartida {
 	public Collection<String> getIps(){
 		return mymatch.getIpsPartida();
 	}
+	
 
+	@GetMapping("/idlistconectadas")
+	@ResponseStatus(HttpStatus.CREATED)
+	public Collection<String> getIpsConectadas(){
+		return mymatch.getIpconectados();
+	}
+	
 	@PutMapping("/id")
 	@ResponseStatus(HttpStatus.CREATED)
 	public String putIp(@RequestBody String ip){
@@ -42,7 +49,9 @@ public class IpsPartida {
 	@PutMapping("/ipconectados")
 	@ResponseStatus(HttpStatus.CREATED)
 	public String putIpConectada(@RequestBody String ip){
+		if(!mymatch.getIpconectados().contains(ip)) {
 			mymatch.getIpconectados().add(ip);
+		}	
 		return ip;
 	}
 	

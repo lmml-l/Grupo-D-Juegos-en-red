@@ -100,6 +100,20 @@ class Lobby extends Phaser.Scene {
 	}
 	*/
 
+	comprobaripssala(ipsconectadas,ipslobby){
+		var ipsensalapresentesenserver = new Array();
+		for(var i = 0; i < ipsconectadas.length ; i++){
+			for(var j = 0 ; j < ipslobby.length ; j++){
+				console.log( "ipone "+ ipsconectadas[i])
+				console.log("jpone" + ipslobby[j])
+				if(ipsconectadas[i] == ipslobby[j]){
+					ipsensalapresentesenserver.push(ipslobby[j]);
+				}
+			}
+		}
+		ipsLobby = ipsensalapresentesenserver;
+	}
+
 	preload(){
 		this.load.image('menuLobbyFondo','Recursos/Imagenes/menuLobbyFondo.png');
 	}
@@ -114,6 +128,22 @@ class Lobby extends Phaser.Scene {
 		this.time.addEvent({delay:100, loop:true,
     	callback: function(){getServerStatus(function(){that.scene.start('EscenarioError');})}})
 
+		///////
+		var miip = ip;
+		 //Si estoy conectado consigo mi ipactual
+
+		console.log(miip + "miip");
+
+		this.time.addEvent({delay:50,loop:true, callback: function(){addIptoIpConectadas(miip)}});//Añade la ip a las conectadas
+
+		var listadeipsconectadas;
+
+		this.time.addEvent({delay:80,loop:true, callback: function(){getIpsConectadas(function(data){listadeipsconectadas = data})}})
+
+		this.time.addEvent({delay:150,loop:true, callback: function(){that.comprobaripssala(listadeipsconectadas,ipsLobby);}})
+
+		this.time.addEvent({delay:300,loop:true, callback: function(){addIptoIpConectadasClear()}})//resetea ips conectadas al servidor
+		///
 	}
 
 	//botón para retroceder
@@ -134,6 +164,11 @@ class Lobby extends Phaser.Scene {
 		
 		getIPs(function(arrayjugadores){ipsLobby= arrayjugadores});//ips jugadores en la sala
 
+		
+
+
+
+		////////////////////////////////////
 		this.time.addEvent({delay:250,  //se tarda un poco en actualizar en nombre del primer jugador de la sala
     	callback: function(){getApodo(function(data){that.nombreRival[0]=data},ipsLobby[0].substring(1,ipsLobby[0].length-1));}})
 

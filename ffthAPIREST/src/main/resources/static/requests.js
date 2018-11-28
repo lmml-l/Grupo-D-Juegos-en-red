@@ -59,6 +59,47 @@ function addMatchtoHistory(match) {
     })
 }
 
+function addIptoIpConectadas(ip) {
+    $.ajax({
+        method: "PUT",
+        url: 'http://' + IPserver + '/ips/ipconectados',
+        data: JSON.stringify(ip),
+        processData: false,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).done(function () {
+        console.log("ip añadida " + JSON.stringify(ip));
+    })
+}
+
+function getIpsConectadas(request) {
+    $.ajax({
+        method: 'GET',
+        url: 'http://' + IPserver + '/ips/idlistconectadas',
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).done(function (data) {
+        request(data);
+        console.log("Info: " + data)
+    })
+}
+
+function addIptoIpConectadasClear() {
+    $.ajax({
+        method: "PUT",
+        url: 'http://' + IPserver + '/ips/ipconectadosclear',
+        processData: false,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).done(function () {
+        console.log("ips conectadas reseteadas ");
+    })
+}
+
+
 function getMyInfo(request) {
     $.ajax({
         method: 'GET',

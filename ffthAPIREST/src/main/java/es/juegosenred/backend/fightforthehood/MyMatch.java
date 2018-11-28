@@ -32,6 +32,7 @@ public class MyMatch {
 		IpsPartida = new ArrayList<>();
 		listadeapodos = new HashMap<>();
 		historial = new ArrayList<>();
+		ipconectados = new ArrayList<>();
 	}
 
 	public MyMatch(ArrayList<String> ipsPartida) {
