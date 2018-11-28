@@ -11,15 +11,20 @@ import java.util.ArrayList;
 
 public class ReaderWriter {
 
-	ArrayList<String> historial = new ArrayList<String>();
+    String [] apodosindex = new String[5];
 
-    public ReaderWriter(ArrayList<String> nuevo){
-        historial = nuevo;
+    public ReaderWriter(String [] apodos){
+        apodosindex = apodos;
     }   
 
-        public ArrayList<String> Lector(ArrayList<String> historial){
+        public void resetArchive(File file){
+            file.delete();
+            file = new File("apodosindex.txt");
+        }
+
+        public String[] Lector(String[] apodosindex){
             String line;
-            ArrayList<String> archive = new ArrayList<String>();
+            String [] apodosarchive = new String[5];
             int i = 0;
             try{
 
@@ -27,11 +32,11 @@ public class ReaderWriter {
                 BufferedReader br = new BufferedReader(fr);
 
                 line = br.readLine();
-                archive.add(i, line);
+                apodosarchive[i] = line;
                 while (line != null){
                     
                     System.out.println(line);
-                    archive.add(i, line);
+                    apodosarchive[i] = line;
                     line = br.readLine();
                 }
 
@@ -43,8 +48,8 @@ public class ReaderWriter {
                 e.printStackTrace();
             }
 
-            historial = archive;
-            return historial;
+            apodosindex = apodosarchive;
+            return apodosindex;
         }
 
         public static ArrayList<String> Escritor(ArrayList<String> historial){

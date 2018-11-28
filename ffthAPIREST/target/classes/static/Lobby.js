@@ -1,3 +1,4 @@
+
 var ipsLobby = new Array();
 var partidaactual;
 var listatemporal = new Array();
@@ -32,8 +33,8 @@ class Lobby extends Phaser.Scene {
 		this.check1 = false;
 		this.check2 = false;
 
-		this.nombreRival[0]="???"
-		this.nombreRival[1]="???";
+		this.nombreRival[0]="?"
+		this.nombreRival[1]="Fulanita123456";
 
 		//Valor de conexión
 		this.estadoConexion[0]="disconnected";
@@ -41,13 +42,13 @@ class Lobby extends Phaser.Scene {
 
 		//Buscando jugador o ya encontrado
 		this.estadoBusqueda[0]="Looking for rivals...";
-		this.estadoBusqueda[1]="PRESS SPACE\nTO ACCEPT";
+		this.estadoBusqueda[1]="READY\nPRESS SPACE TO GO";
 
 		//Textos
 		this.textModo      = this.add.text(50, 50, "Online Mode", { fill: '#F4FFF3', font: '20px Impact', align: 'center'});
 		this.textoSalir    = this.add.text(50, 730, "ESC to exit", { fill: '#F4FFF3', font: '24px Impact', align: 'center'});
 		this.textoConexion = this.add.text(650, 730, "Connection status: " + this.estadoConexion[1], { fill: '#F4FFF3', font: '24px Impact', align: 'center'});
-		this.textoBusqueda = this.add.text(380, 480, this.estadoBusqueda[0], { fill: '#FFFFFF', font: '36px Impact', align: 'center'});
+		this.textoBusqueda = this.add.text(380, 480, this.estadoBusqueda[1], { fill: '#FFFFFF', font: '36px Impact', align: 'center'});
 
 		//PARTIDAS POR DEFECTO/////////////////////////////
 		this.historialPartidas[0]="-";
@@ -68,10 +69,18 @@ class Lobby extends Phaser.Scene {
 		////////////////////////
 		this.texts[0] = this.add.text(312, 400, "" ,{ fill: '#FFFFFF', font: '36px Impact', align: 'center'});
 		this.texts[1] = this.add.text(490, 370, "VS", { fill: '#FFFFFF', font: '54px Impact', align: 'center'});
-		this.texts[2] = this.add.text(80, 370, this.nombreRival[0], { fill: '#FFAC00', font: '54px Impact', align: 'right'}); //máximo de 15 letras
-		this.texts[3] = this.add.text(600, 370, this.nombreRival[1], { fill: '#FFAC00', font: '54px Impact', align: 'left'});
+		this.texts[2] = this.add.text(80, 370, this.nombreRival[0], { fill: '#FFAC00', font: '54px Impact', align: 'center'}); //máximo de 15 letras
+		this.texts[3] = this.add.text(600, 370, this.nombreRival[1], { fill: '#FFAC00', font: '54px Impact', align: 'center'});
 		this.texts[4] = this.add.text(320, 190, "PREPARE TO FIGHT!", { fill: '#FFFFFF', font: '54px Impact', align: 'center'});
 		////////////////////////
+	/*
+		this.texts[0] = this.add.text(312, 400, "" ,{ fill: '#FFFFFF', font: '18px Impact', align: 'center'}).setScale(2);
+		this.texts[1] = this.add.text(712, 400, "this.getRivalIp(mymatch)", { fill: '#FFFFFF', font: '18px Impact', align: 'center'}).setScale(2);
+		this.texts[2] = this.add.text(312, 600, "this.getApodo(this.mymatch", { fill: '#FFFFFF', font: '18px Impact', align: 'center'}).setScale(2);
+		this.texts[3] = this.add.text(712, 600, "this.getApodo(this.mymatch", { fill: '#FFFFFF', font: '18px Impact', align: 'center'}).setScale(2);
+		this.texts[4] = this.add.text(512, 100, "Partida 1v1", { fill: '#FFFFFF', font: '30px Impact', align: 'center'}).setScale(2);
+	*/
+		//this.listlp = this.getListaApodos();
 
 		this.enter = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
 		this.back = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.BACKSPACE);
@@ -116,6 +125,7 @@ class Lobby extends Phaser.Scene {
 
 		this.fondo = this.add.image(this.game.canvas.width/2,this.game.canvas.height/2,'menuLobbyFondo').setScale(1.3);
 		this.escape = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);	//tecla para salir
+		this.ready = this.add.text(650/*RELATIVO*/, 540/*RELATIVO*/, "\n\n\nREADY", { fill: '#FFFFFF', font: '32px Impact', align: 'center'});
 		this.controlmenu();
 
 		var that = this;
@@ -194,53 +204,27 @@ class Lobby extends Phaser.Scene {
 	}
 	
 	avanzar(){
-		if(this.enter.isDown){
-			putcheckReady(true);
+		/*if(this.enter.isDown){
+			putcheckReady();
 			if(getcheckReady()){
-				var that = this;
-				this.ready = this.add.text(397,5, 370, "\n\n\nREADY", { fill: '#FFFFFF', font: '32px Impact', align: 'right'});
-				this.time.addEvent({delay:250,  callback: function(){}})
 				this.enter.isDown = false;
 				that.scene.start('MainEscenario');
 			}
 			
-		}
+		}*/
 	}
-	
+
 
 	update(){
 		this.retroceder();
-		this.avanzar();
+		//this.scenechange();
 
 		var that=this;
 		
-
-		////////////////////////////////////
-
-		getIPs(function(arrayjugadores){ipsLobby= arrayjugadores});//ips jugadores en la sala
-
-		this.time.addEvent({delay:250,  //se tarda un poco en actualizar en nombre del primer jugador de la sala
-    	callback: function(){getApodo(function(data){that.nombreRival[0]=data},ipsLobby[0].substring(1,ipsLobby[0].length-1));}})
-
-		//Como no se sabe si hay un segundo jugador para poner el nombre se comprueba si existe o no , y en funcion de eso se cambia que url debe coger
-		var url2 = function(){if(ipsLobby[1]==null){ 
-			return ipsLobby[1];
-		}else{
-			return ipsLobby[1].substring(1,ipsLobby[1].length-1);
-		}}
-
-		//Se tarda un tiempo en tener el segundo nombre por eso se tarda en actualizar
-    	this.time.addEvent({delay:250,  //tiempo que tarda hasta reiniciar
-    	callback: function(){getApodo(function(data){that.nombreRival[1]=data;},url2());}})
 		
-    	//Se cambian los contenidos de los  textos que muestran los nombres por los apodos de los jugadores actuales.
+		////////////////////////////////////
 		this.texts[2].text=this.nombreRival[0];
 		this.texts[3].text=this.nombreRival[1];
-		if(this.texts[3].text != ""){
-			this.textoBusqueda.text=this.estadoBusqueda[1];
-		}else{
-			this.textoBusqueda.text=this.estadoBusqueda[0];
-		}
 
     	if(this.historialPartidas[this.historialPartidas.length-1]!= null){
     		this.textoPartidas1.text = this.historialPartidas[this.historialPartidas.length-1]
