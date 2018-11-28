@@ -155,7 +155,7 @@ Para ello mostramos el nuevo diagrama de navegación del juego:
 
 En la implementación del API REST encontramos el siguiente diagrama de clases explicativo: 
 
-![...](https://i.gyazo.com/32d4247e3d06fd1b2b30311181786368.png)
+![...](https://i.gyazo.com/cc9800cfb906ce4342e22a8392c97ec3.png)
 
 Por lo que respecta a esta fase, no se han realizado cambios mayores a destacar.
 

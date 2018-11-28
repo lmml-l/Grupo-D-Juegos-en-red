@@ -3,36 +3,15 @@ package es.juegosenred.backend.fightforthehood;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.springframework.stereotype.Component;
-
 public class MyMatch {
 	
 	private ArrayList<String> IpsPartida ;
 	private HashMap<String,String> listadeapodos;
-	private ArrayList<String> historial;
-	private ArrayList<String> ipconectados;
 	
-	public ArrayList<String> getIpconectados() {
-		return ipconectados;
-	}
-
-	public void setIpconectados(ArrayList<String> ipconectados) {
-		this.ipconectados = ipconectados;
-	}
-
-	public ArrayList<String> getHistorial() {
-		return historial;
-	}
-
-	public void setHistorial(ArrayList<String> historial) {
-		this.historial = historial;
-	}
-
 	public MyMatch() {
 		IpsPartida = new ArrayList<>();
-		listadeapodos = new HashMap<>();
-		historial = new ArrayList<>();
-		ipconectados = new ArrayList<>();
+		IpsPartida.add("SoyFalange");
+		IpsPartida.add("SoyFalange2");
 	}
 
 	public MyMatch(ArrayList<String> ipsPartida) {
