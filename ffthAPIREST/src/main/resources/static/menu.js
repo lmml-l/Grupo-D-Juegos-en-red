@@ -19,9 +19,18 @@ class MainMenu extends Phaser.Scene {
 
 		this.textoControles;
 		this.textoVersion;
+		this.fondo;
+		
+		//this.archive;
 	}
 	
 	menu(){
+		
+
+		//Lista de partidas para usar posteriormente
+		//this.archive = new ReaderWriter(//conseguir esta vaina con un getter primero ----> historialPartidas);
+		//this.archive.Lector(historialPartidas);
+		
 		//bloqueos de botón (obliga a soltar la tecla)
 		this.lock1 = true;
 		this.lock2 = true;
@@ -59,14 +68,17 @@ class MainMenu extends Phaser.Scene {
 		this.abajo2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
 		this.go1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
 		this.go2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+		this.salir = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
 		//inicializa las teclas a no pulsadas (para evitar acarreros de pantallas anteriores)
 		this.go1.isDown=false;
 		this.go2.isDown=false;
+		this.salir.isDown=false;
 
 
 		
 	}
 	preload(){
+		this.load.image('fondoMenu','Recursos/Imagenes/menuFondo.png');
 		var title = this.load.image('title','Recursos/Imagenes/Logo.png')
 		var buttonlocal = this.load.image('buttonlocal','Recursos/Imagenes/Jugar_Local.png');
 		var buttononline = this.load.image('buttononline','Recursos/Imagenes/Jugar_Online.png');
@@ -75,10 +87,16 @@ class MainMenu extends Phaser.Scene {
 	}
 
 	create(){
+		this.fondo = this.add.image(this.game.canvas.width/2,this.game.canvas.height/2,'fondoMenu').setScale(1.3);
 		this.menu();
 		//textos de apoyo
-		this.textoControles = this.add.text(50, 710, "Selecciona con flechas/WASD y espacio/enter", { fill: '#FFDA43', font: '16px Lucida Console', align: 'center'});
-		this.textoVersion = this.add.text(760, 710, "v.0.2 preAlpha fase 2", { fill: '#F4FFF3', font: '16px Lucida Console', align: 'center'});
+		this.textoControles = this.add.text(50, 710, "Use W/D or arrows to select\nPress SPACE or ENTER to go", {  fill: '#F4FFF3', font: '24px Impact', align: 'left'});
+		this.textoVersion = this.add.text(700, 710, "v.0.35 preAlpha fase 3_una_semana", { fill: '#F4FFF3', font: '16px Lucida Console', align: 'center'}); //760, 710
+	
+		var that=this;
+		//comprobación del estado del servidor
+		this.time.addEvent({delay:100, loop:true,
+    	callback: function(){getServerStatus(function(){that.scene.start('EscenarioError');})}})
 	}
 
 	//comprueba que la tecla no está siendo apretada
@@ -98,7 +116,7 @@ class MainMenu extends Phaser.Scene {
 	}
 
 	actualizarSelector(){
-		this.selector.setPosition(this.smap[this.posArray].x + 800, this.smap[this.posArray].y);
+		this.selector.setPosition(this.smap[this.posArray].x + 700, this.smap[this.posArray].y); //800
 	}
 
 	actualizarPosArray(){	
@@ -126,21 +144,28 @@ class MainMenu extends Phaser.Scene {
 
 	//da paso a la pantalla seleccionada
 	scenechange(){
+		if(this.salir.isDown){
+			this.scene.start('MainMenu');
+		}
 		if(this.posArray==0 && this.check){
 			this.scene.start('CharapterSelection');
+			this.go1.isDown=false;
+			this.go2.isDown=false;
 		}else if(this.posArray==1 && this.check){
 			this.scene.start('nameMenu');
+			this.go1.isDown=false;
+			this.go2.isDown=false;
 		}else if(this.posArray==2 && this.check){
 			this.scene.start('ControlGuide');
+			this.go1.isDown=false;
+			this.go2.isDown=false;
 		}
 	}
-
 
 	update(){
 		this.scenechange();
 		this.actualizarSelector();
 		this.actualizarPosArray();
 		this.teclasoltada();
-
 	}
 }

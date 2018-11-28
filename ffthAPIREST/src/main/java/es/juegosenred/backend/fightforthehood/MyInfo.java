@@ -2,8 +2,9 @@ package es.juegosenred.backend.fightforthehood;
 
 public class MyInfo {
 
-	private String apodo;
 	private String ip;
+	private String apodo;
+	
 	
 	public String getApodo() {
 		return apodo;

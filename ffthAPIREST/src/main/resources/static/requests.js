@@ -1,44 +1,128 @@
 
+//Variable con la dirección IP del servidor
+var IPserver = location.host;
+
 //Añadir informacion propia
-function postMyInfo(myinfo) {
+function putMyInfo(myinfo) {
     $.ajax({
-        method: "POST",
-        url: 'http://localhost:8080/FightForTheHood/',
-        data: JSON.stringify(myinfo.getIp() + myinfo.getApodo()),
+        method: "PUT",
+        url: 'http://'+ IPserver+ '/myinfo/' + myinfo.ip,
+        data: JSON.stringify(myinfo),
         processData: false,
         headers: {
             "Content-Type": "application/json"
         }
-    }).done(function (data) {
-        console.log("Player data  IP/Apodo: " + data);
+    }).done(function () {
+        console.log("Player data  IP/Apodo: " + JSON.stringify(myinfo));
     })
 }
+
+function addPlayertoRoom (ip) {
+    $.ajax({
+        method: "PUT",
+        url: 'http://'+ IPserver +'/ips/id',
+        data: JSON.stringify(ip),
+        processData: false,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).done(function () {
+        console.log("Ip del jugador añadido " + JSON.stringify(ip));
+    })
+}
+
+function deletePlayerofRoom (ip) {
+    $.ajax({
+        method: "PUT",
+        url: 'http://' + IPserver + '/ips/deleteid',
+        data: JSON.stringify(ip),
+        processData: false,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).done(function () {
+        console.log("Ip del jugador borrado" + JSON.stringify(ip));
+    })
+}
+
+function addMatchtoHistory(match) {
+    $.ajax({
+        method: "PUT",
+        url: 'http://' + IPserver + '/lastmatch',
+        data: JSON.stringify(match),
+        processData: false,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).done(function () {
+        console.log("Ip del jugador añadido " + JSON.stringify(match));
+    })
+}
+
+function addIptoIpConectadas(ip) {
+    $.ajax({
+        method: "PUT",
+        url: 'http://' + IPserver + '/ips/ipconectados',
+        data: JSON.stringify(ip),
+        processData: false,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).done(function () {
+        console.log("ip añadida " + JSON.stringify(ip));
+    })
+}
+
+function getIpsConectadas(request) {
+    $.ajax({
+        method: 'GET',
+        url: 'http://' + IPserver + '/ips/idlistconectadas',
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).done(function (data) {
+        request(data);
+        console.log("Info: " + data)
+    })
+}
+
+function addIptoIpConectadasClear() {
+    $.ajax({
+        method: "PUT",
+        url: 'http://' + IPserver + '/ips/ipconectadosclear',
+        processData: false,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).done(function () {
+        console.log("ips conectadas reseteadas ");
+    })
+}
+
+
+function getMyInfo(request) {
+    $.ajax({
+        method: 'GET',
+        url: 'http://' + IPserver + '/myinfo',
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).done(function (data) {
+        request(data);
+        console.log("Info: " + data)
+    })
+}
+
 
 //Conseguir apodo 
-function getApodo(mymatch, ip) {
+function getApodo(request,ip) {
     $.ajax({
         method: 'GET',
-        url: 'http://localhost:8080/FightForTheHood/',
-        data: JSON.stringify(mymatch.getListadeapodos().get(ip)),
-        processData: false, 
-        headers: {
-            "Content-Type": "application/json"
-        }
+        url: 'http://' + IPserver + '/apodos/apodolist/'+ ip,
     }).done(function (data) {
+        request(data);
         console.log("Apodo: " + data)
-    })
-}
-
-//Conseguir ip del rival
-function getRivalIp(mymatch) {
-    $.ajax({
-        method: 'GET',
-        url: 'http://localhost:8080/FightForTheHood/',
-        headers: {
-            "Content-Type": "application/json"
-        }
-    }).done(function (data) {
-        console.log("IP Rival: " + data)
+        console.log("IPsdsdsd: "+ip)
     })
 }
 
@@ -46,36 +130,57 @@ function getRivalIp(mymatch) {
 function getMyIP(request) {
     $.ajax({
         method: 'GET',
-        url: 'http://localhost:8080/FightForTheHood/',
+        url: 'https://ipapi.co/json/',
         headers: {
             "Content-Type": "application/json"
         }
     }).done(function (data) {
+        request(data);
         console.log("IP Propia: " + data)
     })
 }
 
-//Conseguir lista de apodos
-function getListaApodos(mymatch) {
+//Saber estado de la conexión con el servidor
+function getServerStatus(error) {
     $.ajax({
         method: 'GET',
-        url: 'http://localhost:8080/FightForTheHood/',
+        url: 'http://' + IPserver + '/historial',
         headers: {
             "Content-Type": "application/json"
         }
-    }).done(function (data) {
-        console.log("Listado Últimos Jugadores: " + data)
+    }).fail(function (data) {
+        console.log("Error: Servidor desconectado")
+        error()
     })
 }
+
+
 
 //Conseguir lista de IPs
 function getIPs(arraips) {
     $.ajax({
         method: 'GET',
-        url: 'http://localhost:8080/ips/idlist',
+        url: 'http://' + IPserver + '/ips/idlist',
+        headers: {
+            "Content-Type": "application/json"
+        }
     }).done(function (data) {
         console.log("IPs en partida: " + data)
+        
         arraips(data);
+    })
+}
+
+function getHistorial(request) {
+    $.ajax({
+        method: 'GET',
+        url: 'http://' + IPserver + '/historial',
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).done(function (data) {
+        console.log("IPs en partida: " + data)
+        request(data);
     })
 }
 
