@@ -157,7 +157,30 @@ En la implementación del API REST encontramos el siguiente diagrama de clases e
 Por lo que respecta a esta fase, no se han realizado cambios mayores a destacar.
 
 **--------------------------------------------FIN FASE 3--------------------------------------------**
+**-----------------------------------FASE 3 - AMPLIACIÓN DE PLAZA UNA SEMANA-----------------**
 
+Continuando el esquema de la anterior fase, hemos renovado la interfaz y conseguido implementar la conexión entre clientes en una sala de juego, que da paso a cada uno a una partida en local.
+
+Los diagramas de navegación y de clases se mantienen para esta versión.
+
+**Instrucciones para ejecutar**
+En esta *release* se incluye, además de una carpeta con todo el código, un ejecutable .jar. No se requiere de ningún paso adicional a lo habitual en esta práctica.
+Se ha desarrollado, principalmente, en Spring Tool Suite 3, por lo que la aplicación puede ser ejecutada desde ahí.
+
+En el navegador, se puede empezar a jugar únicamente introduciendo la ip y el puerto 8080 o bien localhost:8080.
+
+**Funcionalidades**
+- Elección de partida local, online o consulta de controles.
+- Mejora de interfaz.
+- Acceso a una sala (*lobby*) para esperar a que otro jugador se conecte y aceptar.
+- Al desconectarse del servidor, aparece un mensaje de error.
+- En la sala, aparecen las cinco últimas partidas jugadas en ese servidor, cuyo historial se guarda en un archivo de texto.
+
+
+El juego deberá ser publicado en plataformas como Kongregate, por lo que lo hemos traducido al inglés. Es posible que algunas partes sigan en español, pero serán cambiadas en la fase siguiente.
+
+
+**--------------------------------FIN FASE 3 - AMPLIACIÓN DE PLAZA UNA SEMANA--------------------------**
 **Integrantes del equipo de desarrollo:**  
 
 **Nombre:** Luis Miguel Moreno López **Correo** lm.moreno.2016@alumnos.urjc.es           **Cuenta GitHub:** lmml-l
