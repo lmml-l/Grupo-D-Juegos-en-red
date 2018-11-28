@@ -31,19 +31,30 @@ public class IpsPartida {
 	}
 	
 
+
 	@GetMapping("/idlistconectadas")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Collection<String> getIpsConectadas(){
 		return mymatch.getIpconectados();
 	}
-	
-	@PutMapping("/id")
+
+	@PutMapping("/checker")
 	@ResponseStatus(HttpStatus.CREATED)
-	public String putIp(@RequestBody String ip){
-		if(mymatch.getIpsPartida().size()<2) {
-			mymatch.getIpsPartida().add(ip);
+	public boolean putChecker(@RequestBody boolean check){
+		mymatch.getReadyornot().add(check);
+		return check;
+	}
+	
+	@GetMapping("/getchecked")
+	@ResponseStatus(HttpStatus.CREATED)
+	public boolean getChecker(@PathVariable MyMatch mymatch){
+		if(mymatch.getReadyornot().get(0)==true && mymatch.getReadyornot().get(1)==true) {
+			mymatch.getReadyornot().remove(0);
+			mymatch.getReadyornot().remove(1);
+			return true;
+		}else {
+			return false;
 		}
-		return ip;
 	}
 	
 	@PutMapping("/ipconectados")
