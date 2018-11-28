@@ -23,13 +23,12 @@ class Lobby extends Phaser.Scene {
 		this.scene;
 		this.fondo;
 		this.salir;
-		//this.archive;
+		this.ready;
 	}
 	
 	controlmenu(){
 
 		//this.archive = new ReaderWriter(//conseguir esta vaina con un getter primero ----> historialPartidas);
-		
 		this.check1 = false;
 		this.check2 = false;
 
@@ -107,6 +106,7 @@ class Lobby extends Phaser.Scene {
 	create(){
 		this.fondo = this.add.image(this.game.canvas.width/2,this.game.canvas.height/2,'menuLobbyFondo').setScale(1.3);
 		this.escape = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);	//tecla para salir
+		this.ready = this.add.text(650/*RELATIVO*/, 540/*RELATIVO*/, "\n\n\nREADY", { fill: '#FFFFFF', font: '32px Impact', align: 'center'});
 		this.controlmenu();
 
 		var that = this;
@@ -123,6 +123,17 @@ class Lobby extends Phaser.Scene {
 			this.scene.start('MainMenu');
 			this.escape.isDown=false;
 		}
+	}
+	
+	avanzar(){
+		/*if(this.enter.isDown){
+			putcheckReady();
+			if(getcheckReady()){
+				this.enter.isDown = false;
+				that.scene.start('MainEscenario');
+			}
+			
+		}*/
 	}
 
 

@@ -143,6 +143,33 @@ function getHistorial(request) {
     })
 }
 
+function putcheckReady (check) {
+    $.ajax({
+        method: "PUT",
+        url: 'http://'+ IPserver +'/checker',
+        data: JSON.stringify(check),
+        processData: false,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).done(function () {
+        console.log("Jugador listo: " + JSON.stringify(check));
+    })
+}
+
+function getcheckReady(request) {
+    $.ajax({
+        method: 'GET',
+        url: 'http://' + IPserver + '/getchecked',
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).done(function (data) {
+        console.log("Estado del jugador: " + data)
+        request();
+    })
+}
+
 /*Delete item from server
 function deleteItem() {
     $.ajax({
