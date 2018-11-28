@@ -22,8 +22,6 @@ class Lobby extends Phaser.Scene {
 		this.scene;
 		this.fondo;
 		this.salir;
-		this.ready1;
-		this.ready2;
 		this.ready;
 	}
 	
@@ -110,7 +108,9 @@ class Lobby extends Phaser.Scene {
 		if(this.enter.isDown){
 			putcheckReady(true);
 			if(getcheckReady()){
-				this.ready1 = this.add.text(397,5, 370, "\n\n\nREADY", { fill: '#FFFFFF', font: '32px Impact', align: 'right'});
+				var that = this;
+				this.ready = this.add.text(397,5, 370, "\n\n\nREADY", { fill: '#FFFFFF', font: '32px Impact', align: 'right'});
+				this.time.addEvent({delay:250,  callback: function(){}})
 				this.enter.isDown = false;
 				that.scene.start('MainEscenario');
 			}
