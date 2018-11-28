@@ -69,7 +69,21 @@ class nameMenu extends Phaser.Scene {
 			
 		}
 	}
-
+	comprobaripssala(ipsconectadas,ipslobby){
+		var ipsensalapresentesenserver = new Array();
+	if(ipsconectadas!=null && ipslobby !=null){
+		for(var i = 0; i < ipsconectadas.length ; i++){
+			for(var j = 0 ; j < ipslobby.length ; j++){
+				console.log( "ipone "+ ipsconectadas[i])
+				console.log("jpone" + ipslobby[j])
+				if(ipsconectadas[i] == ipslobby[j]){
+					ipsensalapresentesenserver.push(ipslobby[j]);
+				}
+			}
+		}
+		return ipsensalapresentesenserver;
+	}
+	}
 
 	create(){
 		this.fondo = this.add.image(this.game.canvas.width/2,this.game.canvas.height/2,'menuNombreFondo').setScale(1.3);
@@ -108,10 +122,42 @@ class nameMenu extends Phaser.Scene {
 
 		var that=this;
 		//comprobación del estado del servidor
+		///////
+		var deletejugadores = function(){
+			for(var i = 0; i< ipsLobby ; i++){
+				var existe = false;
+				for(var j = 0 ; j < listatemporal ; j++){
+					if(ipsLobby[i]==listatemporal[j]){
+						existe = true;
+					}
+				}
+				if(!existe){
+					deletePlayerofRoom(ipsLobby[i])
+				}
+			}
+		}
+
 		this.time.addEvent({delay:100, loop:true,
     	callback: function(){getServerStatus(function(){that.scene.start('EscenarioError');})}})
 
+		this.time.addEvent({delay:50,loop:true, callback: function(){getIPs(function(arrayjugadores){ipsLobby= arrayjugadores});}})//ips jugadores en la sala
 
+		var miip = ip;
+
+		this.time.addEvent({delay:60,loop:true, callback: function(){addIptoIpConectadas(miip)}});//Añade la ip a las conectadas
+
+		var listadeipsconectadas;
+
+		this.time.addEvent({delay:70,loop:true, callback: function(){getIpsConectadas(function(data){listadeipsconectadas = data})}})
+
+		
+		this.time.addEvent({delay:80,loop:true, callback: function(){listatemporal = that.comprobaripssala(listadeipsconectadas,ipsLobby);}})
+
+		this.time.addEvent({delay:90,loop:true, callback: function(){addIptoIpConectadasClear()}})//resetea ips conectadas al servidor
+		
+		this.time.addEvent({delay:95,loop:true, callback: function(){deletejugadores()}})
+
+		///////
 	}
 
 	update(){
