@@ -4,6 +4,7 @@ public class MyInfo {
 
 	private String ip;
 	private String apodo;
+	private float resptime;
 	
 	
 	public String getApodo() {
@@ -18,4 +19,11 @@ public class MyInfo {
 	public void setIp(String ip) {
 		this.ip = ip;
 	}
+	public float getResptime() {
+		return resptime;
+	}
+	public void setResptime(float resptime) {
+		this.resptime = resptime;
+	}
+	
 }

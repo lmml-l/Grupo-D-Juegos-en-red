@@ -17,6 +17,47 @@ function putMyInfo(myinfo) {
     })
 }
 
+function putMyResponseTime(myinfo, resptime) {
+    $.ajax({
+        method: "PUT",
+        url: 'http://'+ IPserver+ '/myinfo/' + myinfo.ip + '/resptime/',
+        data: JSON.stringify(resptime),
+        processData: false,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).done(function () {
+        console.log("ResponseTime: " + JSON.stringify(resptime));
+    })
+}
+
+function putMyRTToZero(myinfo) {
+    $.ajax({
+        method: "PUT",
+        url: 'http://'+ IPserver+ '/myinfo/' + myinfo.ip + '/resptime/',
+        data: JSON.stringify(0),
+        processData: false,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).done(function () {
+        console.log("ResponseTime set to zero: " + JSON.stringify(0));
+    })
+}
+
+function getMyResponseTime(myinfo, request) {
+    $.ajax({
+        method: 'GET',
+        url: 'http://'+ IPserver+ '/myinfo/' + myinfo.ip + '/resptime/',
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).done(function (data) {
+        request(data);
+        console.log("ResponseTime: " + data)
+    })
+}
+
 function addPlayertoRoom (ip) {
     $.ajax({
         method: "PUT",

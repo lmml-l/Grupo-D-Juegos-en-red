@@ -28,4 +28,25 @@ public class MyInfoController {
 		return myinfo;
 	}
 	
+	@GetMapping("/myinfo/{ip}/resptime")
+	@ResponseStatus(HttpStatus.CREATED)
+	public float getMyResponseTime(@RequestBody MyInfo myinfo, @PathVariable String ip){
+		return myinfo.getResptime();
+	}
+	
+	@PutMapping("/myinfo/{ip}/resptime")
+	@ResponseStatus(HttpStatus.CREATED)
+	public float putMyResponseTime(@RequestBody MyInfo myinfo, @PathVariable String ip, float resptime){	
+		myinfo.setResptime(resptime);
+		System.out.println(myinfo.getResptime());
+		return resptime;
+	}
+	
+	@PutMapping("/myinfo/{ip}/resptime")
+	@ResponseStatus(HttpStatus.CREATED)
+	public void putMyRTToZero(@RequestBody MyInfo myinfo, @PathVariable String ip){	
+		myinfo.setResptime(0);
+		System.out.println(myinfo.getResptime());
+	}
+	
 }
