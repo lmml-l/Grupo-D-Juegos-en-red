@@ -103,6 +103,7 @@ class Lobby extends Phaser.Scene {
 
 	comprobaripssala(ipsconectadas,ipslobby){
 		var ipsensalapresentesenserver = new Array();
+
 	if(ipsconectadas!=null && ipslobby !=null){
 		for(var i = 0; i < ipsconectadas.length ; i++){
 			for(var j = 0 ; j < ipslobby.length ; j++){
@@ -113,8 +114,9 @@ class Lobby extends Phaser.Scene {
 				}
 			}
 		}
-		return ipsensalapresentesenserver;
+		console.log("array que se deberia devolver"+ ipsensalapresentesenserver);	
 	}
+	return ipsensalapresentesenserver;
 	}
 
 	preload(){
@@ -139,31 +141,38 @@ class Lobby extends Phaser.Scene {
 
 		//console.log(miip + "miip");
 
+		
 		var url2 = function(){if(ipsLobby[1]==null){ 
 			return ipsLobby[1];
 		}else{
 			return ipsLobby[1].substring(1,ipsLobby[1].length-1);
 		}}
+		
+		this.time.addEvent({delay:1000,loop:true, callback: function(){getIPs(function(arrayjugadores){ipsLobby= arrayjugadores});}})//ips jugadores en la sala
 
-		this.time.addEvent({delay:50,loop:true, callback: function(){getIPs(function(arrayjugadores){ipsLobby= arrayjugadores});}})//ips jugadores en la sala
-
+		if(ipsLobby[0]!=null){
+		console.log(ip + "sdsdssd")
+		console.log(ipsLobby[0].substring(1,ipsLobby[1].length-1)+ "lalla") 
+		if(ipsLobby[0].substring(1,ipsLobby[1].length-1)==ip){
 		var miip = ip;
 
-		this.time.addEvent({delay:60,loop:true, callback: function(){addIptoIpConectadas(miip)}});//Añade la ip a las conectadas
+		this.time.addEvent({delay:1500,loop:true, callback: function(){addIptoIpConectadas(miip)}});//Añade la ip a las conectadas
 
 		var listadeipsconectadas;
 
-		this.time.addEvent({delay:70,loop:true, callback: function(){getIpsConectadas(function(data){listadeipsconectadas = data})}})
+		this.time.addEvent({delay:2000,loop:true, callback: function(){getIpsConectadas(function(data){listadeipsconectadas = data})}})
 
 		
-		this.time.addEvent({delay:80,loop:true, callback: function(){listatemporal = that.comprobaripssala(listadeipsconectadas,ipsLobby);}})
+		this.time.addEvent({delay:2500,loop:true, callback: function(){listatemporal = that.comprobaripssala(listadeipsconectadas,ipsLobby);}})
 
-		this.time.addEvent({delay:90,loop:true, callback: function(){addIptoIpConectadasClear()}})//resetea ips conectadas al servidor
+		this.time.addEvent({delay:15000,loop:true, callback: function(){addIptoIpConectadasClear()}})//resetea ips conectadas al servidor
 		///
 		var deletejugadores = function(){
-			for(var i = 0; i< ipsLobby ; i++){
+			for(var i = 0; i< ipsLobby.length ; i++){
 				var existe = false;
-				for(var j = 0 ; j < listatemporal ; j++){
+				for(var j = 0 ; j < listatemporal.length ; j++){
+					console.log(listatemporal[j]);
+					console.log(ipsLobby[i]);
 					if(ipsLobby[i]==listatemporal[j]){
 						existe = true;
 					}
@@ -174,23 +183,26 @@ class Lobby extends Phaser.Scene {
 			}
 		}
 
-		this.time.addEvent({delay:95,loop:true, callback: function(){deletejugadores()}})
+		this.time.addEvent({delay:3000,loop:true, callback: function(){deletejugadores()}})
+		}}
+		
+		
+		//this.time.addEvent({delay:1000,loop:true , callback: function(){}})
 
-		this.time.addEvent({delay:85,loop:true , callback: function(){}})
 		var funcionstring= function(){if(ipsLobby[0]!=null){ return ipsLobby[0].substring(1,ipsLobby[0].length-1)}else{return ""}}
-		this.time.addEvent({delay:95,loop:true,  //se tarda un poco en actualizar en nombre del primer jugador de la sala
+		this.time.addEvent({delay:1000,loop:true,  //se tarda un poco en actualizar en nombre del primer jugador de la sala
     	callback: function(){getApodo(function(data){that.nombreRival[0]=data},funcionstring());}})
 
 		//Como no se sabe si hay un segundo jugador para poner el nombre se comprueba si existe o no , y en funcion de eso se cambia que url debe coger
 	
 
 		//Se tarda un tiempo en tener el segundo nombre por eso se tarda en actualizar
-    	this.time.addEvent({delay:250,loop:true,  //tiempo que tarda hasta reiniciar
+    	this.time.addEvent({delay:1000,loop:true,  //tiempo que tarda hasta reiniciar
     	callback: function(){getApodo(function(data){that.nombreRival[1]=data},url2());}})
 		
     	//Se cambian los contenidos de los  textos que muestran los nombres por los apodos de los jugadores actuales.
 		
-		this.time.addEvent({delay:250,loop:true,  //tiempo que tarda hasta reiniciar
+		this.time.addEvent({delay:1000,loop:true,  //tiempo que tarda hasta reiniciar
     	callback: function(){getHistorial(function(data){that.historialPartidas = data})}})
 	}
 

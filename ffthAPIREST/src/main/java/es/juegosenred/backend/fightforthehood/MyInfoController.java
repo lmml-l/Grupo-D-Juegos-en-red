@@ -27,7 +27,7 @@ public class MyInfoController {
 		System.out.println(mymatch.getListadeapodos().get(myinfo.getIp()));
 		return myinfo;
 	}
-	
+	/*
 	@GetMapping("/myinfo/{ip}/resptime")
 	@ResponseStatus(HttpStatus.CREATED)
 	public float getMyResponseTime(@RequestBody MyInfo myinfo, @PathVariable String ip){
@@ -48,5 +48,5 @@ public class MyInfoController {
 		myinfo.setResptime(0);
 		System.out.println(myinfo.getResptime());
 	}
-	
+	*/
 }

@@ -27,7 +27,9 @@ public class IpsPartida {
 	@GetMapping("/idlist")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Collection<String> getIps(){
+		System.out.println(mymatch.getIpsPartida().toString()+ "lista de ipslobby");
 		return mymatch.getIpsPartida();
+		
 	}
 	
 
@@ -65,7 +67,9 @@ public class IpsPartida {
 	@PutMapping("/deleteid")
 	@ResponseStatus(HttpStatus.CREATED)
 	public String deleteId (@RequestBody String ip){
-		mymatch.getIpsPartida().remove(ip);
+		//System.out.println("ipquedebeborrar0 " + mymatch.getIpsPartida().get(0));
+		//System.out.println("ipquedebeborrar "+ ip.substring(2, ip.length()-3)+ '"');
+		mymatch.getIpsPartida().remove(ip.substring(2, ip.length()-3)+ '"');
 		return ip;
 	}
 	

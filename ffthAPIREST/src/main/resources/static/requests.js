@@ -68,7 +68,7 @@ function addPlayertoRoom (ip) {
             "Content-Type": "application/json"
         }
     }).done(function () {
-        console.log("Ip del jugador añadido " + JSON.stringify(ip));
+        console.log("Ip del jugador añadido " + ip);
     })
 }
 
@@ -82,7 +82,7 @@ function deletePlayerofRoom (ip) {
             "Content-Type": "application/json"
         }
     }).done(function () {
-        console.log("Ip del jugador borrado" + JSON.stringify(ip));
+        console.log("Ip del jugador borrado" + ip);
     })
 }
 
@@ -207,7 +207,6 @@ function getIPs(arraips) {
         }
     }).done(function (data) {
         console.log("IPs en partida: " + data)
-        
         arraips(data);
     })
 }
