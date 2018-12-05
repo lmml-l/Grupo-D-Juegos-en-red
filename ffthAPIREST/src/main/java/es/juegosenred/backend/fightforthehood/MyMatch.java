@@ -78,11 +78,17 @@ public class MyMatch {
 	}
 	
 	public void EliminarIpenIpsPartidaporTime(int maxtime) {
+		ArrayList<String> keysBorradas = new ArrayList<>();
 		for(String key : tiempoParaDesconexion.keySet()) {
 			int time = tiempoParaDesconexion.get(key);
 			if(time >= maxtime ) {
 				IpsPartida.remove(key);
+				keysBorradas.add(key);
 			}
+		}
+		
+		for(String key: keysBorradas) {
+		tiempoParaDesconexion.remove(key);
 		}
 	}
 	
