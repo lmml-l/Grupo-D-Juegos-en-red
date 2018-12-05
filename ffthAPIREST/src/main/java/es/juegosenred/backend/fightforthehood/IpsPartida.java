@@ -2,6 +2,8 @@ package es.juegosenred.backend.fightforthehood;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -98,4 +100,16 @@ public class IpsPartida {
 		return request.getRemoteAddr();
 	}
 	
+	@PutMapping("/time/{ip:.+}")
+	@ResponseStatus(HttpStatus.CREATED)
+	public String putTime(@PathVariable String ip , @RequestBody String id){
+		mymatch.getTiempoParaDesconexion().put(id,0);
+		System.out.println(id);
+		return ip;
+	}
+	
+	public void loopfordesconexion() {
+		 mymatch.AumentarTiempo(1); 
+		 mymatch.EliminarIpenIpsPartidaporTime(2);      
+	}
 }

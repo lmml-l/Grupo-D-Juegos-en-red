@@ -219,8 +219,22 @@ function getHistorial(request) {
             "Content-Type": "application/json"
         }
     }).done(function (data) {
-        console.log("IPs en partida: " + data)
+        console.log("Historial: " + data)
         request(data);
+    })
+}
+
+function putTime(ip,id){
+     $.ajax({
+        method: "PUT",
+        url: 'http://' + IPserver + '/ips/time/' + ip,
+        data: JSON.stringify(id),
+        processData: false,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).done(function () {
+        console.log("ip tiempo" + JSON.stringify(ip));
     })
 }
 
