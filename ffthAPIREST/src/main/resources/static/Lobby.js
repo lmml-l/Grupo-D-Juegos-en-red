@@ -15,7 +15,7 @@ class Lobby extends Phaser.Scene {
 		this.textoConexion;
 		this.estadoConexion = new Array(2); //estado de la conexión en todo momento (conectado o desconectado)
 		this.textoBusqueda;
-		this.estadoBusqueda = new Array(2); 	//buscando o encontrado
+		this.estadoBusqueda; 	//buscando o encontrado
 		this.nombreRival = new Array(2); 	//conocido o desconocido
 		this.textoPartidas;
 		this.historialPartidas = new Array(5);
@@ -42,8 +42,7 @@ class Lobby extends Phaser.Scene {
 		this.estadoConexion[1]="connected";
 
 		//Buscando jugador o ya encontrado
-		this.estadoBusqueda[0]="Looking for rivals...";
-		this.estadoBusqueda[1]="READY\nPRESS SPACE TO GO";
+		this.estadoBusqueda="Looking for rivals...";
 
 		//Textos
 		this.textModo      = this.add.text(50, 50, "Online Mode", { fill: '#F4FFF3', font: '20px Impact', align: 'center'});
@@ -153,8 +152,26 @@ class Lobby extends Phaser.Scene {
 		this.time.addEvent({delay:1000,loop:true, callback: function(){getIPs(function(arrayjugadores){ipsLobby= arrayjugadores});}})//ips jugadores en la sala
 
 		this.time.addEvent({delay:1100,loop:true, callback: function(){putTime(ip,ip)}})
-		that.textoBusqueda = that.add.text(380, 480, that.estadoBusqueda[i], { fill: '#FFFFFF', font: '36px Impact', align: 'center'});
+		that.textoBusqueda = that.add.text(380, 480, that.estadoBusqueda, { fill: '#FFFFFF', font: '36px Impact', align: 'center'});
 
+
+		//se entra automáticamente a local cuando los dos jugadores están
+		this.time.addEvent({delay:3000,loop:true, callback: function(){
+			if(ipsLobby.length == 2){
+				that.time.addEvent({delay:1000, callback: function(){
+				that.scene.start('MainEscenario');
+			}})
+		}
+		}})
+
+		//mensaje de iniciar partida
+		this.time.addEvent({delay:2000,loop:true, callback: function(){
+			if(ipsLobby.length == 2){
+				that.textoBusqueda.text = "Starting fight";
+			}else{
+				that.textoBusqueda.text = "Looking for rivals...";
+			}
+		}})
 		/*
 		if(ipsLobby[0]!=null){
 		console.log(ip + "sdsdssd")
