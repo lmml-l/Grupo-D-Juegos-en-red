@@ -1,3 +1,11 @@
+////WEBSOCKETS////
+var connection = new WebSocket('ws://127.0.0.1:8080/echo');
+
+connection.onmessage = function(msg) {
+		console.log("WS message: " + msg.data);
+}
+/////////////////
+
 //Pantalla inicial. Da acceso a la selección de personajes, pantalla de controles y, en versiones futuras, juego online
 class MainMenu extends Phaser.Scene {
 	constructor(){
@@ -97,6 +105,10 @@ class MainMenu extends Phaser.Scene {
 		//comprobación del estado del servidor
 		this.time.addEvent({delay:100, loop:true,
     	callback: function(){getServerStatus(function(){that.scene.start('EscenarioError');})}})
+
+    	///WEBSOCKETS
+    	connection.send(JSON.stringify("Me llamo WILLYREXXXXXXXXXXXXXXXXXXX"));
+    	///////////
 	}
 
 	//comprueba que la tecla no está siendo apretada

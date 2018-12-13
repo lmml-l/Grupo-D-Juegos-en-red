@@ -40,6 +40,8 @@
         "Recursos/Imagenes/Sprites_Armas/ArmasHUD/PuñoAmericanoHUD.png",
         "Recursos/Imagenes/Sprites_Armas/ArmasHUD/BateHUD.png",
         "Recursos/Imagenes/Sprites_Armas/Puños/PuñoPixelizado.png"]
+
+        
 //----------------------------------------------------------------------------------------
 
 //La clase escenario sirve para colocar los elementos de la partida y como controlador de la misma
