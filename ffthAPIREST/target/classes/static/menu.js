@@ -1,3 +1,11 @@
+////WEBSOCKETS////
+var connection = new WebSocket('ws://'+ location.host +'/echo');
+
+connection.onmessage = function(msg) {
+		console.log("WS message: " + msg.data);
+}
+/////////////////
+
 //Pantalla inicial. Da acceso a la selección de personajes, pantalla de controles y, en versiones futuras, juego online
 class MainMenu extends Phaser.Scene {
 	constructor(){
@@ -74,7 +82,9 @@ class MainMenu extends Phaser.Scene {
 		this.go2.isDown=false;
 		this.salir.isDown=false;
 
-
+		///WEBSOCKETS
+    	connection.send(JSON.stringify("Me llamo WILLYREXXXXXXXXXXXXXXXXXXX"));
+    	///////////
 		
 	}
 	preload(){
@@ -97,6 +107,8 @@ class MainMenu extends Phaser.Scene {
 		//comprobación del estado del servidor
 		this.time.addEvent({delay:100, loop:true,
     	callback: function(){getServerStatus(function(){that.scene.start('EscenarioError');})}})
+
+    	
 	}
 
 	//comprueba que la tecla no está siendo apretada
@@ -167,5 +179,7 @@ class MainMenu extends Phaser.Scene {
 		this.actualizarSelector();
 		this.actualizarPosArray();
 		this.teclasoltada();
+
+
 	}
 }
