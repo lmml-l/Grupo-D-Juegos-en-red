@@ -69,7 +69,7 @@ public class Time {
 //				User aux = disconnectStack.pop();
 //				UsersController.borraUser(aux.getId());
 //		}
-			System.out.println(mymatch.getIpsPartida().size()+"compruebo que lo coje bien");
+			//System.out.println(mymatch.getIpsPartida().size()+"compruebo que lo coje bien");
 			mymatch.AumentarTiempo(1);
 			mymatch.EliminarIpenIpsPartidaporTime(10);
 			

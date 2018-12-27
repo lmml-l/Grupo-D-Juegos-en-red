@@ -1,8 +1,15 @@
 ////WEBSOCKETS////
-var connection = new WebSocket('ws://'+ location.host +'/echo');
+var connection;
+function conection (){
+	connection = new WebSocket('ws://'+ location.host +'/echo');
+	connection.onmessage = function(msg) {
+			console.log("WS message: " + msg.data);
+	}
 
-connection.onmessage = function(msg) {
-		console.log("WS message: " + msg.data);
+	connection.onclose = function() {
+		setTimeout(conection(),1000);
+		console.log("Closing socket");
+	}
 }
 /////////////////
 
@@ -106,7 +113,7 @@ class MainMenu extends Phaser.Scene {
 		this.time.addEvent({delay:100, loop:true,
     	callback: function(){getServerStatus(function(){that.scene.start('EscenarioError');})}})
 
-    	
+    	conection();
 	}
 
 	//comprueba que la tecla no está siendo apretada
@@ -139,7 +146,12 @@ class MainMenu extends Phaser.Scene {
 			this.posArray--;
 			this.lock1=false;
 			///WEBSOCKETS
-	    	connection.send(JSON.stringify("Me llamo WILLYREXXXXXXXXXXXXXXXXXXX"));
+			var msg = {
+					name : "PaTO",
+					message : "Willyrex"
+				}
+			
+	    	connection.send(JSON.stringify(msg));
 	    	///////////
 		}else if(this.go1.isDown){
 			this.check = true;
