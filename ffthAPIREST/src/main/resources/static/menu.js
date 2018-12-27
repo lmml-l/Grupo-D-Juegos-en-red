@@ -82,9 +82,7 @@ class MainMenu extends Phaser.Scene {
 		this.go2.isDown=false;
 		this.salir.isDown=false;
 
-		///WEBSOCKETS
-    	connection.send(JSON.stringify("Me llamo WILLYREXXXXXXXXXXXXXXXXXXX"));
-    	///////////
+		
 		
 	}
 	preload(){
@@ -129,6 +127,8 @@ class MainMenu extends Phaser.Scene {
 
 	actualizarSelector(){
 		this.selector.setPosition(this.smap[this.posArray].x + 700, this.smap[this.posArray].y); //800
+		
+		
 	}
 
 	actualizarPosArray(){	
@@ -138,10 +138,15 @@ class MainMenu extends Phaser.Scene {
 		}else if(this.arriba1.isDown && (this.posArray>0) && !this.check && this.lock1){
 			this.posArray--;
 			this.lock1=false;
+			///WEBSOCKETS
+	    	connection.send(JSON.stringify("Me llamo WILLYREXXXXXXXXXXXXXXXXXXX"));
+	    	///////////
 		}else if(this.go1.isDown){
 			this.check = true;
 			
 		}
+		
+		
 
 		if(this.abajo2.isDown && (this.posArray<2) && !this.check && this.lock4){
 			this.posArray++;
