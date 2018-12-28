@@ -1,30 +1,13 @@
-////WEBSOCKETS////
-var connection;
-function connectionJugador (){
-	connection = new WebSocket('ws://'+ location.host +'/echo');
-	connection.onmessage = function(msg) {
-			console.log("WS message: " + msg.data);
-	}
-
-	connection.onclose = function() {
-		setTimeout(conection(),1000);
-		console.log("Closing socket");
-	}
-}
-/////////////////
-
-
 //Cada jugador selecciona el aspecto con el que aparecerá su personaje
 class CharapterSelection extends Phaser.Scene {
 	constructor(){
 		super({key:"CharapterSelection"});
 		this.pmap1 = new Array();
-		this.JugadoresListos = new Array();
+		this.pmap2 = new Array();
 		this.checkplayer1;
 		this.checkplayer2;
 		this.p1;
-
-
+		this.p2;
 		this.posArrayP1;
 		this.posArrayP2;
 
@@ -55,6 +38,7 @@ class CharapterSelection extends Phaser.Scene {
 		this.checkplayer2 = false;
 		//selección
 		this.posArrayP1=0;
+		this.posArrayP2=1;
 
 		//sprites
 		var title = this.add.image(this.game.canvas.width*(3/6),this.game.canvas.height*(150/600),'title').setScale(0.5);
@@ -64,8 +48,11 @@ class CharapterSelection extends Phaser.Scene {
 		//guarda las imágenes en arrays
 		this.pmap1.push(character1);
 		this.pmap1.push(character2);
+		this.pmap2.push(character1);
+		this.pmap2.push(character2);
 		//imagen de miniatura del personaje
-		this.p1 = this.add.sprite((this.pmap1[this.posArrayP1].x - 75), (this.pmap1[this.posArrayP1].y - 75),'V').setScale(1.5);
+		this.p1 = this.add.sprite((this.pmap1[this.posArrayP1].x - 75), (this.pmap1[this.posArrayP1].y - 75),'P1').setScale(1.5);
+		this.p2 = this.add.sprite((this.pmap2[this.posArrayP2].x + 75), (this.pmap2[this.posArrayP2].y - 75),'P2').setScale(1.5);
 		//engloba las imágenes
 		var container = this.add.container(0,0);
 		container.add(title);
@@ -124,19 +111,18 @@ class CharapterSelection extends Phaser.Scene {
 	create(){
 		this.fondo = this.add.image(this.game.canvas.width/2,this.game.canvas.height/2,'menuCharacterFondo').setScale(1.3);
 		this.selection();
-		this.textModo = this.add.text(50, 50, "Online mode", { fill: '#F4FFF3', font: '20px Impact', align: 'center'});
+		this.textModo = this.add.text(50, 50, "Local mode", { fill: '#F4FFF3', font: '20px Impact', align: 'center'});
 		//indicación de los controles
 		this.textoControles = this.add.text(470, 540, "\nselect\naccept", { fill: '#FFFFFF', font: '30px Impact', align: 'center'});
 		this.textoControles = this.add.text(470, 540, "control", { fill: '#FFAC00', font: '30px Impact', align: 'center'});
 		this.textoControles = this.add.text(300, 540, "\nA,D\nSPACE", { fill: '#FFAC00', font: '32px Impact', align: 'center'});
+		this.textoControles = this.add.text(650, 540, "\n←,→\nENTER", { fill: '#FFAC00', font: '32px Impact', align: 'center'});
 		this.subtitulo 		= this.add.text(360, 350, "CHOOSE YOUR FIGHTER", { fill: '#FFAC00', font: '38px Impact', align: 'center'});
 		this.textoSalir     = this.add.text(50, 730, "ESC to exit", { fill: '#F4FFF3', font: '24px Impact', align: 'center'});
 	
 		//indicación de si está listo el jugador
 		this.ready[0]="";
 		this.ready[1]="READY";
-
-		connectionJugador();
 
 		//texto invisible
 		this.ready1 =this.add.text(0, 0, this.ready[0], { fill: '#F4FFF3', font: '24px Impact', align: 'center'});
@@ -151,11 +137,20 @@ class CharapterSelection extends Phaser.Scene {
 	//actualiza las imágenes de los iconos J1 y J2
 	actualizarP1P2(){
 		this.p1.setPosition(this.pmap1[this.posArrayP1].x - 75, this.pmap1[this.posArrayP1].y - 75);
-	
+		this.p2.setPosition(this.pmap2[this.posArrayP2].x + 75, this.pmap2[this.posArrayP2].y - 75);
 	}
 
 	//actualiza las posiciones según lo seleccionado
 	actualizarPosArray(){
+		if(this.derecha1.isDown && (this.posArrayP2<1) && !this.checkplayer2){
+			this.posArrayP2++; //mueve cursor a la derecha
+		}else if(this.izquierda1.isDown && (this.posArrayP2>0) && !this.checkplayer2){
+			this.posArrayP2--; //mueve cursor a la izquierda
+		}else if(this.confirmar1.isDown){
+			this.checkplayer2 = true; //confirmación y bloqueo
+			this.ready1 = this.add.text(650, 540, "\n\n\n"+this.ready[1], { fill: '#FFFFFF', font: '32px Impact', align: 'center'});
+			sprite2=this.seleccionaravatar(this.posArrayP2);
+		}
 
 		if(this.derecha2.isDown && (this.posArrayP1<1) && !this.checkplayer1 ){
 			this.posArrayP1++; //mueve cursor a la derecha
@@ -163,18 +158,9 @@ class CharapterSelection extends Phaser.Scene {
 			this.posArrayP1--; //mueve cursor a la izquierda
 		}else if(this.confirmar2.isDown){
 			this.checkplayer1 = true; //confirmación y bloqueo
-			///WEBSOCKETS
-			var msg = {
-					name : "Pepe",
-					message : "WillyrexVEGETTA"
-				}
-			
-	    	connection.send(JSON.stringify(msg));
-	    	///////////
 			this.ready2 = this.add.text(300, 540, "\n\n\n"+this.ready[1], { fill: '#FFFFFF', font: '32px Impact', align: 'center'});
 			sprite=this.seleccionaravatar(this.posArrayP1);
 		}
-
 	}
 //da paso a la pantalla seleccionada sólo si los dos jugadores han elegido o si se decide salir
 	scenechange(){
