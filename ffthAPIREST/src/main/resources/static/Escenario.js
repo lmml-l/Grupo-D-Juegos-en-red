@@ -456,10 +456,15 @@ create(){
     var that = this;
 
         var dropevent = this.time.addEvent({delay:2000 ,loop:true ,
-        callback: function(){that.drops.spawnarma()} });
+        callback: function(){that.drops.spawnarma()
+            //JSON// 
+        console.log(JSON.stringify(that.jugador));
+        } });
 
         var restartescenaevent = this.time.addEvent({delay:300 ,loop:true ,
         callback: function(){that.checkPartida()} });
+
+
 	}
 
 

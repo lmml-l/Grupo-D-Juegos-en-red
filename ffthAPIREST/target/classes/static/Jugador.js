@@ -229,4 +229,16 @@ function Jugador(avatar,controles,proyectiles){
 		that.teclasoltada();
 	}
 
+	this.toJSON = function(){
+		var data = {
+			avatar: that.avatar,
+			arma: that.arma,
+			escudo: that.escudo,
+			vida: that.vida,
+			proyectiles: that.proyectiles,
+			municiones: that.municiones
+		}
+		return data;
+	}
+
 }

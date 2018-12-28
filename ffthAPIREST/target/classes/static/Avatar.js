@@ -224,5 +224,18 @@ function Avatar (nam,scen,posx,posy,spritesheet) { //parámetros marcados desde 
 		this.getvely=function(){
 			return that.sprite.body.velocity.y;
 		}
+
+		//JSON
+		this.toJSON = function (){
+			var data = {
+				names: that.names,
+				hojadespritesheet: that.hojadespritesheet,
+				x: that.x,
+				y: that.y,
+				//scene: that.scene,
+				sprite: that.sprite
+			}
+			return data;
+		}
 	}
 		

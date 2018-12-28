@@ -181,16 +181,27 @@ function Proyectiles (sprites){
 			}
 				scene.time.addEvent({delay:175, callback:function(){ //el delay es el alcance
 					for(var i = 0 ; i< balasdeescopetaarray.length ; i++){
+						for(var j in that.proyectilesenescane){
+							if(that.proyectilesenescane[j]==balasdeescopetaarray[i]){
+								that.proyectilesenescane.splice(j,1);
+							}
+						}
 						balasdeescopetaarray[i].destroy();
 					}
 				}});
 			break;
+
 			case 'Subfusil':
-			
 			var disp = function(){
 				var balasubfusil = that.fisicasproyectil(arma,avatar,that.crearproyectiles(arma,scene,avatar))
 				that.proyectilesenescane.push(balasubfusil);
-				scene.time.addEvent({delay:300, callback: function(){balasubfusil.destroy()}});
+				scene.time.addEvent({delay:300, callback: function(){
+					for(var j in that.proyectilesenescane){
+							if(that.proyectilesenescane[j]==balasubfusil){
+								that.proyectilesenescane.splice(j,1);
+							}
+						}
+					balasubfusil.destroy()}});
 			};
 
 			disp();
@@ -202,14 +213,28 @@ function Proyectiles (sprites){
 			case 'Pistola':
 			var balapistola = that.fisicasproyectil(arma,avatar,that.crearproyectiles(arma,scene,avatar))
 			that.proyectilesenescane.push(balapistola);
-			scene.time.addEvent({delay:1300, callback: function(){balapistola.destroy()}});
+			scene.time.addEvent({delay:1300, callback: function(){
+				for(var j in that.proyectilesenescane){
+							if(that.proyectilesenescane[j] == balapistola){
+								that.proyectilesenescane.splice(j,1);
+							}
+						}
+				balapistola.destroy()}});
 			break;
+
 			case "":
 			break;
+
 			default:
 			var baladefault = that.fisicasproyectil(arma,avatar,that.crearproyectiles(arma,scene,avatar))
 			that.proyectilesenescane.push(baladefault);
-			scene.time.addEvent({delay:300, callback: function(){baladefault.destroy()}});
+			scene.time.addEvent({delay:300, callback: function(){
+				for(var j in that.proyectilesenescane){
+							if(that.proyectilesenescane[j]==baladefault){
+								that.proyectilesenescane.splice(j,1);
+							}
+						}
+				baladefault.destroy()}});
 		}
 
 	}
