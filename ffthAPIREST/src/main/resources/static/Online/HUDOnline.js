@@ -1,6 +1,6 @@
 'use strict'
 	//El HUD (HEAD-UP DISPLAY) muestra en la parte baja de la pantalla la barra de vida, tiempo restante, arma escogida y rondas ganadas
-   function HUD(escena, sprites,jugadores){
+   function HUDOnline(escena, sprites,jugadores){
    	this.spritearmas = sprites;
    	this.scene = escena;
    	this.jugadores = jugadores;

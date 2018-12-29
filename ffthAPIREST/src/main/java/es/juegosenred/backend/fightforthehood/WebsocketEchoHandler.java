@@ -37,23 +37,41 @@ public class WebsocketEchoHandler extends TextWebSocketHandler {
 		System.out.println("Message received: " + message.getPayload());
 		JsonNode node = mapper.readTree(message.getPayload());
 		
-		sendOtherParticipants(session, node);
+		SelectordeTipodeMensaje(session, node);
 	}
 
-	private void sendOtherParticipants(WebSocketSession session, JsonNode node) throws IOException {
+	private void sendOtherParticipants(WebSocketSession session, Object newNode) throws IOException {
 
-		System.out.println("Message sent: " + node.toString());
-		
-		ObjectNode newNode = mapper.createObjectNode();
-		newNode.put("name", node.get("name").asText());
-		newNode.put("message", node.get("message").asText());
-		
+		System.out.println("Message sent: " + newNode.toString());
 		
 		for(WebSocketSession participant : sessions.values()) {
 			if(!participant.getId().equals(session.getId())) {
 				participant.sendMessage(new TextMessage(newNode.toString()));
 			}
 			
+		}
+	}
+	
+	private void SelectordeTipodeMensaje(WebSocketSession session , JsonNode node) throws IOException {
+		
+		if(node.has("avatar") && node.has("arma") && node.has("escudo") //SE AÑADEN ELSE IF PARA CADA TIPO DE JSON (Jugador,drops...)
+		&& node.has("vida") && node.has("proyectiles") && node.has("municiones") ) {//Se identifican diciendo si el nodo json tiene los atributos que deberia tener
+			
+			ObjectNode newNode = mapper.createObjectNode();
+			newNode.put("avatar", node.get("avatar").asText());
+			newNode.put("arma", node.get("arma").asText());
+			newNode.put("escudo", node.get("escudo").asText());
+			newNode.put("vida", node.get("vida").asText());
+			newNode.put("proyectiles", node.get("proyectiles").asText());
+			newNode.put("municiones", node.get("municiones").asText());
+			
+			sendOtherParticipants(session, newNode);
+		}
+		else if (node.has("ready")){
+			ObjectNode newNode = mapper.createObjectNode();
+			newNode.put("ready", node.get("ready").asText());
+			
+			sendOtherParticipants(session, newNode);
 		}
 	}
 }

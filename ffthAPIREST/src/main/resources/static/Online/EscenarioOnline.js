@@ -2,6 +2,7 @@
 
     //DEFINICIÓN DE VARIABLES GLOBALES
     //----------------------------------------------------------------------------------------
+    /*
     var victorias=new Array(2); //Almacena el nº de partidas ganadas por cada jugador
     victorias[0]=0; victorias[1]=0;
 
@@ -41,14 +42,14 @@
         "Recursos/Imagenes/Sprites_Armas/ArmasHUD/BateHUD.png",
         "Recursos/Imagenes/Sprites_Armas/Puños/PuñoPixelizado.png"]
 
-        
+    */
 //----------------------------------------------------------------------------------------
 
 //La clase escenario sirve para colocar los elementos de la partida y como controlador de la misma
-class MainEscenario extends Phaser.Scene {
+class EscenarioOnline extends Phaser.Scene {
 
 	constructor(){
-		super({key:"MainEscenario"});
+		super({key:"EscenarioOnline"});
         
         //Posicionamos los personajes
         this.avatar = new Avatar("a",this,400,400,sprite);
@@ -456,7 +457,10 @@ create(){
     var that = this;
 
         var dropevent = this.time.addEvent({delay:2000 ,loop:true ,
-        callback: function(){that.drops.spawnarma()} });
+        callback: function(){that.drops.spawnarma()
+            //JSON
+            connection.send(JSON.stringify(jugador));
+        } });
 
         var restartescenaevent = this.time.addEvent({delay:300 ,loop:true ,
         callback: function(){that.checkPartida()} });

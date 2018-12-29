@@ -159,7 +159,7 @@ class Lobby extends Phaser.Scene {
 		this.time.addEvent({delay:3000,loop:true, callback: function(){
 			if(ipsLobby.length == 2){
 				that.time.addEvent({delay:1000, callback: function(){
-				that.scene.start('MainEscenario');
+				that.scene.start('CharapterSelectionOnline');
 			}})
 		}
 		}})
