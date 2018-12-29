@@ -58,6 +58,7 @@ public class WebsocketEchoHandler extends TextWebSocketHandler {
 		&& node.has("vida") && node.has("proyectiles") && node.has("municiones") ) {//Se identifican diciendo si el nodo json tiene los atributos que deberia tener
 			
 			ObjectNode newNode = mapper.createObjectNode();
+			newNode.put("protocolo","Jugador");
 			newNode.put("avatar", node.get("avatar").asText());
 			newNode.put("arma", node.get("arma").asText());
 			newNode.put("escudo", node.get("escudo").asText());

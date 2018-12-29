@@ -12,6 +12,10 @@ function conection (){
 		console.log("Closing socket");
 	}
 }
+
+function RecibirMensaje (msg){
+	
+}
 /////////////////
 
 
