@@ -53,27 +53,34 @@ public class WebsocketEchoHandler extends TextWebSocketHandler {
 	}
 	
 	private void SelectordeTipodeMensaje(WebSocketSession session , JsonNode node) throws IOException {
-		
+		/*
 		if(node.has("avatar") && node.has("arma") && node.has("escudo") //SE AÑADEN ELSE IF PARA CADA TIPO DE JSON (Jugador,drops...)
 		&& node.has("vida") && node.has("proyectiles") && node.has("municiones") ) {//Se identifican diciendo si el nodo json tiene los atributos que deberia tener
-			
-			ObjectNode newNode = mapper.createObjectNode();
-			newNode.put("protocolo","Jugador");
-			newNode.put("avatar", node.get("avatar").asText());
-			newNode.put("arma", node.get("arma").asText());
-			newNode.put("escudo", node.get("escudo").asText());
-			newNode.put("vida", node.get("vida").asText());
-			newNode.put("proyectiles", node.get("proyectiles").asText());
-			newNode.put("municiones", node.get("municiones").asText());
-			
-			sendOtherParticipants(session, newNode);
-		}
-		else if (node.has("ready")){
-			ObjectNode newNode = mapper.createObjectNode();
-			newNode.put("ready", node.get("ready").asText());
+		*/
+		ObjectNode newNode = mapper.createObjectNode();
+		switch(node.get("protocolo").asText()){		
+		case "Jugador":
+			newNode.put("protocolo",node.get("protocolo").asText());
+			newNode.put("avatar", node.get("jugador").get("avatar").asText());
+			newNode.put("arma", node.get("jugador").get("arma").asText());
+			newNode.put("escudo", node.get("jugador").get("escudo").asText());
+			newNode.put("vida", node.get("jugador").get("vida").asText());
+			newNode.put("proyectiles", node.get("jugador").get("proyectiles").asText());
+			newNode.put("municiones", node.get("jugador").get("municiones").asText());
 			
 			sendOtherParticipants(session, newNode);
+			break;
+			
+		case "GetReady":
+			newNode.put("protocolo", node.get("protocolo").asText());
+			newNode.put("ready", node.get("ready").get("ready").asText());
+			sendOtherParticipants(session, newNode);
+			break;
+			
+		default:
+			
+		}	
+				
 		}
-	}
 }
 

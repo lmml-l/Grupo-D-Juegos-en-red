@@ -4,7 +4,14 @@ function conection (){
 	connection = new WebSocket('ws://'+ location.host +'/echo');
 	connection.onmessage = function(msg) {
 		console.log("WS message: " + msg.data);
-
+		var datosGuardadosComoObjeto = JSON.parse(msg.data);
+		switch(datosGuardadosComoObjeto.protocolo){
+			case "Jugador":
+			break;
+			case "GetReady":
+			break;
+			default:
+		}
 	}
 
 	connection.onclose = function() {
@@ -12,6 +19,7 @@ function conection (){
 		console.log("Closing socket");
 	}
 }
+
 /////////////////
 
 

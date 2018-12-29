@@ -459,7 +459,8 @@ create(){
         var dropevent = this.time.addEvent({delay:2000 ,loop:true ,
         callback: function(){that.drops.spawnarma()
             //JSON
-            connection.send(JSON.stringify(jugador));
+            var message = {protocolo: "Jugador" , jugador: jugador}
+            connection.send(JSON.stringify(message));
         } });
 
         var restartescenaevent = this.time.addEvent({delay:300 ,loop:true ,
