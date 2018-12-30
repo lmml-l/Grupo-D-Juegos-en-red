@@ -155,13 +155,12 @@ class CharapterSelectionOnline extends Phaser.Scene {
 			this.posArrayP1--; //mueve cursor a la izquierda
 		}else if(this.confirmar2.isDown){
 				
-			if(!this.checkplayer1){
+		
 				this.checkplayer1 = true; //confirmación y bloqueo
 				var data = {ready : that.checkplayer1 };
 				var message = {protocolo: "GetReady", ready : data };
 				connection.send(JSON.stringify(message))
 				
-			}
 
 			this.ready2 = this.add.text(300, 540, "\n\n\n"+this.ready[1], { fill: '#FFFFFF', font: '32px Impact', align: 'center'});
 			sprite=this.seleccionaravatar(this.posArrayP1);

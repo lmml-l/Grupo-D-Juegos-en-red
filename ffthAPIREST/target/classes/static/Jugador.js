@@ -137,11 +137,13 @@ function Jugador(avatar,controles,proyectiles){
 	//el personaje es empujado hacia abajo, excepto si está tocando algo por debajo
 	//simulación de la gravedad
 	this.gravedad=function(){
+	if(that.avatar.sprite.body!=null){
 		if(that.avatar.sprite.body.touching.down){
 			that.avatar.vely(0);
 		}else {
 			that.avatar.vely(that.avatar.getvely()+ 9.8);
 		}
+	}
 	}
 
 	//control del personaje según la tecla y orientación
