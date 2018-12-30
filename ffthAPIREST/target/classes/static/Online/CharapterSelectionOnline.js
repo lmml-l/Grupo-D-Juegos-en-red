@@ -176,8 +176,8 @@ class CharapterSelectionOnline extends Phaser.Scene {
 		}
 		if(this.checkplayer1 && this.checkplayer2){
 			this.ready2 = this.add.text(470, 390, "\n\n\n"+this.ready[1], { fill: '#FFFFFF', font: '32px Impact', align: 'center'});
-			this.time.addEvent({delay:10000, this.scene.start('EscenarioOnline');}); //Quiero añadir uun texto que ponga la partida va a comenzar... cuando seleccionen listo los dos jugadores
-			//this.scene.start('EscenarioOnline'); //Seria una vez que le den un timer y ya el texto.
+			//this.time.addEvent({delay:10000}); //Quiero añadir uun texto que ponga la partida va a comenzar... cuando seleccionen listo los dos jugadores
+			this.scene.start('EscenarioOnline'); //Seria una vez que le den un timer y ya el texto.
 		}
 	}
 

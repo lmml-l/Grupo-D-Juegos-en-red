@@ -457,27 +457,48 @@ create(){
     var that = this;
 
         var dropevent = this.time.addEvent({delay:2000 ,loop:true ,
-        callback: function(){that.drops.spawnarma()
-            //JSON
-            var message = {protocolo: "Jugador" , jugador: that.jugador}
+        callback: function(){that.drops.spawnarma()} });
+
+        var restartescenaevent = this.time.addEvent({delay:300 ,loop:true ,
+        callback: function(){that.checkPartida()} });
+
+///ACTUALIZACIONES DE OBJETOS RELACIONADOS CON WEBSOCKET
+        var ActualizarJugadorWebsocketVia = this.time.addEvent({delay:10 ,loop:true ,
+        callback: function(){
+         var message = {protocolo: "Jugador" , jugador: that.jugador}
             connection.send(JSON.stringify(message));
 
-            {
             that.jugador1.arma = Jugador.arma;
             that.jugador1.proyectiles.proyectilesenescane = Jugador.proyectiles.proyectilesenescane;
             that.jugador1.municiones = Jugador.municiones;
             that.jugador1.vida = Jugador.vida;
             that.jugador1.keysalto = Jugador.W;
-            console.log(that.jugador1.keysalto);
-            //that.jugador1.avatar.sprite.frame = Jugador.avatar.sprite.frame;
-            }
+            that.jugador1.keymovizq = Jugador.A;
+            that.jugador1.keymovder = Jugador.D;
+            that.jugador1.keyrecarmasoltada = Jugador.R;
+            that.jugador1.keydisparo = Jugador.T;     
+        }});
 
-        } });
-
-        var restartescenaevent = this.time.addEvent({delay:300 ,loop:true ,
-        callback: function(){that.checkPartida()} });
-
+       
         Jugador = that.jugador1;
+
+        var ActualizarPosJugador = this.time.addEvent({delay:10 ,loop:false ,
+        callback: function(){
+
+        that.jugador1.avatar.sprite.x = Jugador.avatar.sprite.x;
+        that.jugador1.avatar.sprite.y = Jugador.avatar.sprite.y;
+
+        }});
+
+        var ActualizarPosJugadorLoop = this.time.addEvent({delay:2000 ,loop:true ,
+        callback: function(){
+
+        that.jugador1.avatar.sprite.x = Jugador.avatar.sprite.x;
+        that.jugador1.avatar.sprite.y = Jugador.avatar.sprite.y;
+
+        }});
+        
+//////////////////////////////////////////////////////////////
 	}
 
 

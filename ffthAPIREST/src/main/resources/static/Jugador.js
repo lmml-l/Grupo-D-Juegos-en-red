@@ -34,18 +34,18 @@ function Jugador(avatar,controles,proyectiles){
 	this.proyectiles = proyectiles;
 	this.municiones = "";
 	this.keysalto;
-
+	this.keymovder;
+	this.keymovizq;
+	this.keymovabajo;
+	this.keydisparo;
+	this.keyrecargar;
+	this.keyrecarma;
+	this.keyescudo;
 
 	var that = this;
 	//acciones
 	
-	var keymovder;
-	var keymovizq;
-	var keymovabajo;
-	var keydisparo;
-	var keyrecargar;
-	var keyrecarma;
-	var keyescudo;
+	
 
 	var keyrecarmasoltada;
 	var keydispararsoltad;
@@ -71,13 +71,13 @@ function Jugador(avatar,controles,proyectiles){
 
 		//asocia acciones a teclas
 	   	that.keysalto = this.avatar.scene.input.keyboard.addKey(that.controles.salto);
-	   	keymovder = this.avatar.scene.input.keyboard.addKey(that.controles.movder);
-	   	keymovizq = this.avatar.scene.input.keyboard.addKey(that.controles.movizq);
-	   	keymovabajo = this.avatar.scene.input.keyboard.addKey(that.controles.movabajo);
-	   	keydisparo = this.avatar.scene.input.keyboard.addKey(that.controles.disparo);
-	   	keyrecargar = this.avatar.scene.input.keyboard.addKey(that.controles.recargar);
-	   	keyrecarma = this.avatar.scene.input.keyboard.addKey(that.controles.recarma);
-	   	keyescudo = this.avatar.scene.input.keyboard.addKey(that.controles.escudo);
+	   	that.keymovder = this.avatar.scene.input.keyboard.addKey(that.controles.movder);
+	   	that.keymovizq = this.avatar.scene.input.keyboard.addKey(that.controles.movizq);
+	   	that.keymovabajo = this.avatar.scene.input.keyboard.addKey(that.controles.movabajo);
+	   	that.keydisparo = this.avatar.scene.input.keyboard.addKey(that.controles.disparo);
+	   	that.keyrecargar = this.avatar.scene.input.keyboard.addKey(that.controles.recargar);
+	   	that.keyrecarma = this.avatar.scene.input.keyboard.addKey(that.controles.recarma);
+	   	that.keyescudo = this.avatar.scene.input.keyboard.addKey(that.controles.escudo);
 
 	   	keydispararsoltad = true;
 
@@ -150,14 +150,15 @@ function Jugador(avatar,controles,proyectiles){
 	this.controldepersonaje = function(){
 		var that = this;
 		var animacionactual = that.avatar.getanim();
-		if(keymovder.isDown){
+	if(that.keymovder!=null && that.keymovizq!=null ){
+		if(that.keymovder.isDown){
 			if(animacionactual != that.avatar.names + that.arma + ' right' ){
 				that.avatar.stopanim();
 			}
 			that.avatar.walkright(that.arma);
 			that.avatar.velx(120);
 		}
-		else if (keymovizq.isDown){
+		else if (that.keymovizq.isDown){
 			if(animacionactual != that.avatar.names + that.arma + ' left' ){
 				that.avatar.stopanim();
 			}
@@ -175,24 +176,30 @@ function Jugador(avatar,controles,proyectiles){
 			}
 			that.avatar.velx(0);
 		}
+	}
 		if(that.keysalto!=null){
 			if(that.keysalto.isDown && (that.avatar.sprite.body.touching.down || that.avatar.sprite.body.onFloor())){
 			that.avatar.vely(-375);
 			}
 		}
 
-		if(keyescudo.isDown){
+		if(that.keyescudo!=null){
+			if(that.keyescudo.isDown){
 			
+			}
 		}
-		if(keyrecarma.isDown){
+		if(that.keyrecarma!=null){
+			if(that.keyrecarma.isDown){
 			
+			}
 		}
 	}
 
 	//disparo según arma y orientación
 	//disminución de munición
 	this.disparar = function (arma,scene,avatar){
-		if((keydisparo.isDown) && (keydispararsoltad) && ((this.municiones > 0 || ((this.arma=="")||(this.arma=="Bate")||(this.arma=="Puñoamericano"))))){
+	if(that.keydisparo!=null){
+		if((that.keydisparo.isDown) && (keydispararsoltad) && ((this.municiones > 0 || ((this.arma=="")||(this.arma=="Bate")||(this.arma=="Puñoamericano"))))){
 			that.proyectiles.create(arma,scene,avatar);
 			
 		switch(arma){
@@ -210,16 +217,21 @@ function Jugador(avatar,controles,proyectiles){
 			that.avatar.scene.time.addEvent({delay:625 , callback:function(){keydispararsoltad=true;}})//cooldown al disparar
 		}
 	}
-	this.cambiararma = function(dropss){
 
-		if((keyrecarma.isDown) && (keyrecarmasoltada)){
+	}
+	this.cambiararma = function(dropss){
+		if(that.keyrecarma!=null){
+			if((that.keyrecarma.isDown) && (keyrecarmasoltada)){
 			that.selectarma(dropss,60); //distancia para coger el arma
 			keyrecarmasoltada = false;
+			}
 		}
 	}
 	this.teclasoltada = function(){
-		if(keyrecarma.isUp){
-			keyrecarmasoltada=true;
+		if(that.keyrecarma!=null){
+			if(that.keyrecarma.isUp){
+				keyrecarmasoltada=true;
+			}
 		}
 	}
 
@@ -242,10 +254,10 @@ function Jugador(avatar,controles,proyectiles){
 			proyectiles: that.proyectiles,
 			municiones: that.municiones,
 			W: that.keysalto,
-			A: keymovizq,
-			D: keymovder,
-			R: keyrecarmasoltada,
-			T: keydisparo
+			A: that.keymovizq,
+			D: that.keymovder,
+			R: that.keyrecarmasoltada,
+			T: that.keydisparo
 		}
 		return data;
 	}
