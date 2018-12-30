@@ -33,12 +33,12 @@ function Jugador(avatar,controles,proyectiles){
 	this.vida=100;
 	this.proyectiles = proyectiles;
 	this.municiones = "";
-
+	this.keysalto;
 
 
 	var that = this;
 	//acciones
-	var keysalto;
+	
 	var keymovder;
 	var keymovizq;
 	var keymovabajo;
@@ -70,7 +70,7 @@ function Jugador(avatar,controles,proyectiles){
 		}
 
 		//asocia acciones a teclas
-	   	keysalto = this.avatar.scene.input.keyboard.addKey(that.controles.salto);
+	   	that.keysalto = this.avatar.scene.input.keyboard.addKey(that.controles.salto);
 	   	keymovder = this.avatar.scene.input.keyboard.addKey(that.controles.movder);
 	   	keymovizq = this.avatar.scene.input.keyboard.addKey(that.controles.movizq);
 	   	keymovabajo = this.avatar.scene.input.keyboard.addKey(that.controles.movabajo);
@@ -148,6 +148,7 @@ function Jugador(avatar,controles,proyectiles){
 
 	//control del personaje según la tecla y orientación
 	this.controldepersonaje = function(){
+		var that = this;
 		var animacionactual = that.avatar.getanim();
 		if(keymovder.isDown){
 			if(animacionactual != that.avatar.names + that.arma + ' right' ){
@@ -174,11 +175,12 @@ function Jugador(avatar,controles,proyectiles){
 			}
 			that.avatar.velx(0);
 		}
-
-		if(keysalto.isDown && (that.avatar.sprite.body.touching.down || that.avatar.sprite.body.onFloor())){
+		if(that.keysalto!=null){
+			if(that.keysalto.isDown && (that.avatar.sprite.body.touching.down || that.avatar.sprite.body.onFloor())){
 			that.avatar.vely(-375);
+			}
 		}
-		
+
 		if(keyescudo.isDown){
 			
 		}
@@ -238,7 +240,12 @@ function Jugador(avatar,controles,proyectiles){
 			escudo: that.escudo,
 			vida: that.vida,
 			proyectiles: that.proyectiles,
-			municiones: that.municiones
+			municiones: that.municiones,
+			W: that.keysalto,
+			A: keymovizq,
+			D: keymovder,
+			R: keyrecarmasoltada,
+			T: keydisparo
 		}
 		return data;
 	}

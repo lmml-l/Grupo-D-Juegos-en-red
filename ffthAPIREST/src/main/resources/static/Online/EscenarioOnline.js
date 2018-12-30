@@ -467,8 +467,9 @@ create(){
             that.jugador1.proyectiles.proyectilesenescane = Jugador.proyectiles.proyectilesenescane;
             that.jugador1.municiones = Jugador.municiones;
             that.jugador1.vida = Jugador.vida;
-            that.jugador1.avatar.sprite.x = Jugador.avatar.sprite.x;
-            that.jugador1.avatar.sprite.y = Jugador.avatar.sprite.y;
+            that.jugador1.keysalto = Jugador.W;
+            console.log(that.jugador1.keysalto);
+            //that.jugador1.avatar.sprite.frame = Jugador.avatar.sprite.frame;
             }
 
         } });
@@ -482,7 +483,7 @@ create(){
 
 update(){ //actualizaciones
     this.jugador.update(this.drops);
-    //this.jugador1.update(this.drops);
+    this.jugador1.update(this.drops);
     this.atravesarplataformaspersonaje(this.jugador.avatar.sprite,this.plataformas);
     this.atravesarplataformaspersonaje(this.jugador1.avatar.sprite,this.plataformas2);
     

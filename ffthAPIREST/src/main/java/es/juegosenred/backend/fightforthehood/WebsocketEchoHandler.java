@@ -118,10 +118,7 @@ public class WebsocketEchoHandler extends TextWebSocketHandler {
 	}
 	
 	private void SelectordeTipodeMensaje(WebSocketSession session , JsonNode node) throws IOException {
-		/*
-		if(node.has("avatar") && node.has("arma") && node.has("escudo") //SE AÑADEN ELSE IF PARA CADA TIPO DE JSON (Jugador,drops...)
-		&& node.has("vida") && node.has("proyectiles") && node.has("municiones") ) {//Se identifican diciendo si el nodo json tiene los atributos que deberia tener
-		*/
+		
 		ObjectNode newNode = mapper.createObjectNode();
 		switch(node.get("protocolo").asText()){		
 		case "Jugador":
