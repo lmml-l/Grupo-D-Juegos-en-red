@@ -51,7 +51,7 @@ class CharapterSelectionOnline extends Phaser.Scene {
 		this.pmap1.push(character1);
 		this.pmap1.push(character2);
 		//imagen de miniatura del personaje
-		this.p1 = this.add.sprite((this.pmap1[this.posArrayP1].x - 75), (this.pmap1[this.posArrayP1].y - 75),'V').setScale(1.5);
+		this.p1 = this.add.sprite((this.pmap1[this.posArrayP1].x - 75), (this.pmap1[this.posArrayP1].y - 75),'P1');
 		//engloba las imágenes
 		var container = this.add.container(0,0);
 		container.add(title);
@@ -102,8 +102,7 @@ class CharapterSelectionOnline extends Phaser.Scene {
 		//var subtitle = this.load.image('subtitle','Recursos/Imagenes/subtitle.png');
 		var character1 = this.load.image('character1','Recursos/Imagenes/Character1.png');
 		var character2 = this.load.image('character2','Recursos/Imagenes/Character2.png');
-		var p1 		   = this.load.image('P1','Recursos/Imagenes/J1.png');
-		var p2 		   = this.load.image('P2','Recursos/Imagenes/J2.png');
+		var p1 		   = this.load.image('P1','Recursos/Imagenes/Flecha.png');
 		this.load.image('menuCharacterFondo','Recursos/Imagenes/menuCharacterFondo.png');
 	}
 
