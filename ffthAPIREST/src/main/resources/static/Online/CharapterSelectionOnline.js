@@ -111,15 +111,15 @@ class CharapterSelectionOnline extends Phaser.Scene {
 		this.selection();
 		this.textModo = this.add.text(50, 50, "Online mode", { fill: '#F4FFF3', font: '20px Impact', align: 'center'});
 		//indicación de los controles
-		this.textoControles = this.add.text(470, 540, "\nselect\naccept", { fill: '#FFFFFF', font: '30px Impact', align: 'center'});
-		this.textoControles = this.add.text(470, 540, "control", { fill: '#FFAC00', font: '30px Impact', align: 'center'});
-		this.textoControles = this.add.text(300, 540, "\nA,D\nSPACE", { fill: '#FFAC00', font: '32px Impact', align: 'center'});
+		this.textoControles = this.add.text(110, 540, "\nselect\naccept", { fill: '#FFFFFF', font: '30px Impact', align: 'center'});
+		this.textoControles = this.add.text(470, 400, "control", { fill: '#FFAC00', font: '30px Impact', align: 'center'});
+		this.textoControles = this.add.text(20, 540, "\nA,D\nSPACE", { fill: '#FFAC00', font: '32px Impact', align: 'center'});
 		this.subtitulo 		= this.add.text(360, 350, "CHOOSE YOUR FIGHTER", { fill: '#FFAC00', font: '38px Impact', align: 'center'});
 		this.textoSalir     = this.add.text(50, 730, "ESC to exit", { fill: '#F4FFF3', font: '24px Impact', align: 'center'});
 	
 		//indicación de si está listo el jugador
 		this.ready[0]="";
-		this.ready[1]="READY";
+		this.ready[1]="Players Ready";
 
 		conection();
 
@@ -161,8 +161,8 @@ class CharapterSelectionOnline extends Phaser.Scene {
 				var message = {protocolo: "GetReady", ready : data };
 				connection.send(JSON.stringify(message))
 				
-
-			this.ready2 = this.add.text(300, 540, "\n\n\n"+this.ready[1], { fill: '#FFFFFF', font: '32px Impact', align: 'center'});
+            
+			//this.ready2 = this.add.text(470, 390, "\n\n\n"+this.ready[1], { fill: '#FFFFFF', font: '32px Impact', align: 'center'});
 			sprite=this.seleccionaravatar(this.posArrayP1);
 
 		
@@ -175,7 +175,9 @@ class CharapterSelectionOnline extends Phaser.Scene {
 			this.scene.start('MainMenu');
 		}
 		if(this.checkplayer1 && this.checkplayer2){
-			this.scene.start('EscenarioOnline');
+			this.ready2 = this.add.text(470, 390, "\n\n\n"+this.ready[1], { fill: '#FFFFFF', font: '32px Impact', align: 'center'});
+			//this.time.addEvent({delay:10000}); //Quiero añadir uun texto que ponga la partida va a comenzar... cuando seleccionen listo los dos jugadores
+			this.scene.start('EscenarioOnline'); //Seria una vez que le den un timer y ya el texto.
 		}
 	}
 
