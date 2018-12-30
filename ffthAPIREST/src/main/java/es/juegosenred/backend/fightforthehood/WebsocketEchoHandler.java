@@ -61,12 +61,15 @@ public class WebsocketEchoHandler extends TextWebSocketHandler {
 		switch(node.get("protocolo").asText()){		
 		case "Jugador":
 			newNode.put("protocolo",node.get("protocolo").asText());
+			newNode.put("jugador",node.get("jugador").asText());
+			/*
 			newNode.put("avatar", node.get("jugador").get("avatar").asText());
 			newNode.put("arma", node.get("jugador").get("arma").asText());
 			newNode.put("escudo", node.get("jugador").get("escudo").asText());
 			newNode.put("vida", node.get("jugador").get("vida").asText());
 			newNode.put("proyectiles", node.get("jugador").get("proyectiles").asText());
 			newNode.put("municiones", node.get("jugador").get("municiones").asText());
+			*/
 			
 			sendOtherParticipants(session, newNode);
 			break;

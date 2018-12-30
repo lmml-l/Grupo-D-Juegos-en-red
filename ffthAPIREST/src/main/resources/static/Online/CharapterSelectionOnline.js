@@ -1,28 +1,3 @@
-////WEBSOCKETS////
-var connection;
-function conection (){
-	connection = new WebSocket('ws://'+ location.host +'/echo');
-	connection.onmessage = function(msg) {
-		console.log("WS message: " + msg.data);
-		var datosGuardadosComoObjeto = JSON.parse(msg.data);
-		switch(datosGuardadosComoObjeto.protocolo){
-			case "Jugador":
-			break;
-			case "GetReady":
-			break;
-			default:
-		}
-	}
-
-	connection.onclose = function() {
-		setTimeout(conection(),1000);
-		console.log("Closing socket");
-	}
-}
-
-/////////////////
-
-
 //Cada jugador selecciona el aspecto con el que aparecerá su personaje
 class CharapterSelectionOnline extends Phaser.Scene {
 	constructor(){
@@ -61,6 +36,9 @@ class CharapterSelectionOnline extends Phaser.Scene {
 		//comprueba si se ha elegido o no
 		this.checkplayer1 = false;
 		this.checkplayer2 = false;
+
+		///Variable websocket inicializacion
+		GetReady = this.checkplayer2;
 		//selección
 		this.posArrayP1=0;
 
@@ -154,6 +132,10 @@ class CharapterSelectionOnline extends Phaser.Scene {
 		//comprobación del estado del servidor
 		this.time.addEvent({delay:100, loop:true,
     	callback: function(){getServerStatus(function(){that.scene.start('EscenarioError');})}})
+
+		//Actualiza si el otro jugador a elegido personaje a traves de websocket
+    	this.time.addEvent({delay:1000 ,loop:true ,
+        callback: function(){that.checkplayer2 = GetReady} });
 
 	}
 
