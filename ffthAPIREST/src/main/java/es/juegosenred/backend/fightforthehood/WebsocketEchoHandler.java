@@ -101,7 +101,6 @@ public class WebsocketEchoHandler extends TextWebSocketHandler {
 			if(!participant.getId().equals(session.getId())) {
 				participant.sendMessage(new TextMessage(newNode.toString()));
 			}
-			
 		}
 	}
 	
@@ -113,8 +112,20 @@ public class WebsocketEchoHandler extends TextWebSocketHandler {
 				if(!participant.getId().equals(session.getId())) {
 					participant.sendMessage(new TextMessage(newNode.toString()));
 				}
-				
 		}	
+	}
+	
+	private void sendHostToClient(WebSocketSession session, Object newNode) throws IOException {
+
+		System.out.println("Message sent: " + newNode.toString());
+		List<WebSocketSession> participantes = ParesDeUsuariosEnLaMismaPartida.get(session.getId());
+			if(participantes.get(0).equals(session)) {
+				for(WebSocketSession participant : participantes){
+				if(!participant.getId().equals(session.getId())) {
+					participant.sendMessage(new TextMessage(newNode.toString()));
+				}
+			}	
+			}
 	}
 	
 	private void SelectordeTipodeMensaje(WebSocketSession session , JsonNode node) throws IOException {
@@ -134,6 +145,13 @@ public class WebsocketEchoHandler extends TextWebSocketHandler {
 			newNode.put("ready", node.get("ready").get("ready").asText());
 			//sendOtherParticipants(session, newNode);
 			sendParticipantsInSameMatch(session, newNode);
+			break;
+			
+		case "Drops":
+			newNode.put("protocolo", node.get("protocolo").asText());
+			newNode.put("drops", node.get("drops").get("drops").asText());
+			//sendOtherParticipants(session, newNode);
+			sendHostToClient(session, newNode);
 			break;
 			
 		default:

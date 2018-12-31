@@ -96,4 +96,11 @@ function Drops(escena, sprites) {
 			s.destroy();
 		}
 	}
+
+	this.toJSON = function(){
+		var data = {
+			sprite: that.sprite
+		}
+		return data;
+	}
 }

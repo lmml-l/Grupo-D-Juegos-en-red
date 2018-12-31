@@ -4,6 +4,7 @@
 
 var Jugador;
 var GetReady;
+var Drops;
 
 var connection;
 function conection (){
@@ -18,10 +19,12 @@ function conection (){
 			case "GetReady":
 			GetReady = datosGuardadosComoObjeto.ready;
 			break;
+			case "Drops":
+			Drops = datosGuardadosComoObjeto.drops;
+			break;
 			default:
 		}
 	}
-
 	connection.onclose = function() {
 		setTimeout(conection(),1000);
 		console.log("Closing socket");

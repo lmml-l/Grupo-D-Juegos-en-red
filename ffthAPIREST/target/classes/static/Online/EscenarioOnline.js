@@ -457,7 +457,12 @@ create(){
     var that = this;
 
         var dropevent = this.time.addEvent({delay:2000 ,loop:true ,
-        callback: function(){that.drops.spawnarma()} });
+        callback: function(){
+            var message = {protocolo: "Drops" , drops: that.drops}
+            connection2.send(JSON.stringify(message));
+            that.drops.spawnarma()
+            
+        }});
 
         var restartescenaevent = this.time.addEvent({delay:300 ,loop:true ,
         callback: function(){that.checkPartida()} });
@@ -481,6 +486,7 @@ create(){
 
        
         Jugador = that.jugador1;
+        Drops = that.drops;
 
         var ActualizarPosJugador = this.time.addEvent({delay:10 ,loop:false ,
         callback: function(){
