@@ -149,7 +149,7 @@ public class WebsocketEchoHandler extends TextWebSocketHandler {
 			
 		case "Drops":
 			newNode.put("protocolo", node.get("protocolo").asText());
-			newNode.put("drops", node.get("drops").get("drops").asText());
+			newNode.set("drops", node.get("drops"));
 			//sendOtherParticipants(session, newNode);
 			sendHostToClient(session, newNode);
 			break;

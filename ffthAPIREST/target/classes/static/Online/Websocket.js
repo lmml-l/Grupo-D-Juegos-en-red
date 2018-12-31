@@ -4,14 +4,11 @@
 
 var Jugador;
 var GetReady;
-var Drops;
+var Drops = null;
 
 var connection;
-var connection2;
 function conection (){
 	connection = new WebSocket('ws://'+ location.host +'/echo');
-	connection2 = new WebSocket('ws://'+ location.host +'/echo');
-	//connection 1
 	connection.onmessage = function(msg) {
 		console.log("WS message: " + msg.data);
 		var datosGuardadosComoObjeto = JSON.parse(msg.data);
@@ -29,27 +26,6 @@ function conection (){
 		}
 	}
 	connection.onclose = function() {
-		setTimeout(conection(),1000);
-		console.log("Closing socket");
-	}
-	//connection 2
-	connection2.onmessage = function(msg) {
-		console.log("WS message: " + msg.data);
-		var datosGuardadosComoObjeto = JSON.parse(msg.data);
-		switch(datosGuardadosComoObjeto.protocolo){
-			case "Jugador":
-			Jugador = datosGuardadosComoObjeto.jugador;
-			break;
-			case "GetReady":
-			GetReady = datosGuardadosComoObjeto.ready;
-			break;
-			case "Drops":
-			Drops = datosGuardadosComoObjeto.drops;
-			break;
-			default:
-		}
-	}
-	connection2.onclose = function() {
 		setTimeout(conection(),1000);
 		console.log("Closing socket");
 	}

@@ -72,12 +72,15 @@ function Drops(escena, sprites) {
 	}
 
 	this.spawnarma = function(){
+		if(that.sprite!=null){
+			
 		var armapos = that.initPos();
 		var check = true;
 		var i = 0;
 
 		//comprueba que la posición marcada en initPos() no está ocupada
 		//si es válida se añade a la escena
+		
 		while(check && i<that.sprite.length){
 			if(that.sprite[i].x == armapos[0] && that.sprite[i].y == armapos[1]){
 				check = false;
@@ -94,6 +97,7 @@ function Drops(escena, sprites) {
 		if(that.sprite.length > 5){
 			var s = that.sprite.shift();
 			s.destroy();
+		}
 		}
 	}
 

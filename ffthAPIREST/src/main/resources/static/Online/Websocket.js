@@ -4,7 +4,7 @@
 
 var Jugador;
 var GetReady;
-var Drops;
+var Drops = null;
 
 var connection;
 function conection (){

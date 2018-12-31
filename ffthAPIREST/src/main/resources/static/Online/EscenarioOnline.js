@@ -456,49 +456,63 @@ create(){
     //time event spawndrop
     var that = this;
 
-        var dropevent = this.time.addEvent({delay:2000 ,loop:true ,
-        callback: function(){
-            var message = {protocolo: "Drops" , drops: that.drops}
-            connection.send(JSON.stringify(message));
-            that.drops.spawnarma()
-            
-        }});
-
-        var restartescenaevent = this.time.addEvent({delay:300 ,loop:true ,
+    var restartescenaevent = this.time.addEvent({delay:300 ,loop:true ,
         callback: function(){that.checkPartida()} });
 
 ///ACTUALIZACIONES DE OBJETOS RELACIONADOS CON WEBSOCKET
-        var ActualizarJugadorWebsocketVia = this.time.addEvent({delay:10 ,loop:true ,
-        callback: function(){
-         var message = {protocolo: "Jugador" , jugador: that.jugador}
-            connection.send(JSON.stringify(message));
+    var message;
 
-            that.jugador1.arma = Jugador.arma;
-            that.jugador1.proyectiles.proyectilesenescane = Jugador.proyectiles.proyectilesenescane;
-            that.jugador1.municiones = Jugador.municiones;
-            that.jugador1.vida = Jugador.vida;
-            that.jugador1.keysalto = Jugador.W;
-            that.jugador1.keymovizq = Jugador.A;
-            that.jugador1.keymovder = Jugador.D;
-            that.jugador1.keyrecarmasoltada = Jugador.R;
-            that.jugador1.keydisparo = Jugador.T;     
+        message = {protocolo: "Jugador" , jugador: that.jugador}
+
+         var dropevent = this.time.addEvent({delay:2000 ,loop:true ,
+        callback: function(){
+            that.drops.spawnarma()
+            }});
+
+        var actualizarMensajeDropYDrops = this.time.addEvent({delay:300 ,loop:true ,
+        callback: function(){
+            message = {protocolo: "Drops" , drops: that.drops}
+            setTimeout(function(){
+                 if(Drops!=null){
+                     that.drops.sprite = Drops.sprite;
+                }},100)
+            }});
+
+        var actualizarMensajeParaJugador =this.time.addEvent({delay:200 ,loop:true ,
+        callback: function(){
+            message = {protocolo: "Jugador" , jugador: that.jugador}
+                that.jugador1.arma = Jugador.arma;
+                that.jugador1.proyectiles.proyectilesenescane = Jugador.proyectiles.proyectilesenescane;
+                that.jugador1.municiones = Jugador.municiones;
+                that.jugador1.vida = Jugador.vida;
+                that.jugador1.keysalto = Jugador.W;
+                that.jugador1.keymovizq = Jugador.A;
+                that.jugador1.keymovder = Jugador.D;
+                that.jugador1.keyrecarmasoltada = Jugador.R;
+                that.jugador1.keydisparo = Jugador.T;   
+        }});
+
+        var MandarWebsocket = this.time.addEvent({delay:100 ,loop:true ,
+        callback: function(){
+
+        connection.send(JSON.stringify(message));
+          
         }});
 
        
         Jugador = that.jugador1;
-        Drops = that.drops;
 
-        var ActualizarPosJugador = this.time.addEvent({delay:10 ,loop:false ,
+        var ActualizarPosJugador = this.time.addEvent({delay:100 ,loop:false ,
         callback: function(){
-
+        message = {protocolo: "Jugador" , jugador: that.jugador}
         that.jugador1.avatar.sprite.x = Jugador.avatar.sprite.x;
         that.jugador1.avatar.sprite.y = Jugador.avatar.sprite.y;
 
         }});
 
-        var ActualizarPosJugadorLoop = this.time.addEvent({delay:2000 ,loop:true ,
+        var ActualizarPosJugadorLoop = this.time.addEvent({delay:2500 ,loop:true ,
         callback: function(){
-
+        message = {protocolo: "Jugador" , jugador: that.jugador}
         that.jugador1.avatar.sprite.x = Jugador.avatar.sprite.x;
         that.jugador1.avatar.sprite.y = Jugador.avatar.sprite.y;
 
