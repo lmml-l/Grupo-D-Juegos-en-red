@@ -202,8 +202,8 @@ function getCheckerStatus() {
         headers: {
             "Content-Type": "application/json"
         }
-    }).fail(function (data) {
-        console.log("Valor del check: " + data)
+    }).fail(function () {
+        console.log("Lo coge")
     })
 }
 

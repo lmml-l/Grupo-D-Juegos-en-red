@@ -46,6 +46,7 @@ public class MyMatch {
 		historial = new ArrayList<>();
 		ipconectados = new ArrayList<>();
 		tiempoParaDesconexion = new HashMap<>();
+		checker = "1";
 	}
 
 	public MyMatch(ArrayList<String> ipsPartida) {
