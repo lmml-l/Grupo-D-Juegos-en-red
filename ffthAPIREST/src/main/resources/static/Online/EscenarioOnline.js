@@ -473,8 +473,8 @@ create(){
         callback: function(){
             message = {protocolo: "Drops" , drops: that.drops}
             setTimeout(function(){
-                 if(Drops!=null){
-                     that.drops.sprite = Drops.sprite;
+                 if(DropsWS!=null){
+                     that.drops.sprite = DropsWS.sprite;
                 }},100)
             }});
 
