@@ -34,6 +34,7 @@ class MainMenu extends Phaser.Scene {
 		this.lock3;
 		this.lock4;
 
+
 		this.textoControles;
 		this.textoVersion;
 		this.fondo;
@@ -109,11 +110,15 @@ class MainMenu extends Phaser.Scene {
 		//textos de apoyo
 		this.textoControles = this.add.text(50, 710, "Use W/D or arrows to select\nPress SPACE or ENTER to go", {  fill: '#F4FFF3', font: '24px Impact', align: 'left'});
 		this.textoVersion = this.add.text(700, 710, "v.0.35 preAlpha fase 3_una_semana", { fill: '#F4FFF3', font: '16px Lucida Console', align: 'center'}); //760, 710
-	
+		
+		setCheckerStatus("1")
 		var that=this;
 		//comprobación del estado del servidor
-		this.time.addEvent({delay:100, loop:true,
-    	callback: function(){getServerStatus(function(){that.scene.start('EscenarioError');})}})
+		if(function(){getCheckerStatus()}=="0"){
+			this.time.addEvent({delay:100, loop:true,
+		    callback: function(){getServerStatus(function(){that.scene.start('EscenarioError');})}})
+		}
+
 
     	
 	}

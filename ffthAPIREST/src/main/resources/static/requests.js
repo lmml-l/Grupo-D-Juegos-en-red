@@ -195,6 +195,32 @@ function getServerStatus(error) {
     })
 }
 
+function getCheckerStatus() {
+    $.ajax({
+        method: 'GET',
+        url: 'http://' + IPserver + '/check',
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).fail(function (data) {
+        console.log("Valor del check: " + data)
+    })
+}
+
+function setCheckerStatus(checker){
+    $.ajax({
+        method: 'PUT',
+        url: 'http://' + IPserver + '/check',
+        data: JSON.stringify(checker),
+        processData: false,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).fail(function (data) {
+        console.log("Valor del check: " + checker)
+    })
+}
+
 
 
 //Conseguir lista de IPs

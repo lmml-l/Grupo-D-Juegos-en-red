@@ -15,6 +15,7 @@ class nameMenu extends Phaser.Scene {
 		this.textoRepetir;
 		this.textoSalir;
 		this.textoNombre;
+		this.textoEstadosala;
 		this.ipsjugadoressala;
 		this.arrayjugadores;
 		this.salir;
@@ -65,6 +66,7 @@ class nameMenu extends Phaser.Scene {
 			}
 			else{
 				console.log("The server is full");
+				this.textoEstadosala = this.add.text(390, 515, "The server is full", { fill: '#F4FFF3', font: '20px Impact', align: 'center'});
 			}
 			
 		}
@@ -73,11 +75,13 @@ class nameMenu extends Phaser.Scene {
 
 	create(){
 		this.fondo = this.add.image(this.game.canvas.width/2,this.game.canvas.height/2,'menuNombreFondo').setScale(1.3);
+		
+		this.textoEstadosala = this.add.text(390, 515, "", { fill: '#F4FFF3', font: '20px Impact', align: 'center'});
 
 		this.escape = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);	//tecla para salir
 		this.enter  = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER); //tecla para aceptar
 
-		this.textoSalir    = this.add.text(50, 730, "ESC to exit", { fill: '#F4FFF3', font: '24px Impact', align: 'center'});
+		this.textoSalir = this.add.text(50, 730, "ESC to exit", { fill: '#F4FFF3', font: '24px Impact', align: 'center'});
 
 		this.textoVersion = this.add.text(340, 300, "What's your name?", { fill: '#FFAC00', font: '48px Impact', align: 'center'});
 		this.textoVersion = this.add.text(390, 415, "Press ENTER to search a match", { fill: '#F4FFF3', font: '20px Impact', align: 'center'});
@@ -90,8 +94,10 @@ class nameMenu extends Phaser.Scene {
 		
 		getMyIP(function(data){ip = data.ip});
 
-		this.time.addEvent({delay:4000,loop:true,
-    	callback: function(){getServerStatus(function(){that.scene.start('EscenarioError');})}})
+		if(function(){getCheckerStatus()}=="0"){
+			this.time.addEvent({delay:100, loop:true,
+		    callback: function(){getServerStatus(function(){that.scene.start('EscenarioError');})}})
+		}
 
 		this.time.addEvent({delay:400 , callback: function(){console.log(ip+"abc")}})
 		

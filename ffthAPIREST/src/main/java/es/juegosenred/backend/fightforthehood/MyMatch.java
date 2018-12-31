@@ -14,6 +14,7 @@ public class MyMatch {
 	private ArrayList<String> historial;
 	private ArrayList<String> ipconectados;
 	private HashMap<String,Integer> tiempoParaDesconexion;
+	private String checker;
 	
 	public HashMap<String, Integer> getTiempoParaDesconexion() {
 		return tiempoParaDesconexion;
@@ -90,6 +91,14 @@ public class MyMatch {
 		for(String key: keysBorradas) {
 		tiempoParaDesconexion.remove(key);
 		}
+	}
+
+	public String getChecker() {
+		return checker;
+	}
+
+	public void setChecker(String checker) {
+		this.checker = checker;
 	}
 	
 	

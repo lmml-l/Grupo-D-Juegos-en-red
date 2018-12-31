@@ -130,8 +130,10 @@ class CharapterSelection extends Phaser.Scene {
 	
 		var that=this;
 		//comprobación del estado del servidor
-		this.time.addEvent({delay:100, loop:true,
-    	callback: function(){getServerStatus(function(){that.scene.start('EscenarioError');})}})
+		if(function(){getCheckerStatus()}=="0"){
+			this.time.addEvent({delay:100, loop:true,
+		    callback: function(){getServerStatus(function(){that.scene.start('EscenarioError');})}})
+		}
 	}
 
 	//actualiza las imágenes de los iconos J1 y J2
