@@ -15,7 +15,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-public class WebsocketEchoHandler extends TextWebSocketHandler {
+public class WebsocketDropHandler extends TextWebSocketHandler {
 	
 	private Map<String, WebSocketSession> sessions = new ConcurrentHashMap<>();
 	private Map<String,List<WebSocketSession>> ParesDeUsuariosEnLaMismaPartida = new ConcurrentHashMap<>();
@@ -93,52 +93,32 @@ public class WebsocketEchoHandler extends TextWebSocketHandler {
 		
 	}
 	
-	private void sendOtherParticipants(WebSocketSession session, Object newNode) throws IOException {
-
-		System.out.println("Message sent: " + newNode.toString());
-		
-		for(WebSocketSession participant : sessions.values()) {
-			if(!participant.getId().equals(session.getId())) {
-				participant.sendMessage(new TextMessage(newNode.toString()));
-			}
-		}
-	}
 	
-	private void sendParticipantsInSameMatch(WebSocketSession session, Object newNode) throws IOException {
+	private void sendHostToClient(WebSocketSession session, Object newNode) throws IOException {
 
 		System.out.println("Message sent: " + newNode.toString());
 		List<WebSocketSession> participantes = ParesDeUsuariosEnLaMismaPartida.get(session.getId());
-			for(WebSocketSession participant : participantes){
+			if(participantes.get(0).equals(session)) {
+				for(WebSocketSession participant : participantes){
 				if(!participant.getId().equals(session.getId())) {
 					participant.sendMessage(new TextMessage(newNode.toString()));
 				}
-		}	
+			}	
+			}
 	}
 	
 	private void SelectordeTipodeMensaje(WebSocketSession session , JsonNode node) throws IOException {
 		
 		ObjectNode newNode = mapper.createObjectNode();
 		switch(node.get("protocolo").asText()){		
-		case "Jugador":
-			newNode.put("protocolo",node.get("protocolo").asText());
-			newNode.set("jugador",node.get("jugador"));			
+			
+		case "Drops":
+			newNode.put("protocolo", node.get("protocolo").asText());
+			newNode.set("drops", node.get("drops"));
 			//sendOtherParticipants(session, newNode);
-			sendParticipantsInSameMatch(session, newNode);
+			sendHostToClient(session, newNode);
 			break;
 			
-		case "GetReady":
-			newNode.put("protocolo", node.get("protocolo").asText());
-			newNode.put("ready", node.get("ready").get("ready").asText());
-			//sendOtherParticipants(session, newNode);
-			sendParticipantsInSameMatch(session, newNode);
-			break;
-
-		case "Skin":
-		    newNode.put("protocolo", node.get("protocolo").asText());
-		    newNode.set("skin", node.get("skin"));
-			//sendOtherParticipants(session, newNode);
-			sendParticipantsInSameMatch(session, newNode);
-			break;
 		default:
 			
 		}	

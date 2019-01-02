@@ -166,7 +166,7 @@ class CharapterSelectionOnline extends Phaser.Scene {
 				this.checkplayer1 = true; //confirmación y bloqueo
 				var data = {ready : that.checkplayer1 };
 				var message = {protocolo: "GetReady", ready : data };
-				connection.send(JSON.stringify(message))
+				connectionJugador.send(JSON.stringify(message))
 				
             
 			//this.ready2 = this.add.text(470, 390, "\n\n\n"+this.ready[1], { fill: '#FFFFFF', font: '32px Impact', align: 'center'});
