@@ -27,7 +27,7 @@ public class Checker {
 	
 	@PutMapping("/checker")
 	@ResponseStatus(HttpStatus.CREATED)
-	public void putIp(@PathVariable String check){
+	public void putIp(String check){
 		mymatch.setChecker(check);
 		System.out.println("Valor de check: " + check);
 	}
