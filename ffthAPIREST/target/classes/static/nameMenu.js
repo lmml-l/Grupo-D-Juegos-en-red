@@ -66,7 +66,7 @@ class nameMenu extends Phaser.Scene {
 			}
 			else{
 				console.log("The server is full");
-				this.textoEstadosala = this.add.text(390, 515, "The server is full", { fill: '#F4FFF3', font: '20px Impact', align: 'center'});
+				this.textoEstadosala = this.add.text(450, 515, "The server is full", { fill: '#F4FFF3', font: '20px Impact', align: 'center'});
 			}
 			
 		}

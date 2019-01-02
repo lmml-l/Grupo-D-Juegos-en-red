@@ -75,8 +75,8 @@ class Lobby extends Phaser.Scene {
 		////////////////////////
 		this.texts[0] = this.add.text(312, 400, "" ,{ fill: '#FFFFFF', font: '36px Impact', align: 'center'});
 		this.texts[1] = this.add.text(490, 370, "VS", { fill: '#FFFFFF', font: '54px Impact', align: 'center'});
-		this.texts[2] = this.add.text(140, 370, this.nombreRival[0], { fill: '#FFAC00', font: '54px Impact', align: 'center'}); //máximo de 15 letras
-		this.texts[3] = this.add.text(680, 370, this.nombreRival[1], { fill: '#FFAC00', font: '54px Impact', align: 'center'});
+		this.texts[2] = this.add.text(100, 370, this.nombreRival[0], { fill: '#FFAC00', font: '54px Impact', align: 'center'}); //máximo de 15 letras
+		this.texts[3] = this.add.text(600, 370, this.nombreRival[1], { fill: '#FFAC00', font: '54px Impact', align: 'center'});
 		this.texts[4] = this.add.text(320, 190, "PREPARE TO FIGHT!", { fill: '#FFFFFF', font: '54px Impact', align: 'center'});
 		////////////////////////
 	/*
