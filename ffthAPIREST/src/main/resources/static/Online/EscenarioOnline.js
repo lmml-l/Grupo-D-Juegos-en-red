@@ -466,16 +466,32 @@ create(){
 
          var dropevent = this.time.addEvent({delay:2000 ,loop:true ,
         callback: function(){
+            if(DropsWS==null){
             that.drops.spawnarma()
+            }
             }});
 
-        var actualizarMensajeDropYDrops = this.time.addEvent({delay:300 ,loop:true ,
+        var actualizarMensajeDropYDrops = this.time.addEvent({delay:1100 ,loop:true ,
         callback: function(){
             message = {protocolo: "Drops" , drops: that.drops}
-            setTimeout(function(){
-                 if(Drops!=null){
-                     that.drops.sprite = Drops.sprite;
-                }},100)
+            var armatemporal2 = that.scene.physics.add.sprite(DropsWS.sprite[1].x,DropsWS.sprite[1].y,DropsWS.sprite[1].texture).setScale(1)
+                if(DropsWS!=null){
+                    console.log(armatemporal + "HIIIISDISDS");
+                     //that.drops.sprite = DropsWS.sprite;
+                     //Destruimos los sprite
+                     for(var i = 0 ; i< that.drops.sprite.lenght ; i++){
+                        that.drops.sprite[i].destroy();
+                     }
+                     //vaciamos el array
+                     that.drops.sprite = new Array();
+
+                     //Creamos los nuevos sprite y añadimos al array
+                     for(var i = 0 ; i< DropsWS.sprite.lenght ; i++){
+                        var armatemporal = that.scene.physics.add.sprite(DropsWS.sprite[i].x,DropsWS.sprite[i].y,DropsWS.sprite[i].texture).setScale(1)
+                        that.drops.sprite.push(armatemporal);
+                        console.log(armatemporal + "HIIIISDISDS");
+                     }
+                }
             }});
 
         var actualizarMensajeParaJugador =this.time.addEvent({delay:200 ,loop:true ,

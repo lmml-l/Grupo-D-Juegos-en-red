@@ -18,16 +18,16 @@ public class Checker {
 	@Autowired
 	private MyMatch mymatch;
 		
-	@GetMapping("/checkstatus")
+	@GetMapping("/checker")
 	@ResponseStatus(HttpStatus.CREATED)
 	public String getCheckerStatus(){
 		System.out.println("Valor de check: " + mymatch.getChecker());
 		return mymatch.getChecker();
 	}
 	
-	@PutMapping("/checkstatus")
+	@PutMapping("/checker")
 	@ResponseStatus(HttpStatus.CREATED)
-	public void putIp(String check){
+	public void putIp(@PathVariable String check){
 		mymatch.setChecker(check);
 		System.out.println("Valor de check: " + check);
 	}

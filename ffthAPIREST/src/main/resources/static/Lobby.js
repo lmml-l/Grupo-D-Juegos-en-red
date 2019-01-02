@@ -15,6 +15,10 @@ class Lobby extends Phaser.Scene {
 		this.textoConexion;
 		this.estadoConexion = new Array(2); //estado de la conexión en todo momento (conectado o desconectado)
 		this.textoBusqueda;
+		this.jugadorDesc1;
+		this.estadoDesc1;
+		this.jugadorDesc2;
+		this.estadoDesc2;
 		this.estadoBusqueda; 	//buscando o encontrado
 		this.nombreRival = new Array(2); 	//conocido o desconocido
 		this.textoPartidas;
@@ -34,8 +38,8 @@ class Lobby extends Phaser.Scene {
 		this.check1 = false;
 		this.check2 = false;
 
-		this.nombreRival[0]="???"
-		this.nombreRival[1]="???";
+		this.nombreRival[0]=""
+		this.nombreRival[1]="";
 
 		//Valor de conexión
 		this.estadoConexion[0]="disconnected";
@@ -43,6 +47,8 @@ class Lobby extends Phaser.Scene {
 
 		//Buscando jugador o ya encontrado
 		this.estadoBusqueda="Looking for rivals...";
+		this.estadoDesc1="";
+		this.estadoDesc2="";
 
 		//Textos
 		this.textModo      = this.add.text(50, 50, "Online Mode", { fill: '#F4FFF3', font: '20px Impact', align: 'center'});
@@ -69,8 +75,8 @@ class Lobby extends Phaser.Scene {
 		////////////////////////
 		this.texts[0] = this.add.text(312, 400, "" ,{ fill: '#FFFFFF', font: '36px Impact', align: 'center'});
 		this.texts[1] = this.add.text(490, 370, "VS", { fill: '#FFFFFF', font: '54px Impact', align: 'center'});
-		this.texts[2] = this.add.text(80, 370, this.nombreRival[0], { fill: '#FFAC00', font: '54px Impact', align: 'center'}); //máximo de 15 letras
-		this.texts[3] = this.add.text(600, 370, this.nombreRival[1], { fill: '#FFAC00', font: '54px Impact', align: 'center'});
+		this.texts[2] = this.add.text(140, 370, this.nombreRival[0], { fill: '#FFAC00', font: '54px Impact', align: 'center'}); //máximo de 15 letras
+		this.texts[3] = this.add.text(680, 370, this.nombreRival[1], { fill: '#FFAC00', font: '54px Impact', align: 'center'});
 		this.texts[4] = this.add.text(320, 190, "PREPARE TO FIGHT!", { fill: '#FFFFFF', font: '54px Impact', align: 'center'});
 		////////////////////////
 	/*
@@ -153,6 +159,8 @@ class Lobby extends Phaser.Scene {
 
 		this.time.addEvent({delay:1100,loop:true, callback: function(){putTime(ip,ip)}})
 		that.textoBusqueda = that.add.text(380, 480, that.estadoBusqueda, { fill: '#FFFFFF', font: '36px Impact', align: 'center'});
+		that.jugadorDesc1 = that.add.text(80, 370, that.estadoDesc1, { fill: '#A52019', font: '40px Impact', align: 'center'});
+		that.jugadorDesc2 = that.add.text(600, 370, that.estadoDesc2, { fill: '#A52019', font: '40px Impact', align: 'center'});
 
 
 		//se entra automáticamente a local cuando los dos jugadores están
@@ -168,8 +176,16 @@ class Lobby extends Phaser.Scene {
 		this.time.addEvent({delay:2000,loop:true, callback: function(){
 			if(ipsLobby.length == 2){
 				that.textoBusqueda.text = "Starting fight";
+				that.jugadorDesc1.text = "";
+				that.jugadorDesc2.text = "";
+			}else if(ipsLobby.length == 1){
+				that.textoBusqueda.text = "Looking for rivals...";
+				that.jugadorDesc1.text = "";
+				that.jugadorDesc2.text = "Player disconnected"
 			}else{
 				that.textoBusqueda.text = "Looking for rivals...";
+				that.jugadorDesc1.text = "Player disconnected";
+				that.jugadorDesc2.text = "Player disconnected"
 			}
 		}})
 		/*

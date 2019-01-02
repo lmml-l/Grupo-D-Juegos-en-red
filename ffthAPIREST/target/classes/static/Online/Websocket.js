@@ -4,7 +4,7 @@
 
 var Jugador;
 var GetReady;
-var Drops = null;
+var DropsWS = null;
 
 var connection;
 function conection (){
@@ -20,7 +20,7 @@ function conection (){
 			GetReady = datosGuardadosComoObjeto.ready;
 			break;
 			case "Drops":
-			Drops = datosGuardadosComoObjeto.drops;
+			DropsWS = datosGuardadosComoObjeto.drops;
 			break;
 			default:
 		}
