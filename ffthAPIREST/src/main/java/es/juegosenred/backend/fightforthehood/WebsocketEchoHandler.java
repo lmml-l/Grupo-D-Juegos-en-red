@@ -134,8 +134,7 @@ public class WebsocketEchoHandler extends TextWebSocketHandler {
 		switch(node.get("protocolo").asText()){		
 		case "Jugador":
 			newNode.put("protocolo",node.get("protocolo").asText());
-			newNode.set("jugador",node.get("jugador"));
-			
+			newNode.set("jugador",node.get("jugador"));			
 			//sendOtherParticipants(session, newNode);
 			sendParticipantsInSameMatch(session, newNode);
 			break;
@@ -153,7 +152,12 @@ public class WebsocketEchoHandler extends TextWebSocketHandler {
 			//sendOtherParticipants(session, newNode);
 			sendHostToClient(session, newNode);
 			break;
-			
+		case "Skin":
+		    newNode.put("protocolo", node.get("protocolo").asText());
+		    newNode.set("skin", node.get("skin"));
+			//sendOtherParticipants(session, newNode);
+			sendParticipantsInSameMatch(session, newNode);
+			break;
 		default:
 			
 		}	

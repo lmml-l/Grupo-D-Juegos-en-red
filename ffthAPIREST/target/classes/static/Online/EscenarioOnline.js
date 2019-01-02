@@ -518,6 +518,7 @@ create(){
        
         Jugador = that.jugador1;
 
+
         var ActualizarPosJugador = this.time.addEvent({delay:100 ,loop:false ,
         callback: function(){
         message = {protocolo: "Jugador" , jugador: that.jugador}

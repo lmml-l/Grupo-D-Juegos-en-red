@@ -5,6 +5,7 @@
 var Jugador;
 var GetReady;
 var DropsWS = null;
+var Skin;
 
 var connection;
 function conection (){
@@ -22,6 +23,11 @@ function conection (){
 			case "Drops":
 			DropsWS = datosGuardadosComoObjeto.drops;
 			//console.log(DropsWS.sprite + "Tiene que ser un puto array de mierda valeeeee");
+			break;
+			case "Skin":
+			Skin = datosGuardadosComoObjeto.skin;
+			console.log (Skin.skin);
+
 			break;
 			default:
 		}

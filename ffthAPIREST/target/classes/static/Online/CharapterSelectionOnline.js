@@ -1,4 +1,7 @@
 //Cada jugador selecciona el aspecto con el que aparecerá su personaje
+
+var SoloMandarUnaVez = false;
+
 class CharapterSelectionOnline extends Phaser.Scene {
 	constructor(){
 		super({key:"CharapterSelectionOnline"});
@@ -29,6 +32,7 @@ class CharapterSelectionOnline extends Phaser.Scene {
 		this.ready2; 
 
 		var that = this;
+
 	}
 
 	selection(){
@@ -126,7 +130,7 @@ class CharapterSelectionOnline extends Phaser.Scene {
 		this.ready1 =this.add.text(0, 0, this.ready[0], { fill: '#F4FFF3', font: '24px Impact', align: 'center'});
 
 		conection();
-
+        Skin = sprite2;
 	
 		var that=this;
 		//comprobación del estado del servidor
@@ -179,8 +183,11 @@ startPartida () {
 }
 
 //da paso a la pantalla seleccionada sólo si los dos jugadores han elegido o si se decide salir
+
+
 	scenechange(){
 		var that=this;
+
 
 		if(this.salir.isDown){
 			this.scene.start('MainMenu');
@@ -203,11 +210,25 @@ startPartida () {
 		if(this.checkplayer1 && this.checkplayer2){
             this.add.text(490, 390, "\n"+"Ready", {fill: '#930A0A', font: '24px Impact'}).alpha = 0.06;
 			this.ready2 = this.add.text(420, 390, "\n\n\n"+this.ready[1], { fill: '#F4FFF3', font: '24px Arial', align: 'center'}).alpha = 0.06;
+
+           if(SoloMandarUnaVez == false){
+
+            SoloMandarUnaVez = true;
+            var MySkin = {skin : sprite};
+		    var messagee = {protocolo: "Skin", skin : MySkin };
+		    connection.send(JSON.stringify(messagee))
+		    //console.log(SoloMandarUnaVez);
+           }
+ 
+            sprite2 = Skin.skin;
+
 			this.time.addEvent({delay:7000, 
 			callback: function(){that.startPartida()}}); //Quiero añadir un texto que ponga la partida va a comenzar... 
 			//cuando seleccionen listo los dos jugadores y un timer to start 
 			
 		}
+
+	
 	}
 
 	update(){
