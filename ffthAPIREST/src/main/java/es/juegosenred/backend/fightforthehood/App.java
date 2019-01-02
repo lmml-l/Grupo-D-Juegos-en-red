@@ -22,12 +22,18 @@ public class App implements WebSocketConfigurer
 	WebSocketHandlerRegistry registry) {
 	registry.addHandler(echoHandler(), "/echo")
 	.setAllowedOrigins("*");
+	
+	registry.addHandler(dropHandler(), "/drops")
+	.setAllowedOrigins("*");
 	}
 	@Bean
 	public WebsocketEchoHandler echoHandler() {
 	return new WebsocketEchoHandler();
 	}
-
+	@Bean
+	public WebsocketDropHandler dropHandler() {
+	return new WebsocketDropHandler();
+	}
 	
 	
     public static void main( String[] args )

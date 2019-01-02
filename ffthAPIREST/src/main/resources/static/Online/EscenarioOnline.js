@@ -505,13 +505,14 @@ create(){
                 that.jugador1.keymovizq = Jugador.A;
                 that.jugador1.keymovder = Jugador.D;
                 that.jugador1.keyrecarmasoltada = Jugador.R;
-                that.jugador1.keydisparo = Jugador.T;   
+                that.jugador1.keydisparo = Jugador.T;
         }});
 
         var MandarWebsocket = this.time.addEvent({delay:100 ,loop:true ,
         callback: function(){
 
-        connection.send(JSON.stringify(message));
+        connectionJugador.send(JSON.stringify(message));
+        connectionDrops.send(JSON.stringify(message));
           
         }});
 

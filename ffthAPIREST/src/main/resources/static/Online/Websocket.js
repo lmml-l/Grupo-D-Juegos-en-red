@@ -4,12 +4,17 @@
 
 var Jugador;
 var GetReady;
-var DropsWS = null;
+var DropsWS = null; //comienzo a null para dividir entre sesiones
 
-var connection;
+var connectionJugador;
+var connectionDrops;
 function conection (){
-	connection = new WebSocket('ws://'+ location.host +'/echo');
-	connection.onmessage = function(msg) {
+	//Dos websockets, uno para Jugador y otro para Drops
+	connectionJugador = new WebSocket('ws://'+ location.host +'/echo');
+	connectionDrops   = new WebSocket('ws://'+ location.host +'/drops');
+
+	//JUGADOR
+	connectionJugador.onmessage = function(msg) {
 		console.log("WS message: " + msg.data);
 		var datosGuardadosComoObjeto = JSON.parse(msg.data);
 		switch(datosGuardadosComoObjeto.protocolo){
@@ -19,6 +24,19 @@ function conection (){
 			case "GetReady":
 			GetReady = datosGuardadosComoObjeto.ready;
 			break;
+			default:
+		}
+	}
+	connectionJugador.onclose = function() {
+		setTimeout(conection(),1000);
+		console.log("Closing socket");
+	}
+
+	//DROPS
+		connectionDrops.onmessage = function(msg) {
+		console.log("WS message: " + msg.data);
+		var datosGuardadosComoObjeto = JSON.parse(msg.data);
+		switch(datosGuardadosComoObjeto.protocolo){
 			case "Drops":
 			DropsWS = datosGuardadosComoObjeto.drops;
 			//console.log(DropsWS.sprite + "Tiene que ser un puto array de mierda valeeeee");
@@ -26,7 +44,7 @@ function conection (){
 			default:
 		}
 	}
-	connection.onclose = function() {
+	connectionDrops.onclose = function() {
 		setTimeout(conection(),1000);
 		console.log("Closing socket");
 	}
