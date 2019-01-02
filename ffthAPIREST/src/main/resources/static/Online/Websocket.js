@@ -21,6 +21,7 @@ function conection (){
 			break;
 			case "Drops":
 			DropsWS = datosGuardadosComoObjeto.drops;
+			console.log(DropsWS + "Tiene que ser un puto array de mierda valeeeee");
 			break;
 			default:
 		}

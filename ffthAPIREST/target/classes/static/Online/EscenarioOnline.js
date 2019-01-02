@@ -474,13 +474,13 @@ create(){
         var actualizarMensajeDropYDrops = this.time.addEvent({delay:1100 ,loop:true ,
         callback: function(){
             message = {protocolo: "Drops" , drops: that.drops}
-            var armatemporal2 = that.scene.physics.add.sprite(DropsWS.sprite[1].x,DropsWS.sprite[1].y,DropsWS.sprite[1].texture).setScale(1)
+
                 if(DropsWS!=null){
-                    console.log(armatemporal + "HIIIISDISDS");
                      //that.drops.sprite = DropsWS.sprite;
                      //Destruimos los sprite
                      for(var i = 0 ; i< that.drops.sprite.lenght ; i++){
                         that.drops.sprite[i].destroy();
+                        console.log("Borro las armas que hay")
                      }
                      //vaciamos el array
                      that.drops.sprite = new Array();
@@ -489,7 +489,6 @@ create(){
                      for(var i = 0 ; i< DropsWS.sprite.lenght ; i++){
                         var armatemporal = that.scene.physics.add.sprite(DropsWS.sprite[i].x,DropsWS.sprite[i].y,DropsWS.sprite[i].texture).setScale(1)
                         that.drops.sprite.push(armatemporal);
-                        console.log(armatemporal + "HIIIISDISDS");
                      }
                 }
             }});
