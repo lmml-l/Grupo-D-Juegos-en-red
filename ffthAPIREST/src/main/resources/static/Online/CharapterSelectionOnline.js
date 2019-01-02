@@ -216,7 +216,7 @@ startPartida () {
             SoloMandarUnaVez = true;
             var MySkin = {skin : sprite};
 		    var messagee = {protocolo: "Skin", skin : MySkin };
-		    connection.send(JSON.stringify(messagee))
+		    connectionJugador.send(JSON.stringify(messagee))
 		    //console.log(SoloMandarUnaVez);
            }
  
