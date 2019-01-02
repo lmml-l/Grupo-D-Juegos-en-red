@@ -473,7 +473,7 @@ create(){
             }
             }});
 
-        var actualizarMensajeDropYDrops = this.time.addEvent({delay:300 ,loop:true ,
+        var actualizarMensajeDropYDrops = this.time.addEvent({delay:100 ,loop:true ,
         callback: function(){
             messageDrops = {protocolo: "Drops" , drops: that.drops}
 
@@ -496,7 +496,7 @@ create(){
                 }
             }});
 
-        var actualizarMensajeParaJugador =this.time.addEvent({delay:200 ,loop:true ,
+        var actualizarMensajeParaJugador =this.time.addEvent({delay:100 ,loop:true ,
         callback: function(){
             message = {protocolo: "Jugador" , jugador: that.jugador}
                 that.jugador1.arma = Jugador.arma;
