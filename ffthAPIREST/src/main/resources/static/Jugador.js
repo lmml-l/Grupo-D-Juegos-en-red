@@ -256,7 +256,7 @@ function Jugador(avatar,controles,proyectiles){
 			W: that.keysalto,
 			A: that.keymovizq,
 			D: that.keymovder,
-			R: that.keyrecarmasoltada,
+			R: that.keyrecarma,
 			T: that.keydisparo
 		}
 		return data;

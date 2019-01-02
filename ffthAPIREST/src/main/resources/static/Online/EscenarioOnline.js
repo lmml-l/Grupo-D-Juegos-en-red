@@ -506,7 +506,7 @@ create(){
                 that.jugador1.keysalto = Jugador.W;
                 that.jugador1.keymovizq = Jugador.A;
                 that.jugador1.keymovder = Jugador.D;
-                that.jugador1.keyrecarmasoltada = Jugador.R;
+                that.jugador1.keyrecarma = Jugador.R;
                 that.jugador1.keydisparo = Jugador.T;
         }});
 
