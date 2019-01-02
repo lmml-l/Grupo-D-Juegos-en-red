@@ -26,7 +26,7 @@ class CharapterSelectionOnline extends Phaser.Scene {
 
 		this.ready = new Array(2);
 		this.ready1;
-		this.ready2;
+		this.ready2; 
 
 		var that = this;
 	}
@@ -121,11 +121,12 @@ class CharapterSelectionOnline extends Phaser.Scene {
 		this.ready[0]="";
 		this.ready[1]="\nPlayers are ready,\ngame will start...";
 
-		conection();
-
 		//texto invisible
 		this.ready1 =this.add.text(0, 0, this.ready[0], { fill: '#F4FFF3', font: '24px Impact', align: 'center'});
 		this.ready1 =this.add.text(0, 0, this.ready[0], { fill: '#F4FFF3', font: '24px Impact', align: 'center'});
+
+		conection();
+
 	
 		var that=this;
 		//comprobación del estado del servidor
@@ -182,6 +183,10 @@ startPartida () {
 		if(this.salir.isDown){
 			this.scene.start('MainMenu');
 		}
+		if(this.confirmar2.isDown){
+
+			this.add.text(490, 390, "\n\n"+"Ready", {fill: '#00853A', font: '24px Impact'});
+		}
 
 		/*
 		if(this.checkplayer1=true) {
@@ -194,8 +199,8 @@ startPartida () {
 		*/
 
 		if(this.checkplayer1 && this.checkplayer2){
-
-			this.ready2 = this.add.text(420, 390, "\n\n\n"+this.ready[1], { fill: '#F4FFF3', font: '24px Impact', align: 'center'});
+            this.add.text(490, 390, "\n"+"Ready", {fill: '#930A0A', font: '24px Impact'}).alpha = 0.06;
+			this.ready2 = this.add.text(420, 390, "\n\n\n"+this.ready[1], { fill: '#F4FFF3', font: '24px Arial', align: 'center'}).alpha = 0.06;
 			this.time.addEvent({delay:7000, 
 			callback: function(){that.startPartida()}}); //Quiero añadir un texto que ponga la partida va a comenzar... 
 			//cuando seleccionen listo los dos jugadores y un timer to start 
