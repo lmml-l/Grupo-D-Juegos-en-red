@@ -4,7 +4,7 @@
 
 var Jugador;
 var GetReady;
-var DropsWS = null;
+var DropsWS = null; //comienzo a null para dividir entre sesiones
 
 var connectionJugador;
 var connectionDrops;

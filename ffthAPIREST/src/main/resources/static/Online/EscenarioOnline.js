@@ -461,8 +461,10 @@ create(){
 
 ///ACTUALIZACIONES DE OBJETOS RELACIONADOS CON WEBSOCKET
     var message;
+    var messageDrops;
 
-        message = {protocolo: "Jugador" , jugador: that.jugador}
+        message      = {protocolo: "Jugador" , jugador: that.jugador}
+        messageDrops = {protocolo: "Drops" , drops: that.drops}
 
          var dropevent = this.time.addEvent({delay:2000 ,loop:true ,
         callback: function(){
@@ -471,9 +473,9 @@ create(){
             }
             }});
 
-        var actualizarMensajeDropYDrops = this.time.addEvent({delay:1100 ,loop:true ,
+        var actualizarMensajeDropYDrops = this.time.addEvent({delay:300 ,loop:true ,
         callback: function(){
-            message = {protocolo: "Drops" , drops: that.drops}
+            messageDrops = {protocolo: "Drops" , drops: that.drops}
 
                 if(DropsWS!=null){
                      //that.drops.sprite = DropsWS.sprite;
@@ -512,7 +514,13 @@ create(){
         callback: function(){
 
         connectionJugador.send(JSON.stringify(message));
-        connectionDrops.send(JSON.stringify(message));
+          
+        }});
+
+        var MandarWebsocketDrops = this.time.addEvent({delay:100 ,loop:true ,
+        callback: function(){
+
+        connectionDrops.send(JSON.stringify(messageDrops));
           
         }});
 
