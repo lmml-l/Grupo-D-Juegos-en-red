@@ -478,7 +478,7 @@ create(){
                 if(DropsWS!=null){
                      //that.drops.sprite = DropsWS.sprite;
                      //Destruimos los sprite
-                     for(var i = 0 ; i< that.drops.sprite.lenght ; i++){
+                     for(var i = 0 ; i< that.drops.sprite.length ; i++){
                         that.drops.sprite[i].destroy();
                         console.log("Borro las armas que hay")
                      }
@@ -486,8 +486,9 @@ create(){
                      that.drops.sprite = new Array();
 
                      //Creamos los nuevos sprite y añadimos al array
-                     for(var i = 0 ; i< DropsWS.sprite.lenght ; i++){
-                        var armatemporal = that.scene.physics.add.sprite(DropsWS.sprite[i].x,DropsWS.sprite[i].y,DropsWS.sprite[i].texture).setScale(1)
+                     for(var i = 0 ; i< DropsWS.sprite.length ; i++){
+                        console.log(DropsWS.sprite[i]);
+                        var armatemporal = that.physics.add.sprite(DropsWS.sprite[i].x,DropsWS.sprite[i].y,DropsWS.sprite[i].texture).setScale(1)
                         that.drops.sprite.push(armatemporal);
                      }
                 }
