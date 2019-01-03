@@ -28,6 +28,8 @@ public class App implements WebSocketConfigurer
 	
 	registry.addHandler(timeHandler(), "/tiempo")
 	.setAllowedOrigins("*");
+	registry.addHandler(puntuacionHandler(), "/puntuacion")
+	.setAllowedOrigins("*");
 	}
 	@Bean
 	public WebsocketEchoHandler echoHandler() {
@@ -40,6 +42,10 @@ public class App implements WebSocketConfigurer
 	@Bean
 	public WebsocketTimeHandler timeHandler() {
 	return new WebsocketTimeHandler();
+	}
+	@Bean
+	public WebsocketPuntuacionHandler puntuacionHandler() {
+	return new WebsocketPuntuacionHandler();
 	}
 	
 	
