@@ -7,6 +7,8 @@ var GetReady;
 var DropsWS = null;
 var Tiempo  = null;
 var Skin;
+var check = 0;
+var comp = false;
 
 //Tipos de conexión websocket
 var connectionJugador;
@@ -18,6 +20,7 @@ function conection (){
 	connectionJugador  = new WebSocket('ws://'+ location.host +'/echo');
 	connectionDrops    = new WebSocket('ws://'+ location.host +'/drops');
 	connectionTiempo   = new WebSocket('ws://'+ location.host +'/tiempo');
+	comp = false;
 
 	//JUGADOR
 	connectionJugador.onmessage = function(msg) {
@@ -59,6 +62,7 @@ function conection (){
 
 	//TIEMPO
 		connectionTiempo.onmessage = function(msg) {
+		putCheck(0);
 		console.log("WS message: " + msg.data);
 		var datosGuardadosComoObjeto = JSON.parse(msg.data);
 		switch(datosGuardadosComoObjeto.protocolo){
@@ -71,7 +75,36 @@ function conection (){
 	connectionTiempo.onclose = function() {
 		setTimeout(conection(),1000);
 		console.log("Closing socket");
+		sumCheck();
+		if(getCheck()>5){
+			setComp(true);
+		}
 	}
+}
+
+function sumCheck(){
+	this.check++;
+	console.log("negros" + this.check)
+	return this.check;
+}
+
+function putCheck(checker){
+	this.check = 0;
+	console.log("negros a 0")
+}
+
+function getCheck(){
+	console.log("negros" + this.check)
+	return this.check;
+}
+
+function getComp(){
+	return this.comp;
+}
+
+function setComp(bool){
+	this.comp = bool;
+	console.log(comp)
 }
 
 

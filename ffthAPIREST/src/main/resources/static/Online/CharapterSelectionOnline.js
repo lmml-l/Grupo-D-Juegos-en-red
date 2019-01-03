@@ -9,7 +9,7 @@ class CharapterSelectionOnline extends Phaser.Scene {
 		this.checkplayer1;
 		this.checkplayer2;
 		this.p1;
-
+		this.check;
 
 		this.posArrayP1;
 		this.posArrayP2;
@@ -128,13 +128,14 @@ class CharapterSelectionOnline extends Phaser.Scene {
 		//texto invisible
 		this.ready1 =this.add.text(0, 0, this.ready[0], { fill: '#F4FFF3', font: '24px Impact', align: 'center'});
 		this.ready1 =this.add.text(0, 0, this.ready[0], { fill: '#F4FFF3', font: '24px Impact', align: 'center'});
+		this.check = getComp();
 
 		conection();
         Skin = sprite2;
 	
 		var that=this;
 		//comprobación del estado del servidor
-		if(function(){getCheckerStatus()}=="0"){
+		if(this.check>5){
 			this.time.addEvent({delay:100, loop:true,
 		    callback: function(){getServerStatus(function(){that.scene.start('EscenarioError');})}})
 		}
@@ -227,6 +228,13 @@ startPartida () {
 			//cuando seleccionen listo los dos jugadores y un timer to start 
 			
 		}
+		
+		var that = this;
+		if(this.check){
+			console.log("furrula")
+			this.time.addEvent({delay:100, loop:true,
+		    callback: function(){that.scene.start('EscenarioError');}})
+		}
 
 	
 	}
@@ -235,6 +243,6 @@ startPartida () {
 		this.scenechange();
 		this.actualizarP1P2();
 		this.actualizarPosArray();
-
+		
 	}
 }

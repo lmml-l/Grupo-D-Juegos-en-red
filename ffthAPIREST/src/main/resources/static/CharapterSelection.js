@@ -10,7 +10,8 @@ class CharapterSelection extends Phaser.Scene {
 		this.p2;
 		this.posArrayP1;
 		this.posArrayP2;
-
+		this.check;
+		
 		this.derecha1;
 		this.derecha2;
 		this.izquierda1;
@@ -111,6 +112,7 @@ class CharapterSelection extends Phaser.Scene {
 	create(){
 		this.fondo = this.add.image(this.game.canvas.width/2,this.game.canvas.height/2,'menuCharacterFondo').setScale(1.3);
 		this.selection();
+		this.check = getComp();
 		this.textModo = this.add.text(50, 50, "Local mode", { fill: '#F4FFF3', font: '20px Impact', align: 'center'});
 		//indicación de los controles
 		this.textoControles = this.add.text(470, 540, "\nselect\naccept", { fill: '#FFFFFF', font: '30px Impact', align: 'center'});
@@ -130,10 +132,7 @@ class CharapterSelection extends Phaser.Scene {
 	
 		var that=this;
 		//comprobación del estado del servidor
-		if(function(){getCheckerStatus()}=="0"){
-			this.time.addEvent({delay:100, loop:true,
-		    callback: function(){getServerStatus(function(){that.scene.start('EscenarioError');})}})
-		}
+		
 	}
 
 	//actualiza las imágenes de los iconos J1 y J2
@@ -171,6 +170,12 @@ class CharapterSelection extends Phaser.Scene {
 		}
 		if(this.checkplayer1 && this.checkplayer2){
 			this.scene.start('MainEscenario');
+		}
+		var that = this;
+		if(this.check){
+			console.log("furrula")
+			this.time.addEvent({delay:100, loop:true,
+		    callback: function(){that.scene.start('EscenarioError');}})
 		}
 	}
 
