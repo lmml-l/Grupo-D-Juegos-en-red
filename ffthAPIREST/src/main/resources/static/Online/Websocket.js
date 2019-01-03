@@ -7,6 +7,7 @@ var GetReady;
 var DropsWS = null;
 var Tiempo  = null;
 var IsHost = null
+var PosicionWS = null;
 var Skin;
 var check = 0;
 var comp = false;
@@ -67,13 +68,16 @@ function conection (){
 
 
 
-	//DROPS
+	//DROPS (también se usa para la posición inicial)
 		connectionDrops.onmessage = function(msg) {
 		console.log("WS message: " + msg.data);
 		var datosGuardadosComoObjeto = JSON.parse(msg.data);
 		switch(datosGuardadosComoObjeto.protocolo){
 			case "Drops":
 			DropsWS = datosGuardadosComoObjeto.drops;
+			break;
+			case "Posicion":
+			PosicionWS = datosGuardadosComoObjeto.posicion;
 			break;
 			default:
 		}
@@ -83,7 +87,7 @@ function conection (){
 		console.log("Closing socket");
 	}
 
-	//TIEMPO
+	//TIEMPO (también se usa para indicar quién es el host)
 		connectionTiempo.onmessage = function(msg) {
 		putCheck(0);
 		console.log("WS message: " + msg.data);
