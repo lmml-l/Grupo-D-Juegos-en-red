@@ -150,12 +150,13 @@ class CharapterSelectionOnline extends Phaser.Scene {
     	var IsHostText = this.add.text(100, 100, "", { fill: '#FFAC00', font: '38px Impact', align: 'center'});
     	
 
-    	this.time.addEvent({delay:3000, loop:false, 
+    	this.time.addEvent({delay:2000, loop: true, 
     	callback: function(){
     		var messageHost = {protocolo: "Host"}
     		connectionTiempo.send(JSON.stringify(messageHost));
     		if(IsHost!=null){
     			IsHostText.text="You are the Host";
+
     		}
 
     	}})
@@ -176,7 +177,7 @@ class CharapterSelectionOnline extends Phaser.Scene {
 			this.posArrayP1++; //mueve cursor a la derecha
 		}else if(this.izquierda2.isDown && (this.posArrayP1>0) && !this.checkplayer1){
 			this.posArrayP1--; //mueve cursor a la izquierda
-		}else if(this.confirmar2.isDown){
+		}else if(this.confirmar2.isDown && (IsHost!=null || this.checkplayer2)){
 				
 		
 				this.checkplayer1 = true; //confirmación y bloqueo
@@ -208,7 +209,7 @@ startPartida () {
 		if(this.salir.isDown){
 			this.scene.start('MainMenu');
 		}
-		if(this.confirmar2.isDown){
+		if(this.confirmar2.isDown && (IsHost!=null || this.checkplayer2)){
 
 			this.add.text(490, 390, "\n\n"+"Ready", {fill: '#00853A', font: '24px Impact'});
 		}
