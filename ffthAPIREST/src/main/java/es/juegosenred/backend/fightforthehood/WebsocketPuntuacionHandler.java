@@ -15,7 +15,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-public class WebsocketTimeHandler extends TextWebSocketHandler {
+public class WebsocketPuntuacionHandler extends TextWebSocketHandler {
 	
 	private Map<String, WebSocketSession> sessions = new ConcurrentHashMap<>();
 	private Map<String,List<WebSocketSession>> ParesDeUsuariosEnLaMismaPartida = new ConcurrentHashMap<>();
@@ -92,10 +92,10 @@ public class WebsocketTimeHandler extends TextWebSocketHandler {
 		}
 		
 	}
-
+	
 	
 	private void sendHostToClient(WebSocketSession session, Object newNode) throws IOException {
-		
+
 		System.out.println("Message sent: " + newNode.toString());
 		List<WebSocketSession> participantes = ParesDeUsuariosEnLaMismaPartida.get(session.getId());
 			if(participantes.get(0).equals(session)) {
@@ -112,27 +112,16 @@ public class WebsocketTimeHandler extends TextWebSocketHandler {
 		ObjectNode newNode = mapper.createObjectNode();
 		switch(node.get("protocolo").asText()){		
 			
-		case "Tiempo":
+		case "Puntuacion":
 			newNode.put("protocolo", node.get("protocolo").asText());
-			newNode.set("tiempo", node.get("tiempo"));
+			newNode.set("puntuacion", node.get("puntuacion"));
 			//sendOtherParticipants(session, newNode);
 			sendHostToClient(session, newNode);
 			break;
 			
-		case "Host":
-			newNode.put("protocolo", node.get("protocolo").asText());
-			List<WebSocketSession> participantes = ParesDeUsuariosEnLaMismaPartida.get(session.getId());
-			if(participantes.get(0).equals(session)){
-				newNode.put("ishost", session.getId());
-			}else {
-				newNode.set("ishost", null);
-			}
-			session.sendMessage(new TextMessage(newNode.toString()));
-			break;
 		default:
 			
 		}	
 				
 		}
 }
-

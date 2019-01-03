@@ -51,9 +51,11 @@ class EscenarioOnline extends Phaser.Scene {
 	constructor(){
 		super({key:"EscenarioOnline"});
         
-        //Posicionamos los personajes
-        this.avatar = new Avatar("a",this,400,400,sprite);
-        this.avatar1 = new Avatar("b",this,600,400,sprite2);
+        //Posicionamos los personajes. Posición definida en CharacterSelection
+        this.avatar  = new Avatar("a",this,posInicial[0],posInicial[1],sprite);   //Jugador host
+        this.avatar1 = new Avatar("b",this,posInicial[2],posInicial[3],sprite2);  //Jugador cliente
+
+
         //Asociamos proyectiles
         this.proyectiles = new Proyectiles(spriteproyectiles);
         this.proyectiles2 = new Proyectiles(spriteproyectiles);
@@ -463,10 +465,12 @@ create(){
     var message;        //Jugador
     var messageDrops;   //Drops
     var messageTiempo;  //Tiempo (cuenta atrás)
+    var messagePuntuacion //Puntuación para ganar
 
         message       = {protocolo: "Jugador" , jugador: that.jugador}
         messageDrops  = {protocolo: "Drops" , drops: that.drops}
         messageTiempo = {protocolo: "Tiempo" , tiempo: that.Clock}
+        messagePuntuacion = {protocolo: "Puntuacion" , puntuacion: victorias}
 
          var dropevent = this.time.addEvent({delay:2000 ,loop:true ,
         callback: function(){
@@ -504,11 +508,7 @@ create(){
                 that.jugador1.arma       = Jugador.arma;
                 that.jugador1.proyectiles.proyectilesenescane = Jugador.proyectiles.proyectilesenescane;
                 that.jugador1.municiones = Jugador.municiones;
-
-            
                 that.jugador1.vida       = Jugador.vida;
-                
-
                 that.jugador1.keysalto   = Jugador.W;
                 that.jugador1.keymovizq  = Jugador.A;
                 that.jugador1.keymovder  = Jugador.D;
@@ -547,17 +547,15 @@ create(){
           
         }});
 
+        var MandarWebsocketPuntuacion = this.time.addEvent({delay:100 ,loop:true ,
+        callback: function(){
+
+        connectionPuntuacion.send(JSON.stringify(messagePuntuacion));
+          
+        }});
+
        
         Jugador = that.jugador1;
-
-
-        var ActualizarPosJugador = this.time.addEvent({delay:100 ,loop:false ,
-        callback: function(){
-        message = {protocolo: "Jugador" , jugador: that.jugador}
-        that.jugador1.avatar.sprite.x = Jugador.avatar.sprite.x;
-        that.jugador1.avatar.sprite.y = Jugador.avatar.sprite.y;
-
-        }});
 
         var ActualizarPosJugadorLoop = this.time.addEvent({delay:2000 ,loop:true ,
         callback: function(){

@@ -465,10 +465,12 @@ create(){
     var message;        //Jugador
     var messageDrops;   //Drops
     var messageTiempo;  //Tiempo (cuenta atrás)
+    var messagePuntuacion //Puntuación para ganar
 
         message       = {protocolo: "Jugador" , jugador: that.jugador}
         messageDrops  = {protocolo: "Drops" , drops: that.drops}
         messageTiempo = {protocolo: "Tiempo" , tiempo: that.Clock}
+        messagePuntuacion = {protocolo: "Puntuacion" , puntuacion: victorias}
 
          var dropevent = this.time.addEvent({delay:2000 ,loop:true ,
         callback: function(){
@@ -542,6 +544,13 @@ create(){
         callback: function(){
 
         connectionTiempo.send(JSON.stringify(messageTiempo));
+          
+        }});
+
+        var MandarWebsocketPuntuacion = this.time.addEvent({delay:100 ,loop:true ,
+        callback: function(){
+
+        connectionPuntuacion.send(JSON.stringify(messagePuntuacion));
           
         }});
 

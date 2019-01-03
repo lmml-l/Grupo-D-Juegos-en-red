@@ -146,6 +146,19 @@ class CharapterSelectionOnline extends Phaser.Scene {
     	this.time.addEvent({delay:1000 ,loop:true ,
         callback: function(){that.checkplayer2 = GetReady} });
 
+    	//Actualiza si el cliente es Host o no 
+    	var IsHostText = this.add.text(100, 100, "", { fill: '#FFAC00', font: '38px Impact', align: 'center'});
+    	
+
+    	this.time.addEvent({delay:1000, loop:true, 
+    	callback: function(){
+    		var messageHost = {protocolo: "Host"}
+    		connectionTiempo.send(JSON.stringify(messageHost));
+    		if(IsHost!=null){
+    			IsHostText.text="You are the Host";
+    		}
+
+    	}})
 	}
 
 	//actualiza las imágenes de la flecha de selección

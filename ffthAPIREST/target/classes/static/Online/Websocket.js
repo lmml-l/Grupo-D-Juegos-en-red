@@ -6,20 +6,24 @@ var Jugador;
 var GetReady;
 var DropsWS = null;
 var Tiempo  = null;
+var IsHost = null
 var Skin;
 var check = 0;
 var comp = false;
+var Puntuacion;
 
 //Tipos de conexión websocket
 var connectionJugador;
 var connectionDrops;
 var connectionTiempo;
+var connectionPuntuacion;
 
 function conection (){
 	//Tres websockets: Jugador, Drops y Tiempo
 	connectionJugador  = new WebSocket('ws://'+ location.host +'/echo');
 	connectionDrops    = new WebSocket('ws://'+ location.host +'/drops');
 	connectionTiempo   = new WebSocket('ws://'+ location.host +'/tiempo');
+	connectionPuntuacion   = new WebSocket('ws://'+ location.host +'/puntuacion');
 	comp = false;
 
 	//JUGADOR
@@ -43,6 +47,25 @@ function conection (){
 		setTimeout(conection(),1000);
 		console.log("Closing socket");
 	}
+
+
+	//PUNTUACIÓN
+	connectionPuntuacion.onmessage = function(msg) {
+		console.log("WS message: " + msg.data);
+		var datosGuardadosComoObjeto = JSON.parse(msg.data);
+		switch(datosGuardadosComoObjeto.protocolo){
+			case "Puntuacion":
+			Puntuacion = datosGuardadosComoObjeto.jugador;
+			break;
+			default:
+		}
+	}
+	connectionPuntuacion.onclose = function() {
+		setTimeout(conection(),1000);
+		console.log("Closing socket");
+	}
+
+
 
 	//DROPS
 		connectionDrops.onmessage = function(msg) {
@@ -69,6 +92,8 @@ function conection (){
 			case "Tiempo":
 			Tiempo = datosGuardadosComoObjeto.tiempo; console.log("TIEMPO:" + Tiempo)
 			break;
+			case "Host":
+			IsHost = 
 			default:
 		}
 	}
