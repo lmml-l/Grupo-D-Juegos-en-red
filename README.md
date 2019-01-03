@@ -161,6 +161,42 @@ Por lo que respecta a esta fase, no se han realizado cambios mayores a destacar.
 
 **--------------------------------------------FIN FASE 3--------------------------------------------**
 
+**--------------------------------------------FASE 4--------------------------------------------**
+
+En esta fase implementamos Websockets para que nuestro juego pueda ser multijugador entre dos equipos en línea.
+En esta documentación explicaremos de forma básica la organización interna de dicha implementación.
+
+**Websockets y mensajes**
+A nivel lógico, cada cliente genera por su cuenta toda la información necesaria para ejecutar una partida, como si fuera en local. Dado que necesitamos modificar información que se refleje de la misma manera para ambos jugadores sobre un escenario común, uno de los clientes, el primero en entrar al *lobby*, actuará como *host* para algunas comunicaciones.
+
+Se utilizan cuatro websockets para el envío y recepción de mensajes:
+- **Echo**- Informacion que se comunica a todos los clientes en partida. 
+   Se compone de los siguientes protocolos recogidos en el manejador *WebsocketEchoHandler*:
+    - *GetReady* - En el selector de personajes, da la señal de que el cliente está listo para comenzar
+    - *Skin* - Se comunica el aspecto (skin) que tendrá el personaje al iniciar la partida
+    - *Jugador* - Durante la pelea, se indica información de la clase Jugador como la posición, la vida, el arma o las acciones que realiza (moverse, disparar, etc).
+    
+    La información de Jugador se obtiene de forma predictiva, puesto que cada cliente conoce las acciones del otro, las calcula y, periódicamente, las corrige con datos absolutos, como puede ser la posición o la vida.
+    
+- **Drop**- Información que se actualiza desde el cliente *host* al otro.
+   Armas del escenario (drops) y posición inicial.
+   Se compone de los siguientes protocolos recogidos en el manejador *WebsocketDropHandler*:
+    - *Drops* - Se envían las armas generadas desde el *host*
+    - *Posicion* - Se envía la posición inicial generada desde el *host* para que ambos jugadores se coloquen en el mismo sitio
+    
+- **Tiempo**- Información que se actualiza desde el cliente *host* al otro.
+    Sincroniza el tiempo restante por ronda entre los dos jugadores e indica quién es el jugador *host*.
+    Se compone de los siguientes protocolos recogidos en el manejador *WebsocketTimeHandler*:
+    - *Tiempo* - En partida envía el tiempo restante generado en el *host*
+    - *Host* - En el selector de personajes indica únicamente al jugador *host* su estatus como tal
+    
+- **Puntuación** - En prevención de errores, envía desde el *host* el número de victorias conseguido por ambos jugadores.
+
+
+**Diagrama de clases**
+
+**--------------------------------------------FIN FASE 4--------------------------------------------**
+
 **Integrantes del equipo de desarrollo:**  
 
 **Nombre:** Luis Miguel Moreno López **Correo** lm.moreno.2016@alumnos.urjc.es           **Cuenta GitHub:** lmml-l
