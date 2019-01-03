@@ -6,6 +6,7 @@ var Jugador;
 var GetReady;
 var DropsWS = null;
 var Tiempo  = null;
+var IsHost = null
 var Skin;
 var check = 0;
 var comp = false;
@@ -67,8 +68,10 @@ function conection (){
 		var datosGuardadosComoObjeto = JSON.parse(msg.data);
 		switch(datosGuardadosComoObjeto.protocolo){
 			case "Tiempo":
-			Tiempo = datosGuardadosComoObjeto.tiempo; console.log("TIEMPO:" + Tiempo)
+			Tiempo = datosGuardadosComoObjeto.tiempo; 
 			break;
+			case "Host":
+			IsHost = datosGuardadosComoObjeto.ishost;
 			default:
 		}
 	}

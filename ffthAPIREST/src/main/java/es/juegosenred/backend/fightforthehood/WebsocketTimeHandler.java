@@ -92,10 +92,10 @@ public class WebsocketTimeHandler extends TextWebSocketHandler {
 		}
 		
 	}
-	
+
 	
 	private void sendHostToClient(WebSocketSession session, Object newNode) throws IOException {
-
+		
 		System.out.println("Message sent: " + newNode.toString());
 		List<WebSocketSession> participantes = ParesDeUsuariosEnLaMismaPartida.get(session.getId());
 			if(participantes.get(0).equals(session)) {
@@ -119,6 +119,16 @@ public class WebsocketTimeHandler extends TextWebSocketHandler {
 			sendHostToClient(session, newNode);
 			break;
 			
+		case "Host":
+			newNode.put("protocolo", node.get("protocolo").asText());
+			List<WebSocketSession> participantes = ParesDeUsuariosEnLaMismaPartida.get(session.getId());
+			if(participantes.get(0).equals(session)){
+				newNode.put("ishost", session.getId());
+			}else {
+				newNode.set("ishost", null);
+			}
+			session.sendMessage(new TextMessage(newNode.toString()));
+			break;
 		default:
 			
 		}	
