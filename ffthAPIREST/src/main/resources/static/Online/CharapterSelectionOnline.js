@@ -143,8 +143,16 @@ class CharapterSelectionOnline extends Phaser.Scene {
 		}
 
 		//Actualiza si el otro jugador ha elegido personaje a traves de websocket
+		var textoreadysolounavez = false;
     	this.time.addEvent({delay:1000 ,loop:true ,
-        callback: function(){that.checkplayer2 = GetReady} });
+        callback: function(){that.checkplayer2 = GetReady
+
+        	if(that.checkplayer2 && !textoreadysolounavez){
+        		that.add.text(480, 390, "\n"+"Ready", {fill: '#930A0A', font: '24px Impact'});
+        		textoreadysolounavez = true;
+        	}
+
+        } });
 
     	//Actualiza si el cliente es Host o no 
     	var IsHostText = this.add.text(100, 100, "", { fill: '#FFAC00', font: '38px Impact', align: 'center'});
@@ -165,7 +173,7 @@ class CharapterSelectionOnline extends Phaser.Scene {
     	callback: function(){
     		var messagePosicion = {protocolo: "Posicion", posicion: [600, 400, 400, 400]} //posiciones iniciales en la otra pantalla
     		connectionDrops.send(JSON.stringify(messagePosicion));
-    		if(PosicionWS!=null){
+    		if(PosicionWS!=null && PosicionWS!= undefined){
             posInicial = PosicionWS.posicion;
             }
     	}})
@@ -220,7 +228,7 @@ startPartida () {
 		}
 		if(this.confirmar2.isDown && (IsHost!=null || this.checkplayer2)){
 
-			this.add.text(490, 390, "\n\n"+"Ready", {fill: '#00853A', font: '24px Impact'});
+			this.add.text(480, 390, "\n\n"+"Ready", {fill: '#00853A', font: '24px Impact'});
 		}
 
 		/*
@@ -234,7 +242,6 @@ startPartida () {
 		*/
 
 		if(this.checkplayer1 && this.checkplayer2){
-            this.add.text(490, 390, "\n"+"Ready", {fill: '#930A0A', font: '24px Impact'}).alpha = 0.06;
 			this.ready2 = this.add.text(420, 390, "\n\n\n"+this.ready[1], { fill: '#F4FFF3', font: '24px Arial', align: 'center'}).alpha = 0.06;
 
            if(SoloMandarUnaVez == false){

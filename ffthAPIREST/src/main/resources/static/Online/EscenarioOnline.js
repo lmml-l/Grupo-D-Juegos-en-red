@@ -559,11 +559,13 @@ create(){
           
         }});
         //Nuevas Posiciones Iniciales en funcion de si eres Host o Cliente
+        if(posInicial!=undefined){
         that.jugador.avatar.sprite.x = posInicial[0]
         that.jugador.avatar.sprite.y = posInicial[1]
         that.jugador1.avatar.sprite.x = posInicial[2]
         that.jugador1.avatar.sprite.y = posInicial[3]
-      
+        }
+        
         Jugador = that.jugador1;
 
         var ActualizarPosJugadorLoop = this.time.addEvent({delay:2000 ,loop:true ,
