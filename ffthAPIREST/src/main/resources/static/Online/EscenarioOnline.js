@@ -498,7 +498,7 @@ create(){
                 }
             }});
 
-        var actualizarMensajeParaJugador =this.time.addEvent({delay:100 ,loop:true ,
+        var actualizarMensajeParaJugador =this.time.addEvent({delay:10 ,loop:true ,
         callback: function(){
             message = {protocolo: "Jugador" , jugador: that.jugador}
                 that.jugador1.arma       = Jugador.arma;
@@ -522,7 +522,7 @@ create(){
 
         }});
 
-        var MandarWebsocket = this.time.addEvent({delay:100 ,loop:true ,
+        var MandarWebsocket = this.time.addEvent({delay:10 ,loop:true ,
         callback: function(){
 
         connectionJugador.send(JSON.stringify(message));
@@ -555,7 +555,7 @@ create(){
 
         }});
 
-        var ActualizarPosJugadorLoop = this.time.addEvent({delay:2500 ,loop:true ,
+        var ActualizarPosJugadorLoop = this.time.addEvent({delay:2000 ,loop:true ,
         callback: function(){
         message = {protocolo: "Jugador" , jugador: that.jugador}
         that.jugador1.avatar.sprite.x = Jugador.avatar.sprite.x;

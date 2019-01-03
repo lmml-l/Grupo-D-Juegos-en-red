@@ -109,7 +109,7 @@ class MainMenu extends Phaser.Scene {
 		this.menu();
 		//textos de apoyo
 		this.textoControles = this.add.text(50, 710, "Use W/D or arrows to select\nPress SPACE or ENTER to go", {  fill: '#F4FFF3', font: '24px Impact', align: 'left'});
-		this.textoVersion = this.add.text(700, 710, "v.0.35 preAlpha fase 3_una_semana", { fill: '#F4FFF3', font: '16px Lucida Console', align: 'center'}); //760, 710
+		this.textoVersion = this.add.text(700, 710, "v.4.0 Alpha Fase 4", { fill: '#F4FFF3', font: '16px Lucida Console', align: 'center'}); //760, 710
 		
 		setCheckerStatus("1")
 		var that=this;
