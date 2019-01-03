@@ -93,7 +93,7 @@ public class WebsocketDropHandler extends TextWebSocketHandler {
 		
 	}
 	
-	
+	//Envía únicamente al usuario cliente (que no es host)
 	private void sendHostToClient(WebSocketSession session, Object newNode) throws IOException {
 
 		System.out.println("Message sent: " + newNode.toString());
@@ -115,6 +115,13 @@ public class WebsocketDropHandler extends TextWebSocketHandler {
 		case "Drops":
 			newNode.put("protocolo", node.get("protocolo").asText());
 			newNode.set("drops", node.get("drops"));
+			//sendOtherParticipants(session, newNode);
+			sendHostToClient(session, newNode);
+			break;
+			
+		case "Posicion":
+			newNode.put("protocolo", node.get("protocolo").asText());
+			newNode.set("posicion", node.get("posicion"));
 			//sendOtherParticipants(session, newNode);
 			sendHostToClient(session, newNode);
 			break;
