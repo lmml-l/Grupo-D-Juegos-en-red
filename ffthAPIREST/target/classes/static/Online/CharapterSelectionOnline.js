@@ -163,8 +163,8 @@ class CharapterSelectionOnline extends Phaser.Scene {
     	//Envía la posición inicial correspondiente al segundo jugador (no host)
     	this.time.addEvent({delay:1000, loop:true, 
     	callback: function(){
-    		var messagePosicion = {protocolo: "Posicion"}
-    		connectionDrops.send(JSON.stringify(messagePosicion)); console.log("POS" + PosicionWS);
+    		var messagePosicion = {protocolo: "Posicion", posicion: [600, 400, 400, 400]} //posiciones iniciales en la otra pantalla
+    		connectionDrops.send(JSON.stringify(messagePosicion));
     		if(PosicionWS!=null){
             posInicial = PosicionWS.posicion;
             }

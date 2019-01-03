@@ -78,6 +78,10 @@ function conection (){
 			break;
 			case "Posicion":
 			PosicionWS = datosGuardadosComoObjeto.posicion;
+			console.log(PosicionWS);
+			if(PosicionWS!= undefined){
+			posInicial = PosicionWS;
+			}
 			break;
 			default:
 		}

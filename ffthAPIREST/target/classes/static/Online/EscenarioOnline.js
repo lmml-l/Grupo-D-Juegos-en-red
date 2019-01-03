@@ -429,8 +429,13 @@ create(){
     
 
     //jugadores
+    if(IsHost!=null){//Distinto lugar a donde mirar si son el host o el cliente
     this.jugador.create("right");
     this.jugador1.create("left");
+    }else {
+    this.jugador.create("left");
+    this.jugador1.create("right");
+    }
     //colisiones jugador 1
     this.physics.add.collider(this.jugador.avatar.sprite, this.suelo);          //con suelo
     this.physics.add.collider(this.jugador.avatar.sprite,this.plataformas);     //con plataformas
@@ -553,8 +558,12 @@ create(){
         connectionPuntuacion.send(JSON.stringify(messagePuntuacion));
           
         }});
-
-       
+        //Nuevas Posiciones Iniciales en funcion de si eres Host o Cliente
+        that.jugador.avatar.sprite.x = posInicial[0]
+        that.jugador.avatar.sprite.y = posInicial[1]
+        that.jugador1.avatar.sprite.x = posInicial[2]
+        that.jugador1.avatar.sprite.y = posInicial[3]
+      
         Jugador = that.jugador1;
 
         var ActualizarPosJugadorLoop = this.time.addEvent({delay:2000 ,loop:true ,
