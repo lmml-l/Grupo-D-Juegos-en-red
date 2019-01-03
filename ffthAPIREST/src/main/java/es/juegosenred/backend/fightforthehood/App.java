@@ -25,6 +25,9 @@ public class App implements WebSocketConfigurer
 	
 	registry.addHandler(dropHandler(), "/drops")
 	.setAllowedOrigins("*");
+	
+	registry.addHandler(timeHandler(), "/tiempo")
+	.setAllowedOrigins("*");
 	}
 	@Bean
 	public WebsocketEchoHandler echoHandler() {
@@ -33,6 +36,10 @@ public class App implements WebSocketConfigurer
 	@Bean
 	public WebsocketDropHandler dropHandler() {
 	return new WebsocketDropHandler();
+	}
+	@Bean
+	public WebsocketTimeHandler timeHandler() {
+	return new WebsocketTimeHandler();
 	}
 	
 	

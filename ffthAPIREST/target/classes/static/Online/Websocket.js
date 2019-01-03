@@ -5,16 +5,19 @@
 var Jugador;
 var GetReady;
 var DropsWS = null;
+var Tiempo  = null;
 var Skin;
 
-
-
+//Tipos de conexión websocket
 var connectionJugador;
 var connectionDrops;
+var connectionTiempo;
+
 function conection (){
-	//Dos websockets, uno para Jugador y otro para Drops
-	connectionJugador = new WebSocket('ws://'+ location.host +'/echo');
-	connectionDrops   = new WebSocket('ws://'+ location.host +'/drops');
+	//Tres websockets: Jugador, Drops y Tiempo
+	connectionJugador  = new WebSocket('ws://'+ location.host +'/echo');
+	connectionDrops    = new WebSocket('ws://'+ location.host +'/drops');
+	connectionTiempo   = new WebSocket('ws://'+ location.host +'/tiempo');
 
 	//JUGADOR
 	connectionJugador.onmessage = function(msg) {
@@ -45,7 +48,6 @@ function conection (){
 		switch(datosGuardadosComoObjeto.protocolo){
 			case "Drops":
 			DropsWS = datosGuardadosComoObjeto.drops;
-			//console.log(DropsWS.sprite + "Tiene que ser un puto array de mierda valeeeee");
 			break;
 			default:
 		}
@@ -54,6 +56,24 @@ function conection (){
 		setTimeout(conection(),1000);
 		console.log("Closing socket");
 	}
+
+	//TIEMPO
+		connectionTiempo.onmessage = function(msg) {
+		console.log("WS message: " + msg.data);
+		var datosGuardadosComoObjeto = JSON.parse(msg.data);
+		switch(datosGuardadosComoObjeto.protocolo){
+			case "Tiempo":
+			Tiempo = datosGuardadosComoObjeto.tiempo; console.log("TIEMPO:" + Tiempo)
+			break;
+			default:
+		}
+	}
+	connectionTiempo.onclose = function() {
+		setTimeout(conection(),1000);
+		console.log("Closing socket");
+	}
 }
+
+
 
 /////////////////

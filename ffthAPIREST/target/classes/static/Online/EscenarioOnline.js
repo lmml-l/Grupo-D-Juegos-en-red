@@ -460,11 +460,13 @@ create(){
         callback: function(){that.checkPartida()} });
 
 ///ACTUALIZACIONES DE OBJETOS RELACIONADOS CON WEBSOCKET
-    var message;
-    var messageDrops;
+    var message;        //Jugador
+    var messageDrops;   //Drops
+    var messageTiempo;  //Tiempo (cuenta atrás)
 
-        message      = {protocolo: "Jugador" , jugador: that.jugador}
-        messageDrops = {protocolo: "Drops" , drops: that.drops}
+        message       = {protocolo: "Jugador" , jugador: that.jugador}
+        messageDrops  = {protocolo: "Drops" , drops: that.drops}
+        messageTiempo = {protocolo: "Tiempo" , tiempo: that.Clock}
 
          var dropevent = this.time.addEvent({delay:2000 ,loop:true ,
         callback: function(){
@@ -499,15 +501,25 @@ create(){
         var actualizarMensajeParaJugador =this.time.addEvent({delay:100 ,loop:true ,
         callback: function(){
             message = {protocolo: "Jugador" , jugador: that.jugador}
-                that.jugador1.arma = Jugador.arma;
+                that.jugador1.arma       = Jugador.arma;
                 that.jugador1.proyectiles.proyectilesenescane = Jugador.proyectiles.proyectilesenescane;
                 that.jugador1.municiones = Jugador.municiones;
-                that.jugador1.vida = Jugador.vida;
-                that.jugador1.keysalto = Jugador.W;
-                that.jugador1.keymovizq = Jugador.A;
-                that.jugador1.keymovder = Jugador.D;
+                that.jugador1.vida       = Jugador.vida;
+                that.jugador1.keysalto   = Jugador.W;
+                that.jugador1.keymovizq  = Jugador.A;
+                that.jugador1.keymovder  = Jugador.D;
                 that.jugador1.keyrecarma = Jugador.R;
                 that.jugador1.keydisparo = Jugador.T;
+        }});
+
+        //Iguala el tiempo de ambos jugadores cada 2 segundos
+        var actualizarTiempo = this.time.addEvent({delay:2000 ,loop:true ,
+        callback: function(){
+            message = {protocolo: "Tiempo" , tiempo: that.Clock}
+            if(Tiempo != null){
+                that.Clock.elapsed = Tiempo.elapsed;
+            }
+
         }});
 
         var MandarWebsocket = this.time.addEvent({delay:100 ,loop:true ,
@@ -521,6 +533,13 @@ create(){
         callback: function(){
 
         connectionDrops.send(JSON.stringify(messageDrops));
+          
+        }});
+
+        var MandarWebsocketTiempo = this.time.addEvent({delay:2000 ,loop:true ,
+        callback: function(){
+
+        connectionTiempo.send(JSON.stringify(messageTiempo));
           
         }});
 
