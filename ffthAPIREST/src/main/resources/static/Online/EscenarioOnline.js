@@ -51,9 +51,11 @@ class EscenarioOnline extends Phaser.Scene {
 	constructor(){
 		super({key:"EscenarioOnline"});
         
-        //Posicionamos los personajes
-        this.avatar = new Avatar("a",this,400,400,sprite);
-        this.avatar1 = new Avatar("b",this,600,400,sprite2);
+        //Posicionamos los personajes. Posición definida en CharacterSelection
+        this.avatar  = new Avatar("a",this,posInicial[0],posInicial[1],sprite);   //Jugador host
+        this.avatar1 = new Avatar("b",this,posInicial[2],posInicial[3],sprite2);  //Jugador cliente
+
+
         //Asociamos proyectiles
         this.proyectiles = new Proyectiles(spriteproyectiles);
         this.proyectiles2 = new Proyectiles(spriteproyectiles);
@@ -545,15 +547,6 @@ create(){
 
        
         Jugador = that.jugador1;
-
-
-        var ActualizarPosJugador = this.time.addEvent({delay:100 ,loop:false ,
-        callback: function(){
-        message = {protocolo: "Jugador" , jugador: that.jugador}
-        that.jugador1.avatar.sprite.x = Jugador.avatar.sprite.x;
-        that.jugador1.avatar.sprite.y = Jugador.avatar.sprite.y;
-
-        }});
 
         var ActualizarPosJugadorLoop = this.time.addEvent({delay:2000 ,loop:true ,
         callback: function(){
