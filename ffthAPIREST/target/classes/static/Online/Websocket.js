@@ -90,10 +90,10 @@ function conection (){
 		var datosGuardadosComoObjeto = JSON.parse(msg.data);
 		switch(datosGuardadosComoObjeto.protocolo){
 			case "Tiempo":
-			Tiempo = datosGuardadosComoObjeto.tiempo; console.log("TIEMPO:" + Tiempo)
+			Tiempo = datosGuardadosComoObjeto.tiempo; 
 			break;
 			case "Host":
-			IsHost = 
+			IsHost = datosGuardadosComoObjeto.ishost;
 			default:
 		}
 	}
