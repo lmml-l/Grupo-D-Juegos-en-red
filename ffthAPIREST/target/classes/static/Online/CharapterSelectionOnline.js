@@ -2,6 +2,9 @@
 
 var SoloMandarUnaVez = false;
 
+//Posición inicial J1X  J1Y  J2X J2Y
+var posInicial = [400, 400, 600, 400]
+
 class CharapterSelectionOnline extends Phaser.Scene {
 	constructor(){
 		super({key:"CharapterSelectionOnline"});
@@ -32,7 +35,6 @@ class CharapterSelectionOnline extends Phaser.Scene {
 		this.ready2; 
 
 		var that = this;
-
 	}
 
 	selection(){
