@@ -150,7 +150,7 @@ class CharapterSelectionOnline extends Phaser.Scene {
     	var IsHostText = this.add.text(100, 100, "", { fill: '#FFAC00', font: '38px Impact', align: 'center'});
     	
 
-    	this.time.addEvent({delay:1000, loop:true, 
+    	this.time.addEvent({delay:3000, loop:false, 
     	callback: function(){
     		var messageHost = {protocolo: "Host"}
     		connectionTiempo.send(JSON.stringify(messageHost));
