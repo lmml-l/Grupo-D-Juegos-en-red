@@ -2,13 +2,13 @@
 //Controla las armas que aparecen sueltas por el escenario (drops)
 //Las armas se colocan aleatoriamente en cinco posiciones fijas
 function Drops(escena, sprites) {
-		this.scene = escena;
-		this.pistola = sprites[0];
-		this.escopeta = sprites[1];
-		this.subfusil = sprites[2];
-		this.puñoamericano = sprites[3];
-		this.batebeisbol = sprites[4];
-		this.sprite = new Array();
+		this.scene 			= escena;
+		this.pistola 		= sprites[0];
+		this.escopeta 		= sprites[1];
+		this.subfusil 		= sprites[2];
+		this.puñoamericano 	= sprites[3];
+		this.batebeisbol 	= sprites[4];
+		this.sprite 		= new Array();
 		var that = this;
 
 	this.initPos = function(){
@@ -80,7 +80,6 @@ function Drops(escena, sprites) {
 
 		//comprueba que la posición marcada en initPos() no está ocupada
 		//si es válida se añade a la escena
-		
 		while(check && i<that.sprite.length){
 			if(that.sprite[i].x == armapos[0] && that.sprite[i].y == armapos[1]){
 				check = false;

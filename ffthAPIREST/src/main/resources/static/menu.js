@@ -108,7 +108,7 @@ class MainMenu extends Phaser.Scene {
 		this.fondo = this.add.image(this.game.canvas.width/2,this.game.canvas.height/2,'fondoMenu').setScale(1.3);
 		this.menu();
 		//textos de apoyo
-		this.textoControles = this.add.text(50, 710, "Use W/D or arrows to select\nPress SPACE or ENTER to go", {  fill: '#F4FFF3', font: '24px Impact', align: 'left'});
+		this.textoControles = this.add.text(50, 710, "Use A/D or arrows to select\nPress SPACE or ENTER to go", {  fill: '#F4FFF3', font: '24px Impact', align: 'left'});
 		this.textoVersion = this.add.text(700, 710, "v.4.0 Alpha Fase 4", { fill: '#F4FFF3', font: '16px Lucida Console', align: 'center'}); //760, 710
 		
 		setCheckerStatus("1")

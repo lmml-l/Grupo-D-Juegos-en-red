@@ -4,12 +4,12 @@
    	this.spritearmas = sprites;
    	this.scene = escena;
    	this.jugadores = jugadores;
-		this.Municiones = new Array(2);			//munición de cada jugador
+		this.Municiones = new Array(2);			  //munición de cada jugador
 		this.ArmasMostradas = new Array(2);		//arma seleccionada
-		this.BarrasVidas = new Array(2);		//vida restante
-		this.RondasVictoria = new Array(2);    	//rondas ganadas por cada jugador
-		this.Clock;								//tiempo restante
-		this.MostrarReloj;  					//visualización del tiempo
+		this.BarrasVidas = new Array(2);		  //vida restante
+		this.RondasVictoria = new Array(2);   //rondas ganadas por cada jugador
+		this.Clock;								            //tiempo restante
+		this.MostrarReloj;  					        //visualización del tiempo
 		var that = this;
 
 

@@ -177,17 +177,17 @@ class Lobby extends Phaser.Scene {
 		//mensaje de iniciar partida
 		this.time.addEvent({delay:2000,loop:true, callback: function(){
 			if(ipsLobby.length == 2){
-				that.textoBusqueda.text = "Starting fight";
+				that.textoBusqueda.text = "Starting fight...";
 				that.jugadorDesc1.text = "";
 				that.jugadorDesc2.text = "";
 			}else if(ipsLobby.length == 1){
 				that.textoBusqueda.text = "Looking for rivals...";
 				that.jugadorDesc1.text = "";
-				that.jugadorDesc2.text = "Player disconnected"
+				that.jugadorDesc2.text = "Please wait..."
 			}else{
 				that.textoBusqueda.text = "Looking for rivals...";
-				that.jugadorDesc1.text = "Player disconnected";
-				that.jugadorDesc2.text = "Player disconnected"
+				that.jugadorDesc1.text = "Please wait...";
+				that.jugadorDesc2.text = "Please wait..."
 			}
 		}})
 		/*

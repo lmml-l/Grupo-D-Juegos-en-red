@@ -26,6 +26,8 @@ class CharapterSelectionOnline extends Phaser.Scene {
 		this.textoSalir;
 		this.salir;
 		this.textoModo;
+		this.textoConexion;
+		this.textoWaitHost;
 
 		this.textoControles;
 		this.fondo;
@@ -117,20 +119,24 @@ class CharapterSelectionOnline extends Phaser.Scene {
 		this.selection();
 		this.textModo = this.add.text(50, 50, "Online mode", { fill: '#F4FFF3', font: '20px Impact', align: 'center'});
 		//indicación de los controles
-		this.textoControles = this.add.text(110, 540, "\nselect\naccept", { fill: '#FFFFFF', font: '30px Impact', align: 'center'});
-		this.textoControles = this.add.text(20, 510, "control", { fill: '#FFAC00', font: '30px Impact', align: 'center'});
-		this.textoControles = this.add.text(20, 540, "\nA,D\nSPACE", { fill: '#FFAC00', font: '32px Impact', align: 'center'});
+		this.textoControles = this.add.text(160, 540, "\nselect\naccept", { fill: '#FFFFFF', font: '30px Impact', align: 'center'});
+		this.textoControles = this.add.text(60, 520, "control", { fill: '#FFAC00', font: '30px Impact', align: 'center'});
+		this.textoControles = this.add.text(60, 540, "\nA,D\nSPACE", { fill: '#FFAC00', font: '32px Impact', align: 'center'});
 		this.subtitulo 		= this.add.text(360, 350, "CHOOSE YOUR FIGHTER", { fill: '#FFAC00', font: '38px Impact', align: 'center'});
 		this.textoSalir     = this.add.text(50, 730, "ESC to exit", { fill: '#F4FFF3', font: '24px Impact', align: 'center'});
-	
+		this.textoConexion  = this.add.text(650, 730, "Connection status: connected", { fill: '#F4FFF3', font: '24px Impact', align: 'center'});
+
 		//indicación de si está listo el jugador
 		this.ready[0]="";
-		this.ready[1]="\nPlayers are ready,\ngame will start...";
+		this.ready[1]="\nPlayers are ready,\nwaiting to start...";
 
 		//texto invisible
 		this.ready1 =this.add.text(0, 0, this.ready[0], { fill: '#F4FFF3', font: '24px Impact', align: 'center'});
 		this.ready1 =this.add.text(0, 0, this.ready[0], { fill: '#F4FFF3', font: '24px Impact', align: 'center'});
 		this.check = getComp();
+
+		//texto de espera hasta que el host elija
+		this.textoWaitHost = this.add.text(450, 390, "", {fill: '#F4FFF3', font: '24px Impact', align: 'center'});
 
 		conection();
         Skin = sprite2;
@@ -146,16 +152,14 @@ class CharapterSelectionOnline extends Phaser.Scene {
 		var textoreadysolounavez = false;
     	this.time.addEvent({delay:1000 ,loop:true ,
         callback: function(){that.checkplayer2 = GetReady
-
         	if(that.checkplayer2 && !textoreadysolounavez){
-        		that.add.text(480, 390, "\n"+"Ready", {fill: '#930A0A', font: '24px Impact'});
+        		that.textoWaitHost.text = "\n"+"Rival is ready";
         		textoreadysolounavez = true;
         	}
-
         } });
 
     	//Actualiza si el cliente es Host o no 
-    	var IsHostText = this.add.text(100, 100, "", { fill: '#FFAC00', font: '38px Impact', align: 'center'});
+    	var IsHostText = this.add.text(650, 700, "", { fill: '#F4FFF3', font: '20px Impact', align: 'right'});
     	
 
     	this.time.addEvent({delay:2000, loop: true, 
@@ -163,8 +167,7 @@ class CharapterSelectionOnline extends Phaser.Scene {
     		var messageHost = {protocolo: "Host"}
     		connectionTiempo.send(JSON.stringify(messageHost));
     		if(IsHost!=null){
-    			IsHostText.text="You are the Host";
-
+    			IsHostText.text="You are the host";
     		}
     	}})
 
@@ -195,18 +198,12 @@ class CharapterSelectionOnline extends Phaser.Scene {
 		}else if(this.izquierda2.isDown && (this.posArrayP1>0) && !this.checkplayer1){
 			this.posArrayP1--; //mueve cursor a la izquierda
 		}else if(this.confirmar2.isDown && (IsHost!=null || this.checkplayer2)){
-				
-		
 				this.checkplayer1 = true; //confirmación y bloqueo
 				var data = {ready : that.checkplayer1 };
 				var message = {protocolo: "GetReady", ready : data };
 				connectionJugador.send(JSON.stringify(message))
 				
-            
-			//this.ready2 = this.add.text(470, 390, "\n\n\n"+this.ready[1], { fill: '#FFFFFF', font: '32px Impact', align: 'center'});
 			sprite=this.seleccionaravatar(this.posArrayP1);
-
-		
 		}
 
 	}
@@ -217,8 +214,6 @@ startPartida () {
 }
 
 //da paso a la pantalla seleccionada sólo si los dos jugadores han elegido o si se decide salir
-
-
 	scenechange(){
 		var that=this;
 
@@ -231,16 +226,6 @@ startPartida () {
 			this.add.text(480, 390, "\n\n"+"Ready", {fill: '#00853A', font: '24px Impact'});
 		}
 
-		/*
-		if(this.checkplayer1=true) {
-        this.add.text(420, 390, "Player1 is ready", { fill: '#F4FFF3', font: '24px Impact', align: 'center'});
-
-		}
-		if(this.checkplayer2=true) {
-	    this.add.text(420, 390, "Player2 is ready", { fill: '#F4FFF3', font: '24px Impact', align: 'center'});         
-		}
-		*/
-
 		if(this.checkplayer1 && this.checkplayer2){
 			this.ready2 = this.add.text(420, 390, "\n\n\n"+this.ready[1], { fill: '#F4FFF3', font: '24px Arial', align: 'center'}).alpha = 0.06;
 
@@ -250,7 +235,6 @@ startPartida () {
             var MySkin = {skin : sprite};
 		    var messagee = {protocolo: "Skin", skin : MySkin };
 		    connectionJugador.send(JSON.stringify(messagee))
-		    //console.log(SoloMandarUnaVez);
            }
  
             sprite2 = Skin.skin;
@@ -263,7 +247,6 @@ startPartida () {
 		
 		var that = this;
 		if(this.check){
-			console.log("furrula")
 			this.time.addEvent({delay:100, loop:true,
 		    callback: function(){that.scene.start('EscenarioError');}})
 		}

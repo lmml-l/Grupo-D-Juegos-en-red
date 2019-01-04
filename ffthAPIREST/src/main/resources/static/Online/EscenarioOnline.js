@@ -1,50 +1,5 @@
 'use strict'
 
-    //DEFINICIÓN DE VARIABLES GLOBALES
-    //----------------------------------------------------------------------------------------
-    /*
-    var victorias=new Array(2); //Almacena el nº de partidas ganadas por cada jugador
-    victorias[0]=0; victorias[1]=0;
-
-    var colisionesjugadoresbalas = new Array();
-    var colisionesescenariobalas = new Array();
-
-        var sprite = ["Recursos/Imagenes/Sprites_Personaje/SpritePersonajeIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpritePersonajeDerecha.png",
-        "Recursos/Imagenes/Sprites_Personaje/SpritePistolaIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpritePistolaDerecha.png",
-        "Recursos/Imagenes/Sprites_Personaje/SpriteEscopetaIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpriteEscopetaDerecha.png",
-        "Recursos/Imagenes/Sprites_Personaje/SpriteThomsomIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpriteThomsomDerecha.png",
-        "Recursos/Imagenes/Sprites_Personaje/SpritePersonajePuñoAmericanoIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpritePersonajePuñoAmericanoDerecha.png",
-        "Recursos/Imagenes/Sprites_Personaje/SpriteBateIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpriteBateDerecha.png"]
-
-        var sprite2 = ["Recursos/Imagenes/Sprites_Personaje2/SpritePersonajeIzquierda.png","Recursos/Imagenes/Sprites_Personaje2/SpritePersonajeDerecha.png",
-        "Recursos/Imagenes/Sprites_Personaje2/SpritePistolaIzquierda.png","Recursos/Imagenes/Sprites_Personaje2/SpritePistolaDerecha.png",
-        "Recursos/Imagenes/Sprites_Personaje2/SpriteEscopetaIzquierda.png","Recursos/Imagenes/Sprites_Personaje2/SpriteEscopetaDerecha.png",
-        "Recursos/Imagenes/Sprites_Personaje2/SpriteThomsomIzquierda.png","Recursos/Imagenes/Sprites_Personaje2/SpriteThomsomDerecha.png",
-        "Recursos/Imagenes/Sprites_Personaje2/SpritePersonajePuñoAmericanoIzquierda.png","Recursos/Imagenes/Sprites_Personaje2/SpritePersonajePuñoAmericanoDerecha.png",
-        "Recursos/Imagenes/Sprites_Personaje2/SpriteBateIzquierda.png","Recursos/Imagenes/Sprites_Personaje2/SpriteBateDerecha.png"]
-
-        var spritearmas = ["Recursos/Imagenes/Sprites_Armas/Pistola/PistolaPixelizada.png",
-        "Recursos/Imagenes/Sprites_Armas/Escopeta/EscopetaPixelizada.png",
-        "Recursos/Imagenes/Sprites_Armas/Thompson/ThompsonPixelizado.png",
-        "Recursos/Imagenes/Sprites_Armas/Puno_Americano/PuñoAmericanoPixelizado.png",
-        "Recursos/Imagenes/Sprites_Armas/Bate_de_Beisbol/BateBeisbolPixelizado.png"]
-
-        var spriteproyectiles = ["Recursos/Imagenes/Sprites_Proyectiles/balaEscopeta.png",
-        "Recursos/Imagenes/Sprites_Proyectiles/bala.png",
-        "Recursos/Imagenes/Sprites_Proyectiles/GolpeBatePixelizadoAjustado.png",
-        "Recursos/Imagenes/Sprites_Proyectiles/GolpePuño.png",
-        "Recursos/Imagenes/Sprites_Proyectiles/GolpePuño.png"]
-        
-        var Hud = ["Recursos/Imagenes/Sprites_Armas/ArmasHUD/PistolaHUD.png",
-        "Recursos/Imagenes/Sprites_Armas/ArmasHUD/EscopetaHUD.png",
-        "Recursos/Imagenes/Sprites_Armas/ArmasHUD/ThompsonHUD.png",
-        "Recursos/Imagenes/Sprites_Armas/ArmasHUD/PuñoAmericanoHUD.png",
-        "Recursos/Imagenes/Sprites_Armas/ArmasHUD/BateHUD.png",
-        "Recursos/Imagenes/Sprites_Armas/Puños/PuñoPixelizado.png"]
-
-    */
-//----------------------------------------------------------------------------------------
-
 //La clase escenario sirve para colocar los elementos de la partida y como controlador de la misma
 class EscenarioOnline extends Phaser.Scene {
 
@@ -467,15 +422,15 @@ create(){
         callback: function(){that.checkPartida()} });
 
 ///ACTUALIZACIONES DE OBJETOS RELACIONADOS CON WEBSOCKET
-    var message;        //Jugador
-    var messageDrops;   //Drops
-    var messageTiempo;  //Tiempo (cuenta atrás)
-    var messagePuntuacion //Puntuación para ganar
+    var message;            //Jugador
+    var messageDrops;       //Drops
+    var messageTiempo;      //Tiempo (cuenta atrás)
+    var messagePuntuacion   //Puntuación para ganar
 
-        message           = {protocolo: "Jugador" , jugador: that.jugador}
-        messageDrops      = {protocolo: "Drops" , drops: that.drops}
-        messageTiempo     = {protocolo: "Tiempo" , tiempo: that.Clock}
-        messagePuntuacion = {protocolo: "Puntuacion" , puntuacion: victorias}
+        message           = {protocolo: "Jugador" ,     jugador: that.jugador}
+        messageDrops      = {protocolo: "Drops" ,       drops: that.drops}
+        messageTiempo     = {protocolo: "Tiempo" ,      tiempo: that.Clock}
+        messagePuntuacion = {protocolo: "Puntuacion" ,  puntuacion: victorias}
 
          var dropevent = this.time.addEvent({delay:2000 ,loop:true ,
         callback: function(){
@@ -489,18 +444,15 @@ create(){
             messageDrops = {protocolo: "Drops" , drops: that.drops}
 
                 if(DropsWS!=null){
-                     //that.drops.sprite = DropsWS.sprite;
                      //Destruimos los sprite
                      for(var i = 0 ; i< that.drops.sprite.length ; i++){
                         that.drops.sprite[i].destroy();
-                        console.log("Borro las armas que hay")
                      }
                      //vaciamos el array
                      that.drops.sprite = new Array();
 
                      //Creamos los nuevos sprite y añadimos al array
                      for(var i = 0 ; i< DropsWS.sprite.length ; i++){
-                        console.log(DropsWS.sprite[i]);
                         var armatemporal = that.physics.add.sprite(DropsWS.sprite[i].x,DropsWS.sprite[i].y,DropsWS.sprite[i].textureKey).setScale(1)
                         that.drops.sprite.push(armatemporal);
                      }
