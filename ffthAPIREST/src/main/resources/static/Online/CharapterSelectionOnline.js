@@ -120,7 +120,6 @@ class CharapterSelectionOnline extends Phaser.Scene {
 		this.textModo = this.add.text(50, 50, "Online mode", { fill: '#F4FFF3', font: '20px Impact', align: 'center'});
 		//indicación de los controles
 		this.textoControles = this.add.text(160, 540, "\nselect\naccept", { fill: '#FFFFFF', font: '30px Impact', align: 'center'});
-		this.textoControles = this.add.text(60, 520, "control", { fill: '#FFAC00', font: '30px Impact', align: 'center'});
 		this.textoControles = this.add.text(60, 540, "\nA,D\nSPACE", { fill: '#FFAC00', font: '32px Impact', align: 'center'});
 		this.subtitulo 		= this.add.text(360, 350, "CHOOSE YOUR FIGHTER", { fill: '#FFAC00', font: '38px Impact', align: 'center'});
 		this.textoSalir     = this.add.text(50, 730, "ESC to exit", { fill: '#F4FFF3', font: '24px Impact', align: 'center'});
@@ -159,7 +158,7 @@ class CharapterSelectionOnline extends Phaser.Scene {
         } });
 
     	//Actualiza si el cliente es Host o no 
-    	var IsHostText = this.add.text(650, 700, "", { fill: '#F4FFF3', font: '20px Impact', align: 'right'});
+    	var IsHostText = this.add.text(55, 100, "", { fill: '#F4FFF3', font: '30px Impact', align: 'right'});
     	
 
     	this.time.addEvent({delay:2000, loop: true, 
