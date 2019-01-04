@@ -94,10 +94,8 @@ class nameMenu extends Phaser.Scene {
 		
 		getMyIP(function(data){ip = data.ip});
 
-		if(function(){getCheckerStatus()}=="0"){
 			this.time.addEvent({delay:100, loop:true,
 		    callback: function(){getServerStatus(function(){that.scene.start('EscenarioError');})}})
-		}
 
 		this.time.addEvent({delay:400 , callback: function(){console.log(ip+"abc")}})
 		
@@ -120,7 +118,7 @@ class nameMenu extends Phaser.Scene {
 		}
 		)
 
-		var that=this;
+		//var that=this;
 		//comprobación del estado del servidor
 		//this.time.addEvent({delay:100, loop:true,
     	//callback: function(){getServerStatus(function(){that.scene.start('EscenarioError');})}})
@@ -131,7 +129,7 @@ class nameMenu extends Phaser.Scene {
 	update(){
 		this.retroceder();
 		this.aceptar();
-		var that = this;
+		//var that = this;
 		//getIPs(function(arrayjugadores){that.ipsjugadoressala = arrayjugadores})
 		//console.log(this.ipsjugadoressala);
 

@@ -36,10 +36,8 @@ class ControlGuide extends Phaser.Scene {
 	
 		var that=this;
 		//comprobación del estado del servidor
-		if(function(){getCheckerStatus()}=="0"){
 			this.time.addEvent({delay:100, loop:true,
 		    callback: function(){getServerStatus(function(){that.scene.start('EscenarioError');})}})
-		}
 	}
 
 	actualizarPosArray(){	

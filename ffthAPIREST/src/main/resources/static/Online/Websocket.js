@@ -105,7 +105,9 @@ function conection (){
 		console.log("Closing socket");
 		sumCheck();
 		if(getCheck()>5){
+			console.log(check)
 			setComp(true);
+			console.log(comp)
 		}
 	}
 }

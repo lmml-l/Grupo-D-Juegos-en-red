@@ -43,14 +43,12 @@ create (){
 	this.time.addEvent({delay:1000, loop:true,
     callback: function(){that.num++;}});*/
     
-    setCheckerStatus("0")
     
     
 }
 
 update(){
 	if(this.esc.isDown || this.enter.isDown){
-		setCheckerStatus("1")
 		this.scene.start('MainMenu');
 	}
 }

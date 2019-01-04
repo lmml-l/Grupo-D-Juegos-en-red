@@ -137,10 +137,8 @@ class Lobby extends Phaser.Scene {
 
 		var that = this;
 		//comprobación del estado del servidor
-		if(function(){getCheckerStatus()}=="0"){
 			this.time.addEvent({delay:100, loop:true,
 		    callback: function(){getServerStatus(function(){that.scene.start('EscenarioError');})}})
-		}
 
 		///////
 		
@@ -262,7 +260,7 @@ class Lobby extends Phaser.Scene {
 		this.retroceder();
 		//this.scenechange();
 
-		var that=this;
+		//var that=this;
 		
 		////////////////////////////////////
 		this.texts[2].text=this.nombreRival[0];
