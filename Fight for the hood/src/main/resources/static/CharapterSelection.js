@@ -171,7 +171,6 @@ class CharapterSelection extends Phaser.Scene {
 		}
 		var that = this;
 		if(this.check){
-			console.log("furrula")
 			this.time.addEvent({delay:100, loop:true,
 		    callback: function(){that.scene.start('EscenarioError');}})
 		}

@@ -89,7 +89,7 @@ checkPartida(){
     //Si algún jugador llega a 3 victorias gana la partida
     if(victorias[0]==3){                                    //jugador 1
         console.log('P1 WINS');
-        this.finPartidaTexto.setText("P1 RULES THE HOOD");   //texto en pantalla
+        this.finPartidaTexto.setText("\nP1 RULES THE HOOD");   //texto en pantalla
         victorias[0]=0; victorias[1]=0;                     //reseteo de rondasw
         this.time.addEvent({delay:3000,                     //tiempo que tarda hasta reiniciar
         callback: function(){that.restartPartida()}});
@@ -110,14 +110,16 @@ checkPartida(){
         if(ganador==0){
             victorias[0]+=1;                                //suma una victoria
             console.log('P1 WINS');
-            this.ganadorTexto.setText("GANA J1");
+            this.finTiempoTexto.setText("KO");
+            this.ganadorTexto.setText("\nP1 WINS");
             this.restartPartida();                          //reinicia el nivel
         }   
         //gana J2
         else if(ganador==1){
             victorias[1]+=1;                                //suma una victoria
             console.log('P2 WINS');
-            this.ganadorTexto.setText("P2 WINS");
+            this.finTiempoTexto.setText("KO");
+            this.ganadorTexto.setText("\nP2 WINS");
             this.restartPartida();                          //reinicia el nivel
         }
     }
@@ -126,20 +128,43 @@ checkPartida(){
     else if(this.jugador.vida<=0 && this.jugador1.vida>0){  //jugador 1
         victorias[1]+=1;
         console.log('Gana J2');
-        this.ganadorTexto.setText("P2 WINS");
+        this.finTiempoTexto.setText("KO");
+        this.ganadorTexto.setText("\nP2 WINS");
         this.restartPartida();
     }
     else if(this.jugador1.vida<=0 && this.jugador.vida>0){  //jugador 2
         victorias[0]+=1;
         console.log('Gana J1');
-        this.ganadorTexto.setText("P1 WINS");
+        this.finTiempoTexto.setText("KO");
+        this.ganadorTexto.setText("\nP1 WINS");
         this.restartPartida();
     } 
     //Si acaba el tiempo
     if(91-this.Clock.getElapsedSeconds() == 0){             //comprobación de reloj (diferencia de tiempo) 
     this.finTiempoTexto.setText("TIME OVER");
-    this.restartPartida();
+    if(this.jugador1.vida!=0 && this.jugador.vida!=0){
+        //Gana J1 si tiene mayor vida
+        if(this.jugador.vida > this.jugador1.vida){
+            victorias[0]+=1;
+            console.log('Gana J1');
+            this.ganadorTexto.setText("\nP1 WINS");
+            this.restartPartida();
+        }
+        //Gana J2 si tiene mayor vida
+        if(this.jugador.vida < this.jugador1.vida){
+            victorias[1]+=1;
+            console.log('Gana J2');
+            this.ganadorTexto.setText("\nP2 WINS");
+            this.restartPartida();
+        }
+        //Empate
+        if(this.jugador.vida = this.jugador1.vida){
+            console.log('Empate');
+            this.ganadorTexto.setText("\nTIE");
+            this.restartPartida();
+        }
     }
+}
 }
 
 
@@ -449,8 +474,8 @@ create(){
 
     //colocación de textos
     this.ganadorTexto =     this.add.text(480, 250, "", { fill: '#FFAC00', font: '52px Impact', align: 'center'});
-    this.finPartidaTexto =  this.add.text(400, 250, "", { fill: '#E85C0D', font: '52px Impact', align: 'center'});
-    this.finTiempoTexto =   this.add.text(480, 250, "", { fill: '#FFAC00', font: '52px Impact', align: 'center'});
+    this.finPartidaTexto =  this.add.text(400, 250, "", { fill: '#E8330C', font: '52px Impact', align: 'center'});
+    this.finTiempoTexto =   this.add.text(480, 250, "", { fill: '#E8330C', font: '52px Impact', align: 'center'});
 
     //time event spawndrop
     var that = this;
