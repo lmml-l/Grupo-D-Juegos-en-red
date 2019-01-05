@@ -153,14 +153,14 @@ function Jugador(avatar,controles,proyectiles){
 				that.avatar.stopanim();
 			}
 			that.avatar.walkright(that.arma);
-			that.avatar.velx(120);
+			that.avatar.velx(175); //120
 		}
 		else if (that.keymovizq.isDown){
 			if(animacionactual != that.avatar.names + that.arma + ' left' ){
 				that.avatar.stopanim();
 			}
 			that.avatar.walkleft(that.arma);
-			that.avatar.velx(-120);
+			that.avatar.velx(-175);
 		}
 		else{
 			if(animacionactual.includes(' left')){

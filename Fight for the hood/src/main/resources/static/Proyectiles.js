@@ -141,21 +141,21 @@ function Proyectiles (sprites){
 			break;
 			case "Pistola":
 				if(avatar.getanim().includes('left')){
-					var vector = new Phaser.Math.Vector2(-1400,0); //velocidad de disparo
+					var vector = new Phaser.Math.Vector2(-1300,0); //velocidad de disparo
 					balas.setVelocity(vector.x,vector.y);
 
 				}else if(avatar.getanim().includes('right')){
-					var vector = new Phaser.Math.Vector2(1400,0); //velocidad de disparo
+					var vector = new Phaser.Math.Vector2(1300,0); //velocidad de disparo
 					balas.setVelocity(vector.x,vector.y);
 				}
 			break;
 			case "Subfusil":
 				
 				if(avatar.getanim().includes('left')){
-					var vector = new Phaser.Math.Vector2(-1200,0); //velocidad de disparo
+					var vector = new Phaser.Math.Vector2(-1100,0); //velocidad de disparo
 					balas.setVelocity(vector.x,vector.y);
 				}else if(avatar.getanim().includes('right')){
-					var vector = new Phaser.Math.Vector2(1200,0); //velocidad de disparo
+					var vector = new Phaser.Math.Vector2(1100,0); //velocidad de disparo
 					balas.setVelocity(vector.x,vector.y);
 				}
 			break;
