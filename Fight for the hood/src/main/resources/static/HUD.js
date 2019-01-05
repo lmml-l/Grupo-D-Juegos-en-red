@@ -32,8 +32,8 @@
 	    that.MostrarReloj = that.scene.add.text(484,602, (Math.trunc(91 - that.Clock.getElapsedSeconds())).toString(), { fill: '#FFFFFF', font: '52px Impact', align: 'center'});
 
         //Indica munición
-        that.Municiones[0] = that.scene.add.text(115, 716, that.jugadores[1].municiones.toString()).setScale(2);   	//Crea la munición del jugador 1
-        that.Municiones[1] = that.scene.add.text(875, 716, that.jugadores[0].municiones.toString()).setScale(2);
+        that.Municiones[0] = that.scene.add.text(115, 716, that.jugadores[1].municiones.toString(), { fill: '#FFFFFF', font: '28px Impact', align: 'left'}).setScale(1);   	//Crea la munición del jugador 1
+        that.Municiones[1] = that.scene.add.text(875, 716, that.jugadores[0].municiones.toString(), { fill: '#FFFFFF', font: '28px Impact', align: 'right'}).setScale(1);
         //Barras de vida
         that.BarrasVidas[0] = that.scene.add.graphics({x:0,y:0});
         that.BarrasVidas[1] = that.scene.add.graphics({x:0,y:0});   //Crea la munición del jugador 2
@@ -130,6 +130,10 @@
 	this.update = function(){
 	  	that.ArmasMostradas[0].setTexture(" "+ that.jugadores[0].arma); 
 	  	that.ArmasMostradas[1].setTexture(" "+ that.jugadores[1].arma);
+      //Si la munición es 0, se indica con un mensaje aparte
+      if(that.jugadores[0].municiones.toString() == "0"){that.jugadores[0].municiones = "NO AMMO";} //J1
+      if(that.jugadores[1].municiones.toString() == "0"){that.jugadores[0].municiones = "NO AMMO";} //J2
+      //Muestra munición
 	  	that.Municiones[0].setText(that.jugadores[0].municiones.toString());
 	  	that.Municiones[1].setText(that.jugadores[1].municiones.toString());
 

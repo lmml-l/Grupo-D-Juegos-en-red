@@ -44,9 +44,6 @@ function Jugador(avatar,controles,proyectiles){
 
 	var that = this;
 	//acciones
-	
-	
-
 	var keyrecarmasoltada;
 	var keydispararsoltad;
 
