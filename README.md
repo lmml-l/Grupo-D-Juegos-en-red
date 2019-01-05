@@ -163,8 +163,8 @@ Por lo que respecta a esta fase, no se han realizado cambios mayores a destacar.
 
 **--------------------------------------------FASE 4--------------------------------------------**
 
-En esta fase implementamos Websockets para que nuestro juego pueda ser multijugador entre dos equipos en línea.
-En esta documentación explicaremos de forma básica la organización interna de dicha implementación.
+En esta fase implementamos websockets para que nuestro juego pueda ser multijugador entre dos equipos en línea.
+En esta documentación explicaremos de forma básica el funcionamiento y la organización interna de dicha implementación.
 
 **Partida multijugador**
 Partimos desde la implementación anterior de API REST, en el que dos jugadores pueden conectarse a una sala. Esta vez, en lugar de dar paso a una partida local, acceden a una verdadera partida multijugador.
@@ -173,7 +173,7 @@ Partimos desde la implementación anterior de API REST, en el que dos jugadores 
 
 Una vez dos clientes hayan accedido a la sala, ambos jugadores pasan a la pantalla de selección de personaje. Al primer jugador que entre se le indica que es el *host*. El segundo jugador deberá esperar a que el host elija para poder escoger, tras lo cual comienza la partida. Mientras la sala esté llena, no podrán acceder más jugadores.
 
-![...](https://i.imgur.com/tWIJ2Se.jpg)
+![...](https://i.imgur.com/Tge4djb.jpg)
 
 Durante la partida, el jugador maneja a su personaje por el entorno de juego, teniendo ambos clientes las mismas armas disponibles en el escenario, mismo tiempo restante y, en definitiva, la misma información de partida. Una vez uno de los jugadores gane la pelea, al mejor de tres rondas, son redirigidos al menú principal.
 
