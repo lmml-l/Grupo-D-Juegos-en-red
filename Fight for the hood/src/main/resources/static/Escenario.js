@@ -228,10 +228,17 @@ colisionesbalasjugador(jugador,balast){
                 //se borra la bala y se quita vida al personaje
                 obj1.destroy();
                 jugador.vida=jugador.vida-5; console.log(jugador.vida);
-                if(jugador.vida<0){
-                    jugador.vida=0;
-                }
-            };
+
+                //Efecto de parpadeo
+                    jugador.avatar.sprite.alpha = 0; //invisible
+
+                    that.time.addEvent({delay:10 ,loop:false,   //visible
+                    callback: function(){
+                        jugador.avatar.sprite.alpha = 1;
+                    } });
+            }
+
+                
             
             //añade la colisión
             var colisionActual = this.physics.add.overlap(balast[j],jugador.avatar.sprite,funcioncallback);
@@ -239,6 +246,13 @@ colisionesbalasjugador(jugador,balast){
             colisionesjugadoresbalas.push(colisionActual);
         }
     }
+}
+
+noZero(jugador){
+    //Aseguramos que la vida no baja de cero (prevención de errores)
+    if(jugador.vida<0){
+        jugador.vida=0;
+    };
 }
 
 //misma estructura que la anterior
@@ -293,19 +307,10 @@ pausar(){
     if(this.pausa.isDown){
         if(pausado === false){
             this.pausa.isDown       = false; //se inicia a false para que no vuelva a abrirse
-            //this.pausaTexto.text    = "PAUSE";
             this.game.paused        = true;
             pausado                 = true; console.log("estoy en pausa xd");
             this.scene.sleep(this.scene); //pausa la escena
             this.scene.switch('Pausa');
-        }
-        else{
-            /*
-            this.pausa.isDown       = false; //se inicia a false para que no vuelva a abrirse
-            this.pausaTexto.text    = ""; //se "esconde" el texto
-            this.pausado            = false; console.log("ya no estoy en pausa xd");
-            this.scene.resume(this);//reanuda la escena
-            */
         }
     }
 }
@@ -533,6 +538,10 @@ update(){ //actualizaciones
     this.colisionesbalaescenario(this.plataformas3,this.jugador1.proyectiles.proyectilesenescane);
     this.colisionesbalaescenario(this.suelo3,this.jugador.proyectiles.proyectilesenescane);
     this.colisionesbalaescenario(this.suelo3,this.jugador1.proyectiles.proyectilesenescane);
+
+    this.noZero(this.jugador);
+    this.noZero(this.jugador1);
+
 
     this.pausar();
     this.hud.update();
