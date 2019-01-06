@@ -485,29 +485,34 @@ create(){
 
         var MandarWebsocket = this.time.addEvent({delay:10 ,loop:true ,
         callback: function(){
-
-        connectionJugador.send(JSON.stringify(message));
+        if(connectionJugador.readyState==1){
+        	connectionJugador.send(JSON.stringify(message));
+        }
           
         }});
 
         var MandarWebsocketDrops = this.time.addEvent({delay:100 ,loop:true ,
         callback: function(){
-
-        connectionDrops.send(JSON.stringify(messageDrops));
+        if(connectionDrops.readyState==1){
+        	connectionDrops.send(JSON.stringify(messageDrops));
+        }
           
         }});
 
         var MandarWebsocketTiempo = this.time.addEvent({delay:2000 ,loop:true ,
         callback: function(){
-
-        connectionTiempo.send(JSON.stringify(messageTiempo));
+        if(connectionTiempo.readyState==1){
+        	connectionTiempo.send(JSON.stringify(messageTiempo));
+        }
           
         }});
 
         var MandarWebsocketPuntuacion = this.time.addEvent({delay:100 ,loop:true ,
         callback: function(){
-
-        connectionPuntuacion.send(JSON.stringify(messagePuntuacion));
+        
+        if(connectionPuntuacion.readyState==1){
+        	connectionPuntuacion.send(JSON.stringify(messagePuntuacion));
+        }
           
         }});
         //Nuevas Posiciones Iniciales en funcion de si eres Host o Cliente
@@ -528,6 +533,11 @@ create(){
 
         }});
         
+        var that = this;
+		if(getComp()){
+			this.time.addEvent({delay:100, loop:true,
+		    callback: function(){that.scene.start('EscenarioError');}})
+		}
 //////////////////////////////////////////////////////////////
 	}
 

@@ -164,7 +164,9 @@ class CharapterSelectionOnline extends Phaser.Scene {
     	this.time.addEvent({delay:2000, loop: true, 
     	callback: function(){
     		var messageHost = {protocolo: "Host"}
-    		connectionTiempo.send(JSON.stringify(messageHost));
+    		if(connectionTiempo.readyState==1){
+    			connectionTiempo.send(JSON.stringify(messageHost));
+    		}
     		if(IsHost!=null){
     			IsHostText.text="You are the host";
     		}
@@ -174,7 +176,9 @@ class CharapterSelectionOnline extends Phaser.Scene {
     	this.time.addEvent({delay:1000, loop:true, 
     	callback: function(){
     		var messagePosicion = {protocolo: "Posicion", posicion: [600, 400, 400, 400]} //posiciones iniciales en la otra pantalla
-    		connectionDrops.send(JSON.stringify(messagePosicion));
+    		if(connectionDrops.readyState==1){
+    			connectionDrops.send(JSON.stringify(messagePosicion));
+    		}
     		if(PosicionWS!=null && PosicionWS!= undefined){
             posInicial = PosicionWS.posicion;
             }
@@ -200,7 +204,9 @@ class CharapterSelectionOnline extends Phaser.Scene {
 				this.checkplayer1 = true; //confirmación y bloqueo
 				var data = {ready : that.checkplayer1 };
 				var message = {protocolo: "GetReady", ready : data };
-				connectionJugador.send(JSON.stringify(message))
+				if(connectionJugador.readyState==1){
+					connectionJugador.send(JSON.stringify(message));
+				}
 				
 			sprite=this.seleccionaravatar(this.posArrayP1);
 		}
@@ -233,7 +239,9 @@ startPartida () {
             SoloMandarUnaVez = true;
             var MySkin = {skin : sprite};
 		    var messagee = {protocolo: "Skin", skin : MySkin };
-		    connectionJugador.send(JSON.stringify(messagee))
+		    if(connectionJugador.readyState==1){
+		    	connectionJugador.send(JSON.stringify(messagee));
+		    }
            }
  
             sprite2 = Skin.skin;
@@ -245,7 +253,7 @@ startPartida () {
 		}
 		
 		var that = this;
-		if(this.check){
+		if(getComp()){
 			this.time.addEvent({delay:100, loop:true,
 		    callback: function(){that.scene.start('EscenarioError');}})
 		}

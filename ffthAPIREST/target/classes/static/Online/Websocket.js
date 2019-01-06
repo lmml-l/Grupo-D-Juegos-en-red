@@ -104,7 +104,7 @@ function conection (){
 		setTimeout(conection(),1000);
 		console.log("Closing socket");
 		sumCheck();
-		if(getCheck()>5){
+		if(getCheck()==3){
 			console.log(check)
 			setComp(true);
 			console.log(comp)

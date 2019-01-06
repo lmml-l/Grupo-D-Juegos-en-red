@@ -94,7 +94,7 @@ class nameMenu extends Phaser.Scene {
 		
 		getMyIP(function(data){ip = data.ip});
 
-			this.time.addEvent({delay:100, loop:true,
+			this.time.addEvent({delay:1000, loop:true,
 		    callback: function(){getServerStatus(function(){that.scene.start('EscenarioError');})}})
 
 		this.time.addEvent({delay:400 , callback: function(){console.log(ip+"abc")}})

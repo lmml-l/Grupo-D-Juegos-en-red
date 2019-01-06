@@ -460,6 +460,10 @@ create(){
 
         var restartescenaevent = this.time.addEvent({delay:300 ,loop:true ,
         callback: function(){that.checkPartida()} });
+        
+        //desconexion del servidor
+        this.time.addEvent({delay:1000, loop:true,
+		    callback: function(){getServerStatus(function(){that.scene.start('EscenarioError');})}})
 
 
 	}
