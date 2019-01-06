@@ -132,7 +132,7 @@
 	  	that.ArmasMostradas[1].setTexture(" "+ that.jugadores[1].arma);
       //Si la munición es 0, se indica con un mensaje aparte
       if(that.jugadores[0].municiones.toString() == "0"){that.jugadores[0].municiones = "NO AMMO";} //J1
-      if(that.jugadores[1].municiones.toString() == "0"){that.jugadores[0].municiones = "NO AMMO";} //J2
+      if(that.jugadores[1].municiones.toString() == "0"){that.jugadores[1].municiones = "NO AMMO";} //J2
       //Muestra munición
 	  	that.Municiones[0].setText(that.jugadores[0].municiones.toString());
 	  	that.Municiones[1].setText(that.jugadores[1].municiones.toString());
