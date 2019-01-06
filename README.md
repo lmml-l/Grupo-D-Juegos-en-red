@@ -215,6 +215,16 @@ Para la implementación de la comunicación asíncrona, se han añadido cuatro w
 
 ![...](https://i.imgur.com/pXgX1Vb.png)
 
+**Vídeo**
+
+En este vídeo, resumimos las características de nuestro juego y una demonstración de partida. 
+
+Recomendamos verlo en pantalla completa, pues al subirse a Youtube, muchos monitores acaban distorsionando la imagen con un *efecto Moiré*, no monstrándose como es en realidad a menos de abrir la pantalla completa. 
+
+Pinche en la imagen para ver el vídeo:
+
+[![](http://img.youtube.com/vi/ThUG2cx4QaQ/0.jpg)](http://www.youtube.com/watch?v=ThUG2cx4QaQ "Vídeo")
+
 **--------------------------------------------FIN FASE 4--------------------------------------------**
 
 **Integrantes del equipo de desarrollo:**  
