@@ -1,7 +1,7 @@
 //Muestra los controles del juego. Funcionamiento análogo al resto de menús (menu.js y CharapterSelection.js)
-class ControlGuide extends Phaser.Scene {
+class Pausa extends Phaser.Scene {
 	constructor(){
-		super({key:"ControlGuide"});
+		super({key:"Pausa"});
 		this.check;
 		this.salir; //salir con escape
 		this.texto
@@ -41,15 +41,19 @@ class ControlGuide extends Phaser.Scene {
 	actualizarPosArray(){	
 		if(this.salir.isDown){
 			this.check = true;
+			this.salir.isDown = false;
 			//this.salir.isDown = false;
 		}
 	}
 
 	scenechange(){
 		if(this.check){
-			this.time.clearPendingEvents();
-    		this.time.removeAllEvents();
-			this.scene.start('MainMenu');
+			//this.time.clearPendingEvents();
+    		//this.time.removeAllEvents();
+    		pausado 	= false;
+    		this.check 	= false;
+			this.scene.wake('MainEscenario');
+			//this.scene.switch('MainEscenario');
 		}
 	}
 

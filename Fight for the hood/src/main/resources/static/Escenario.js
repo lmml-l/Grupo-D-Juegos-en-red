@@ -8,6 +8,8 @@
     var colisionesjugadoresbalas = new Array();
     var colisionesescenariobalas = new Array();
 
+    var pausado = false;
+
         var sprite = ["Recursos/Imagenes/Sprites_Personaje/SpritePersonajeIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpritePersonajeDerecha.png",
         "Recursos/Imagenes/Sprites_Personaje/SpritePistolaIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpritePistolaDerecha.png",
         "Recursos/Imagenes/Sprites_Personaje/SpriteEscopetaIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpriteEscopetaDerecha.png",
@@ -72,6 +74,11 @@ class MainEscenario extends Phaser.Scene {
         this.ganadorTexto;
         this.finTiempoTexto;
         this.finPartidaTexto;
+        this.pausaTexto;
+
+        //pausa
+        this.pausar;
+        this.pausar.isDown=false; //inicialización a falso para evitar ciclos
 	}
 
 //Reiniciamos el nivel
@@ -87,18 +94,18 @@ restartPartida(){
 checkPartida(){
     var that=this;
     //Si algún jugador llega a 3 victorias gana la partida
-    if(victorias[0]==3){                                    //jugador 1
+    if(victorias[0]==3){                                        //jugador 1
         console.log('P1 WINS');
-        this.finPartidaTexto.setText("\nP1 RULES THE HOOD");   //texto en pantalla
-        victorias[0]=0; victorias[1]=0;                     //reseteo de rondasw
-        this.time.addEvent({delay:3000,                     //tiempo que tarda hasta reiniciar
+        this.finPartidaTexto.setText("P1 RULES THE HOOD");    //texto en pantalla
+        victorias[0]=0; victorias[1]=0;                         //reseteo de rondasw
+        this.time.addEvent({delay:3000,                         //tiempo que tarda hasta reiniciar
         callback: function(){that.restartPartida()}});
     }
-    if(victorias[1]==3){                                    //jugador 2
+    if(victorias[1]==3){                                        //jugador 2
         console.log('J2 GANA LA PARTIDA');
-        this.finPartidaTexto.setText("P2 RULES THE HOOD");   //texto en pantalla
-        victorias[0]=0; victorias[1]=0;                     //reseteo de rondas
-        this.time.addEvent({delay:3000,                     //tiempo que tarda hasta reiniciar
+        this.finPartidaTexto.setText("P2 RULES THE HOOD");      //texto en pantalla
+        victorias[0]=0; victorias[1]=0;                         //reseteo de rondas
+        this.time.addEvent({delay:3000,                         //tiempo que tarda hasta reiniciar
         callback: function(){that.restartPartida()}});  
     }
 
@@ -281,6 +288,27 @@ atravesarplataformaspersonaje(jugador,plataforma){
             }
         }
     }
+
+pausar(){
+    if(this.pausa.isDown){
+        if(pausado === false){
+            this.pausa.isDown       = false; //se inicia a false para que no vuelva a abrirse
+            //this.pausaTexto.text    = "PAUSE";
+            this.game.paused        = true;
+            pausado                 = true; console.log("estoy en pausa xd");
+            this.scene.sleep(this.scene); //pausa la escena
+            this.scene.switch('Pausa');
+        }
+        else{
+            /*
+            this.pausa.isDown       = false; //se inicia a false para que no vuelva a abrirse
+            this.pausaTexto.text    = ""; //se "esconde" el texto
+            this.pausado            = false; console.log("ya no estoy en pausa xd");
+            this.scene.resume(this);//reanuda la escena
+            */
+        }
+    }
+}
 
 
 preload(){
@@ -473,9 +501,10 @@ create(){
     this.hud.create(this.Clock); 
 
     //colocación de textos
-    this.ganadorTexto =     this.add.text(480, 250, "", { fill: '#FFAC00', font: '52px Impact', align: 'center'});
-    this.finPartidaTexto =  this.add.text(400, 250, "", { fill: '#E8330C', font: '52px Impact', align: 'center'});
-    this.finTiempoTexto =   this.add.text(480, 250, "", { fill: '#E8330C', font: '52px Impact', align: 'center'});
+    this.ganadorTexto       =   this.add.text(480, 250, "", { fill: '#FFAC00', font: '52px Impact', align: 'center'});
+    this.finPartidaTexto    =   this.add.text(400, 250, "", { fill: '#E8330C', font: '52px Impact', align: 'center'});
+    this.finTiempoTexto     =   this.add.text(480, 250, "", { fill: '#E8330C', font: '52px Impact', align: 'center'});
+    this.pausaTexto         =   this.add.text(480, 250, "", { fill: '#E8330C', font: '52px Impact', align: 'center'});
 
     //time event spawndrop
     var that = this;
@@ -486,7 +515,8 @@ create(){
         var restartescenaevent = this.time.addEvent({delay:300 ,loop:true ,
         callback: function(){that.checkPartida()} });
 
-
+    //Botón de pausa ESC
+    this.pausa = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
 	}
 
 
@@ -504,6 +534,7 @@ update(){ //actualizaciones
     this.colisionesbalaescenario(this.suelo3,this.jugador.proyectiles.proyectilesenescane);
     this.colisionesbalaescenario(this.suelo3,this.jugador1.proyectiles.proyectilesenescane);
 
+    this.pausar();
     this.hud.update();
     }
 }
