@@ -9,8 +9,8 @@ var Tiempo  	= null;
 var IsHost  	= null
 var PosicionWS  = null;
 var Skin;
-var check 		= 0;
-var comp 		= false;
+//var check 		= 0;
+//var comp 		= false;
 var Puntuacion;
 
 //Tipos de conexión websocket
@@ -103,15 +103,16 @@ function conection (){
 	connectionTiempo.onclose = function() {
 		setTimeout(conection(),1000);
 		console.log("Closing socket");
-		sumCheck();
-		if(getCheck()==3){
-			console.log(check)
-			setComp(true);
-			console.log(comp)
-		}
+		//sumCheck();
+		//if(getCheck()>=3){
+			//console.log(check)
+			//setComp(true);
+			//console.log(comp)
+		//}
 	}
 }
 
+/*
 function sumCheck(){
 	this.check++;
 	return this.check;
@@ -132,7 +133,7 @@ function getComp(){
 function setComp(bool){
 	this.comp = bool;
 }
-
+*/
 
 
 /////////////////

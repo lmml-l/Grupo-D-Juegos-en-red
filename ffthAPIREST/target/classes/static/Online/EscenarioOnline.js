@@ -532,13 +532,18 @@ create(){
         that.jugador1.avatar.sprite.y = Jugador.avatar.sprite.y;
 
         }});
-        
+        /*
         var that = this;
 		if(getComp()){
 			this.time.addEvent({delay:100, loop:true,
 		    callback: function(){that.scene.start('EscenarioError');}})
 		}
+		*/
 //////////////////////////////////////////////////////////////
+        //estado del servidor
+        var that = this;
+        this.time.addEvent({delay:1000, loop:true,
+		    callback: function(){getServerStatus(function(){that.scene.start('EscenarioError');})}})
 	}
 
 
