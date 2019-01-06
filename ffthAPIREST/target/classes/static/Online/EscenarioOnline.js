@@ -426,7 +426,10 @@ create(){
     var that=this;
 	//comprobación del estado del servidor
 		this.time.addEvent({delay:1000, loop:true,
-	    callback: function(){getServerStatus(function(){that.scene.start('EscenarioError');})}})
+	    callback: function(){getServerStatus(function(){
+	    	that.time.clearPendingEvents();
+	        that.time.removeAllEvents();
+	    	that.scene.start('EscenarioError');})}})
     
     var message;            //Jugador
     var messageDrops;       //Drops
