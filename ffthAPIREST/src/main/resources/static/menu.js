@@ -132,6 +132,8 @@ class MainMenu extends Phaser.Scene {
 				that.go2.isDown=false;
 			}})}})
 
+		this.time.addEvent({delay:1000, loop:true,
+		callback: function(){getServerStatusCheck(function(){that.desconexion.text = "";})}})
 
     	
 	}
