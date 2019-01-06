@@ -195,6 +195,18 @@ function getServerStatus(error) {
     })
 }
 
+function getServerStatusCheck(checking) {
+    $.ajax({
+        method: 'GET',
+        url: 'http://' + IPserver + '/historial',
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).done(function (data) {
+        checking()
+    })
+}
+
 //Conseguir lista de IPs
 function getIPs(arraips) {
     $.ajax({
