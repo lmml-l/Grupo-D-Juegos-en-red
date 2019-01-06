@@ -46,15 +46,15 @@ checkPartida(){
     var that=this;
     //Si algún jugador llega a 3 victorias gana la partida
     if(victorias[0]==3){                                    //jugador 1
-        console.log('J1 GANA LA PARTIDA');
-        this.finPartidaTexto.setText("J1 GANA LA PELEA");   //texto en pantalla
+        console.log('YOU WIN!');
+        this.finPartidaTexto.setText("YOU WIN\nTHE FIGHT FOR THE HOOD!");   //texto en pantalla
         victorias[0]=0; victorias[1]=0;                     //reseteo de rondasw
         this.time.addEvent({delay:3000,                     //tiempo que tarda hasta reiniciar
         callback: function(){that.restartPartida()}});
     }
     if(victorias[1]==3){                                    //jugador 2
-        console.log('J2 GANA LA PARTIDA');
-        this.finPartidaTexto.setText("J2 GANA LA PELEA");   //texto en pantalla
+        console.log('YOU LOSE!');
+        this.finPartidaTexto.setText("YOU LOSE\nTHE FIGHT FOR THE HOOD!");   //texto en pantalla
         victorias[0]=0; victorias[1]=0;                     //reseteo de rondas
         this.time.addEvent({delay:3000,                     //tiempo que tarda hasta reiniciar
         callback: function(){that.restartPartida()}});  
@@ -62,20 +62,20 @@ checkPartida(){
 
     //Si los dos jugadores llegan a 0 al mismo tiempo
     if(this.jugador.vida<=0 && this.jugador1.vida<=0){
-        console.log('Ganador aleatorio');
+        console.log('RandoWinner');
         var ganador = Math.floor(Math.random()*2);          //se elige aleatoriamente ganador
         //gana J1
         if(ganador==0){
             victorias[0]+=1;                                //suma una victoria
-            console.log('Gana J1');
-            this.ganadorTexto.setText("GANA J1");
+            console.log('YOU WIN!');
+            this.ganadorTexto.setText("YOU WIN!");
             this.restartPartida();                          //reinicia el nivel
         }   
         //gana J2
         else if(ganador==1){
             victorias[1]+=1;                                //suma una victoria
-            console.log('Gana J2');
-            this.ganadorTexto.setText("GANA J2");
+            console.log('YOU LOSE!');
+            this.ganadorTexto.setText("YOU LOSE!");
             this.restartPartida();                          //reinicia el nivel
         }
     }
@@ -83,19 +83,19 @@ checkPartida(){
     //Si algún jugador se queda sin vida
     else if(this.jugador.vida<=0 && this.jugador1.vida>0){  //jugador 1
         victorias[1]+=1;
-        console.log('Gana J2');
-        this.ganadorTexto.setText("GANA J2");
+        console.log('YOU LOSE!');
+        this.ganadorTexto.setText("YOU LOSE!");
         this.restartPartida();
     }
     else if(this.jugador1.vida<=0 && this.jugador.vida>0){  //jugador 2
         victorias[0]+=1;
-        console.log('Gana J1');
-        this.ganadorTexto.setText("GANA J1");
+        console.log('YOU WIN!');
+        this.ganadorTexto.setText("YOU WIN!");
         this.restartPartida();
     } 
     //Si acaba el tiempo
     if(91-this.Clock.getElapsedSeconds() == 0){             //comprobación de reloj (diferencia de tiempo) 
-    this.finTiempoTexto.setText("SE ACABÓ\nEL TIEMPO");
+    this.finTiempoTexto.setText("TIME\nIS UP");
     this.restartPartida();
     }
 }
