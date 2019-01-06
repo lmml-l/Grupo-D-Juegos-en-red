@@ -115,22 +115,10 @@ class MainMenu extends Phaser.Scene {
 		this.textoVersion = this.add.text(700, 750, "v.4.0 Alpha Fase 4", { fill: '#F4FFF3', font: '16px Lucida Console', align: 'center'}); //760, 710
 		var that=this;
 		//comprobación del estado del servidor
-		this.time.addEvent({delay:0, loop:true,
+		this.time.addEvent({delay:1000, loop:true,
 		callback: function(){getServerStatus(function(){
 			that.desconexion.text = "Server Disconnected";
-			if(that.posArray==0 && that.check){
-				that.scene.start('EscenarioError');
-				that.go1.isDown=false;
-				that.go2.isDown=false;
-			}else if(that.posArray==1 && that.check){
-				that.scene.start('EscenarioError');
-				that.go1.isDown=false;
-				that.go2.isDown=false;
-			}else if(that.posArray==2 && that.check){
-				that.scene.start('EscenarioError');
-				that.go1.isDown=false;
-				that.go2.isDown=false;
-			}})}})
+			that.scene.start('EscenarioError');})}})
 
 		this.time.addEvent({delay:1000, loop:true,
 		callback: function(){getServerStatusCheck(function(){that.desconexion.text = "";})}})
