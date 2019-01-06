@@ -140,12 +140,10 @@ class CharapterSelectionOnline extends Phaser.Scene {
 		conection();
         Skin = sprite2;
 	
-		var that=this;
+        var that=this;
 		//comprobación del estado del servidor
-		if(this.check>5){
-			this.time.addEvent({delay:100, loop:true,
+			this.time.addEvent({delay:1000, loop:true,
 		    callback: function(){getServerStatus(function(){that.scene.start('EscenarioError');})}})
-		}
 
 		//Actualiza si el otro jugador ha elegido personaje a traves de websocket
 		var textoreadysolounavez = false;
@@ -252,11 +250,11 @@ startPartida () {
 			
 		}
 		
-		var that = this;
+		/*var that = this;
 		if(getComp()){
 			this.time.addEvent({delay:100, loop:true,
 		    callback: function(){that.scene.start('EscenarioError');}})
-		}
+		}*/
 
 	
 	}
