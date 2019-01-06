@@ -15,8 +15,10 @@ class Pausa extends Phaser.Scene {
 		//var controls = this.add.image(this.game.canvas.width/2,this.game.canvas.height/2,'controls').setScale(1);
 
 		this.salir = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
+		this.volverMenu = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
 
-		this.salir.isDown=false;
+		this.salir.isDown 		= false;
+		this.volverMenu.isDown 	= false;
 	}
 
 	preload(){
@@ -29,11 +31,8 @@ class Pausa extends Phaser.Scene {
 	create(){
 		this.fondo 		= this.add.image(this.game.canvas.width/2,this.game.canvas.height/2,'menuControlFondo').setScale(1.3);
 		this.controlmenu();
-		this.texto 		= this.add.text(200, 500, "Player 1\nA,S\nW\nR\nT", { fill: '#FFAC00', font: '28px Impact', align: 'left'});
-		this.texto 		= this.add.text(400, 500, "Controls\nMove\nJump\nGrap/Drop Weapon\nShoot", { fill: '#FFFFFF', font: '28px Impact', align: 'center'});
-		this.texto 		= this.add.text(700, 500, "Player 2\n←,→\n↑\nO\nP", { fill: '#3FAEFF', font: '28px Impact', align: 'right'});
-
-		this.textoSalir = this.add.text(50, 730, "ESC to exit", { fill: '#F4FFF3', font: '24px Impact', align: 'center'});
+		this.texto 		= this.add.text(200, 500, "Press Z for back to menu", { fill: '#FFAC00', font: '28px Impact', align: 'left'});
+		this.textoSalir = this.add.text(200, 500, "\nPress ESC to resume", { fill: '#F4FFF3', font: '24px Impact', align: 'center'});
 	
 		var that=this;
 	}
@@ -43,6 +42,12 @@ class Pausa extends Phaser.Scene {
 			this.check = true;
 			this.salir.isDown = false;
 			//this.salir.isDown = false;
+		}
+		if(this.volverMenu.isDown){
+			this.volverMenu.isDown = false;
+			this.scene.stop('MainEscenario');
+			this.scene.switch('MainMenu');
+			this.scene.stop('Pausa');
 		}
 	}
 

@@ -308,7 +308,7 @@ pausar(){
         if(pausado === false){
             this.pausa.isDown       = false; //se inicia a false para que no vuelva a abrirse
             this.game.paused        = true;
-            pausado                 = true; console.log("estoy en pausa xd");
+            pausado                 = true;
             this.scene.sleep(this.scene); //pausa la escena
             this.scene.switch('Pausa');
         }
