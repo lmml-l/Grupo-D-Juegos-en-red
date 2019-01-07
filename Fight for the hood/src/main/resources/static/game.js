@@ -14,7 +14,7 @@ var config = {
         disableWebAudio: true
     },
     //Orden de escenas
-    scene: [MainMenu,ControlGuide,CharapterSelection,Pausa,MainEscenario] //scene: [MainMenu,ControlGuide,nameMenu,Lobby,CharapterSelection,MainEscenario]
+    scene: [MainMenu,ControlGuide,Creditos,CharapterSelection,Pausa,MainEscenario] //scene: [MainMenu,ControlGuide,nameMenu,Lobby,CharapterSelection,MainEscenario]
 };
 
 var game = new Phaser.Game(config);

@@ -46,8 +46,9 @@ class Pausa extends Phaser.Scene {
 		if(this.volverMenu.isDown){
 			this.volverMenu.isDown = false;
 			this.scene.stop('MainEscenario');
-			this.scene.switch('MainMenu');
 			this.scene.stop('Pausa');
+			this.scene.start('MainMenu');
+			
 		}
 	}
 
@@ -57,6 +58,7 @@ class Pausa extends Phaser.Scene {
     		//this.time.removeAllEvents();
     		pausado 	= false;
     		this.check 	= false;
+    		this.scene.stop('Pausa');
 			this.scene.wake('MainEscenario');
 			//this.scene.switch('MainEscenario');
 		}

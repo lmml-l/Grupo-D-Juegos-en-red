@@ -343,9 +343,9 @@ pausar(){
             this.pausa.isDown       = false; //se inicia a false para que no vuelva a abrirse
             this.game.paused        = true;
             pausado                 = true;
-            this.scene.sleep(this.scene); //pausa la escena
+            //this.scene.sleep(this.scene); //pausa la escena
             this.scene.switch('Pausa');
-            this.musica.stop();
+            this.musica.pause();
         }
     }
 }
@@ -396,6 +396,8 @@ create(){
 
 	this.add.sprite(512, 215, 'fondo');
 	this.add.sprite(512, 681, 'HUD');
+
+    pausado = false;
 
     this.musica = this.game.sound.add('musicabatalla');
     this.musica.setVolume(0.15);
@@ -598,6 +600,7 @@ create(){
 
     //Botón de pausa ESC
     this.pausa = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
+    this.pausa.isDown = false;
 	}
 
 
@@ -624,7 +627,9 @@ update(){ //actualizaciones
 
 
     this.pausar();
-    this.musica.resume();
+    if(pausado === false && (!this.pausa.isDown)){
+        this.musica.resume();
+    }
     this.hud.update();
     }
 
