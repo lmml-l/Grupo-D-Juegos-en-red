@@ -121,7 +121,7 @@ class MainMenu extends Phaser.Scene {
 		this.musica.play();
 		//textos de apoyo
 		this.textoControles = this.add.text(50, 710, "Use A/D or arrows to select\nPress SPACE or ENTER to go", {  fill: '#F4FFF3', font: '24px Impact', align: 'left'});
-		this.textoVersion = this.add.text(700, 750, "v.4.0 Alpha Fase 4", { fill: '#F4FFF3', font: '16px Lucida Console', align: 'center'}); //760, 710
+		this.textoVersion = this.add.text(700, 750, "v.5.0 Alpha", { fill: '#F4FFF3', font: '16px Lucida Console', align: 'center'}); //760, 710
 		var that=this;
 	}
 
