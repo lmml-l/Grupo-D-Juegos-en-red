@@ -85,6 +85,15 @@ function Jugador(avatar,controles,proyectiles){
 
 	   	keydispararsoltad = true;
 
+	   	//Puesta a false
+	   	that.keysalto.isDown = false;
+	   	that.keymovder.isDown = false;
+	   	that.keymovizq.isDown = false;
+	   	that.keymovabajo.isDown = false;
+	   	that.keydisparo.isDown = false;
+	   	that.keyrecargar.isDown = false;
+	   	that.keyrecarma.isDown = false;
+	   	that.keyescudo.isDown = false;
 
 	}
 	//marca la cantidad de munición con la que cuenta cada arma

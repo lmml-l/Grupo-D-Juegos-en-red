@@ -346,6 +346,26 @@ pausar(){
             //this.scene.sleep(this.scene); //pausa la escena
             this.scene.switch('Pausa');
             this.musica.pause();
+
+            //Puesta a false de controles de J1
+            this.jugador.keysalto.isDown    = false;
+            this.jugador.keymovder.isDown   = false;
+            this.jugador.keymovizq.isDown   = false;
+            this.jugador.keymovabajo.isDown = false;
+            this.jugador.keydisparo.isDown  = false;
+            this.jugador.keyrecargar.isDown = false;
+            this.jugador.keyrecarma.isDown  = false;
+            this.jugador.keyescudo.isDown   = false;
+
+            //Puesta a false de controles de J2
+            this.jugador1.keysalto.isDown    = false;
+            this.jugador1.keymovder.isDown   = false;
+            this.jugador1.keymovizq.isDown   = false;
+            this.jugador1.keymovabajo.isDown = false;
+            this.jugador1.keydisparo.isDown  = false;
+            this.jugador1.keyrecargar.isDown = false;
+            this.jugador1.keyrecarma.isDown  = false;
+            this.jugador1.keyescudo.isDown   = false;
         }
     }
 }

@@ -10,6 +10,7 @@
 		this.RondasVictoria = new Array(2);   //rondas ganadas por cada jugador
 		this.Clock;								            //tiempo restante
 		this.MostrarReloj;  					        //visualización del tiempo
+    this.textoESC;                        //indica que se pausa con ESC
 		var that = this;
 
 
@@ -30,6 +31,8 @@
 	    that.Clock = clock; //temporizador controlado por el Escenario (escena)
 
 	    that.MostrarReloj = that.scene.add.text(484,602, (Math.trunc(91 - that.Clock.getElapsedSeconds())).toString(), { fill: '#FFFFFF', font: '52px Impact', align: 'center'});
+
+      that.textoESC = that.scene.add.text(420, 730, 'Press ESC to pause', { fill: '#FFFFFF', font: '24px Impact', align: 'center'}).setScale(1);
 
         //Indica munición
         that.Municiones[0] = that.scene.add.text(115, 716, that.jugadores[1].municiones.toString(), { fill: '#FFFFFF', font: '28px Impact', align: 'left'}).setScale(1);   	//Crea la munición del jugador 1
