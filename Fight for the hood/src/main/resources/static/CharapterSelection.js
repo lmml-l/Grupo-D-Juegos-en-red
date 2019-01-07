@@ -105,8 +105,8 @@ class CharapterSelection extends Phaser.Scene {
 		//var subtitle = this.load.image('subtitle','Recursos/Imagenes/subtitle.png');
 		var character1 = this.load.image('character1','Recursos/Imagenes/Character1.png');
 		var character2 = this.load.image('character2','Recursos/Imagenes/Character2.png');
-		var p1 		   = this.load.image('P1','Recursos/Imagenes/J1.png');
-		var p2 		   = this.load.image('P2','Recursos/Imagenes/J2.png');
+		var p1 		   = this.load.image('P1','Recursos/Imagenes/P1.png');
+		var p2 		   = this.load.image('P2','Recursos/Imagenes/P2.png');
 		this.load.image('menuCharacterFondo','Recursos/Imagenes/menuCharacterFondo.png');
 		this.load.audio('musicacharacterselection','Recursos/Audio/CharacterSelection.mp3');
 	}
