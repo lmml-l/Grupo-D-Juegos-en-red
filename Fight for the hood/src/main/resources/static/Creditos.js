@@ -5,6 +5,7 @@ class Creditos extends Phaser.Scene {
 		this.check;
 		this.salir; //salir con esc
 		this.texto;
+		this.creditoss;
 		this.fondoSalir;
 		this.musica;
 	}
@@ -22,14 +23,15 @@ class Creditos extends Phaser.Scene {
 
 	preload(){
 		this.load.image('menuControlFondo','Recursos/Imagenes/menuControlesFondo.png');
-		
+		this.load.image('Credits','Recursos/Imagenes/Creditos.png');
 		this.load.audio('musicacontrol','Recursos/Audio/Menu.mp3');
 	}
 
 	create(){
 		this.fondo 		= this.add.image(this.game.canvas.width/2,this.game.canvas.height/2,'menuControlFondo').setScale(1.3);
+		this.creditoss =  this.add.image('Credits');
 		this.controlmenu();
-		this.musica = this.game.sound.add('musicacontrol');
+		this.musica = this.game.sound.add(100, 100,'musicacontrol');
 		this.musica.setLoop(true);
 		this.musica.setVolume(0.5);
 		this.musica.play();
