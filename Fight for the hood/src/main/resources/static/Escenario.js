@@ -69,8 +69,21 @@ class MainEscenario extends Phaser.Scene {
         this.drops = new Drops(this,spritearmas);
 
         this.hud = new HUD (this, Hud , [this.jugador,this.jugador1]);
+
+        //Musica y sonidos
         this.musica;
         this.victoria;
+        this.disparosmg;
+        this.disparopistola;
+        this.disparoescopeta;
+        this.golpepuño;
+        this.golpebate;
+        this.recogersmg
+        this.recogerpistola
+        this.recogerescopeta
+        this.recogerpuño
+        this.recogerbate
+
         //textos
         this.ganadorTexto;
         this.finTiempoTexto;
@@ -99,21 +112,28 @@ checkPartida(){
         console.log('P1 WINS');
         this.finPartidaTexto.setText("P1 RULES THE HOOD");    //texto en pantalla
         victorias[0]=0; victorias[1]=0;                         //reseteo de rondasw
-        this.time.addEvent({delay:3000,                         //tiempo que tarda hasta reiniciar
+        this.time.addEvent({delay:1000,                         //tiempo que tarda hasta reiniciar
         callback: function(){
-             that.scene.start('MainMenu');
-        that.musica.stop();
-        that.victoria.play();}});
+            that.musica.stop();
+            that.time.addEvent({delay:500,  //tiempo que tarda hasta reiniciar
+    callback: function(){that.victoria.play();}});
+            that.time.addEvent({delay:3000,  //tiempo que tarda hasta reiniciar
+    callback: function(){that.scene.start('MainMenu');}});
+            
+        }});
     }
     if(victorias[1]==3){                                        //jugador 2
         console.log('J2 GANA LA PARTIDA');
         this.finPartidaTexto.setText("P2 RULES THE HOOD");      //texto en pantalla
         victorias[0]=0; victorias[1]=0;                         //reseteo de rondas
-        this.time.addEvent({delay:3000,                         //tiempo que tarda hasta reiniciar
+        this.time.addEvent({delay:1000,                         //tiempo que tarda hasta reiniciar
         callback: function(){
-            that.scene.start('MainMenu');
-        that.musica.stop();
-        that.victoria.play();}});  
+            that.musica.stop();
+            that.time.addEvent({delay:500,  //tiempo que tarda hasta reiniciar
+    callback: function(){that.victoria.play();}});
+            that.time.addEvent({delay:3000,  //tiempo que tarda hasta reiniciar
+    callback: function(){that.scene.start('MainMenu');}});
+        }});  
     }
 
     //Si los dos jugadores llegan a 0 al mismo tiempo
@@ -360,6 +380,16 @@ preload(){
 
     this.load.audio('musicabatalla','Recursos/Audio/Battle Theme.mp3');
     this.load.audio('musicavictory','Recursos/Audio/Victory.mp3');
+    this.load.audio('disparosmg','Recursos/Audio/SMGShot.mp3');
+    this.load.audio('disparopistola','Recursos/Audio/HandgunShot.mp3');
+    this.load.audio('golpepuño','Recursos/Audio/PunchHit.mp3');
+    this.load.audio('golpebate','Recursos/Audio/BaseballBatHit.mp3');
+    this.load.audio('disparoescopeta','Recursos/Audio/ShotgunShot.mp3');
+    this.load.audio('recogerpistola','Recursos/Audio/HandgunPickup.mp3');
+    this.load.audio('recogersmg','Recursos/Audio/SMGPickup.mp3');
+    this.load.audio('recogerescopeta','Recursos/Audio/ShotgunPickup.mp3');
+    this.load.audio('recogerbate','Recursos/Audio/BaseballBatPickup.mp3');
+    this.load.audio('recogerpuño','Recursos/Audio/PunchPickup.mp3');
 }
 
 create(){
@@ -368,12 +398,32 @@ create(){
 	this.add.sprite(512, 681, 'HUD');
 
     this.musica = this.game.sound.add('musicabatalla');
-    this.musica.setVolume(0.5);
+    this.musica.setVolume(0.15);
     this.musica.play();
 
     this.victoria = this.game.sound.add('musicavictory');
     this.musica.setLoop(false);
     this.musica.setVolume(0.5);
+    this.disparosmg = this.game.sound.add('disparosmg');
+    this.disparosmg.setVolume(1);
+    this.disparopistola = this.game.sound.add('disparopistola');
+    this.disparopistola.setVolume(1);
+    this.disparoescopeta = this.game.sound.add('disparoescopeta');
+    this.disparoescopeta.setVolume(1);
+    this.golpepuño = this.game.sound.add('golpepuño');
+    this.golpepuño.setVolume(1);
+    this.golpebate = this.game.sound.add('golpebate');
+    this.golpebate.setVolume(1);
+    this.recogersmg = this.game.sound.add('recogersmg');
+    this.recogersmg.setVolume(1);
+    this.recogerpistola = this.game.sound.add('recogerpistola');
+    this.recogerpistola.setVolume(1);
+    this.recogerescopeta = this.game.sound.add('recogerescopeta');
+    this.recogerescopeta.setVolume(1);
+    this.recogerpuño = this.game.sound.add('recogerpuño');
+    this.recogerpuño.setVolume(1);
+    this.recogerbate = this.game.sound.add('recogerbate');
+    this.recogerbate.setVolume(1);
 
 	this.plataformas = this.physics.add.staticGroup();   //Hace sólidas las plataformas enfocadas al primer personaje
     this.suelo = this.physics.add.staticGroup();
@@ -554,6 +604,10 @@ create(){
 update(){ //actualizaciones
     this.jugador.update(this.drops);
     this.jugador1.update(this.drops);
+
+    this.sonidos(this.jugador);
+    this.sonidos(this.jugador1);
+
     this.atravesarplataformaspersonaje(this.jugador.avatar.sprite,this.plataformas);
     this.atravesarplataformaspersonaje(this.jugador1.avatar.sprite,this.plataformas2);
     
@@ -573,4 +627,50 @@ update(){ //actualizaciones
     this.musica.resume();
     this.hud.update();
     }
+
+
+sonidos(jugador){
+    if(jugador.shotCheck >= 1){
+        switch(jugador.shotCheck){
+            case 2:
+                this.disparoescopeta.play();
+                break;
+            case 3:
+                this.disparopistola.play();
+                break;
+            case 4:
+                this.disparosmg.play();
+                break;
+            case 5:
+                this.golpebate.play();
+                break;
+            case 6:
+                this.golpepuño.play();
+                break;
+        }
+        jugador.shotCheck = 1;
+    }
+
+    if(jugador.dropCheck >= 1){
+        switch(jugador.dropCheck){
+            case 2:
+                this.recogerbate.play();
+                break;
+            case 3:
+                this.recogerpuño.play();
+                break;
+            case 4:
+                this.recogerescopeta.play();
+                break;
+            case 5:
+                this.recogerpistola.play();
+                break;
+            case 6:
+                this.recogersmg.play();
+                break;
+        }
+        jugador.dropCheck = 1;
+    }
+}
+
 }

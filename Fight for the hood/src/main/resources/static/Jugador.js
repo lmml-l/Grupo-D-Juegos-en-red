@@ -33,6 +33,8 @@ function Jugador(avatar,controles,proyectiles){
 	this.vida=100;
 	this.proyectiles = proyectiles;
 	this.municiones = "";
+	this.shotCheck;
+	this.dropCheck;
 	this.keysalto;
 	this.keymovder;
 	this.keymovizq;
@@ -41,12 +43,7 @@ function Jugador(avatar,controles,proyectiles){
 	this.keyrecargar;
 	this.keyrecarma;
 	this.keyescudo;
-	/*this.disparosmg;
-	this.disparopistola;
-	this.disparoescopeta;
-	this.golpepuño;
-	this.golpebate;
-	this.recogerarma;*/
+	
 
 	var that = this;
 	//acciones
@@ -55,31 +52,15 @@ function Jugador(avatar,controles,proyectiles){
 
 	//carga el avatar y los proyectiles
 	this.preload=function(){
+		var that = this;
 		that.avatar.preload();
 		that.proyectiles.preload(that.avatar.scene);
-		/*that.load.audio('disparosmg','Recursos/Audio/SMGShot.mp3');
-		that.load.audio('disparopistola','Recursos/Audio/HandgunShot.mp3');
-		that.load.audio('golpepuño','Recursos/Audio/PunchHit.mp3');
-		that.load.audio('golpebate','Recursos/Audio/BaseballBatHit.mp3');
-		that.load.audio('disparoescopeta','Recursos/Audio/ShotgunShot.mp3');
-		that.load.audio('recogerarma','Recursos/Audio/HandgunPickup.mp3');*/
+		
 	}
 	this.create=function(lado){
+		var that = this;
 		that.avatar.animaciones();
 		that.avatar.spawnavatar();
-
-		/*that.disparosmg = that.game.sound.add('disparosmg');
-		that.disparosmg.setVolume(1);
-		that.disparopistola = that.game.sound.add('disparopistola');
-		that.disparopistola.setVolume(1);
-		that.disparoescopeta = that.game.sound.add('disparoescopeta');
-		that.disparoescopeta.setVolume(1);
-		that.golpepuño = that.game.sound.add('golpepuño');
-		that.golpepuño.setVolume(1);
-		that.golpebate = that.game.sound.add('golpebate');
-		that.golpebate.setVolume(1);
-		that.recogerarma = that.game.sound.add('recogerarma');
-		that.recogerarma.setVolume(1);*/
 
 		that.vida = 100;			//vida del personaje
         that.municiones = "";		//munición vacía por defecto
@@ -109,6 +90,7 @@ function Jugador(avatar,controles,proyectiles){
 	//marca la cantidad de munición con la que cuenta cada arma
 	//las armas cuerpo a cuerpo no necesitan munición
 	this.selectmunicion = function(arma){
+		var that = this;
 		var municiones;
 		switch(arma){
 			case "Bate":
@@ -131,6 +113,7 @@ function Jugador(avatar,controles,proyectiles){
 	}
 	//gestiona el cambio de arma en partida
 	this.selectarma = function(armasdrops,offset){
+		var that = this;
 		var i = 0
 		var armaactual = this.arma;
 		var cambiadoarma = false;
@@ -143,6 +126,23 @@ function Jugador(avatar,controles,proyectiles){
                     armasdrops.sprite.splice(i,1);
                     this.municiones=this.selectmunicion(this.arma);
                     cambiadoarma=true;
+                    switch(this.arma){
+						case "Bate":
+						 	that.dropCheck = 2;
+						 	break;
+						case "Puñoamericano":
+							that.dropCheck = 3;
+							break;
+						case "Escopeta":
+							that.dropCheck = 4;
+							break;
+						case "Pistola":
+							that.dropCheck = 5;
+							break;
+						case "Subfusil":
+							that.dropCheck = 6;
+							break;
+					}
                 }
                 else{
                     this.arma="";
@@ -160,46 +160,47 @@ function Jugador(avatar,controles,proyectiles){
 	//el personaje es empujado hacia abajo, excepto si está tocando algo por debajo
 	//simulación de la gravedad
 	this.gravedad=function(){
-	if(that.avatar.sprite.body!=null){
-		if(that.avatar.sprite.body.touching.down){
-			that.avatar.vely(0);
-		}else {
-			that.avatar.vely(that.avatar.getvely()+ 9.8);
+		var that = this;
+		if(that.avatar.sprite.body!=null){
+			if(that.avatar.sprite.body.touching.down){
+				that.avatar.vely(0);
+			}else {
+				that.avatar.vely(that.avatar.getvely()+ 9.8);
+			}
 		}
-	}
 	}
 
 	//control del personaje según la tecla y orientación
 	this.controldepersonaje = function(){
 		var that = this;
 		var animacionactual = that.avatar.getanim();
-	if(that.keymovder!=null && that.keymovizq!=null ){
-		if(that.keymovder.isDown){
-			if(animacionactual != that.avatar.names + that.arma + ' right' ){
-				that.avatar.stopanim();
+		if(that.keymovder!=null && that.keymovizq!=null ){
+			if(that.keymovder.isDown){
+				if(animacionactual != that.avatar.names + that.arma + ' right' ){
+					that.avatar.stopanim();
+				}
+				that.avatar.walkright(that.arma);
+				that.avatar.velx(175); //120
 			}
-			that.avatar.walkright(that.arma);
-			that.avatar.velx(175); //120
+			else if (that.keymovizq.isDown){
+				if(animacionactual != that.avatar.names + that.arma + ' left' ){
+					that.avatar.stopanim();
+				}
+				that.avatar.walkleft(that.arma);
+				that.avatar.velx(-175);
+			}
+			else{
+				if(animacionactual.includes(' left')){
+					that.avatar.stopanim();
+					that.avatar.idleleft(that.arma);
+				}
+				else if(animacionactual.includes(' right')){
+					that.avatar.stopanim();
+					that.avatar.idleright(that.arma);
+				}
+				that.avatar.velx(0);
+			}
 		}
-		else if (that.keymovizq.isDown){
-			if(animacionactual != that.avatar.names + that.arma + ' left' ){
-				that.avatar.stopanim();
-			}
-			that.avatar.walkleft(that.arma);
-			that.avatar.velx(-175);
-		}
-		else{
-			if(animacionactual.includes(' left')){
-				that.avatar.stopanim();
-				that.avatar.idleleft(that.arma);
-			}
-			else if(animacionactual.includes(' right')){
-				that.avatar.stopanim();
-				that.avatar.idleright(that.arma);
-			}
-			that.avatar.velx(0);
-		}
-	}
 		if(that.keysalto!=null){
 			if(that.keysalto.isDown && (that.avatar.sprite.body.touching.down || that.avatar.sprite.body.onFloor())){
 			that.avatar.vely(-375);
@@ -221,47 +222,50 @@ function Jugador(avatar,controles,proyectiles){
 	//disparo según arma y orientación
 	//disminución de munición
 	this.disparar = function (arma,scene,avatar){
-	if(that.keydisparo!=null){
-		if((that.keydisparo.isDown) && (keydispararsoltad) && ((this.municiones > 0 || ((this.arma=="")) || 
-			((this.arma=="Bate")) || ((this.arma=="Puñoamericano"))))){
-			that.proyectiles.create(arma,scene,avatar);
-			
-		switch(arma){
-			case "Escopeta":
-				that.municiones -= 8;
-				//that.disparoescopeta.play();
-				break;
-			case "Pistola":
-				that.municiones -= 1;
-				//that.disparopistola.play();
-				break;
-			case "Subfusil":
-				that.municiones -= 3;
-				//that.disparosmg.play();
-				break;
-			case "Bate":
-				//that.golpebate.play();
-				break;
-			case "Puñoamericano":
-				//that.golpepuño.play();
-				break;
-		}
-			keydispararsoltad = false;
-			that.avatar.scene.time.addEvent({delay:625 , callback:function(){keydispararsoltad=true;}})//cooldown al disparar
+		var that = this;
+		if(that.keydisparo!=null){
+			if((that.keydisparo.isDown) && (keydispararsoltad) && ((this.municiones > 0 || ((this.arma=="")) || 
+				((this.arma=="Bate")) || ((this.arma=="Puñoamericano"))))){
+				that.proyectiles.create(arma,scene,avatar);
+				
+				switch(arma){
+					case "Escopeta":
+						that.municiones -= 8;
+						that.shotCheck = 2;
+						break;
+					case "Pistola":
+						that.municiones -= 1;
+						that.shotCheck = 3;
+						break;
+					case "Subfusil":
+						that.municiones -= 3;
+						that.shotCheck = 4;
+						break;
+					case "Bate":
+						that.shotCheck = 5;
+						break;
+					case "Puñoamericano":
+						that.shotCheck = 6;
+						break;
+				}
+				keydispararsoltad = false;
+				that.avatar.scene.time.addEvent({delay:625 , callback:function(){keydispararsoltad=true;}})//cooldown al disparar
+			}
 		}
 	}
 
-	}
 	this.cambiararma = function(dropss){
+		var that = this;
 		if(that.keyrecarma!=null){
 			if((that.keyrecarma.isDown) && (keyrecarmasoltada)){
 			that.selectarma(dropss,60); //distancia para coger el arma
 			keyrecarmasoltada = false;
-			//that.recogerarma.play();
 			}
 		}
 	}
+
 	this.teclasoltada = function(){
+		var that = this;
 		if(that.keyrecarma!=null){
 			if(that.keyrecarma.isUp){
 				keyrecarmasoltada=true;
@@ -270,6 +274,7 @@ function Jugador(avatar,controles,proyectiles){
 	}
 
 	this.update=function(dropss){
+		var that = this;
 		that.gravedad();
 		that.controldepersonaje();
 		
