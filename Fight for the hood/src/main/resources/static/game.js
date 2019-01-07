@@ -10,6 +10,9 @@ var config = {
             debug: false
         }
     },
+    audio: {
+        disableWebAudio: true
+    },
     //Orden de escenas
     scene: [MainMenu,ControlGuide,CharapterSelection,Pausa,MainEscenario] //scene: [MainMenu,ControlGuide,nameMenu,Lobby,CharapterSelection,MainEscenario]
 };

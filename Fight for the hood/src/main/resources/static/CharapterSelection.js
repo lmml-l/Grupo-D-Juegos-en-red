@@ -11,6 +11,7 @@ class CharapterSelection extends Phaser.Scene {
 		this.posArrayP1;
 		this.posArrayP2;
 		this.check;
+		this.musica;
 		
 		this.derecha1;
 		this.derecha2;
@@ -107,12 +108,17 @@ class CharapterSelection extends Phaser.Scene {
 		var p1 		   = this.load.image('P1','Recursos/Imagenes/J1.png');
 		var p2 		   = this.load.image('P2','Recursos/Imagenes/J2.png');
 		this.load.image('menuCharacterFondo','Recursos/Imagenes/menuCharacterFondo.png');
+		this.load.audio('musicacharacterselection','Recursos/Audio/CharacterSelection.mp3');
 	}
 
 	create(){
 		this.fondo = this.add.image(this.game.canvas.width/2,this.game.canvas.height/2,'menuCharacterFondo').setScale(1.3);
 		this.selection();
 
+		this.musica = this.game.sound.add('musicacharacterselection');
+		this.musica.setLoop(true);
+		this.musica.setVolume(0.5);
+		this.musica.play();
 		//indicación de los controles
 		this.textoControles = this.add.text(470, 540, "\nselect\naccept", { fill: '#FFFFFF', font: '30px Impact', align: 'center'});
 		this.textoControles = this.add.text(470, 540, "control", { fill: '#FFAC00', font: '30px Impact', align: 'center'});
@@ -165,14 +171,18 @@ class CharapterSelection extends Phaser.Scene {
 	scenechange(){
 		if(this.salir.isDown){
 			this.scene.start('MainMenu');
+			this.musica.stop();
 		}
 		if(this.checkplayer1 && this.checkplayer2){
 			this.scene.start('MainEscenario');
+			this.musica.stop();
 		}
 		var that = this;
 		if(this.check){
 			this.time.addEvent({delay:100, loop:true,
-		    callback: function(){that.scene.start('EscenarioError');}})
+		    callback: function(){
+		    	that.scene.start('EscenarioError');
+		    this.musica.stop();}})
 		}
 	}
 

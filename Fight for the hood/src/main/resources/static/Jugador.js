@@ -41,6 +41,12 @@ function Jugador(avatar,controles,proyectiles){
 	this.keyrecargar;
 	this.keyrecarma;
 	this.keyescudo;
+	/*this.disparosmg;
+	this.disparopistola;
+	this.disparoescopeta;
+	this.golpepuño;
+	this.golpebate;
+	this.recogerarma;*/
 
 	var that = this;
 	//acciones
@@ -51,10 +57,30 @@ function Jugador(avatar,controles,proyectiles){
 	this.preload=function(){
 		that.avatar.preload();
 		that.proyectiles.preload(that.avatar.scene);
+		/*that.load.audio('disparosmg','Recursos/Audio/SMGShot.mp3');
+		that.load.audio('disparopistola','Recursos/Audio/HandgunShot.mp3');
+		that.load.audio('golpepuño','Recursos/Audio/PunchHit.mp3');
+		that.load.audio('golpebate','Recursos/Audio/BaseballBatHit.mp3');
+		that.load.audio('disparoescopeta','Recursos/Audio/ShotgunShot.mp3');
+		that.load.audio('recogerarma','Recursos/Audio/HandgunPickup.mp3');*/
 	}
 	this.create=function(lado){
 		that.avatar.animaciones();
 		that.avatar.spawnavatar();
+
+		/*that.disparosmg = that.game.sound.add('disparosmg');
+		that.disparosmg.setVolume(1);
+		that.disparopistola = that.game.sound.add('disparopistola');
+		that.disparopistola.setVolume(1);
+		that.disparoescopeta = that.game.sound.add('disparoescopeta');
+		that.disparoescopeta.setVolume(1);
+		that.golpepuño = that.game.sound.add('golpepuño');
+		that.golpepuño.setVolume(1);
+		that.golpebate = that.game.sound.add('golpebate');
+		that.golpebate.setVolume(1);
+		that.recogerarma = that.game.sound.add('recogerarma');
+		that.recogerarma.setVolume(1);*/
+
 		that.vida = 100;			//vida del personaje
         that.municiones = "";		//munición vacía por defecto
         that.arma = "";				//desarmado por defecto
@@ -196,18 +222,27 @@ function Jugador(avatar,controles,proyectiles){
 	//disminución de munición
 	this.disparar = function (arma,scene,avatar){
 	if(that.keydisparo!=null){
-		if((that.keydisparo.isDown) && (keydispararsoltad) && ((this.municiones > 0 || ((this.arma=="")||(this.arma=="Bate")||(this.arma=="Puñoamericano"))))){
+		if((that.keydisparo.isDown) && (keydispararsoltad) && ((this.municiones > 0 || ((this.arma==""))))){
 			that.proyectiles.create(arma,scene,avatar);
 			
 		switch(arma){
 			case "Escopeta":
 				that.municiones -= 8;
+				//that.disparoescopeta.play();
 				break;
 			case "Pistola":
 				that.municiones -= 1;
+				//that.disparopistola.play();
 				break;
 			case "Subfusil":
 				that.municiones -= 3;
+				//that.disparosmg.play();
+				break;
+			case "Bate":
+				//that.golpebate.play();
+				break;
+			case "Puñoamericano":
+				//that.golpepuño.play();
 				break;
 		}
 			keydispararsoltad = false;
@@ -221,6 +256,7 @@ function Jugador(avatar,controles,proyectiles){
 			if((that.keyrecarma.isDown) && (keyrecarmasoltada)){
 			that.selectarma(dropss,60); //distancia para coger el arma
 			keyrecarmasoltada = false;
+			//that.recogerarma.play();
 			}
 		}
 	}

@@ -69,7 +69,8 @@ class MainEscenario extends Phaser.Scene {
         this.drops = new Drops(this,spritearmas);
 
         this.hud = new HUD (this, Hud , [this.jugador,this.jugador1]);
-
+        this.musica;
+        this.victoria;
         //textos
         this.ganadorTexto;
         this.finTiempoTexto;
@@ -99,14 +100,20 @@ checkPartida(){
         this.finPartidaTexto.setText("P1 RULES THE HOOD");    //texto en pantalla
         victorias[0]=0; victorias[1]=0;                         //reseteo de rondasw
         this.time.addEvent({delay:3000,                         //tiempo que tarda hasta reiniciar
-        callback: function(){that.restartPartida()}});
+        callback: function(){
+            that.restartPartida()
+        that.musica.stop();
+        that.victoria.play();}});
     }
     if(victorias[1]==3){                                        //jugador 2
         console.log('J2 GANA LA PARTIDA');
         this.finPartidaTexto.setText("P2 RULES THE HOOD");      //texto en pantalla
         victorias[0]=0; victorias[1]=0;                         //reseteo de rondas
         this.time.addEvent({delay:3000,                         //tiempo que tarda hasta reiniciar
-        callback: function(){that.restartPartida()}});  
+        callback: function(){
+            that.restartPartida()
+        that.musica.stop();
+        that.victoria.play();}});  
     }
 
     //Si los dos jugadores llegan a 0 al mismo tiempo
@@ -119,7 +126,8 @@ checkPartida(){
             console.log('P1 WINS');
             this.finTiempoTexto.setText("KO");
             this.ganadorTexto.setText("\nP1 WINS");
-            this.restartPartida();                          //reinicia el nivel
+            this.restartPartida();    
+            this.musica.stop();                      //reinicia el nivel
         }   
         //gana J2
         else if(ganador==1){
@@ -127,7 +135,8 @@ checkPartida(){
             console.log('P2 WINS');
             this.finTiempoTexto.setText("KO");
             this.ganadorTexto.setText("\nP2 WINS");
-            this.restartPartida();                          //reinicia el nivel
+            this.restartPartida(); 
+            this.musica.stop();                         //reinicia el nivel
         }
     }
 
@@ -138,6 +147,7 @@ checkPartida(){
         this.finTiempoTexto.setText("KO");
         this.ganadorTexto.setText("\nP2 WINS");
         this.restartPartida();
+        this.musica.stop();
     }
     else if(this.jugador1.vida<=0 && this.jugador.vida>0){  //jugador 2
         victorias[0]+=1;
@@ -145,6 +155,7 @@ checkPartida(){
         this.finTiempoTexto.setText("KO");
         this.ganadorTexto.setText("\nP1 WINS");
         this.restartPartida();
+        this.musica.stop();
     } 
     //Si acaba el tiempo
     if(91-this.Clock.getElapsedSeconds() == 0){             //comprobación de reloj (diferencia de tiempo) 
@@ -156,6 +167,7 @@ checkPartida(){
             console.log('Gana J1');
             this.ganadorTexto.setText("\nP1 WINS");
             this.restartPartida();
+            this.musica.stop();
         }
         //Gana J2 si tiene mayor vida
         if(this.jugador.vida < this.jugador1.vida){
@@ -163,12 +175,14 @@ checkPartida(){
             console.log('Gana J2');
             this.ganadorTexto.setText("\nP2 WINS");
             this.restartPartida();
+            this.musica.stop();
         }
         //Empate
         if(this.jugador.vida = this.jugador1.vida){
             console.log('Empate');
             this.ganadorTexto.setText("\nTIE");
             this.restartPartida();
+            this.musica.stop();
         }
     }
 }
@@ -311,6 +325,7 @@ pausar(){
             pausado                 = true;
             this.scene.sleep(this.scene); //pausa la escena
             this.scene.switch('Pausa');
+            this.musica.stop();
         }
     }
 }
@@ -342,12 +357,23 @@ preload(){
     this.load.image('tuboPixel', 'Recursos/Imagenes/tuboPixel.png');
     this.load.image('dropzonePixel', 'Recursos/Imagenes/dropzone.png');
     this.load.image('HUD', 'Recursos/Imagenes/HUD.png');
+
+    this.load.audio('musicabatalla','Recursos/Audio/Battle Theme.mp3');
+    this.load.audio('musicavictory','Recursos/Audio/Victory.mp3');
 }
 
 create(){
 
 	this.add.sprite(512, 215, 'fondo');
 	this.add.sprite(512, 681, 'HUD');
+
+    this.musica = this.game.sound.add('musicabatalla');
+    this.musica.setVolume(0.5);
+    this.musica.play();
+
+    this.victoria = this.game.sound.add('musicavictory');
+    this.musica.setLoop(false);
+    this.musica.setVolume(0.5);
 
 	this.plataformas = this.physics.add.staticGroup();   //Hace sólidas las plataformas enfocadas al primer personaje
     this.suelo = this.physics.add.staticGroup();
@@ -544,6 +570,7 @@ update(){ //actualizaciones
 
 
     this.pausar();
+    this.musica.resume();
     this.hud.update();
     }
 }
