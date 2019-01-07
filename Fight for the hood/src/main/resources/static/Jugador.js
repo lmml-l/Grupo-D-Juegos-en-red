@@ -222,7 +222,8 @@ function Jugador(avatar,controles,proyectiles){
 	//disminución de munición
 	this.disparar = function (arma,scene,avatar){
 	if(that.keydisparo!=null){
-		if((that.keydisparo.isDown) && (keydispararsoltad) && ((this.municiones > 0 || ((this.arma==""))))){
+		if((that.keydisparo.isDown) && (keydispararsoltad) && ((this.municiones > 0 || ((this.arma=="")) || 
+			((this.arma=="Bate")) || ((this.arma=="Puñoamericano"))))){
 			that.proyectiles.create(arma,scene,avatar);
 			
 		switch(arma){

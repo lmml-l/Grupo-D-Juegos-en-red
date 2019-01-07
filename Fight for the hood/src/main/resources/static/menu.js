@@ -46,7 +46,6 @@ class MainMenu extends Phaser.Scene {
 	}
 	
 	menu(){
-		
 
 		//Lista de partidas para usar posteriormente
 		//this.archive = new ReaderWriter(//conseguir esta vaina con un getter primero ----> historialPartidas);
@@ -100,6 +99,7 @@ class MainMenu extends Phaser.Scene {
 		
 	}
 	preload(){
+		
 		this.load.image('fondoMenu','Recursos/Imagenes/menuFondo.png');
 		var title = this.load.image('title','Recursos/Imagenes/Logo.png')
 		var buttonlocal = this.load.image('buttonlocal','Recursos/Imagenes/Jugar_Local.png');

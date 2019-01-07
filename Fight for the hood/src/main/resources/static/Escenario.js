@@ -101,7 +101,7 @@ checkPartida(){
         victorias[0]=0; victorias[1]=0;                         //reseteo de rondasw
         this.time.addEvent({delay:3000,                         //tiempo que tarda hasta reiniciar
         callback: function(){
-            that.restartPartida()
+             that.scene.start('MainMenu');
         that.musica.stop();
         that.victoria.play();}});
     }
@@ -111,7 +111,7 @@ checkPartida(){
         victorias[0]=0; victorias[1]=0;                         //reseteo de rondas
         this.time.addEvent({delay:3000,                         //tiempo que tarda hasta reiniciar
         callback: function(){
-            that.restartPartida()
+            that.scene.start('MainMenu');
         that.musica.stop();
         that.victoria.play();}});  
     }
@@ -332,7 +332,7 @@ pausar(){
 
 
 preload(){
-    //carga de hojas de sprites
+    
     this.jugador.avatar.hojadespritesheet = sprite;
     this.jugador1.avatar.hojadespritesheet = sprite2;
     //carga de recursos de los personajes, HUD y drops
