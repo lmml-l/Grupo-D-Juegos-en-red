@@ -103,8 +103,8 @@ class MainMenu extends Phaser.Scene {
 		this.load.image('fondoMenu','Recursos/Imagenes/menuFondo.png');
 		var title = this.load.image('title','Recursos/Imagenes/Logo.png')
 		var buttonlocal = this.load.image('buttonlocal','Recursos/Imagenes/Jugar_Local.png');
-		var buttononline = this.load.image('buttononline','Recursos/Imagenes/Creditos1.png');
-		var controles = this.load.image('controles','Recursos/Imagenes/Controles.png');
+		var buttononline = this.load.image('buttononline','Recursos/Imagenes/Controles.png');
+		var controles = this.load.image('controles','Recursos/Imagenes/Creditos1.png');
 		var selector = this.load.image('Selector','Recursos/Imagenes/Selector.png');
 		var musica = this.load.audio('musicamenu','Recursos/Audio/Menu.mp3');
 		
