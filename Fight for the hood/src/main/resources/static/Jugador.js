@@ -105,7 +105,7 @@ function Jugador(avatar,controles,proyectiles){
 			case "Bate":
 			 	municiones = "";
 			 	break;
-			case "Puñoamericano":
+			case "Punoamericano":
 				municiones = "";
 				break;
 			case "Escopeta":
@@ -139,7 +139,7 @@ function Jugador(avatar,controles,proyectiles){
 						case "Bate":
 						 	that.dropCheck = 2;
 						 	break;
-						case "Puñoamericano":
+						case "Punoamericano":
 							that.dropCheck = 3;
 							break;
 						case "Escopeta":
@@ -234,7 +234,7 @@ function Jugador(avatar,controles,proyectiles){
 		var that = this;
 		if(that.keydisparo!=null){
 			if((that.keydisparo.isDown) && (keydispararsoltad) && ((this.municiones > 0 || ((this.arma=="")) || 
-				((this.arma=="Bate")) || ((this.arma=="Puñoamericano"))))){
+				((this.arma=="Bate")) || ((this.arma=="Punoamericano"))))){
 				that.proyectiles.create(arma,scene,avatar);
 				
 				switch(arma){
@@ -253,7 +253,7 @@ function Jugador(avatar,controles,proyectiles){
 					case "Bate":
 						that.shotCheck = 5;
 						break;
-					case "Puñoamericano":
+					case "Punoamericano":
 						that.shotCheck = 6;
 						break;
 				}

@@ -6,7 +6,7 @@ function Drops(escena, sprites) {
 		this.pistola 		= sprites[0];
 		this.escopeta 		= sprites[1];
 		this.subfusil 		= sprites[2];
-		this.puñoamericano 	= sprites[3];
+		this.punoamericano 	= sprites[3];
 		this.batebeisbol 	= sprites[4];
 		this.sprite 		= new Array();
 		var that = this;
@@ -33,7 +33,7 @@ function Drops(escena, sprites) {
 		that.scene.load.image('Pistola', that.pistola);
 		that.scene.load.image('Escopeta', that.escopeta);
 		that.scene.load.image('Subfusil', that.subfusil);
-		that.scene.load.image('Puñoamericano', that.puñoamericano);
+		that.scene.load.image('Punoamericano', that.punoamericano);
 		that.scene.load.image('Bate', that.batebeisbol);
 
 
@@ -61,7 +61,7 @@ function Drops(escena, sprites) {
 			break;
 
 			case 3:
-				name = "Puñoamericano";
+				name = "Punoamericano";
 			break;
 
 			case 4:
@@ -79,7 +79,7 @@ function Drops(escena, sprites) {
 		var i = 0;
 
 		//comprueba que la posición marcada en initPos() no está ocupada
-		//si es válida se añade a la escena
+		//si es válida se anade a la escena
 		while(check && i<that.sprite.length){
 			if(that.sprite[i].x == armapos[0] && that.sprite[i].y == armapos[1]){
 				check = false;
@@ -92,7 +92,7 @@ function Drops(escena, sprites) {
 		that.sprite.push(armapw)
 		}
 		
-		//se descarta el arma que no se añade
+		//se descarta el arma que no se anade
 		if(that.sprite.length > 5){
 			var s = that.sprite.shift();
 			s.destroy();

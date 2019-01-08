@@ -19,7 +19,7 @@
 		that.scene.load.image(' Pistola', that.spritearmas[0]);
 		that.scene.load.image(' Escopeta', that.spritearmas[1]);
 		that.scene.load.image(' Subfusil', that.spritearmas[2]);
-		that.scene.load.image(' Puñoamericano', that.spritearmas[3]);
+		that.scene.load.image(' Punoamericano', that.spritearmas[3]);
 		that.scene.load.image(' Bate', that.spritearmas[4]);
 		that.scene.load.image(' ', that.spritearmas[5]);		
 	}

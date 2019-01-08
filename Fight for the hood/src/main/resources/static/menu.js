@@ -67,7 +67,7 @@ class MainMenu extends Phaser.Scene {
 		var buttononline = this.add.image(0,this.game.canvas.height*(4/6),'buttononline').setScale(0.5).setInteractive();
 		var controles = this.add.image(0,(this.game.canvas.height*(5/6)),'controles').setScale(0.5).setInteractive();
 
-		//se añaden al array
+		//se anaden al array
 		this.smap.push(buttonlocal);
 		this.smap.push(buttononline);
 		this.smap.push(controles);

@@ -133,26 +133,26 @@ function Avatar (nam,scen,posx,posy,spritesheet) { //parámetros marcados desde 
 			})
 		var g = that.scene.anims.generateFrameNumbers(that.names + 'p1lpa', { start: 0, end: 2 });
 		that.scene.anims.create({
-    			key: that.names + 'Puñoamericano left',
+    			key: that.names + 'Punoamericano left',
    				frames:[g[0],g[1],g[2],g[1]],
     			frameRate: 9,
     			repeat: -1
 			})
 		var r = that.scene.anims.generateFrameNumbers(that.names + 'p1rpa', { start: 0, end: 2 })
 		that.scene.anims.create({
-    			key: that.names + 'Puñoamericano right',
+    			key: that.names + 'Punoamericano right',
    				frames: [r[0],r[1],r[2],r[1]],
     			frameRate: 9,
     			repeat: -1
 			})
 		that.scene.anims.create({
-    			key: that.names + 'Puñoamericano idle left',
+    			key: that.names + 'Punoamericano idle left',
    				frames: that.scene.anims.generateFrameNumbers(that.names + 'p1lpa', { start: 1, end: 1 }),
     			frameRate: 9,
     			repeat: -1
 			})
 		that.scene.anims.create({
-    			key: that.names + 'Puñoamericano idle right',
+    			key: that.names + 'Punoamericano idle right',
    				frames: that.scene.anims.generateFrameNumbers(that.names + 'p1rpa', { start: 1, end: 1 }),
     			frameRate: 9,
     			repeat: -1

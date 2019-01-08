@@ -14,34 +14,34 @@
         "Recursos/Imagenes/Sprites_Personaje/SpritePistolaIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpritePistolaDerecha.png",
         "Recursos/Imagenes/Sprites_Personaje/SpriteEscopetaIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpriteEscopetaDerecha.png",
         "Recursos/Imagenes/Sprites_Personaje/SpriteThomsomIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpriteThomsomDerecha.png",
-        "Recursos/Imagenes/Sprites_Personaje/SpritePersonajePuñoAmericanoIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpritePersonajePuñoAmericanoDerecha.png",
+        "Recursos/Imagenes/Sprites_Personaje/SpritePersonajePunoAmericanoIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpritePersonajePunoAmericanoDerecha.png",
         "Recursos/Imagenes/Sprites_Personaje/SpriteBateIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpriteBateDerecha.png"]
 
         var sprite2 = ["Recursos/Imagenes/Sprites_Personaje2/SpritePersonajeIzquierda.png","Recursos/Imagenes/Sprites_Personaje2/SpritePersonajeDerecha.png",
         "Recursos/Imagenes/Sprites_Personaje2/SpritePistolaIzquierda.png","Recursos/Imagenes/Sprites_Personaje2/SpritePistolaDerecha.png",
         "Recursos/Imagenes/Sprites_Personaje2/SpriteEscopetaIzquierda.png","Recursos/Imagenes/Sprites_Personaje2/SpriteEscopetaDerecha.png",
         "Recursos/Imagenes/Sprites_Personaje2/SpriteThomsomIzquierda.png","Recursos/Imagenes/Sprites_Personaje2/SpriteThomsomDerecha.png",
-        "Recursos/Imagenes/Sprites_Personaje2/SpritePersonajePuñoAmericanoIzquierda.png","Recursos/Imagenes/Sprites_Personaje2/SpritePersonajePuñoAmericanoDerecha.png",
+        "Recursos/Imagenes/Sprites_Personaje2/SpritePersonajePunoAmericanoIzquierda.png","Recursos/Imagenes/Sprites_Personaje2/SpritePersonajePunoAmericanoDerecha.png",
         "Recursos/Imagenes/Sprites_Personaje2/SpriteBateIzquierda.png","Recursos/Imagenes/Sprites_Personaje2/SpriteBateDerecha.png"]
 
         var spritearmas = ["Recursos/Imagenes/Sprites_Armas/Pistola/PistolaPixelizada.png",
         "Recursos/Imagenes/Sprites_Armas/Escopeta/EscopetaPixelizada.png",
         "Recursos/Imagenes/Sprites_Armas/Thompson/ThompsonPixelizado.png",
-        "Recursos/Imagenes/Sprites_Armas/Puno_Americano/PuñoAmericanoPixelizado.png",
+        "Recursos/Imagenes/Sprites_Armas/Puno_Americano/PunoAmericanoPixelizado.png",
         "Recursos/Imagenes/Sprites_Armas/Bate_de_Beisbol/BateBeisbolPixelizado.png"]
 
         var spriteproyectiles = ["Recursos/Imagenes/Sprites_Proyectiles/balaEscopeta.png",
         "Recursos/Imagenes/Sprites_Proyectiles/bala.png",
         "Recursos/Imagenes/Sprites_Proyectiles/GolpeBatePixelizadoAjustado.png",
-        "Recursos/Imagenes/Sprites_Proyectiles/GolpePuño.png",
-        "Recursos/Imagenes/Sprites_Proyectiles/GolpePuño.png"]
+        "Recursos/Imagenes/Sprites_Proyectiles/GolpePuno.png",
+        "Recursos/Imagenes/Sprites_Proyectiles/GolpePuno.png"]
         
         var Hud = ["Recursos/Imagenes/Sprites_Armas/ArmasHUD/PistolaHUD.png",
         "Recursos/Imagenes/Sprites_Armas/ArmasHUD/EscopetaHUD.png",
         "Recursos/Imagenes/Sprites_Armas/ArmasHUD/ThompsonHUD.png",
-        "Recursos/Imagenes/Sprites_Armas/ArmasHUD/PuñoAmericanoHUD.png",
+        "Recursos/Imagenes/Sprites_Armas/ArmasHUD/PunoAmericanoHUD.png",
         "Recursos/Imagenes/Sprites_Armas/ArmasHUD/BateHUD.png",
-        "Recursos/Imagenes/Sprites_Armas/Puños/PuñoPixelizado.png"]
+        "Recursos/Imagenes/Sprites_Armas/Punos/PunoPixelizado.png"]
 
         
 //----------------------------------------------------------------------------------------
@@ -76,12 +76,12 @@ class MainEscenario extends Phaser.Scene {
         this.disparosmg;
         this.disparopistola;
         this.disparoescopeta;
-        this.golpepuño;
+        this.golpepuno;
         this.golpebate;
         this.recogersmg
         this.recogerpistola
         this.recogerescopeta
-        this.recogerpuño
+        this.recogerpuno
         this.recogerbate
 
         //textos
@@ -243,7 +243,7 @@ colisionesbalasjugador(jugador,balast){
             }
             i++;
         }
-        //si no está en el array de colisiones, se añade
+        //si no está en el array de colisiones, se anade
         if(!colisionexistente){
             //esta función se llama cuando se produce una colisión entre la bala y el personaje
             var funcioncallback = function(obj1,obje2){
@@ -274,7 +274,7 @@ colisionesbalasjugador(jugador,balast){
 
                 
             
-            //añade la colisión
+            //anade la colisión
             var colisionActual = this.physics.add.overlap(balast[j],jugador.avatar.sprite,funcioncallback);
             //almacena la colisión en el array
             colisionesjugadoresbalas.push(colisionActual);
@@ -402,14 +402,14 @@ preload(){
     this.load.audio('musicavictory','Recursos/Audio/Victory.mp3');
     this.load.audio('disparosmg','Recursos/Audio/SMGShot.mp3');
     this.load.audio('disparopistola','Recursos/Audio/HandgunShot.mp3');
-    this.load.audio('golpepuño','Recursos/Audio/PunchHit.mp3');
+    this.load.audio('golpepuno','Recursos/Audio/PunchHit.mp3');
     this.load.audio('golpebate','Recursos/Audio/BaseballBatHit.mp3');
     this.load.audio('disparoescopeta','Recursos/Audio/ShotgunShot.mp3');
     this.load.audio('recogerpistola','Recursos/Audio/HandgunPickup.mp3');
     this.load.audio('recogersmg','Recursos/Audio/SMGPickup.mp3');
     this.load.audio('recogerescopeta','Recursos/Audio/ShotgunPickup.mp3');
     this.load.audio('recogerbate','Recursos/Audio/BaseballBatPickup.mp3');
-    this.load.audio('recogerpuño','Recursos/Audio/PunchPickup.mp3');
+    this.load.audio('recogerpuno','Recursos/Audio/PunchPickup.mp3');
 }
 
 create(){
@@ -432,8 +432,8 @@ create(){
     this.disparopistola.setVolume(1);
     this.disparoescopeta = this.game.sound.add('disparoescopeta');
     this.disparoescopeta.setVolume(1);
-    this.golpepuño = this.game.sound.add('golpepuño');
-    this.golpepuño.setVolume(1);
+    this.golpepuno = this.game.sound.add('golpepuno');
+    this.golpepuno.setVolume(1);
     this.golpebate = this.game.sound.add('golpebate');
     this.golpebate.setVolume(1);
     this.recogersmg = this.game.sound.add('recogersmg');
@@ -442,8 +442,8 @@ create(){
     this.recogerpistola.setVolume(1);
     this.recogerescopeta = this.game.sound.add('recogerescopeta');
     this.recogerescopeta.setVolume(1);
-    this.recogerpuño = this.game.sound.add('recogerpuño');
-    this.recogerpuño.setVolume(1);
+    this.recogerpuno = this.game.sound.add('recogerpuno');
+    this.recogerpuno.setVolume(1);
     this.recogerbate = this.game.sound.add('recogerbate');
     this.recogerbate.setVolume(1);
 
@@ -670,7 +670,7 @@ sonidos(jugador){
                 this.golpebate.play();
                 break;
             case 6:
-                this.golpepuño.play();
+                this.golpepuno.play();
                 break;
         }
         jugador.shotCheck = 1;
@@ -682,7 +682,7 @@ sonidos(jugador){
                 this.recogerbate.play();
                 break;
             case 3:
-                this.recogerpuño.play();
+                this.recogerpuno.play();
                 break;
             case 4:
                 this.recogerescopeta.play();
