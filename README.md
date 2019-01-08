@@ -238,7 +238,9 @@ En esta sección, describiremos el proceso de finalización de *Fight for the ho
 Antes de comenzar la programación de mejoras, realizamos una prueba de evaluación empírica con usuarios. Debido al poco tiempo y calado de las mejoras que podíamos asumir, empleamos como herramienta principal un cuestionario. Éste debía ser completado por los usuarios tras haber probado libremente el juego. De ellos, dos fueron conducidos mientras jugaban, mientras que el resto no obtuvo ninguna ayuda antes de comenzar el cuestionario.
 
 El cuestionario se componía de preguntas de libre respuesta, de selección única o lineal (gradual de 1 a 5).
-Puede ver las respuestas en este enlace: https://docs.google.com/spreadsheets/d/1-axOwLXBRekAEEnjYQQIPLlrPGqdba_y3rORISz-AoE/edit?usp=sharing
+Puede ver las respuestas en este enlace: 
+
+https://docs.google.com/spreadsheets/d/1-axOwLXBRekAEEnjYQQIPLlrPGqdba_y3rORISz-AoE/edit?usp=sharing
 
 En síntesis, estas fueron las conclusiones y sugerencias más destacadas:
 
@@ -261,8 +263,16 @@ En síntesis, estas fueron las conclusiones y sugerencias más destacadas:
 
 Glitches encontrados:
  - Rara vez, el personaje no deja de moverse hacia un lado
+ - Al volver a comenzar una segunda partida, no se actualizan correctamente las *skins* de los personajes. Se mantienen los de la partida anterior.
  - El personaje se ralentiza al impactar
-  - Pese a no ser intencionado, decidimos mantenerlo para obtener dinamismo durante el combate
+   
+**Corrección de glitches**
+   
+   - El error del movimiento se solucionó dándole valor *false* a todos los botones de *Jugador* al iniciar la partida y al regresar de la pausa.
+   
+   - No se logró solucionar el error de las skins, puesto que corresponde a problemas de caché a bajo nivel.
+   
+   - Pese a no ser intencionado, decidimos mantener la ralentización al impactar para obtener dinamismo durante el combate.
 
 **Mejoras añadidas**
 
@@ -277,13 +287,22 @@ A partir de los resultados del *beta testing* y de apreciaciones propias, éstas
 - Nuevos mensajes al finalizar rondas
 - Pequeños retoques de color
 - Traducción completa al inglés
+- Pausa con indicación de controles añadidos
+- Indicación de pausa en el HUD
+- Sección de créditos
+
+Sería preciso hacer una mejora de las animaciones, los sprites de las armas y del escenario, para mejorar el estilo visual del juego. El escenario podría añadir plataformas móviles horizontales, para mejorar el comportamiento de los jugadores.
+
+Del mismo modo, sería interesante la adición de nuevas armas a distancia, como granadas, y de elementos interactuables o eventos aleatorios.
+
+No lo pudimos hacer ya que es un trabajo que no podíamos asumir durante el tiempo de desarrollo.
 
 **Publicación**
 
- - **Kongregate**: link (subido por Fernando Moreno)
- - **Newgrounds**: link 
- - **Itch.io**: link
- - **Armor games**: link
+ - **Kongregate**: https://www.kongregate.com/games/FernandoMoreno/fight-for-the-hood (subido por Fernando Moreno)
+ - **Newgrounds**: https://www.newgrounds.com/portal/view/724180 (subido por Denis Gudiña)
+ - **IndieExpo**: https://www.indiexpo.net/es/games/fight-for-the-hood (subido por Luis Miguel Moreno)
+ - **Game Jolt**: https://gamejolt.com/games/fightforthehood/389141 (subido por Alejandro Carrillo)
 
 **--------------------------------------------FIN DE FASE 5--------------------------------------------**
 
