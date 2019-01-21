@@ -6,7 +6,7 @@ function Drops(escena, sprites) {
 		this.pistola 		= sprites[0];
 		this.escopeta 		= sprites[1];
 		this.subfusil 		= sprites[2];
-		this.puñoamericano 	= sprites[3];
+		this.punoamericano 	= sprites[3];
 		this.batebeisbol 	= sprites[4];
 		this.sprite 		= new Array();
 		var that = this;
@@ -33,7 +33,7 @@ function Drops(escena, sprites) {
 		that.scene.load.image('Pistola', that.pistola);
 		that.scene.load.image('Escopeta', that.escopeta);
 		that.scene.load.image('Subfusil', that.subfusil);
-		that.scene.load.image('Puñoamericano', that.puñoamericano);
+		that.scene.load.image('Punoamericano', that.punoamericano);
 		that.scene.load.image('Bate', that.batebeisbol);
 
 
@@ -61,7 +61,7 @@ function Drops(escena, sprites) {
 			break;
 
 			case 3:
-				name = "Puñoamericano";
+				name = "Punoamericano";
 			break;
 
 			case 4:

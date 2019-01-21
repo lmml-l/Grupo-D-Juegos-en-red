@@ -20,16 +20,19 @@ class nameMenu extends Phaser.Scene {
 		this.arrayjugadores;
 		this.salir;
 		this.fondo;
+		this.musica;
 	}
 
 	preload(){
 		this.load.image('menuNombreFondo','Recursos/Imagenes/menuNombreFondo.png');
+		this.load.audio('musicacontrol','Recursos/Audio/CharacterSelection.mp3');
 	}
 
 	//botón para retroceder
 	retroceder(){
 		if(this.escape.isDown){
 		this.scene.start('MainMenu');
+		this.musica.stop();
 		this.escape.isDown=false;
 		}
 	}
@@ -63,6 +66,7 @@ class nameMenu extends Phaser.Scene {
 					addMatchtoHistory(arrayconips);
 				}
 				this.scene.start('Lobby');
+				this.musica.stop();
 			}
 			else{
 				console.log("The server is full");
@@ -76,6 +80,11 @@ class nameMenu extends Phaser.Scene {
 	create(){
 		this.fondo = this.add.image(this.game.canvas.width/2,this.game.canvas.height/2,'menuNombreFondo').setScale(1.3);
 		
+		this.musica = this.game.sound.add('musicacontrol');
+		this.musica.setLoop(true);
+		this.musica.setVolume(0.5);
+		this.musica.play();
+
 		this.textoEstadosala = this.add.text(390, 515, "", { fill: '#F4FFF3', font: '20px Impact', align: 'center'});
 
 		this.escape = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);	//tecla para salir
@@ -95,7 +104,9 @@ class nameMenu extends Phaser.Scene {
 		getMyIP(function(data){ip = data.ip});
 
 			this.time.addEvent({delay:1000, loop:true,
-		    callback: function(){getServerStatus(function(){that.scene.start('EscenarioError');})}})
+		    callback: function(){getServerStatus(function(){
+		    	that.scene.start('EscenarioError');
+				this.musica.stop();})}})
 
 		this.time.addEvent({delay:400 , callback: function(){console.log(ip+"abc")}})
 		

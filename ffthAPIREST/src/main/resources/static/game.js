@@ -10,8 +10,11 @@ var config = {
             debug: false
         }
     },
+    audio: {
+        disableWebAudio: true
+    },
     //Orden de escenas
-    scene: [MainMenu,ControlGuide,nameMenu,Lobby,CharapterSelection,CharapterSelectionOnline,MainEscenario,EscenarioOnline,EscenarioError,] //scene: [MainMenu,ControlGuide,nameMenu,Lobby,CharapterSelection,MainEscenario]
+    scene: [MainMenu,ControlGuide,nameMenu,Lobby,CharapterSelection,CharapterSelectionOnline,Pausa,MainEscenario,EscenarioOnline,EscenarioError,] //scene: [MainMenu,ControlGuide,nameMenu,Lobby,CharapterSelection,MainEscenario]
 };
 
 var game = new Phaser.Game(config);

@@ -13,6 +13,7 @@ class CharapterSelectionOnline extends Phaser.Scene {
 		this.checkplayer2;
 		this.p1;
 		this.check;
+		this.musica;
 
 		this.posArrayP1;
 		this.posArrayP2;
@@ -91,7 +92,7 @@ class CharapterSelectionOnline extends Phaser.Scene {
         "Recursos/Imagenes/Sprites_Personaje2/SpritePistolaIzquierda.png","Recursos/Imagenes/Sprites_Personaje2/SpritePistolaDerecha.png",
         "Recursos/Imagenes/Sprites_Personaje2/SpriteEscopetaIzquierda.png","Recursos/Imagenes/Sprites_Personaje2/SpriteEscopetaDerecha.png",
         "Recursos/Imagenes/Sprites_Personaje2/SpriteThomsomIzquierda.png","Recursos/Imagenes/Sprites_Personaje2/SpriteThomsomDerecha.png",
-        "Recursos/Imagenes/Sprites_Personaje2/SpritePersonajePuñoAmericanoIzquierda.png","Recursos/Imagenes/Sprites_Personaje2/SpritePersonajePuñoAmericanoDerecha.png",
+        "Recursos/Imagenes/Sprites_Personaje2/SpritePersonajePunoAmericanoIzquierda.png","Recursos/Imagenes/Sprites_Personaje2/SpritePersonajePunoAmericanoDerecha.png",
         "Recursos/Imagenes/Sprites_Personaje2/SpriteBateIzquierda.png","Recursos/Imagenes/Sprites_Personaje2/SpriteBateDerecha.png"]
 
 		}else if(posArray==1){
@@ -99,7 +100,7 @@ class CharapterSelectionOnline extends Phaser.Scene {
         "Recursos/Imagenes/Sprites_Personaje/SpritePistolaIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpritePistolaDerecha.png",
         "Recursos/Imagenes/Sprites_Personaje/SpriteEscopetaIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpriteEscopetaDerecha.png",
         "Recursos/Imagenes/Sprites_Personaje/SpriteThomsomIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpriteThomsomDerecha.png",
-        "Recursos/Imagenes/Sprites_Personaje/SpritePersonajePuñoAmericanoIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpritePersonajePuñoAmericanoDerecha.png",
+        "Recursos/Imagenes/Sprites_Personaje/SpritePersonajePunoAmericanoIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpritePersonajePunoAmericanoDerecha.png",
         "Recursos/Imagenes/Sprites_Personaje/SpriteBateIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpriteBateDerecha.png"]
 		}
 		return spriteHojalocal;
@@ -112,11 +113,18 @@ class CharapterSelectionOnline extends Phaser.Scene {
 		var character2 = this.load.image('character2','Recursos/Imagenes/Character2.png');
 		var p1 		   = this.load.image('P1','Recursos/Imagenes/Flecha.png');
 		this.load.image('menuCharacterFondo','Recursos/Imagenes/menuCharacterFondo.png');
+		this.load.audio('musicacharacterselection','Recursos/Audio/CharacterSelection.mp3');
 	}
 
 	create(){
 		this.fondo = this.add.image(this.game.canvas.width/2,this.game.canvas.height/2,'menuCharacterFondo').setScale(1.3);
 		this.selection();
+
+		this.musica = this.game.sound.add('musicacharacterselection');
+		this.musica.setLoop(true);
+		this.musica.setVolume(0.5);
+		this.musica.play();
+
 		this.textModo = this.add.text(50, 50, "Online mode", { fill: '#F4FFF3', font: '20px Impact', align: 'center'});
 		//indicación de los controles
 		this.textoControles = this.add.text(160, 540, "\nselect\naccept", { fill: '#FFFFFF', font: '30px Impact', align: 'center'});
@@ -223,6 +231,7 @@ startPartida () {
 
 		if(this.salir.isDown){
 			this.scene.start('MainMenu');
+			this.musica.stop();
 		}
 		if(this.confirmar2.isDown && (IsHost!=null || this.checkplayer2)){
 

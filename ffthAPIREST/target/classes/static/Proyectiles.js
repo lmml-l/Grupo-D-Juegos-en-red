@@ -13,8 +13,8 @@ function Proyectiles (sprites){
 		scene.load.image('Perdigón', that.proyec[0]);
 		scene.load.image('Bala', that.proyec[1]);
 		scene.load.image('GolpeBate', that.proyec[2]);
-		scene.load.image('GolpePuñoA', that.proyec[3]);
-		scene.load.image('GolpePuño', that.proyec[4]);
+		scene.load.image('GolpePunoA', that.proyec[3]);
+		scene.load.image('GolpePuno', that.proyec[4]);
 	}
 
 	//marca el sentido del disparo según la orientáción del personaje
@@ -63,7 +63,7 @@ function Proyectiles (sprites){
 				pos[1] = avatar.sprite.y;
 			break;
 
-			case 'Puñoamericano':
+			case 'Punoamericano':
 				if(avatar.getanim().includes('left')){
 					pos[0]=(avatar.sprite.x - ((avatar.sprite.anims.currentFrame.frame.width)/2));
 				}else if(avatar.getanim().includes('right')){
@@ -99,8 +99,8 @@ function Proyectiles (sprites){
 			case 'Bate':
 				balas = scene.physics.add.sprite(that.checkpos(avatar,arma)[0],that.checkpos(avatar,arma)[1],'GolpeBate').setScale(1);
 			break;
-			case 'Puñoamericano':
-				balas = scene.physics.add.sprite(that.checkpos(avatar,arma)[0],that.checkpos(avatar,arma)[1],'GolpePuñoA').setScale(1);
+			case 'Punoamericano':
+				balas = scene.physics.add.sprite(that.checkpos(avatar,arma)[0],that.checkpos(avatar,arma)[1],'GolpePunoA').setScale(1);
 			break;
 			default:
 
@@ -141,21 +141,21 @@ function Proyectiles (sprites){
 			break;
 			case "Pistola":
 				if(avatar.getanim().includes('left')){
-					var vector = new Phaser.Math.Vector2(-500,0); //velocidad de disparo
+					var vector = new Phaser.Math.Vector2(-1300,0); //velocidad de disparo
 					balas.setVelocity(vector.x,vector.y);
 
 				}else if(avatar.getanim().includes('right')){
-					var vector = new Phaser.Math.Vector2(500,0); //velocidad de disparo
+					var vector = new Phaser.Math.Vector2(1300,0); //velocidad de disparo
 					balas.setVelocity(vector.x,vector.y);
 				}
 			break;
 			case "Subfusil":
 				
 				if(avatar.getanim().includes('left')){
-					var vector = new Phaser.Math.Vector2(-800,0); //velocidad de disparo
+					var vector = new Phaser.Math.Vector2(-1100,0); //velocidad de disparo
 					balas.setVelocity(vector.x,vector.y);
 				}else if(avatar.getanim().includes('right')){
-					var vector = new Phaser.Math.Vector2(800,0); //velocidad de disparo
+					var vector = new Phaser.Math.Vector2(1100,0); //velocidad de disparo
 					balas.setVelocity(vector.x,vector.y);
 				}
 			break;

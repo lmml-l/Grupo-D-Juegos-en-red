@@ -8,38 +8,40 @@
     var colisionesjugadoresbalas = new Array();
     var colisionesescenariobalas = new Array();
 
+    var pausado = false;
+
         var sprite = ["Recursos/Imagenes/Sprites_Personaje/SpritePersonajeIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpritePersonajeDerecha.png",
         "Recursos/Imagenes/Sprites_Personaje/SpritePistolaIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpritePistolaDerecha.png",
         "Recursos/Imagenes/Sprites_Personaje/SpriteEscopetaIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpriteEscopetaDerecha.png",
         "Recursos/Imagenes/Sprites_Personaje/SpriteThomsomIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpriteThomsomDerecha.png",
-        "Recursos/Imagenes/Sprites_Personaje/SpritePersonajePuñoAmericanoIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpritePersonajePuñoAmericanoDerecha.png",
+        "Recursos/Imagenes/Sprites_Personaje/SpritePersonajePunoAmericanoIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpritePersonajePunoAmericanoDerecha.png",
         "Recursos/Imagenes/Sprites_Personaje/SpriteBateIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpriteBateDerecha.png"]
 
         var sprite2 = ["Recursos/Imagenes/Sprites_Personaje2/SpritePersonajeIzquierda.png","Recursos/Imagenes/Sprites_Personaje2/SpritePersonajeDerecha.png",
         "Recursos/Imagenes/Sprites_Personaje2/SpritePistolaIzquierda.png","Recursos/Imagenes/Sprites_Personaje2/SpritePistolaDerecha.png",
         "Recursos/Imagenes/Sprites_Personaje2/SpriteEscopetaIzquierda.png","Recursos/Imagenes/Sprites_Personaje2/SpriteEscopetaDerecha.png",
         "Recursos/Imagenes/Sprites_Personaje2/SpriteThomsomIzquierda.png","Recursos/Imagenes/Sprites_Personaje2/SpriteThomsomDerecha.png",
-        "Recursos/Imagenes/Sprites_Personaje2/SpritePersonajePuñoAmericanoIzquierda.png","Recursos/Imagenes/Sprites_Personaje2/SpritePersonajePuñoAmericanoDerecha.png",
+        "Recursos/Imagenes/Sprites_Personaje2/SpritePersonajePunoAmericanoIzquierda.png","Recursos/Imagenes/Sprites_Personaje2/SpritePersonajePunoAmericanoDerecha.png",
         "Recursos/Imagenes/Sprites_Personaje2/SpriteBateIzquierda.png","Recursos/Imagenes/Sprites_Personaje2/SpriteBateDerecha.png"]
 
         var spritearmas = ["Recursos/Imagenes/Sprites_Armas/Pistola/PistolaPixelizada.png",
         "Recursos/Imagenes/Sprites_Armas/Escopeta/EscopetaPixelizada.png",
         "Recursos/Imagenes/Sprites_Armas/Thompson/ThompsonPixelizado.png",
-        "Recursos/Imagenes/Sprites_Armas/Puno_Americano/PuñoAmericanoPixelizado.png",
+        "Recursos/Imagenes/Sprites_Armas/Puno_Americano/PunoAmericanoPixelizado.png",
         "Recursos/Imagenes/Sprites_Armas/Bate_de_Beisbol/BateBeisbolPixelizado.png"]
 
         var spriteproyectiles = ["Recursos/Imagenes/Sprites_Proyectiles/balaEscopeta.png",
         "Recursos/Imagenes/Sprites_Proyectiles/bala.png",
         "Recursos/Imagenes/Sprites_Proyectiles/GolpeBatePixelizadoAjustado.png",
-        "Recursos/Imagenes/Sprites_Proyectiles/GolpePuño.png",
-        "Recursos/Imagenes/Sprites_Proyectiles/GolpePuño.png"]
+        "Recursos/Imagenes/Sprites_Proyectiles/GolpePuno.png",
+        "Recursos/Imagenes/Sprites_Proyectiles/GolpePuno.png"]
         
         var Hud = ["Recursos/Imagenes/Sprites_Armas/ArmasHUD/PistolaHUD.png",
         "Recursos/Imagenes/Sprites_Armas/ArmasHUD/EscopetaHUD.png",
         "Recursos/Imagenes/Sprites_Armas/ArmasHUD/ThompsonHUD.png",
-        "Recursos/Imagenes/Sprites_Armas/ArmasHUD/PuñoAmericanoHUD.png",
+        "Recursos/Imagenes/Sprites_Armas/ArmasHUD/PunoAmericanoHUD.png",
         "Recursos/Imagenes/Sprites_Armas/ArmasHUD/BateHUD.png",
-        "Recursos/Imagenes/Sprites_Armas/Puños/PuñoPixelizado.png"]
+        "Recursos/Imagenes/Sprites_Armas/Punos/PunoPixelizado.png"]
 
         
 //----------------------------------------------------------------------------------------
@@ -47,32 +49,51 @@
 //La clase escenario sirve para colocar los elementos de la partida y como controlador de la misma
 class MainEscenario extends Phaser.Scene {
 
-	constructor(){
-		super({key:"MainEscenario"});
+    constructor(){
+        super({key:"MainEscenario"});
         
         //Posicionamos los personajes
-        this.avatar = new Avatar("a",this,400,400,sprite);
-        this.avatar1 = new Avatar("b",this,600,400,sprite2);
+        this.avatar         = new Avatar("a",this,400,400,sprite);
+        this.avatar1        = new Avatar("b",this,600,400,sprite2);
         //Asociamos proyectiles
-        this.proyectiles = new Proyectiles(spriteproyectiles);
-        this.proyectiles2 = new Proyectiles(spriteproyectiles);
+        this.proyectiles    = new Proyectiles(spriteproyectiles);
+        this.proyectiles2   = new Proyectiles(spriteproyectiles);
         //Creamos controladores (jugadores) para cada personaje
-        this.jugador = new Jugador(this.avatar,controles2,this.proyectiles);
-        this.jugador1 = new Jugador(this.avatar1,controles1,this.proyectiles2); //elegir controles 1 o controles 2
+        this.jugador        = new Jugador(this.avatar,controles2,this.proyectiles);
+        this.jugador1       = new Jugador(this.avatar1,controles1,this.proyectiles2); //elegir controles 1 o controles 2
         //creamos objetos
         this.plataformas;
         this.suelo;
         this.dropzone;
 
-        this.drops = new Drops(this,spritearmas);
+        this.drops  = new Drops(this,spritearmas);
 
-        this.hud = new HUD (this, Hud , [this.jugador,this.jugador1]);
+        this.hud    = new HUD (this, Hud , [this.jugador,this.jugador1]);
+
+        //Musica y sonidos
+        this.musica;
+        this.victoria;
+        this.disparosmg;
+        this.disparopistola;
+        this.disparoescopeta;
+        this.golpepuno;
+        this.golpebate;
+        this.recogersmg
+        this.recogerpistola
+        this.recogerescopeta
+        this.recogerpuno
+        this.recogerbate
 
         //textos
         this.ganadorTexto;
         this.finTiempoTexto;
         this.finPartidaTexto;
-	}
+        this.pausaTexto;
+
+        //pausa
+        this.pausar;
+        this.pausar.isDown=false; //inicialización a falso para evitar ciclos
+    }
 
 //Reiniciamos el nivel
 restartPartida(){
@@ -87,19 +108,39 @@ restartPartida(){
 checkPartida(){
     var that=this;
     //Si algún jugador llega a 3 victorias gana la partida
-    if(victorias[0]==3){                                    //jugador 1
-        console.log('J1 GANA LA PARTIDA');
-        this.finPartidaTexto.setText("J1 GANA LA PELEA");   //texto en pantalla
-        victorias[0]=0; victorias[1]=0;                     //reseteo de rondasw
-        this.time.addEvent({delay:3000,                     //tiempo que tarda hasta reiniciar
-        callback: function(){that.restartPartida()}});
+    if(victorias[0]==3){                                                    //jugador 1
+        console.log('P1 WINS');
+        this.finPartidaTexto.setText("YOU WIN\nTHE FIGHT FOR THE HOOD!");   //texto en pantalla
+        victorias[0]=0; victorias[1]=0;                                     //reseteo de rondas
+
+        this.time.addEvent({delay:1000, //tiempo
+            callback: function(){
+            that.musica.stop();
+
+        that.time.addEvent({delay:500,                          
+            callback: function(){that.victoria.play();}});
+
+        that.time.addEvent({delay:3000,     
+            callback: function(){that.scene.start('MainMenu');}});
+            
+        }});
     }
-    if(victorias[1]==3){                                    //jugador 2
-        console.log('J2 GANA LA PARTIDA');
-        this.finPartidaTexto.setText("J2 GANA LA PELEA");   //texto en pantalla
-        victorias[0]=0; victorias[1]=0;                     //reseteo de rondas
-        this.time.addEvent({delay:3000,                     //tiempo que tarda hasta reiniciar
-        callback: function(){that.restartPartida()}});  
+    if(victorias[1]==3){                                                    //jugador 2
+        console.log('P2 WINS');
+        this.finPartidaTexto.setText("YOU WIN\nTHE FIGHT FOR THE HOOD!");   //texto en pantalla
+        victorias[0]=0; victorias[1]=0;                                     //reseteo de rondas
+
+        this.time.addEvent({delay:1000,                         
+            callback: function(){
+            that.musica.stop();
+
+        that.time.addEvent({delay:500, 
+            callback: function(){that.victoria.play();}});
+
+        that.time.addEvent({delay:3000,  
+            callback: function(){that.scene.start('MainMenu');}});
+
+        }});  
     }
 
     //Si los dos jugadores llegan a 0 al mismo tiempo
@@ -109,16 +150,20 @@ checkPartida(){
         //gana J1
         if(ganador==0){
             victorias[0]+=1;                                //suma una victoria
-            console.log('Gana J1');
-            this.ganadorTexto.setText("GANA J1");
-            this.restartPartida();                          //reinicia el nivel
+            console.log('P1 WINS');
+            this.finTiempoTexto.setText("KO");
+            this.ganadorTexto.setText("\nP1 WINS");
+            this.restartPartida();    
+            this.musica.stop();                             //reinicia el nivel
         }   
         //gana J2
         else if(ganador==1){
             victorias[1]+=1;                                //suma una victoria
-            console.log('Gana J2');
-            this.ganadorTexto.setText("GANA J2");
-            this.restartPartida();                          //reinicia el nivel
+            console.log('P2 WINS');
+            this.finTiempoTexto.setText("KO");
+            this.ganadorTexto.setText("\nP2 WINS");
+            this.restartPartida(); 
+            this.musica.stop();                             //reinicia el nivel
         }
     }
 
@@ -126,20 +171,48 @@ checkPartida(){
     else if(this.jugador.vida<=0 && this.jugador1.vida>0){  //jugador 1
         victorias[1]+=1;
         console.log('Gana J2');
-        this.ganadorTexto.setText("GANA J2");
+        this.finTiempoTexto.setText("KO");
+        this.ganadorTexto.setText("\nP2 WINS");
         this.restartPartida();
+        this.musica.stop();
     }
     else if(this.jugador1.vida<=0 && this.jugador.vida>0){  //jugador 2
         victorias[0]+=1;
         console.log('Gana J1');
-        this.ganadorTexto.setText("GANA J1");
+        this.finTiempoTexto.setText("KO");
+        this.ganadorTexto.setText("\nP1 WINS");
         this.restartPartida();
+        this.musica.stop();
     } 
     //Si acaba el tiempo
     if(91-this.Clock.getElapsedSeconds() == 0){             //comprobación de reloj (diferencia de tiempo) 
-    this.finTiempoTexto.setText("SE ACABÓ\nEL TIEMPO");
-    this.restartPartida();
+    this.finTiempoTexto.setText("TIME OVER");
+    if(this.jugador1.vida!=0 && this.jugador.vida!=0){
+        //Gana J1 si tiene mayor vida
+        if(this.jugador.vida > this.jugador1.vida){
+            victorias[0]+=1;
+            console.log('Gana J1');
+            this.ganadorTexto.setText("\nP1 WINS");
+            this.restartPartida();
+            this.musica.stop();
+        }
+        //Gana J2 si tiene mayor vida
+        if(this.jugador.vida < this.jugador1.vida){
+            victorias[1]+=1;
+            console.log('Gana J2');
+            this.ganadorTexto.setText("\nP2 WINS");
+            this.restartPartida();
+            this.musica.stop();
+        }
+        //Empate
+        if(this.jugador.vida === this.jugador1.vida){
+            console.log('Empate');
+            this.ganadorTexto.setText("\nTIE");
+            this.restartPartida();
+            this.musica.stop();
+        }
     }
+}
 }
 
 
@@ -177,7 +250,7 @@ colisionesbalasjugador(jugador,balast){
             }
             i++;
         }
-        //si no está en el array de colisiones, se añade
+        //si no está en el array de colisiones, se anade
         if(!colisionexistente){
             //esta función se llama cuando se produce una colisión entre la bala y el personaje
             var funcioncallback = function(obj1,obje2){
@@ -196,17 +269,31 @@ colisionesbalasjugador(jugador,balast){
                 //se borra la bala y se quita vida al personaje
                 obj1.destroy();
                 jugador.vida=jugador.vida-5; console.log(jugador.vida);
-                if(jugador.vida<0){
-                    jugador.vida=0;
-                }
-            };
+
+                //Efecto de parpadeo
+                    jugador.avatar.sprite.alpha = 0; //invisible
+
+                    that.time.addEvent({delay:10 ,loop:false,   //visible
+                    callback: function(){
+                        jugador.avatar.sprite.alpha = 1;
+                    } });
+            }
+
+                
             
-            //añade la colisión
+            //anade la colisión
             var colisionActual = this.physics.add.overlap(balast[j],jugador.avatar.sprite,funcioncallback);
             //almacena la colisión en el array
             colisionesjugadoresbalas.push(colisionActual);
         }
     }
+}
+
+noZero(jugador){
+    //Aseguramos que la vida no baja de cero (prevención de errores)
+    if(jugador.vida<0){
+        jugador.vida=0;
+    };
 }
 
 //misma estructura que la anterior
@@ -257,9 +344,42 @@ atravesarplataformaspersonaje(jugador,plataforma){
         }
     }
 
+pausar(){
+    if(this.pausa.isDown){
+        if(pausado === false){
+            this.pausa.isDown       = false; //se inicia a false para que no vuelva a abrirse
+            this.game.paused        = true;
+            pausado                 = true;
+            //this.scene.sleep(this.scene); //pausa la escena
+            this.scene.switch('Pausa');
+            this.musica.pause();
+
+            //Puesta a false de controles de J1
+            this.jugador.keysalto.isDown    = false;
+            this.jugador.keymovder.isDown   = false;
+            this.jugador.keymovizq.isDown   = false;
+            this.jugador.keymovabajo.isDown = false;
+            this.jugador.keydisparo.isDown  = false;
+            this.jugador.keyrecargar.isDown = false;
+            this.jugador.keyrecarma.isDown  = false;
+            this.jugador.keyescudo.isDown   = false;
+
+            //Puesta a false de controles de J2
+            this.jugador1.keysalto.isDown    = false;
+            this.jugador1.keymovder.isDown   = false;
+            this.jugador1.keymovizq.isDown   = false;
+            this.jugador1.keymovabajo.isDown = false;
+            this.jugador1.keydisparo.isDown  = false;
+            this.jugador1.keyrecargar.isDown = false;
+            this.jugador1.keyrecarma.isDown  = false;
+            this.jugador1.keyescudo.isDown   = false;
+        }
+    }
+}
+
 
 preload(){
-    //carga de hojas de sprites
+    
     this.jugador.avatar.hojadespritesheet = sprite;
     this.jugador1.avatar.hojadespritesheet = sprite2;
     //carga de recursos de los personajes, HUD y drops
@@ -270,39 +390,85 @@ preload(){
 
 
     //SPRITES
-	this.load.image('fondo', 'Recursos/Imagenes/stage.png');
-	this.load.image('plat2', 'Recursos/Imagenes/plat2.png');
-    this.load.image('platShort', 'Recursos/Imagenes/platShort.png');
-    this.load.image('sueloPixel', 'Recursos/Imagenes/sueloPixel.png');
-    this.load.image('techoApixel', 'Recursos/Imagenes/techoApixel.png');
-    this.load.image('techoBpixel', 'Recursos/Imagenes/techoBpixel.png');
-    this.load.image('techoCpixel', 'Recursos/Imagenes/techoCpixel.png');
-    this.load.image('techoDpixel', 'Recursos/Imagenes/techoDpixel.png');
-    this.load.image('cartelPixel', 'Recursos/Imagenes/cartelPixel.png');
-    this.load.image('toldoLPixel', 'Recursos/Imagenes/toldoLPixel.png');
-    this.load.image('toldoRPixel', 'Recursos/Imagenes/toldoRPixel.png');
-    this.load.image('tuboPixel', 'Recursos/Imagenes/tuboPixel.png');
-    this.load.image('dropzonePixel', 'Recursos/Imagenes/dropzone.png');
-    this.load.image('HUD', 'Recursos/Imagenes/HUD.png');
+    this.load.image('fondo',        'Recursos/Imagenes/stage.png');
+    this.load.image('plat2',        'Recursos/Imagenes/plat2.png');
+    this.load.image('platShort',    'Recursos/Imagenes/platShort.png');
+    this.load.image('sueloPixel',   'Recursos/Imagenes/sueloPixel.png');
+    this.load.image('techoApixel',  'Recursos/Imagenes/techoApixel.png');
+    this.load.image('techoBpixel',  'Recursos/Imagenes/techoBpixel.png');
+    this.load.image('techoCpixel',  'Recursos/Imagenes/techoCpixel.png');
+    this.load.image('techoDpixel',  'Recursos/Imagenes/techoDpixel.png');
+    this.load.image('cartelPixel',  'Recursos/Imagenes/cartelPixel.png');
+    this.load.image('toldoLPixel',  'Recursos/Imagenes/toldoLPixel.png');
+    this.load.image('toldoRPixel',  'Recursos/Imagenes/toldoRPixel.png');
+    this.load.image('tuboPixel',    'Recursos/Imagenes/tuboPixel.png');
+    this.load.image('dropzonePixel','Recursos/Imagenes/dropzone.png');
+    this.load.image('HUD',          'Recursos/Imagenes/HUD.png');
+
+    //AUDIO
+    this.load.audio('musicabatalla',    'Recursos/Audio/Battle Theme.mp3');
+    this.load.audio('musicavictory',    'Recursos/Audio/Victory.mp3');
+    this.load.audio('disparosmg',       'Recursos/Audio/SMGShot.mp3');
+    this.load.audio('disparopistola',   'Recursos/Audio/HandgunShot.mp3');
+    this.load.audio('golpepuno',        'Recursos/Audio/PunchHit.mp3');
+    this.load.audio('golpebate',        'Recursos/Audio/BaseballBatHit.mp3');
+    this.load.audio('disparoescopeta',  'Recursos/Audio/ShotgunShot.mp3');
+    this.load.audio('recogerpistola',   'Recursos/Audio/HandgunPickup.mp3');
+    this.load.audio('recogersmg',       'Recursos/Audio/SMGPickup.mp3');
+    this.load.audio('recogerescopeta',  'Recursos/Audio/ShotgunPickup.mp3');
+    this.load.audio('recogerbate',      'Recursos/Audio/BaseballBatPickup.mp3');
+    this.load.audio('recogerpuno',      'Recursos/Audio/PunchPickup.mp3');
 }
 
 create(){
 
-	this.add.sprite(512, 215, 'fondo');
-	this.add.sprite(512, 681, 'HUD');
+    this.add.sprite(512, 215, 'fondo');
+    this.add.sprite(512, 681, 'HUD');
 
-	this.plataformas = this.physics.add.staticGroup();   //Hace sólidas las plataformas enfocadas al primer personaje
-    this.suelo = this.physics.add.staticGroup();
+    pausado = false;
+
+    this.musica = this.game.sound.add('musicabatalla');
+    this.musica.setVolume(0.15);
+    this.musica.play();
+
+    //Sonidos
+    this.victoria           = this.game.sound.add('musicavictory');
+    this.musica.setLoop(false);
+    this.musica.setVolume(0.5);
+    this.disparosmg         = this.game.sound.add('disparosmg');
+    this.disparosmg.setVolume(1);
+    this.disparopistola     = this.game.sound.add('disparopistola');
+    this.disparopistola.setVolume(1);
+    this.disparoescopeta    = this.game.sound.add('disparoescopeta');
+    this.disparoescopeta.setVolume(1);
+    this.golpepuno          = this.game.sound.add('golpepuno');
+    this.golpepuno.setVolume(1);
+    this.golpebate          = this.game.sound.add('golpebate');
+    this.golpebate.setVolume(1);
+    this.recogersmg         = this.game.sound.add('recogersmg');
+    this.recogersmg.setVolume(1);
+    this.recogerpistola     = this.game.sound.add('recogerpistola');
+    this.recogerpistola.setVolume(1);
+    this.recogerescopeta    = this.game.sound.add('recogerescopeta');
+    this.recogerescopeta.setVolume(1);
+    this.recogerpuno        = this.game.sound.add('recogerpuno');
+    this.recogerpuno.setVolume(1);
+    this.recogerbate        = this.game.sound.add('recogerbate');
+    this.recogerbate.setVolume(1);
+
+    //PLATAFORMAS
+    this.plataformas    = this.physics.add.staticGroup();   //Hace sólidas las plataformas enfocadas al primer personaje
+    this.suelo          = this.physics.add.staticGroup();
     
-    this.plataformas2 = this.physics.add.staticGroup();  //Hace sólidas las plataformas enfocadas al segundo personaje
-    this.suelo2 = this.physics.add.staticGroup();
+    this.plataformas2   = this.physics.add.staticGroup();   //Hace sólidas las plataformas enfocadas al segundo personaje
+    this.suelo2         = this.physics.add.staticGroup();
     
-    this.plataformas3 = this.physics.add.staticGroup();  //Hace sólidas las plataformas enfocadas a las balas
-    this.suelo3 = this.physics.add.staticGroup();
+    this.plataformas3   = this.physics.add.staticGroup();   //Hace sólidas las plataformas enfocadas a las balas
+    this.suelo3         = this.physics.add.staticGroup();
 
-    this.dropzone = this.physics.add.staticGroup();     //Gace sólido la zona de drop (aparición de arma)
+    this.dropzone       = this.physics.add.staticGroup();   //Gace sólido la zona de drop (aparición de arma)
 
-	//Suelo
+    //Suelo
     this.suelo.create(512, 585, 'sueloPixel').alpha=0;
     var sueloArray = this.suelo.getChildren();
     sueloArray[0].body.height=13475;
@@ -448,9 +614,10 @@ create(){
     this.hud.create(this.Clock); 
 
     //colocación de textos
-    this.ganadorTexto =     this.add.text(480, 250, "", { fill: '#FFAC00', font: '52px Impact', align: 'center'});
-    this.finPartidaTexto =  this.add.text(400, 250, "", { fill: '#E85C0D', font: '52px Impact', align: 'center'});
-    this.finTiempoTexto =   this.add.text(480, 250, "", { fill: '#FFAC00', font: '52px Impact', align: 'center'});
+    this.ganadorTexto       =   this.add.text(480, 250, "", { fill: '#FFAC00', font: '52px Impact', align: 'center'});
+    this.finPartidaTexto    =   this.add.text(400, 250, "", { fill: '#E8330C', font: '52px Impact', align: 'center'});
+    this.finTiempoTexto     =   this.add.text(480, 250, "", { fill: '#E8330C', font: '52px Impact', align: 'center'});
+    this.pausaTexto         =   this.add.text(480, 250, "", { fill: '#E8330C', font: '52px Impact', align: 'center'});
 
     //time event spawndrop
     var that = this;
@@ -460,18 +627,20 @@ create(){
 
         var restartescenaevent = this.time.addEvent({delay:300 ,loop:true ,
         callback: function(){that.checkPartida()} });
-        
-        //desconexion del servidor
-        this.time.addEvent({delay:1000, loop:true,
-		    callback: function(){getServerStatus(function(){that.scene.start('EscenarioError');})}})
 
-
-	}
+    //Botón de pausa ESC
+    this.pausa = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
+    this.pausa.isDown = false;
+    }
 
 
 update(){ //actualizaciones
     this.jugador.update(this.drops);
     this.jugador1.update(this.drops);
+
+    this.sonidos(this.jugador);
+    this.sonidos(this.jugador1);
+
     this.atravesarplataformaspersonaje(this.jugador.avatar.sprite,this.plataformas);
     this.atravesarplataformaspersonaje(this.jugador1.avatar.sprite,this.plataformas2);
     
@@ -483,6 +652,60 @@ update(){ //actualizaciones
     this.colisionesbalaescenario(this.suelo3,this.jugador.proyectiles.proyectilesenescane);
     this.colisionesbalaescenario(this.suelo3,this.jugador1.proyectiles.proyectilesenescane);
 
+    this.noZero(this.jugador);
+    this.noZero(this.jugador1);
+
+
+    this.pausar();
+    if(pausado === false && (!this.pausa.isDown)){
+        this.musica.resume();
+    }
     this.hud.update();
     }
+
+
+sonidos(jugador){
+    if(jugador.shotCheck >= 1){
+        switch(jugador.shotCheck){
+            case 2:
+                this.disparoescopeta.play();
+                break;
+            case 3:
+                this.disparopistola.play();
+                break;
+            case 4:
+                this.disparosmg.play();
+                break;
+            case 5:
+                this.golpebate.play();
+                break;
+            case 6:
+                this.golpepuno.play();
+                break;
+        }
+        jugador.shotCheck = 1;
+    }
+
+    if(jugador.dropCheck >= 1){
+        switch(jugador.dropCheck){
+            case 2:
+                this.recogerbate.play();
+                break;
+            case 3:
+                this.recogerpuno.play();
+                break;
+            case 4:
+                this.recogerescopeta.play();
+                break;
+            case 5:
+                this.recogerpistola.play();
+                break;
+            case 6:
+                this.recogersmg.play();
+                break;
+        }
+        jugador.dropCheck = 1;
+    }
+}
+
 }

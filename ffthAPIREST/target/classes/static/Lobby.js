@@ -28,6 +28,7 @@ class Lobby extends Phaser.Scene {
 		this.scene;
 		this.fondo;
 		this.salir;
+		//this.musica;
 		//this.archive;
 	}
 	
@@ -126,6 +127,7 @@ class Lobby extends Phaser.Scene {
 */
 	preload(){
 		this.load.image('menuLobbyFondo','Recursos/Imagenes/menuLobbyFondo.png');
+		//this.load.audio('musicacontrol','Recursos/Audio/CharacterSelection.mp3');
 	}
 
 	create(){
@@ -134,6 +136,11 @@ class Lobby extends Phaser.Scene {
 		this.fondo = this.add.image(this.game.canvas.width/2,this.game.canvas.height/2,'menuLobbyFondo').setScale(1.3);
 		this.escape = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);	//tecla para salir
 		this.controlmenu();
+
+		//this.musica = this.game.sound.add('musicacontrol');
+		//this.musica.setLoop(true);
+		//this.musica.setVolume(0.5);
+		//this.musica.play();
 
 		var that = this;
 		//comprobación del estado del servidor
@@ -168,6 +175,7 @@ class Lobby extends Phaser.Scene {
 			if(ipsLobby.length == 2){
 				that.time.addEvent({delay:1000, callback: function(){
 				that.scene.start('CharapterSelectionOnline');
+				//that.musica.stop();
 			}})
 		}
 		}})
@@ -248,10 +256,12 @@ class Lobby extends Phaser.Scene {
 
 	//botón para retroceder
 	retroceder(){
+		var that = this;
 		if(this.escape.isDown){
 			deletePlayerofRoom(ip) //borro la ip de la lista con los jugadores en la sala
-			this.scene.start('MainMenu');
-			this.escape.isDown=false;
+			that.scene.start('MainMenu');
+			//that.musica.stop();
+			that.escape.isDown=false;
 		}
 	}
 

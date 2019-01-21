@@ -4,25 +4,25 @@
 //Teclas para controlar a los personajes
 //Jugador 1
 var controles1 = {
-	salto: Phaser.Input.Keyboard.KeyCodes.UP,
-	movder: Phaser.Input.Keyboard.KeyCodes.RIGHT,
-	movizq: Phaser.Input.Keyboard.KeyCodes.LEFT,
-	movabajo: Phaser.Input.Keyboard.KeyCodes.DOWN,
-	disparo: Phaser.Input.Keyboard.KeyCodes.P,
-	recarma: Phaser.Input.Keyboard.KeyCodes.O,
+	salto: 		Phaser.Input.Keyboard.KeyCodes.UP,
+	movder: 	Phaser.Input.Keyboard.KeyCodes.RIGHT,
+	movizq: 	Phaser.Input.Keyboard.KeyCodes.LEFT,
+	movabajo: 	Phaser.Input.Keyboard.KeyCodes.DOWN,
+	disparo: 	Phaser.Input.Keyboard.KeyCodes.P,
+	recarma: 	Phaser.Input.Keyboard.KeyCodes.O,
 	//recargar: Phaser.Input.Keyboard.KeyCodes.P,
-	escudo: Phaser.Input.Keyboard.KeyCodes.R
+	escudo: 	Phaser.Input.Keyboard.KeyCodes.R
 }
 //Jugador 2
 var controles2 = {
-	salto: Phaser.Input.Keyboard.KeyCodes.W,
-	movder: Phaser.Input.Keyboard.KeyCodes.D,
-	movizq: Phaser.Input.Keyboard.KeyCodes.A,
-	movabajo: Phaser.Input.Keyboard.KeyCodes.S,
-	disparo: Phaser.Input.Keyboard.KeyCodes.T,
-	recarma: Phaser.Input.Keyboard.KeyCodes.R,
+	salto: 		Phaser.Input.Keyboard.KeyCodes.W,
+	movder: 	Phaser.Input.Keyboard.KeyCodes.D,
+	movizq: 	Phaser.Input.Keyboard.KeyCodes.A,
+	movabajo: 	Phaser.Input.Keyboard.KeyCodes.S,
+	disparo: 	Phaser.Input.Keyboard.KeyCodes.T,
+	recarma: 	Phaser.Input.Keyboard.KeyCodes.R,
 	//recargar: Phaser.Input.Keyboard.KeyCodes.R,
-	escudo: Phaser.Input.Keyboard.KeyCodes.SHIFT
+	escudo: 	Phaser.Input.Keyboard.KeyCodes.SHIFT
 }
 
 function Jugador(avatar,controles,proyectiles){
@@ -33,6 +33,8 @@ function Jugador(avatar,controles,proyectiles){
 	this.vida=100;
 	this.proyectiles = proyectiles;
 	this.municiones = "";
+	this.shotCheck;
+	this.dropCheck;
 	this.keysalto;
 	this.keymovder;
 	this.keymovizq;
@@ -70,14 +72,14 @@ function Jugador(avatar,controles,proyectiles){
 		}
 
 		//asocia acciones a teclas
-	   	that.keysalto = this.avatar.scene.input.keyboard.addKey(that.controles.salto);
-	   	that.keymovder = this.avatar.scene.input.keyboard.addKey(that.controles.movder);
-	   	that.keymovizq = this.avatar.scene.input.keyboard.addKey(that.controles.movizq);
-	   	that.keymovabajo = this.avatar.scene.input.keyboard.addKey(that.controles.movabajo);
-	   	that.keydisparo = this.avatar.scene.input.keyboard.addKey(that.controles.disparo);
-	   	that.keyrecargar = this.avatar.scene.input.keyboard.addKey(that.controles.recargar);
-	   	that.keyrecarma = this.avatar.scene.input.keyboard.addKey(that.controles.recarma);
-	   	that.keyescudo = this.avatar.scene.input.keyboard.addKey(that.controles.escudo);
+	   	that.keysalto 		= this.avatar.scene.input.keyboard.addKey(that.controles.salto);
+	   	that.keymovder 		= this.avatar.scene.input.keyboard.addKey(that.controles.movder);
+	   	that.keymovizq 		= this.avatar.scene.input.keyboard.addKey(that.controles.movizq);
+	   	that.keymovabajo 	= this.avatar.scene.input.keyboard.addKey(that.controles.movabajo);
+	   	that.keydisparo 	= this.avatar.scene.input.keyboard.addKey(that.controles.disparo);
+	   	that.keyrecargar 	= this.avatar.scene.input.keyboard.addKey(that.controles.recargar);
+	   	that.keyrecarma 	= this.avatar.scene.input.keyboard.addKey(that.controles.recarma);
+	   	that.keyescudo 		= this.avatar.scene.input.keyboard.addKey(that.controles.escudo);
 
 	   	keydispararsoltad = true;
 
@@ -91,7 +93,7 @@ function Jugador(avatar,controles,proyectiles){
 			case "Bate":
 			 	municiones = "";
 			 	break;
-			case "Puñoamericano":
+			case "Punoamericano":
 				municiones = "";
 				break;
 			case "Escopeta":
@@ -120,6 +122,23 @@ function Jugador(avatar,controles,proyectiles){
                     armasdrops.sprite.splice(i,1);
                     this.municiones=this.selectmunicion(this.arma);
                     cambiadoarma=true;
+                    switch(this.arma){
+						case "Bate":
+						 	that.dropCheck = 2;
+						 	break;
+						case "Punoamericano":
+							that.dropCheck = 3;
+							break;
+						case "Escopeta":
+							that.dropCheck = 4;
+							break;
+						case "Pistola":
+							that.dropCheck = 5;
+							break;
+						case "Subfusil":
+							that.dropCheck = 6;
+							break;
+					}
                 }
                 else{
                     this.arma="";
@@ -156,14 +175,14 @@ function Jugador(avatar,controles,proyectiles){
 				that.avatar.stopanim();
 			}
 			that.avatar.walkright(that.arma);
-			that.avatar.velx(120);
+			that.avatar.velx(175);
 		}
 		else if (that.keymovizq.isDown){
 			if(animacionactual != that.avatar.names + that.arma + ' left' ){
 				that.avatar.stopanim();
 			}
 			that.avatar.walkleft(that.arma);
-			that.avatar.velx(-120);
+			that.avatar.velx(-175);
 		}
 		else{
 			if(animacionactual.includes(' left')){
@@ -199,18 +218,27 @@ function Jugador(avatar,controles,proyectiles){
 	//disminución de munición
 	this.disparar = function (arma,scene,avatar){
 	if(that.keydisparo!=null){
-		if((that.keydisparo.isDown) && (keydispararsoltad) && ((this.municiones > 0 || ((this.arma=="")||(this.arma=="Bate")||(this.arma=="Puñoamericano"))))){
+		if((that.keydisparo.isDown) && (keydispararsoltad) && ((this.municiones > 0 || ((this.arma=="")||(this.arma=="Bate")||(this.arma=="Punoamericano"))))){
 			that.proyectiles.create(arma,scene,avatar);
 			
 		switch(arma){
 			case "Escopeta":
 				that.municiones -= 8;
+				that.shotCheck = 2;
 				break;
 			case "Pistola":
 				that.municiones -= 1;
+				that.shotCheck = 3;
 				break;
 			case "Subfusil":
 				that.municiones -= 3;
+				that.shotCheck = 4;
+				break;
+			case "Bate":
+				that.shotCheck = 5;
+				break;
+			case "Punoamericano":
+				that.shotCheck = 6;
 				break;
 		}
 			keydispararsoltad = false;
