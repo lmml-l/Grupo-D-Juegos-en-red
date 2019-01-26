@@ -1,20 +1,3 @@
-////WEBSOCKETS////
-/*
-var connection;
-function conection (){
-	connection = new WebSocket('ws://'+ location.host +'/echo');
-	connection.onmessage = function(msg) {
-			console.log("WS message: " + msg.data);
-	}
-
-	connection.onclose = function() {
-		setTimeout(conection(),1000);
-		console.log("Closing socket");
-	}
-}
-*/
-/////////////////
-
 //Pantalla inicial. Da acceso a la selección de personajes, pantalla de controles y, en versiones futuras, juego online
 class MainMenu extends Phaser.Scene {
 	constructor(){
@@ -40,8 +23,7 @@ class MainMenu extends Phaser.Scene {
 		this.textoVersion;
 		this.fondo;
 		this.desconexion;
-		
-		
+
 		//this.archive;
 	}
 	

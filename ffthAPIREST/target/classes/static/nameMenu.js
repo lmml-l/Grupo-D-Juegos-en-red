@@ -103,12 +103,11 @@ class nameMenu extends Phaser.Scene {
 		
 		getMyIP(function(data){ip = data.ip});
 
-			this.time.addEvent({delay:1000, loop:true,
-		    callback: function(){getServerStatus(function(){
-		    	that.scene.start('EscenarioError');
-				this.musica.stop();})}})
+		this.time.addEvent({delay:1000, loop:true,
+		   callback: function(){getServerStatus(function(){
+		    that.scene.start('EscenarioError');
+			this.musica.stop();})}})
 
-		this.time.addEvent({delay:400 , callback: function(){console.log(ip+"abc")}})
 		
 		this.time.addEvent({delay:500,  //tiempo que tarda hasta reiniciar
     	callback: function(){getApodo(function(data){that.textoNombre.text=data},ip)}})

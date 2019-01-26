@@ -103,12 +103,11 @@ class nameMenu extends Phaser.Scene {
 		
 		getMyIP(function(data){ip = data.ip});
 
-			this.time.addEvent({delay:1000, loop:true,
-		    callback: function(){getServerStatus(function(){
-		    	that.scene.start('EscenarioError');
-				this.musica.stop();})}})
+		this.time.addEvent({delay:1000, loop:true,
+		   callback: function(){getServerStatus(function(){
+		    that.scene.start('EscenarioError');
+			this.musica.stop();})}})
 
-		this.time.addEvent({delay:400 , callback: function(){console.log(ip+"abc")}})
 		
 		this.time.addEvent({delay:500,  //tiempo que tarda hasta reiniciar
     	callback: function(){getApodo(function(data){that.textoNombre.text=data},ip)}})
@@ -128,27 +127,10 @@ class nameMenu extends Phaser.Scene {
 			}
 		}
 		)
-
-		//var that=this;
-		//comprobación del estado del servidor
-		//this.time.addEvent({delay:100, loop:true,
-    	//callback: function(){getServerStatus(function(){that.scene.start('EscenarioError');})}})
-
-
 	}
 
 	update(){
 		this.retroceder();
 		this.aceptar();
-		//var that = this;
-		//getIPs(function(arrayjugadores){that.ipsjugadoressala = arrayjugadores})
-		//console.log(this.ipsjugadoressala);
-
-		//comprobación del estado del servidor
-		
-
-
 	}
 }
-
-//Para retroceder se pulsa escape, el cuadro de texto y la pregunta

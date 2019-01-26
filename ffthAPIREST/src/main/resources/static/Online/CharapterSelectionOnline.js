@@ -69,15 +69,11 @@ class CharapterSelectionOnline extends Phaser.Scene {
 		container.add(character2); 
 
 		//teclas disponibles
-		//this.derecha1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
 		this.derecha2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
-		//this.izquierda1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
 		this.izquierda2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
-		//this.confirmar1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
 		this.confirmar2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 		this.salir = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
 		//inicializa las teclas a no pulsadas (para evitar acarreros de pantallas anteriores)
-		//this.confirmar1.isDown=false;
 		this.confirmar2.isDown=false;
 		this.salir.isDown=false;
 	}
@@ -258,14 +254,6 @@ startPartida () {
 			//cuando seleccionen listo los dos jugadores y un timer to start 
 			
 		}
-		
-		/*var that = this;
-		if(getComp()){
-			this.time.addEvent({delay:100, loop:true,
-		    callback: function(){that.scene.start('EscenarioError');}})
-		}*/
-
-	
 	}
 
 	update(){

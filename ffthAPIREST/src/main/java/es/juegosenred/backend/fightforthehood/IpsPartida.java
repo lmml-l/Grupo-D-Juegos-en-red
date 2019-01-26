@@ -31,7 +31,6 @@ public class IpsPartida {
 	public Collection<String> getIps(){
 		System.out.println(mymatch.getIpsPartida().toString()+ "lista de ipslobby");
 		return mymatch.getIpsPartida();
-		
 	}
 	
 
@@ -50,22 +49,6 @@ public class IpsPartida {
 		return ip;
 	}
 	
-	@PutMapping("/ipconectados")
-	@ResponseStatus(HttpStatus.CREATED)
-	public String putIpConectada(@RequestBody String ip){
-		if(!mymatch.getIpconectados().contains(ip)) {
-			mymatch.getIpconectados().add(ip);
-		}	
-		return ip;
-	}
-	
-	@PutMapping("/ipconectadosclear")
-	@ResponseStatus(HttpStatus.CREATED)
-	public String clearIpConectada(){
-			mymatch.getIpconectados().clear();
-		return null;
-	}
-	
 	@PutMapping("/deleteid")
 	@ResponseStatus(HttpStatus.CREATED)
 	public String deleteId (@RequestBody String ip){
@@ -74,25 +57,6 @@ public class IpsPartida {
 		mymatch.getIpsPartida().remove(ip.substring(2, ip.length()-3)+ '"');
 		return ip;
 	}
-	
-	
-	/*
-	@GetMapping("/idrival")
-	@ResponseStatus(HttpStatus.CREATED)
-	public String getRivalIp(HttpServletRequest request){ 
-		String myip = request.getRemoteAddr();
-		ArrayList<String> ips = mymatch.getIpsPartida();
-		if(ips.size()==2) {
-			if(ips.get(0).equals(myip)){
-				return (ips.get(1));
-			}else {
-				return (ips.get(0));
-			}
-		}
-		return null;
-	}
-	*/
-	
 	
 	@GetMapping("/ip/myip")
 	@ResponseStatus(HttpStatus.CREATED)

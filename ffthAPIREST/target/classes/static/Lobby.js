@@ -196,45 +196,7 @@ class Lobby extends Phaser.Scene {
 				that.jugadorDesc2.text = "Please wait..."
 			}
 		}})
-		/*
-		if(ipsLobby[0]!=null){
-		console.log(ip + "sdsdssd")
-		console.log(ipsLobby[0].substring(1,ipsLobby[1].length-1)+ "lalla") 
-		if(ipsLobby[0].substring(1,ipsLobby[1].length-1)==ip){
-		var miip = ip;
 
-		this.time.addEvent({delay:1500,loop:true, callback: function(){addIptoIpConectadas(miip)}});//Añade la ip a las conectadas
-
-		var listadeipsconectadas;
-
-		this.time.addEvent({delay:2000,loop:true, callback: function(){getIpsConectadas(function(data){listadeipsconectadas = data})}})
-
-		
-		this.time.addEvent({delay:2500,loop:true, callback: function(){listatemporal = that.comprobaripssala(listadeipsconectadas,ipsLobby);}})
-
-		this.time.addEvent({delay:15000,loop:true, callback: function(){addIptoIpConectadasClear()}})//resetea ips conectadas al servidor
-		///
-		var deletejugadores = function(){
-			for(var i = 0; i< ipsLobby.length ; i++){
-				var existe = false;
-				for(var j = 0 ; j < listatemporal.length ; j++){
-					console.log(listatemporal[j]);
-					console.log(ipsLobby[i]);
-					if(ipsLobby[i]==listatemporal[j]){
-						existe = true;
-					}
-				}
-				if(!existe){
-					deletePlayerofRoom(ipsLobby[i])
-				}
-			}
-		}
-
-		this.time.addEvent({delay:3000,loop:true, callback: function(){deletejugadores()}})
-		}}
-		
-		*/
-		//this.time.addEvent({delay:1000,loop:true , callback: function(){}})
 
 		var funcionstring= function(){if(ipsLobby[0]!=null){ return ipsLobby[0].substring(1,ipsLobby[0].length-1)}else{return ""}}
 		this.time.addEvent({delay:1500,loop:true,  //se tarda un poco en actualizar en nombre del primer jugador de la sala
