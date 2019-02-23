@@ -21,59 +21,57 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/ips")
 public class IpsPartida {
-	
+
 	@Autowired
 	private MyMatch mymatch;
-	
-	
+
 	@GetMapping("/idlist")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Collection<String> getIps(){
-		System.out.println(mymatch.getIpsPartida().toString()+ "lista de ipslobby");
+	public Collection<String> getIps() {
+		System.out.println(mymatch.getIpsPartida().toString() + "lista de ipslobby");
 		return mymatch.getIpsPartida();
 	}
-	
 
 	@GetMapping("/idlistconectadas")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Collection<String> getIpsConectadas(){
+	public Collection<String> getIpsConectadas() {
 		return mymatch.getIpconectados();
 	}
-	
+
 	@PutMapping("/id")
 	@ResponseStatus(HttpStatus.CREATED)
-	public String putIp(@RequestBody String ip){
-		if(mymatch.getIpsPartida().size()<2) {
+	public String putIp(@RequestBody String ip) {
+		if (mymatch.getIpsPartida().size() < 2) {
 			mymatch.getIpsPartida().add(ip);
 		}
 		return ip;
 	}
-	
+
 	@PutMapping("/deleteid")
 	@ResponseStatus(HttpStatus.CREATED)
-	public String deleteId (@RequestBody String ip){
-		//System.out.println("ipquedebeborrar0 " + mymatch.getIpsPartida().get(0));
-		//System.out.println("ipquedebeborrar "+ ip.substring(2, ip.length()-3)+ '"');
-		mymatch.getIpsPartida().remove(ip.substring(2, ip.length()-3)+ '"');
+	public String deleteId(@RequestBody String ip) {
+		// System.out.println("ipquedebeborrar0 " + mymatch.getIpsPartida().get(0));
+		// System.out.println("ipquedebeborrar "+ ip.substring(2, ip.length()-3)+ '"');
+		mymatch.getIpsPartida().remove(ip.substring(2, ip.length() - 3) + '"');
 		return ip;
 	}
-	
+
 	@GetMapping("/ip/myip")
 	@ResponseStatus(HttpStatus.CREATED)
-	public String getMyIp(HttpServletRequest request){
+	public String getMyIp(HttpServletRequest request) {
 		return request.getRemoteAddr();
 	}
-	
+
 	@PutMapping("/time/{ip:.+}")
 	@ResponseStatus(HttpStatus.CREATED)
-	public String putTime(@PathVariable String ip , @RequestBody String id){
-		mymatch.getTiempoParaDesconexion().put(id,0);
+	public String putTime(@PathVariable String ip, @RequestBody String id) {
+		mymatch.getTiempoParaDesconexion().put(id, 0);
 		System.out.println(id);
 		return ip;
 	}
-	
+
 	public void loopfordesconexion() {
-		 mymatch.AumentarTiempo(1); 
-		 mymatch.EliminarIpenIpsPartidaporTime(2);      
+		mymatch.AumentarTiempo(1);
+		mymatch.EliminarIpenIpsPartidaporTime(2);
 	}
 }

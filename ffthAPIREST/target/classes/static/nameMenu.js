@@ -1,7 +1,8 @@
 //Pantalla para preguntar por el nombre del jugador
 //Ese dato se envía al servidor y se pasa a buscar partida
 
-var NombreFinal;
+//var NombreFinal;
+//var ContrasenaFinal;
 var ip;
 
 var textoModificable;
@@ -45,20 +46,26 @@ class nameMenu extends Phaser.Scene {
 
 	
 	aceptar(){
+		var that = this;
 
 		if(this.enter.isDown){
 			if(this.textoNombre.text==="Insert your name"){ //Nombre anónimo
 					this.textoNombre.text="Anonymous";
 				}
-			NombreFinal = this.textoNombre.text;
+			//NombreFinal = this.textoNombre.text;
+			//ContrasenaFinal = this.textoNombre.text;
 			
 
 			var myinfo =
 			{
 				ip: ip,
-				apodo: NombreFinal
+				apodo: that.textoNombre.text,
+				contrasena: that.textoPassword.text, 
 			}
 
+			//Comprobacion de la contrasena//
+
+			////////////////////////////////
 			putMyInfo(myinfo);
 
 			this.enter.isDown=false;

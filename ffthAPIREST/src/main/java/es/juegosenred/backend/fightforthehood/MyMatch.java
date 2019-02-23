@@ -16,7 +16,6 @@ public class MyMatch {
 	private ArrayList<String> ipconectados;
 	private HashMap<String,Integer> tiempoParaDesconexion;
 	private String checker;
-	
 	//Nuevas variables
 	private List<List<String>> ListaConParApodoContrasena;
 	private ArrayList<String> ApododeUsuariosenLobby;

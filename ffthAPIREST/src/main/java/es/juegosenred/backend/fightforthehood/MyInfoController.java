@@ -1,6 +1,9 @@
 package es.juegosenred.backend.fightforthehood;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,30 +26,59 @@ public class MyInfoController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public MyInfo putMyInfo(@RequestBody MyInfo myinfo, @PathVariable String ip ){	
 		mymatch.getListadeapodos().put(myinfo.getIp(), myinfo.getApodo());
-		System.out.println(myinfo.getIp());
-		System.out.println(mymatch.getListadeapodos().get(myinfo.getIp()));
+		//Nuevo Junio
+		ArrayList<String> ParApodoContrasena = new ArrayList<>();
+		ParApodoContrasena.add(myinfo.getApodo());
+		ParApodoContrasena.add(myinfo.getContrasena());
+		mymatch.getListaConParApodoContrasena().add(ParApodoContrasena);
+		///
+		//System.out.println(myinfo.getContrasena());
+		//System.out.println(myinfo.getIp());
+		//System.out.println(mymatch.getListadeapodos().get(myinfo.getIp()));
+		
 		return myinfo;
 	}
-	/*
-	@GetMapping("/myinfo/{ip}/resptime")
+	
+	//Nuevo Junio (Cambiar Mappings)
+	
+	//Faltaria hacer comprobacion de usuarios activos y ya logueados
+	@PutMapping("/a")
 	@ResponseStatus(HttpStatus.CREATED)
-	public float getMyResponseTime(@RequestBody MyInfo myinfo, @PathVariable String ip){
-		return myinfo.getResptime();
+	public boolean Login (@RequestBody MyInfo myinfo, @PathVariable String ip ) {
+		for(List<String> parapodocontrasena: (mymatch.getListaConParApodoContrasena())) {
+			if(parapodocontrasena.get(0).equals(myinfo.getApodo())) {//Se comprueba la posicion 0 que es el Nombre
+				if(parapodocontrasena.get(1).equals(myinfo.getContrasena())){
+					return true;//Informacion de Login correcta
+				}else {
+					return false;//Contrasena incorrecta
+				}
+			}else {
+				return false;//Apodo incorrecta
+			}
+		}
+		
+		return false;
 	}
 	
-	@PutMapping("/myinfo/{ip}/resptime")
+	@PutMapping("/a")
 	@ResponseStatus(HttpStatus.CREATED)
-	public float putMyResponseTime(@RequestBody MyInfo myinfo, @PathVariable String ip, float resptime){	
-		myinfo.setResptime(resptime);
-		System.out.println(myinfo.getResptime());
-		return resptime;
-	}
+	public boolean SignUp (@RequestBody MyInfo myinfo, @PathVariable String ip ) {
+		boolean isSignUpAlready = false;
+		//Comprueba si ya esta registrado el nombre
+		for(List<String> parapodocontrasena: (mymatch.getListaConParApodoContrasena())) {
+			if(parapodocontrasena.get(0).equals(myinfo.getApodo())) {
+				isSignUpAlready=true;
+			}
 	
-	@PutMapping("/myinfo/{ip}/resptime")
-	@ResponseStatus(HttpStatus.CREATED)
-	public void putMyRTToZero(@RequestBody MyInfo myinfo, @PathVariable String ip){	
-		myinfo.setResptime(0);
-		System.out.println(myinfo.getResptime());
+		}
+		
+		if(!isSignUpAlready) {
+		ArrayList<String> ParApodoContrasena = new ArrayList<>();
+		ParApodoContrasena.add(myinfo.getApodo());
+		ParApodoContrasena.add(myinfo.getContrasena());
+		mymatch.getListaConParApodoContrasena().add(ParApodoContrasena);
+		}
+		return false;
+		
 	}
-	*/
 }
