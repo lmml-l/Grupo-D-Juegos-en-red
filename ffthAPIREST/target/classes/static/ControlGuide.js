@@ -13,8 +13,6 @@ class ControlGuide extends Phaser.Scene {
 
 		this.check = false;
 
-		//var controls = this.add.image(this.game.canvas.width/2,this.game.canvas.height/2,'controls').setScale(1);
-
 		this.salir = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
 
 		this.salir.isDown=false;

@@ -12,8 +12,6 @@ class Pausa extends Phaser.Scene {
 
 		this.check = false;
 
-		//var controls = this.add.image(this.game.canvas.width/2,this.game.canvas.height/2,'controls').setScale(1);
-
 		this.salir = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
 		this.volverMenu = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
 
@@ -22,7 +20,6 @@ class Pausa extends Phaser.Scene {
 	}
 
 	preload(){
-		//var controls = this.load.image('controls','Recursos/Imagenes/GuiaControles.png');
 		this.load.image('menuControlFondo','Recursos/Imagenes/menuControlesFondo.png');
 		//IMAGEN DEL TECLADO PROVENIENTE DE https://beconnected.esafety.gov.au/topic-library/essentials/the-absolute-basics/what-is-a-computer/what-is-a-keyboard#
 		//MODIFICADA POR NOSOTROS (color y botones)

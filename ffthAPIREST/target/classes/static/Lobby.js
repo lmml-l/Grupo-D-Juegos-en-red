@@ -1,7 +1,5 @@
 
 var ipsLobby = new Array();
-var partidaactual;
-var listatemporal = new Array();
 class Lobby extends Phaser.Scene {
 	constructor(){
 		super({key:"Lobby"});
@@ -29,12 +27,9 @@ class Lobby extends Phaser.Scene {
 		this.fondo;
 		this.salir;
 		//this.musica;
-		//this.archive;
 	}
 	
 	controlmenu(){
-
-		//this.archive = new ReaderWriter(//conseguir esta vaina con un getter primero ----> historialPartidas);
 		
 		this.check1 = false;
 		this.check2 = false;
@@ -80,14 +75,7 @@ class Lobby extends Phaser.Scene {
 		this.texts[3] = this.add.text(600, 370, this.nombreRival[1], { fill: '#FFAC00', font: '54px Impact', align: 'center'});
 		this.texts[4] = this.add.text(320, 190, "PREPARE TO FIGHT!", { fill: '#FFFFFF', font: '54px Impact', align: 'center'});
 		////////////////////////
-	/*
-		this.texts[0] = this.add.text(312, 400, "" ,{ fill: '#FFFFFF', font: '18px Impact', align: 'center'}).setScale(2);
-		this.texts[1] = this.add.text(712, 400, "this.getRivalIp(mymatch)", { fill: '#FFFFFF', font: '18px Impact', align: 'center'}).setScale(2);
-		this.texts[2] = this.add.text(312, 600, "this.getApodo(this.mymatch", { fill: '#FFFFFF', font: '18px Impact', align: 'center'}).setScale(2);
-		this.texts[3] = this.add.text(712, 600, "this.getApodo(this.mymatch", { fill: '#FFFFFF', font: '18px Impact', align: 'center'}).setScale(2);
-		this.texts[4] = this.add.text(512, 100, "Partida 1v1", { fill: '#FFFFFF', font: '30px Impact', align: 'center'}).setScale(2);
-	*/
-		//this.listlp = this.getListaApodos();
+	
 
 		this.enter = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
 		this.back = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.BACKSPACE);
@@ -96,35 +84,6 @@ class Lobby extends Phaser.Scene {
 		this.back.isDown=false;
 	}
 
-	/*
-	enfrentamientoactual(){
-		if(ipsLobby.length == 2){
-			if(partidaactual != ipsLobby){//partida actual se refiere a las ips que hemos mandado antes al historial
-				addMatchtoHistory(ipsLobby[0] + " vs " + ipsLobby[1]);
-				partidaactual=ipsLobby
-			}
-		}
-	}
-	*/
-/*
-	comprobaripssala(ipsconectadas,ipslobby){
-		var ipsensalapresentesenserver = new Array();
-
-	if(ipsconectadas!=null && ipslobby !=null){
-		for(var i = 0; i < ipsconectadas.length ; i++){
-			for(var j = 0 ; j < ipslobby.length ; j++){
-				console.log( "ipone "+ ipsconectadas[i])
-				console.log("jpone" + ipslobby[j])
-				if(ipsconectadas[i] == ipslobby[j]){
-					ipsensalapresentesenserver.push(ipslobby[j]);
-				}
-			}
-		}
-		console.log("array que se deberia devolver"+ ipsensalapresentesenserver);	
-	}
-	return ipsensalapresentesenserver;
-	}
-*/
 	preload(){
 		this.load.image('menuLobbyFondo','Recursos/Imagenes/menuLobbyFondo.png');
 		//this.load.audio('musicacontrol','Recursos/Audio/CharacterSelection.mp3');
@@ -147,20 +106,7 @@ class Lobby extends Phaser.Scene {
 			this.time.addEvent({delay:1000, loop:true,
 		    callback: function(){getServerStatus(function(){that.scene.start('EscenarioError');})}})
 
-		///////
-		
-		 //Si estoy conectado consigo mi ipactual
 
-		//console.log(miip + "miip");
-
-		
-		var url2 = function(){if(ipsLobby[1]==null){ 
-			that.i=0;
-			return ipsLobby[1];
-		}else{
-			that.i=1;
-			return ipsLobby[1].substring(1,ipsLobby[1].length-1);
-		}}
 		
 		this.time.addEvent({delay:1000,loop:true, callback: function(){getIPs(function(arrayjugadores){ipsLobby= arrayjugadores});}})//ips jugadores en la sala
 
@@ -197,6 +143,14 @@ class Lobby extends Phaser.Scene {
 			}
 		}})
 
+			//funcion que consigue la segunda ip
+		var url2 = function(){if(ipsLobby[1]==null){ 
+			that.i=0;
+			return ipsLobby[1];
+		}else{
+			that.i=1;
+			return ipsLobby[1].substring(1,ipsLobby[1].length-1);
+		}}
 
 		var funcionstring= function(){if(ipsLobby[0]!=null){ return ipsLobby[0].substring(1,ipsLobby[0].length-1)}else{return ""}}
 		this.time.addEvent({delay:1500,loop:true,  //se tarda un poco en actualizar en nombre del primer jugador de la sala
@@ -230,10 +184,6 @@ class Lobby extends Phaser.Scene {
 
 	update(){
 		this.retroceder();
-		//this.scenechange();
-
-		//var that=this;
-		
 		////////////////////////////////////
 		this.texts[2].text=this.nombreRival[0];
 		this.texts[3].text=this.nombreRival[1];
@@ -253,6 +203,5 @@ class Lobby extends Phaser.Scene {
     	if(this.historialPartidas[this.historialPartidas.length-5]!= null){
     		this.textoPartidas5.text = this.historialPartidas[this.historialPartidas.length-5]
     	}
-		
 	}
 }

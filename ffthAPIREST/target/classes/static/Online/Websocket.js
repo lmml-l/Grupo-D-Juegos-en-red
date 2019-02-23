@@ -132,7 +132,3 @@ function getComp(){
 function setComp(bool){
 	this.comp = bool;
 }
-
-
-
-/////////////////

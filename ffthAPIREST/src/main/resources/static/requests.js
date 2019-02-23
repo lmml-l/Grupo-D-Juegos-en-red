@@ -205,14 +205,3 @@ function putTime(ip,id){
         console.log("ip tiempo" + JSON.stringify(ip));
     })
 }
-
-/*Delete item from server
-function deleteItem() {
-    $.ajax({
-        method: 'DELETE',
-        url: 'http://localhost:8080/FightForTheHood/'
-    }).done(function (item) {
-        console.log("Deleted item " + itemId)
-    })
-    */
-//}

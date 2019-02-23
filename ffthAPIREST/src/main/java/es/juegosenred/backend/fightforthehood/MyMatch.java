@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.*;
 
 import org.springframework.stereotype.Component;
 
@@ -15,6 +16,10 @@ public class MyMatch {
 	private ArrayList<String> ipconectados;
 	private HashMap<String,Integer> tiempoParaDesconexion;
 	private String checker;
+	
+	//Nuevas variables
+	private List<List<String>> ListaConParApodoContrasena;
+	private ArrayList<String> ApododeUsuariosenLobby;
 	
 	public HashMap<String, Integer> getTiempoParaDesconexion() {
 		return tiempoParaDesconexion;
@@ -47,6 +52,26 @@ public class MyMatch {
 		ipconectados = new ArrayList<>();
 		tiempoParaDesconexion = new HashMap<>();
 		checker = "1";
+		//Nuevas variables
+		ListaConParApodoContrasena = new ArrayList<>();
+		ApododeUsuariosenLobby = new ArrayList<>();
+		
+	}
+
+	public ArrayList<String> getApododeUsuariosenLobby() {
+		return ApododeUsuariosenLobby;
+	}
+
+	public void setApododeUsuariosenLobby(ArrayList<String> apododeUsuariosenLobby) {
+		ApododeUsuariosenLobby = apododeUsuariosenLobby;
+	}
+
+	public List<List<String>> getListaConParApodoContrasena() {
+		return ListaConParApodoContrasena;
+	}
+
+	public void setListaConParApodoContrasena(List<List<String>> listaConParApodoContrasena) {
+		ListaConParApodoContrasena = listaConParApodoContrasena;
 	}
 
 	public MyMatch(ArrayList<String> ipsPartida) {

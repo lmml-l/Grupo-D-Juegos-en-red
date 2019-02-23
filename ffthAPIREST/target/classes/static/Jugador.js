@@ -10,7 +10,6 @@ var controles1 = {
 	movabajo: 	Phaser.Input.Keyboard.KeyCodes.DOWN,
 	disparo: 	Phaser.Input.Keyboard.KeyCodes.P,
 	recarma: 	Phaser.Input.Keyboard.KeyCodes.O,
-	//recargar: Phaser.Input.Keyboard.KeyCodes.P,
 	escudo: 	Phaser.Input.Keyboard.KeyCodes.R
 }
 //Jugador 2
@@ -21,7 +20,6 @@ var controles2 = {
 	movabajo: 	Phaser.Input.Keyboard.KeyCodes.S,
 	disparo: 	Phaser.Input.Keyboard.KeyCodes.T,
 	recarma: 	Phaser.Input.Keyboard.KeyCodes.R,
-	//recargar: Phaser.Input.Keyboard.KeyCodes.R,
 	escudo: 	Phaser.Input.Keyboard.KeyCodes.SHIFT
 }
 
@@ -46,9 +44,6 @@ function Jugador(avatar,controles,proyectiles){
 
 	var that = this;
 	//acciones
-	
-	
-
 	var keyrecarmasoltada;
 	var keydispararsoltad;
 

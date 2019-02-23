@@ -4,7 +4,7 @@
 var NombreFinal;
 var ip;
 
-var genteensala;
+var textoModificable;
 class nameMenu extends Phaser.Scene {
 	constructor(){
 		super({key:"nameMenu"});
@@ -21,6 +21,12 @@ class nameMenu extends Phaser.Scene {
 		this.salir;
 		this.fondo;
 		this.musica;
+
+		//Nuevas Variables Junio
+		this.textoPassword;
+		this.arriba
+		this.abajo;
+		////////////////////////
 	}
 
 	preload(){
@@ -78,6 +84,7 @@ class nameMenu extends Phaser.Scene {
 
 
 	create(){
+
 		this.fondo = this.add.image(this.game.canvas.width/2,this.game.canvas.height/2,'menuNombreFondo').setScale(1.3);
 		
 		this.musica = this.game.sound.add('musicacontrol');
@@ -95,59 +102,68 @@ class nameMenu extends Phaser.Scene {
 		this.textoVersion = this.add.text(340, 300, "What's your name?", { fill: '#FFAC00', font: '48px Impact', align: 'center'});
 		this.textoVersion = this.add.text(390, 415, "Press ENTER to search a match", { fill: '#F4FFF3', font: '20px Impact', align: 'center'});
 		this.textoVersion = this.add.text(50, 50,   "Online Mode", { fill: '#F4FFF3', font: '20px Impact', align: 'center'});
-		this.textoNombre  = this.add.text(380, 370, "Insert your name", { fill: '#F4FFF3', font: '32px Impact', align: 'center'});
+		this.textoNombre  = this.add.text(380, 370, "Insert your name", { fill: '#F4FFF3', font: '32px Impact', align: 'center'})
 		
 		var that = this;
-		getIPs(function(arrayjugadores){that.ipsjugadoressala = arrayjugadores})
+		//Nuevo Junio
+		this.arriba = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
+		this.abajo = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
+
+		this.textoPassword = this.add.text(380, 400, "Insert your password", { fill: '#F4FFF3', font: '32px Impact', align: 'center'})
+		textoModificable = that.textoNombre;//En funcion de que texto se vaya a modificar , si es contraseña o nombre esta variable apunta a eso
+		//this.textoNombre.on('pointerdown',function(){textoModificable = that.textoNombre});
+		//this.textoPassword.on('pointerdown',function(){textoModificable = that.textoPassword});
+		////////////////////////
 
 		
+		getIPs(function(arrayjugadores){that.ipsjugadoressala = arrayjugadores})
+
+		//Actualiza la ip (variable global) una vez al crearse y luego cada 2s
 		getMyIP(function(data){ip = data.ip});
 
+		this.time.addEvent({delay:2000,loop:true,
+    	callback: function(){getIPs(function(arrayjugadores){that.ipsjugadoressala = arrayjugadores});}})
+
+		//Server Caido (ACTUALIZA CADA 1s)
 		this.time.addEvent({delay:1000, loop:true,
 		   callback: function(){getServerStatus(function(){
 		    that.scene.start('EscenarioError');
 			this.musica.stop();})}})
 
-		
+		//En el caso de que la ip ya este registrada se actualiza el nombre de usuario.
 		this.time.addEvent({delay:500,  //tiempo que tarda hasta reiniciar
     	callback: function(){getApodo(function(data){that.textoNombre.text=data},ip)}})
 		
-		this.time.addEvent({delay:2000,loop:true,
-    	callback: function(){getIPs(function(arrayjugadores){that.ipsjugadoressala = arrayjugadores});}})
-
-			this.input.keyboard.on('keydown',function(event){
-			if(that.textoNombre.text === "Insert your name" &&  event.keyCode >=48 && event.keyCode < 90 || event.keyCode == 32){
-				that.textoNombre.text = event.key;
+		//Escribir texto para poner nombre de usuario.
+		this.input.keyboard.on('keydown',function(event){
+			if(textoModificable!=null){
+			if((textoModificable.text === "Insert your name" || textoModificable.text === "Insert your password" ) &&  event.keyCode >=48 && event.keyCode < 90 || event.keyCode == 32){
+				textoModificable.text = event.key;
 			}
-			else if(event.keyCode === 8 && that.textoNombre.text.length>0){
-				that.textoNombre.text = that.textoNombre.text.substr(0,that.textoNombre.text.length-1)
+			else if(event.keyCode === 8 && textoModificable.text.length>0){
+				textoModificable.text = textoModificable.text.substr(0,textoModificable.text.length-1);
 			}
-			else if(event.keyCode == 32 || event.keyCode >=48 && event.keyCode < 90 && that.textoNombre.text.length<15){
-				that.textoNombre.text += event.key;
+			else if(event.keyCode == 32 || event.keyCode >=48 && event.keyCode < 90 && textoModificable.text.length<15){
+				textoModificable.text += event.key;
+			}
 			}
 		}
 		)
+		}
 
-		//var that=this;
-		//comprobación del estado del servidor
-		//this.time.addEvent({delay:100, loop:true,
-    	//callback: function(){getServerStatus(function(){that.scene.start('EscenarioError');})}})
-
-
+	seleccionContraseñaONombre(){
+		if(this.arriba.isDown){
+			textoModificable = this.textoNombre;
+			this.arriba.isDown = false;
+		}
+		if(this.abajo.isDown){
+			textoModificable= this.textoPassword;
+			this.abajo.isDown = false;
+		}
 	}
-
 	update(){
 		this.retroceder();
 		this.aceptar();
-		//var that = this;
-		//getIPs(function(arrayjugadores){that.ipsjugadoressala = arrayjugadores})
-		//console.log(this.ipsjugadoressala);
-
-		//comprobación del estado del servidor
-		
-
-
+		this.seleccionContraseñaONombre();
 	}
 }
-
-//Para retroceder se pulsa escape, el cuadro de texto y la pregunta

@@ -1,7 +1,5 @@
 
 var ipsLobby = new Array();
-var partidaactual;
-var listatemporal = new Array();
 class Lobby extends Phaser.Scene {
 	constructor(){
 		super({key:"Lobby"});
@@ -109,13 +107,6 @@ class Lobby extends Phaser.Scene {
 		    callback: function(){getServerStatus(function(){that.scene.start('EscenarioError');})}})
 
 
-		var url2 = function(){if(ipsLobby[1]==null){ 
-			that.i=0;
-			return ipsLobby[1];
-		}else{
-			that.i=1;
-			return ipsLobby[1].substring(1,ipsLobby[1].length-1);
-		}}
 		
 		this.time.addEvent({delay:1000,loop:true, callback: function(){getIPs(function(arrayjugadores){ipsLobby= arrayjugadores});}})//ips jugadores en la sala
 
@@ -152,6 +143,14 @@ class Lobby extends Phaser.Scene {
 			}
 		}})
 
+			//funcion que consigue la segunda ip
+		var url2 = function(){if(ipsLobby[1]==null){ 
+			that.i=0;
+			return ipsLobby[1];
+		}else{
+			that.i=1;
+			return ipsLobby[1].substring(1,ipsLobby[1].length-1);
+		}}
 
 		var funcionstring= function(){if(ipsLobby[0]!=null){ return ipsLobby[0].substring(1,ipsLobby[0].length-1)}else{return ""}}
 		this.time.addEvent({delay:1500,loop:true,  //se tarda un poco en actualizar en nombre del primer jugador de la sala
