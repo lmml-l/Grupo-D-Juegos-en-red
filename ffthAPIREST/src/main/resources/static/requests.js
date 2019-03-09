@@ -59,6 +59,7 @@ function getMyResponseTime(myinfo, request) {
     })
 }
 
+/*
 function addPlayertoRoom (ip) {
     $.ajax({
         method: "PUT",
@@ -72,6 +73,7 @@ function addPlayertoRoom (ip) {
         console.log("Ip del jugador añadido " + ip);
     })
 }
+*/
 
 function deletePlayerofRoom (ip) {
     $.ajax({
@@ -210,7 +212,7 @@ function putTime(ip,id){
 
 /////////// Nuevo Junio ////////////////
 
-function login(myinfo){
+function login(myinfo,request){
      $.ajax({
         method: "PUT",
         url: 'http://'+ IPserver+ '/login/' + myinfo.name,
@@ -219,7 +221,9 @@ function login(myinfo){
         headers: {
             "Content-Type": "application/json"
         }
-    }).done(function () {
+    }).done(function (data) {
         console.log("Player data  IP/Apodo/Contrasena: " + JSON.stringify(myinfo));
+        console.log(data);
+        request(data);
     })
 }

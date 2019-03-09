@@ -4,7 +4,7 @@
 //var NombreFinal;
 //var ContrasenaFinal;
 var ip;
-
+var islogininfocorrect;
 var textoModificable;
 class nameMenu extends Phaser.Scene {
 	constructor(){
@@ -51,57 +51,46 @@ class nameMenu extends Phaser.Scene {
 	
 	aceptar(){
 		var that = this;
-		
 		if(this.enter.isDown) {
 			////////////Login///////////
-			if(textoModificable == this.textoPassword || textoModificable == this.textoNombre){
-			//if(this.textoNombre.text==="Insert your name"){ //Nombre anónimo
-			//		this.textoNombre.text="Anonymous";
-			//	}
-			//NombreFinal = this.textoNombre.text;
-			//ContrasenaFinal = this.textoNombre.text;
-			
+			if(textoModificable == this.textoPasswordLogin || textoModificable == this.textoNombreLogin){
 
-			var myinfo =
-			{
+				var myinfo =
+				{
 				ip: ip,
 				apodo: that.textoNombreLogin.text,
 				contrasena: that.textoPasswordLogin.text, 
-			}
+				}
 
-			//Comprobacion de la contrasena//
-			var islogininfocorrect = login(myinfo);//se devuelve bool para saber si la informacion es correcta
-			////////////////////////////////
+				//Comprobacion de la contrasena//
+				console.log(islogininfocorrect);
+				login(myinfo,function(data){islogininfocorrect=data});//se devuelve bool para saber si la informacion es correcta
+				////////////////////////////////
 
-			this.enter.isDown=false;
+				this.enter.isDown=false;
 
-			if(islogininfocorrect){
-				var that = this; 
-				/*
-				if(this.ipsjugadoressala.length < 2){ //Hay espacio en partida
-					addPlayertoRoom(myinfo.ip);
-					getIPs(function(arrayjugadores){that.ipsjugadoressala = arrayjugadores})
-					if(this.ipsjugadoressala.length == 1){
-						var arrayconips = [myinfo.ip,this.ipsjugadoressala[0]];
-						addMatchtoHistory(arrayconips);
-					}
+				if(islogininfocorrect){
+					var that = this; 
 					this.scene.start('Lobby');
 					this.musica.stop();
 				}
-				else{
-					console.log("The server is full");
-					this.textoEstadosala = this.add.text(450, 515, "The server is full", { fill: '#F4FFF3', font: '20px Impact', align: 'center'});
+			}
+			else{
+			////////////SignUp///////////
+				if(textoModificable == this.textoPasswordNew || textoModificable == this.textoNombreNew){
+					var myinfo =
+					{
+					ip: ip,
+					apodo: that.textoNombreNew.text,
+					contrasena: that.textoPasswordNew.text, 
+					}
 				}
-				*/
-				this.scene.start('Lobby');
-				this.musica.stop();
 			}
 		}
 	}
-	else{
 
-	}
-}
+
+
 
 	create(){
 
@@ -144,8 +133,8 @@ class nameMenu extends Phaser.Scene {
 		
 		////////////////////////
 
-		
 		getIPs(function(arrayjugadores){that.ipsjugadoressala = arrayjugadores})
+
 
 		//Actualiza la ip (variable global) una vez al crearse y luego cada 2s
 		getMyIP(function(data){ip = data.ip});
@@ -161,24 +150,25 @@ class nameMenu extends Phaser.Scene {
 
 		//En el caso de que la ip ya este registrada se actualiza el nombre de usuario.
 		this.time.addEvent({delay:500,  //tiempo que tarda hasta reiniciar
-    	callback: function(){getApodo(function(data){that.textoNombreLogin.text=data},ip)}})
+    		callback: function(){getApodo(function(data){that.textoNombreLogin.text=data},ip)}})
 		
 		//Escribir texto para poner nombre de usuario.
 		this.input.keyboard.on('keydown',function(event){
 			if(textoModificable!=null){
-			if((textoModificable.text === "Insert your name" || textoModificable.text === "Insert your password" ) &&  event.keyCode >=48 && event.keyCode < 90 || event.keyCode == 32){
-				textoModificable.text = event.key;
+				if((textoModificable.text === "Insert your name" || textoModificable.text === "Insert your password" ) &&  event.keyCode >=48 && event.keyCode < 90 || event.keyCode == 32){
+					textoModificable.text = event.key;
+				}
+				else if(event.keyCode === 8 && textoModificable.text.length>0){
+					textoModificable.text = textoModificable.text.substr(0,textoModificable.text.length-1);
+				}
+				else if(event.keyCode == 32 || event.keyCode >=48 && event.keyCode < 90 && textoModificable.text.length<15){
+					textoModificable.text += event.key;
+				}
+				}
 			}
-			else if(event.keyCode === 8 && textoModificable.text.length>0){
-				textoModificable.text = textoModificable.text.substr(0,textoModificable.text.length-1);
-			}
-			else if(event.keyCode == 32 || event.keyCode >=48 && event.keyCode < 90 && textoModificable.text.length<15){
-				textoModificable.text += event.key;
-			}
-			}
-		}
 		)
-		}
+	}
+
 
 	seleccionContraseñaONombre(){
 	//Máquina de estados para apuntar a distintos campos de texto
@@ -230,3 +220,4 @@ class nameMenu extends Phaser.Scene {
 		this.seleccionContraseñaONombre();
 	}
 }
+

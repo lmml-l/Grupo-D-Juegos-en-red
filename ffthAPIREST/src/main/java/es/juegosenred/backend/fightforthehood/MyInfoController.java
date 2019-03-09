@@ -46,6 +46,7 @@ public class MyInfoController {
 	@PutMapping("/login/{name}")
 	@ResponseStatus(HttpStatus.CREATED)
 	public boolean Login(@RequestBody MyInfo myinfo, @PathVariable String name) {
+		//System.out.println("Estoy ejecutando el login en el servidor");
 		for (List<String> parapodocontrasena : (mymatch.getListaConParApodoContrasena())) {
 			if (parapodocontrasena.get(0).equals(myinfo.getApodo())) {// Se comprueba la posicion 0 que es el Nombre
 				if (parapodocontrasena.get(1).equals(myinfo.getContrasena())) {
