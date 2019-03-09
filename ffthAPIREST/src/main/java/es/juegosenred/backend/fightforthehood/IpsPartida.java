@@ -28,8 +28,8 @@ public class IpsPartida {
 	@GetMapping("/idlist")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Collection<String> getIps() {
-		System.out.println(mymatch.getIpsPartida().toString() + "lista de ipslobby");
-		return mymatch.getIpsPartida();
+		System.out.println(mymatch.getNombresenPartida().toString() + "lista de ipslobby");
+		return mymatch.getNombresenPartida();
 	}
 
 	@GetMapping("/idlistconectadas")
@@ -38,21 +38,23 @@ public class IpsPartida {
 		return mymatch.getIpconectados();
 	}
 
+	/*
 	@PutMapping("/id")
 	@ResponseStatus(HttpStatus.CREATED)
 	public String putIp(@RequestBody String ip) {
-		if (mymatch.getIpsPartida().size() < 2) {
-			mymatch.getIpsPartida().add(ip);
+		if (mymatch.getNombresenPartida().size() < 2) {
+			mymatch.getNombresenPartida().add(ip);
 		}
 		return ip;
 	}
-
+	*/
+	 
 	@PutMapping("/deleteid")
 	@ResponseStatus(HttpStatus.CREATED)
 	public String deleteId(@RequestBody String ip) {
 		// System.out.println("ipquedebeborrar0 " + mymatch.getIpsPartida().get(0));
 		// System.out.println("ipquedebeborrar "+ ip.substring(2, ip.length()-3)+ '"');
-		mymatch.getIpsPartida().remove(ip.substring(2, ip.length() - 3) + '"');
+		mymatch.getNombresenPartida().remove(ip.substring(2, ip.length() - 3) + '"');
 		return ip;
 	}
 

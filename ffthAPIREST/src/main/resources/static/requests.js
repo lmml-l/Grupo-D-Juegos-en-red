@@ -2,6 +2,7 @@
 var IPserver = location.host;
 
 //Añadir informacion propia
+/*
 function putMyInfo(myinfo) {
     $.ajax({
         method: "PUT",
@@ -15,6 +16,7 @@ function putMyInfo(myinfo) {
         console.log("Player data  IP/Apodo: " + JSON.stringify(myinfo));
     })
 }
+*/
 
 function putMyResponseTime(myinfo, resptime) {
     $.ajax({
@@ -203,5 +205,21 @@ function putTime(ip,id){
         }
     }).done(function () {
         console.log("ip tiempo" + JSON.stringify(ip));
+    })
+}
+
+/////////// Nuevo Junio ////////////////
+
+function login(myinfo){
+     $.ajax({
+        method: "PUT",
+        url: 'http://'+ IPserver+ '/login/' + myinfo.name,
+        data: JSON.stringify(myinfo),
+        processData: false,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).done(function () {
+        console.log("Player data  IP/Apodo/Contrasena: " + JSON.stringify(myinfo));
     })
 }

@@ -9,7 +9,6 @@ var textoModificable;
 class nameMenu extends Phaser.Scene {
 	constructor(){
 		super({key:"nameMenu"});
-		this.nombre;
 		this.escape;
 		this.enter;		
 		this.textoPregunta;
@@ -48,10 +47,15 @@ class nameMenu extends Phaser.Scene {
 	aceptar(){
 		var that = this;
 
-		if(this.enter.isDown){
-			if(this.textoNombre.text==="Insert your name"){ //Nombre anónimo
-					this.textoNombre.text="Anonymous";
-				}
+		
+		if(this.enter.isDown) {
+			////////////Login///////////
+			if(textoModificable == this.textoPassword || textoModificable == this.textoNombre){
+
+
+			//if(this.textoNombre.text==="Insert your name"){ //Nombre anónimo
+			//		this.textoNombre.text="Anonymous";
+			//	}
 			//NombreFinal = this.textoNombre.text;
 			//ContrasenaFinal = this.textoNombre.text;
 			
@@ -64,31 +68,38 @@ class nameMenu extends Phaser.Scene {
 			}
 
 			//Comprobacion de la contrasena//
-
+			var islogininfocorrect = login(myinfo);//se devuelve bool para saber si la informacion es correcta
 			////////////////////////////////
-			putMyInfo(myinfo);
 
 			this.enter.isDown=false;
 
-			var that = this; 
-			if(this.ipsjugadoressala.length < 2){ //Hay espacio en partida
-				addPlayertoRoom(myinfo.ip);
-				getIPs(function(arrayjugadores){that.ipsjugadoressala = arrayjugadores})
-				if(this.ipsjugadoressala.length == 1){
-					var arrayconips = [myinfo.ip,this.ipsjugadoressala[0]];
-					addMatchtoHistory(arrayconips);
+			if(islogininfocorrect){
+				var that = this; 
+				/*
+				if(this.ipsjugadoressala.length < 2){ //Hay espacio en partida
+					addPlayertoRoom(myinfo.ip);
+					getIPs(function(arrayjugadores){that.ipsjugadoressala = arrayjugadores})
+					if(this.ipsjugadoressala.length == 1){
+						var arrayconips = [myinfo.ip,this.ipsjugadoressala[0]];
+						addMatchtoHistory(arrayconips);
+					}
+					this.scene.start('Lobby');
+					this.musica.stop();
 				}
+				else{
+					console.log("The server is full");
+					this.textoEstadosala = this.add.text(450, 515, "The server is full", { fill: '#F4FFF3', font: '20px Impact', align: 'center'});
+				}
+				*/
 				this.scene.start('Lobby');
 				this.musica.stop();
 			}
-			else{
-				console.log("The server is full");
-				this.textoEstadosala = this.add.text(450, 515, "The server is full", { fill: '#F4FFF3', font: '20px Impact', align: 'center'});
-			}
-			
 		}
 	}
+	else{
 
+	}
+}
 
 	create(){
 
