@@ -42,7 +42,7 @@ public class MyInfoController {
 	//Nuevo Junio (Cambiar Mappings)
 	
 	//Faltaria hacer comprobacion de usuarios activos y ya logueados
-	@PutMapping("/a")
+	@PutMapping("/b")
 	@ResponseStatus(HttpStatus.CREATED)
 	public boolean Login (@RequestBody MyInfo myinfo, @PathVariable String ip ) {
 		for(List<String> parapodocontrasena: (mymatch.getListaConParApodoContrasena())) {
