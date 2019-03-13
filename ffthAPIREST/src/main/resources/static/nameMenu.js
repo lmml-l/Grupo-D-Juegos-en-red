@@ -64,7 +64,7 @@ class nameMenu extends Phaser.Scene {
 
 				//Comprobacion de la contrasena//
 				console.log(islogininfocorrect);
-				this.enter.isDown=false;
+				
 				
 				login(myinfo,function(data){islogininfocorrect=data});//se devuelve bool para saber si la informacion es correcta
 				////////////////////////////////
@@ -86,8 +86,11 @@ class nameMenu extends Phaser.Scene {
 					apodo: that.textoNombreNew.text,
 					contrasena: that.textoPasswordNew.text, 
 					}
+
+					signup(myinfo,function(data){})
 				}
 			}
+			this.enter.isDown=false;
 		}
 	}
 

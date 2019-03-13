@@ -222,7 +222,21 @@ function login(myinfo,request){
             "Content-Type": "application/json"
         }
     }).done(function (data) {
-        console.log("Player data  IP/Apodo/Contrasena: " + JSON.stringify(myinfo));
+        console.log(data);
+        request(data);
+    })
+}
+
+function signup(myinfo,request){
+      $.ajax({
+        method: "PUT",
+        url: 'http://'+ IPserver+ '/signup/' + myinfo.name,
+        data: JSON.stringify(myinfo),
+        processData: false,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).done(function (data) {
         console.log(data);
         request(data);
     })

@@ -89,7 +89,7 @@ public class MyInfoController {
 			ParApodoContrasena.add(myinfo.getContrasena());
 			mymatch.getListaConParApodoContrasena().add(ParApodoContrasena);
 		}
-		return false;
+		return isSignUpAlready;
 
 	}
 }
