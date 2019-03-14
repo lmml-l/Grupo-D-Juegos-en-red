@@ -69,13 +69,6 @@ class nameMenu extends Phaser.Scene {
 				login(myinfo,function(data){islogininfocorrect=data});//se devuelve bool para saber si la informacion es correcta
 				////////////////////////////////
 
-				
-
-				if(islogininfocorrect){
-					var that = this; 
-					this.scene.start('Lobby');
-					this.musica.stop();
-				}
 			}
 			else{
 			////////////SignUp///////////
@@ -170,8 +163,17 @@ class nameMenu extends Phaser.Scene {
 					textoModificable.text += event.key;
 				}
 				}
+			})
+
+		/////////////Nuevo Junio//////////
+		this.time.addEvent({delay:1000,loop:true,callback:function(){
+			if(islogininfocorrect){
+				that.scene.start('Lobby');
+				that.musica.stop();
 			}
-		)
+		}})
+		//////////////////////////////////
+		
 	}
 
 
