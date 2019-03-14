@@ -168,6 +168,7 @@ class nameMenu extends Phaser.Scene {
 		/////////////Nuevo Junio//////////
 		this.time.addEvent({delay:1000,loop:true,callback:function(){
 			if(islogininfocorrect){
+				islogininfocorrect=false;
 				that.scene.start('Lobby');
 				that.musica.stop();
 			}
