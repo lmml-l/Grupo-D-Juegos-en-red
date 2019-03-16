@@ -53,16 +53,8 @@ public class MyMatch {
 		checker = "1";
 		//Nuevas variables
 		ListaConParApodoContrasena = new ArrayList<>();
-		ApododeUsuariosenLobby = new ArrayList<>();
+	
 		
-	}
-
-	public ArrayList<String> getApododeUsuariosenLobby() {
-		return ApododeUsuariosenLobby;
-	}
-
-	public void setApododeUsuariosenLobby(ArrayList<String> apododeUsuariosenLobby) {
-		ApododeUsuariosenLobby = apododeUsuariosenLobby;
 	}
 
 	public List<List<String>> getListaConParApodoContrasena() {

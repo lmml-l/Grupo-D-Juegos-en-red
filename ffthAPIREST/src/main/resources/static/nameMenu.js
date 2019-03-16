@@ -5,6 +5,7 @@
 //var ContrasenaFinal;
 var ip;
 var islogininfocorrect;
+var volverAIntentarloguear = true;
 var textoModificable;
 class nameMenu extends Phaser.Scene {
 	constructor(){
@@ -53,7 +54,9 @@ class nameMenu extends Phaser.Scene {
 		var that = this;
 		if(this.enter.isDown) {
 			////////////Login///////////
-			if(textoModificable == this.textoPasswordLogin || textoModificable == this.textoNombreLogin){
+			if((textoModificable == this.textoPasswordLogin || textoModificable == this.textoNombreLogin) && volverAIntentarloguear==true){
+
+				volverAIntentarloguear=false;
 
 				var myinfo =
 				{
@@ -61,12 +64,17 @@ class nameMenu extends Phaser.Scene {
 				apodo: that.textoNombreLogin.text,
 				contrasena: that.textoPasswordLogin.text, 
 				}
-
-				//Comprobacion de la contrasena//
-				console.log(islogininfocorrect);
 				
+				var that = this;
+
 				
 				login(myinfo,function(data){islogininfocorrect=data});//se devuelve bool para saber si la informacion es correcta
+				
+				this.enter.isDown=false;
+
+				this.time.addEvent({delay:2000,  //tiempo que tarda hasta poder volver a pulsar
+    			callback: function(){volverAIntentarloguear = true;}})
+
 				////////////////////////////////
 
 			}
@@ -79,11 +87,11 @@ class nameMenu extends Phaser.Scene {
 					apodo: that.textoNombreNew.text,
 					contrasena: that.textoPasswordNew.text, 
 					}
-
+					this.enter.isDown=false;
 					signup(myinfo,function(data){})
 				}
 			}
-			this.enter.isDown=false;
+			
 		}
 	}
 
@@ -91,6 +99,9 @@ class nameMenu extends Phaser.Scene {
 
 
 	create(){
+		volverAIntentarloguear = true;
+		islogininfocorrect=""
+		
 
 		this.fondo = this.add.image(this.game.canvas.width/2,this.game.canvas.height/2,'menuNombreFondo').setScale(1.3);
 		
@@ -167,12 +178,13 @@ class nameMenu extends Phaser.Scene {
 
 		/////////////Nuevo Junio//////////
 		this.time.addEvent({delay:1000,loop:true,callback:function(){
-			if(islogininfocorrect){
-				islogininfocorrect=false;
+			if(islogininfocorrect=="OK"){
 				that.scene.start('Lobby');
 				that.musica.stop();
 			}
 		}})
+
+		this.enter.isDown=false;
 		//////////////////////////////////
 		
 	}

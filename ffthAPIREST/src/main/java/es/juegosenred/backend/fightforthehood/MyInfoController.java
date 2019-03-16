@@ -45,30 +45,53 @@ public class MyInfoController {
 	// Faltaria hacer comprobacion de usuarios activos y ya logueados
 	@PutMapping("/login/{name}")
 	@ResponseStatus(HttpStatus.CREATED)
-	public boolean Login(@RequestBody MyInfo myinfo, @PathVariable String name) {
+	public String Login(@RequestBody MyInfo myinfo, @PathVariable String name) {
 		//System.out.println("Estoy ejecutando el login en el servidor");
+		String codigoDeError ="";
 		for (List<String> parapodocontrasena : (mymatch.getListaConParApodoContrasena())) {
 			if (parapodocontrasena.get(0).equals(myinfo.getApodo())) {// Se comprueba la posicion 0 que es el Nombre
 				if (parapodocontrasena.get(1).equals(myinfo.getContrasena())) {
 					//Informacion de Login correcta
 					//Ahora comprobamos disponibilidad de la sala
 					if(mymatch.getNombresenPartida().size()<2) {
-						//Añadir al server
-						mymatch.getNombresenPartida().add(myinfo.getApodo());//Añadimos al jugador a la sala
-						return true;//Hay hueco aun en la sala
+						//Comprobamos que esta cuenta no este en uso
+						System.out.println(" Wii");
+						for(String apodoEnSala: mymatch.getNombresenPartida()) {
+							System.out.println(apodoEnSala + " Wii");
+							if(apodoEnSala.equals(myinfo.getApodo())) {
+								codigoDeError = "UsuarioYaLogueado";
+							}
+						}
+						if((codigoDeError!="UsuarioYaLogueado")) {
+							mymatch.getNombresenPartida().add(myinfo.getApodo());//Añadimos al jugador a la sala
+							return "OK";//Hay hueco aun en la sala
+						}
 					}
 					else {
-						return false;//No hay hueco en la sala
+						if(!codigoDeError.equals("UsuarioYaLogueado")) {
+							System.out.println(codigoDeError);
+							codigoDeError = "NoHueco";//No hay hueco en la sala
+							System.out.println("NoHueco");
+						}
 					}
 				} else {
-					return false;// Contrasena incorrecta
+					if((!codigoDeError.equals("NoHueco")) && !(codigoDeError.equals("UsuarioYaLogueado"))) {
+						System.out.println(codigoDeError);
+						codigoDeError = "ContrasenaInvalida";// Contrasena incorrecta
+						System.out.println("ContrasenaInvalida");
+					}
 				}
 			} else {
-				return false;// Apodo incorrecta
+				if(!(codigoDeError.equals("NoHueco")) && !(codigoDeError.equals("ContrasenaInvalida")) && !(codigoDeError.equals("UsuarioYaLogueado"))) {
+					System.out.println(codigoDeError);
+					codigoDeError = "ApodoInvalido";// Apodo incorrecta
+					System.out.println("ApodoInvalido");
+				}
+				
 			}
 		}
-
-		return false;
+		
+		return codigoDeError;
 	}
 
 	@PutMapping("/signup/{name}")
