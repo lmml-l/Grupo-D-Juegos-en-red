@@ -143,25 +143,10 @@ class Lobby extends Phaser.Scene {
 			}
 		}})
 
-			//funcion que consigue la segunda ip
-		var url2 = function(){if(ipsLobby[1]==null){ 
-			that.i=0;
-			return ipsLobby[1];
-		}else{
-			that.i=1;
-			return ipsLobby[1].substring(1,ipsLobby[1].length-1);
-		}}
-
-		var funcionstring= function(){if(ipsLobby[0]!=null){ return ipsLobby[0].substring(1,ipsLobby[0].length-1)}else{return ""}}
-		this.time.addEvent({delay:1500,loop:true,  //se tarda un poco en actualizar en nombre del primer jugador de la sala
-    	callback: function(){getApodo(function(data){that.nombreRival[0]=data},funcionstring());}})
-
-		//Como no se sabe si hay un segundo jugador para poner el nombre se comprueba si existe o no , y en funcion de eso se cambia que url debe coger
-	
-
-		//Se tarda un tiempo en tener el segundo nombre por eso se tarda en actualizar
-    	this.time.addEvent({delay:1500,loop:true,  //tiempo que tarda hasta reiniciar
-    	callback: function(){getApodo(function(data){that.nombreRival[1]=data},url2());}})
+	this.time.addEvent({delay:1000,loop:true,
+		callback: function(){getApodosEnSala(function(data){that.nombreRival[0]=data[0];
+			that.nombreRival[1]=data[1];
+		})}})
 		
     	
     	//Se cambian los contenidos de los  textos que muestran los nombres por los apodos de los jugadores actuales.

@@ -18,7 +18,7 @@ public class MyMatch {
 	private String checker;
 	//Nuevas variables
 	private List<List<String>> ListaConParApodoContrasena;
-	private ArrayList<String> ApododeUsuariosenLobby;
+	private ArrayList<String> ApododeUsuariosenLobby;//Sus funcion se realiza en nombresenPartida;
 	
 	public HashMap<String, Integer> getTiempoParaDesconexion() {
 		return tiempoParaDesconexion;
