@@ -34,14 +34,13 @@ public class WebsocketEchoHandler extends TextWebSocketHandler {
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 		System.out.println("Session closed: " + session.getId());
 		sessions.remove(session.getId());
-		
 		BorrarSesionesDeDosEnDos(session);	
 	}
 	
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		
-		System.out.println("Message received: " + message.getPayload());
+		//System.out.println("Message received: " + message.getPayload());
 		JsonNode node = mapper.readTree(message.getPayload());
 		
 		SelectordeTipodeMensaje(session, node);
@@ -56,8 +55,8 @@ public class WebsocketEchoHandler extends TextWebSocketHandler {
 				ParesDeUsuariosEnLaMismaPartida.put(i.get(0).getId(), i);
 				ParesDeUsuariosEnLaMismaPartida.put(i.get(1).getId(), i);
 				IsContained=true;
-				System.out.println(ParesDeUsuariosEnLaMismaPartida.get(i.get(0).getId()));
-				System.out.println(ParesDeUsuariosEnLaMismaPartida.get(i.get(1).getId()));
+				//System.out.println(ParesDeUsuariosEnLaMismaPartida.get(i.get(0).getId()));
+				//System.out.println(ParesDeUsuariosEnLaMismaPartida.get(i.get(1).getId()));
 			}	
 		}
 		
@@ -95,7 +94,7 @@ public class WebsocketEchoHandler extends TextWebSocketHandler {
 	
 	private void sendParticipantsInSameMatch(WebSocketSession session, Object newNode) throws IOException {
 
-		System.out.println("Message sent: " + newNode.toString());
+		//System.out.println("Message sent: " + newNode.toString());
 		List<WebSocketSession> participantes = ParesDeUsuariosEnLaMismaPartida.get(session.getId());
 			for(WebSocketSession participant : participantes){
 				if(!participant.getId().equals(session.getId())) {

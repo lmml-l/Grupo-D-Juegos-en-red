@@ -2,10 +2,12 @@ package es.juegosenred.backend.fightforthehood;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -16,6 +18,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class WebsocketDropHandler extends TextWebSocketHandler {
+	
+	@Autowired
+	private MyMatch mymatch;
 	
 	private Map<String, WebSocketSession> sessions = new ConcurrentHashMap<>();
 	private Map<String,List<WebSocketSession>> ParesDeUsuariosEnLaMismaPartida = new ConcurrentHashMap<>();
@@ -34,14 +39,24 @@ public class WebsocketDropHandler extends TextWebSocketHandler {
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 		System.out.println("Session closed: " + session.getId());
 		sessions.remove(session.getId());
-		
+	
+		ObjectNode msg = mapper.createObjectNode();
+		msg.put("protocolo","RESTART SALA");
+		System.out.println("VOY A MANDAR EL MENSAJE");
+		Collection<WebSocketSession> participantes =  sessions.values();
+		for(WebSocketSession participant : participantes) {
+			participant.sendMessage(new TextMessage(msg.toString()));
+		}
+		BorrarJugadoresEnPartida();
+		ParesDeUsuariosEnLaMismaPartida.clear();
+		sessions.clear();
 		BorrarSesionesDeDosEnDos(session);	
 	}
 	
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		
-		System.out.println("Message received: " + message.getPayload());
+		//System.out.println("Message received: " + message.getPayload());
 		JsonNode node = mapper.readTree(message.getPayload());
 		
 		SelectordeTipodeMensaje(session, node);
@@ -56,8 +71,8 @@ public class WebsocketDropHandler extends TextWebSocketHandler {
 				ParesDeUsuariosEnLaMismaPartida.put(i.get(0).getId(), i);
 				ParesDeUsuariosEnLaMismaPartida.put(i.get(1).getId(), i);
 				IsContained=true;
-				System.out.println(ParesDeUsuariosEnLaMismaPartida.get(i.get(0).getId()));
-				System.out.println(ParesDeUsuariosEnLaMismaPartida.get(i.get(1).getId()));
+				//System.out.println(ParesDeUsuariosEnLaMismaPartida.get(i.get(0).getId()));
+				//System.out.println(ParesDeUsuariosEnLaMismaPartida.get(i.get(1).getId()));
 			}	
 		}
 		
@@ -93,10 +108,14 @@ public class WebsocketDropHandler extends TextWebSocketHandler {
 		
 	}
 	
+	private void BorrarJugadoresEnPartida() {
+		mymatch.getNombresenPartida().clear();
+	}
+	
 	//Envía únicamente al usuario cliente (que no es host)
 	private void sendHostToClient(WebSocketSession session, Object newNode) throws IOException {
 
-		System.out.println("Message sent: " + newNode.toString());
+		//System.out.println("Message sent: " + newNode.toString());
 		List<WebSocketSession> participantes = ParesDeUsuariosEnLaMismaPartida.get(session.getId());
 			if(participantes.get(0).equals(session)) {
 				for(WebSocketSession participant : participantes){

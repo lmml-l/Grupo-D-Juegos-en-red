@@ -79,6 +79,17 @@ function conection (){
 			posInicial = PosicionWS;
 			}
 			break;
+			case "RESTART SALA":
+			console.log("LLEGA AQUI")
+			var that=this;
+    		game.scene.time.clearPendingEvents();
+    		game.scene.time.removeAllEvents();
+    		game.scene.time.addEvent({delay:1500,
+    		callback: function(){
+        		game.scene.scene.restart();
+        		game.scene.scene.musica.stop();
+   			}});
+   			break;
 			default:
 		}
 	}
