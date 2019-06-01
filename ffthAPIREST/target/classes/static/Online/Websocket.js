@@ -82,12 +82,14 @@ function conection (){
 			case "RESTART SALA":
 			console.log("LLEGA AQUI")
 			var that=this;
-    		game.scene.time.clearPendingEvents();
-    		game.scene.time.removeAllEvents();
-    		game.scene.time.addEvent({delay:1500,
+    		game.scene.getScene("EscenarioOnline").time.clearPendingEvents();
+    		game.scene.getScene("EscenarioOnline").time.removeAllEvents();
+    		game.scene.getScene("EscenarioOnline").time.addEvent({delay:1500,
     		callback: function(){
-        		game.scene.scene.restart();
-        		game.scene.scene.musica.stop();
+    			game.scene.getScene("EscenarioOnline").musica.stop();
+        		game.scene.sleep("EscenarioOnline");
+        		game.scene.start("MainMenu");
+        		
    			}});
    			break;
 			default:
