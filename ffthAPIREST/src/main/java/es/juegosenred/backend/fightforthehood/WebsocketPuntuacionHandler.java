@@ -35,6 +35,7 @@ public class WebsocketPuntuacionHandler extends TextWebSocketHandler {
 		System.out.println("Session closed: " + session.getId());
 		sessions.remove(session.getId());
 		
+		ParesDeUsuariosEnLaMismaPartida.clear();
 		BorrarSesionesDeDosEnDos(session);	
 	}
 	

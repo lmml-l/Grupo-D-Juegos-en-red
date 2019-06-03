@@ -35,6 +35,7 @@ public class WebsocketTimeHandler extends TextWebSocketHandler {
 		System.out.println("Session closed: " + session.getId());
 		sessions.remove(session.getId());
 		
+		ParesDeUsuariosEnLaMismaPartida.clear();
 		BorrarSesionesDeDosEnDos(session);	
 	}
 	
@@ -122,6 +123,7 @@ public class WebsocketTimeHandler extends TextWebSocketHandler {
 		case "Host":
 			newNode.put("protocolo", node.get("protocolo").asText());
 			List<WebSocketSession> participantes = ParesDeUsuariosEnLaMismaPartida.get(session.getId());
+			System.out.println(participantes.size());
 			if(participantes.get(0).equals(session)){
 				newNode.put("ishost", session.getId());
 			}else {

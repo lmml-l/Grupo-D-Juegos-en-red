@@ -39,6 +39,7 @@ function conection (){
 			break;
 			case "Skin":
 			Skin = datosGuardadosComoObjeto.skin;
+			sprite2 = Skin.skin;
 			break;
 			default:
 		}
@@ -80,6 +81,7 @@ function conection (){
 			}
 			break;
 			case "RESTART SALA":
+			IsHost = null;
 			console.log("LLEGA AQUI")
 			var that=this;
     		game.scene.getScene("EscenarioOnline").time.clearPendingEvents();

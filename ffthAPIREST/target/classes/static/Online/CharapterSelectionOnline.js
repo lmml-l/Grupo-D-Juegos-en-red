@@ -247,7 +247,7 @@ startPartida () {
 		    }
            }
  
-            sprite2 = Skin.skin;
+            //sprite2 = Skin.skin;
 
 			this.time.addEvent({delay:7000, 
 			callback: function(){that.startPartida()}}); //Quiero añadir un texto que ponga la partida va a comenzar... 
