@@ -3,7 +3,6 @@
 
 //var NombreFinal;
 //var ContrasenaFinal;
-var ip;
 var islogininfocorrect;
 var volverAIntentarloguear = true;
 var textoModificable;
@@ -60,7 +59,6 @@ class nameMenu extends Phaser.Scene {
 
 				var myinfo =
 				{
-				ip: ip,
 				apodo: that.textoNombreLogin.text,
 				contrasena: that.textoPasswordLogin.text, 
 				}
@@ -83,7 +81,6 @@ class nameMenu extends Phaser.Scene {
 				if(textoModificable == this.textoPasswordNew || textoModificable == this.textoNombreNew){
 					var myinfo =
 					{
-					ip: ip,
 					apodo: that.textoNombreNew.text,
 					contrasena: that.textoPasswordNew.text, 
 					}
@@ -142,14 +139,14 @@ class nameMenu extends Phaser.Scene {
 		
 		////////////////////////
 
-		getIPs(function(arrayjugadores){that.ipsjugadoressala = arrayjugadores})
+		//getIPs(function(arrayjugadores){that.ipsjugadoressala = arrayjugadores})
 
 
 		//Actualiza la ip (variable global) una vez al crearse y luego cada 2s
-		getMyIP(function(data){ip = data.ip});
+		//getMyIP(function(data){ip = data.ip});
 
-		this.time.addEvent({delay:2000,loop:true,
-    	callback: function(){getIPs(function(arrayjugadores){that.ipsjugadoressala = arrayjugadores});}})
+		//this.time.addEvent({delay:2000,loop:true,
+    	//callback: function(){getIPs(function(arrayjugadores){that.ipsjugadoressala = arrayjugadores});}})
 
 		//Server Caido (ACTUALIZA CADA 1s)
 		this.time.addEvent({delay:1000, loop:true,
@@ -158,8 +155,8 @@ class nameMenu extends Phaser.Scene {
 			this.musica.stop();})}})
 
 		//En el caso de que la ip ya este registrada se actualiza el nombre de usuario.
-		this.time.addEvent({delay:500,  //tiempo que tarda hasta reiniciar
-    		callback: function(){getApodo(function(data){that.textoNombreLogin.text=data},ip)}})
+		//this.time.addEvent({delay:500,  //tiempo que tarda hasta reiniciar
+    	//	callback: function(){getApodo(function(data){that.textoNombreLogin.text=data},ip)}})
 		
 		//Escribir texto para poner nombre de usuario.
 		this.input.keyboard.on('keydown',function(event){

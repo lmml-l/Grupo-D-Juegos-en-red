@@ -110,7 +110,7 @@ class Lobby extends Phaser.Scene {
 		
 		this.time.addEvent({delay:1000,loop:true, callback: function(){getIPs(function(arrayjugadores){ipsLobby= arrayjugadores});}})//ips jugadores en la sala
 
-		this.time.addEvent({delay:1100,loop:true, callback: function(){putTime(ip,ip)}})
+		//this.time.addEvent({delay:1100,loop:true, callback: function(){putTime(ip,ip)}})
 		that.textoBusqueda = that.add.text(380, 480, that.estadoBusqueda, { fill: '#FFFFFF', font: '36px Impact', align: 'center'});
 		that.jugadorDesc1 = that.add.text(80, 370, that.estadoDesc1, { fill: '#A52019', font: '40px Impact', align: 'center'});
 		that.jugadorDesc2 = that.add.text(600, 370, that.estadoDesc2, { fill: '#A52019', font: '40px Impact', align: 'center'});
@@ -159,7 +159,7 @@ class Lobby extends Phaser.Scene {
 	retroceder(){
 		var that = this;
 		if(this.escape.isDown){
-			deletePlayerofRoom(ip) //borro la ip de la lista con los jugadores en la sala
+			//deletePlayerofRoom(ip) //SE DEBE VOLVER A ACTIVAR CUANDO SE CUMPLA LO PUESTO EN REQUEST.JS
 			that.scene.start('MainMenu');
 			//that.musica.stop();
 			that.escape.isDown=false;

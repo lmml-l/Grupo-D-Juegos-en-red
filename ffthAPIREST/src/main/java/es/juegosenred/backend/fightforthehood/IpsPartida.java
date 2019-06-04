@@ -64,6 +64,7 @@ public class IpsPartida {
 		return request.getRemoteAddr();
 	}
 
+	/*
 	@PutMapping("/time/{ip:.+}")
 	@ResponseStatus(HttpStatus.CREATED)
 	public String putTime(@PathVariable String ip, @RequestBody String id) {
@@ -72,8 +73,10 @@ public class IpsPartida {
 		return ip;
 	}
 
+	
 	public void loopfordesconexion() {
 		mymatch.AumentarTiempo(1);
 		mymatch.EliminarIpenIpsPartidaporTime(2);
 	}
+	*/
 }
