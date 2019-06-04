@@ -26,13 +26,5 @@ public class ApodosPartida {
 		//System.out.println(mymatch.getListadeapodos().get(ip));
 		return mymatch.getListadeapodos().get(ip);
 	}
-	
-	@GetMapping("/apodosEnPartida")
-	@ResponseStatus(HttpStatus.CREATED)
-	public  ArrayList<String> getlistaDeApodosEnSala() {
-		return mymatch.getNombresenPartida();
-		
-	}
-	
 }
 

@@ -245,17 +245,3 @@ function signup(myinfo,request){
         request(data);
     })
 }
-
-
-function getApodosEnSala(request) {
-    $.ajax({
-        method: 'GET',
-        url: 'http://' + IPserver + '/apodos' +'/apodosEnPartida',
-        headers: {
-            "Content-Type": "application/json"
-        }
-    }).done(function (data) {
-        console.log("Apodos: " + data)
-        request(data);
-    })
-}

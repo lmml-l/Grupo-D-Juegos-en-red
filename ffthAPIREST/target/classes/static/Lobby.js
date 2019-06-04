@@ -26,7 +26,7 @@ class Lobby extends Phaser.Scene {
 		this.scene;
 		this.fondo;
 		this.salir;
-		//this.musica;
+		this.musica;
 	}
 	
 	controlmenu(){
@@ -86,7 +86,7 @@ class Lobby extends Phaser.Scene {
 
 	preload(){
 		this.load.image('menuLobbyFondo','Recursos/Imagenes/menuLobbyFondo.png');
-		//this.load.audio('musicacontrol','Recursos/Audio/CharacterSelection.mp3');
+		this.load.audio('musicacontrol','Recursos/Audio/CharacterSelection.mp3');
 	}
 
 	create(){
@@ -96,10 +96,10 @@ class Lobby extends Phaser.Scene {
 		this.escape = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);	//tecla para salir
 		this.controlmenu();
 
-		//this.musica = this.game.sound.add('musicacontrol');
-		//this.musica.setLoop(true);
-		//this.musica.setVolume(0.5);
-		//this.musica.play();
+		this.musica = this.game.sound.add('musicacontrol');
+		this.musica.setLoop(true);
+		this.musica.setVolume(0.5);
+		this.musica.play();
 
 		var that = this;
 		//comprobación del estado del servidor
@@ -108,7 +108,11 @@ class Lobby extends Phaser.Scene {
 
 
 		
-		this.time.addEvent({delay:1000,loop:true, callback: function(){getIPs(function(arrayjugadores){ipsLobby= arrayjugadores});}})//ips jugadores en la sala
+		this.time.addEvent({delay:1000,loop:true, callback: function(){getIPs(function(arrayjugadores)
+			{ipsLobby= arrayjugadores;
+			that.nombreRival[0]=arrayjugadores[0];
+			that.nombreRival[1]=arrayjugadores[1];});
+			}})//ips jugadores en la sala
 
 		//this.time.addEvent({delay:1100,loop:true, callback: function(){putTime(ip,ip)}})
 		that.textoBusqueda = that.add.text(380, 480, that.estadoBusqueda, { fill: '#FFFFFF', font: '36px Impact', align: 'center'});
@@ -120,8 +124,10 @@ class Lobby extends Phaser.Scene {
 		this.time.addEvent({delay:3000,loop:true, callback: function(){
 			if(ipsLobby.length == 2){
 				that.time.addEvent({delay:1000, callback: function(){
-				that.scene.start('CharapterSelectionOnline');
-				//that.musica.stop();
+					that.musica.stop();
+					that.time.clearPendingEvents();
+	        		that.time.removeAllEvents(); 
+					that.scene.start('CharapterSelectionOnline');
 			}})
 		}
 		}})
@@ -142,13 +148,7 @@ class Lobby extends Phaser.Scene {
 				that.jugadorDesc2.text = "Please wait..."
 			}
 		}})
-
-	this.time.addEvent({delay:1000,loop:true,
-		callback: function(){getApodosEnSala(function(data){that.nombreRival[0]=data[0];
-			that.nombreRival[1]=data[1];
-		})}})
-		
-    	
+	
     	//Se cambian los contenidos de los  textos que muestran los nombres por los apodos de los jugadores actuales.
 		
 		this.time.addEvent({delay:1000,loop:true,  //tiempo que tarda hasta reiniciar
@@ -160,8 +160,11 @@ class Lobby extends Phaser.Scene {
 		var that = this;
 		if(this.escape.isDown){
 			//deletePlayerofRoom(ip) //SE DEBE VOLVER A ACTIVAR CUANDO SE CUMPLA LO PUESTO EN REQUEST.JS
+			that.musica.stop();
+			that.time.clearPendingEvents();
+	        that.time.removeAllEvents(); 
 			that.scene.start('MainMenu');
-			//that.musica.stop();
+			
 			that.escape.isDown=false;
 		}
 	}
