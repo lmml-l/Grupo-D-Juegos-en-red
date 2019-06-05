@@ -79,17 +79,17 @@ LA FUNCION DELETEPLAYEROFROOM HAY QUE AJUSTARLA PARA QUE BORRE LAS SESIONES DE W
 ADEMAS DE AJUSTARLA A LAS NUEVAS NECESIDADES 
 SE USA EN LA ESCENA LOBBY (162) Y SE DEBE RESTABLECER CUANDO FUNCIONE ADECUADAMENTE
 */
-function deletePlayerofRoom (ip) {
+function deletePlayerofRoom (nombre) {
     $.ajax({
         method: "PUT",
-        url: 'http://' + IPserver + '/ips/deleteid',
-        data: JSON.stringify(ip),
+        url: 'http://' + IPserver + '/apodos/deletenombre',
+        data: JSON.stringify(nombre),
         processData: false,
         headers: {
             "Content-Type": "application/json"
         }
     }).done(function () {
-        console.log("Ip del jugador borrado" + ip);
+        console.log("Nombre del jugador borrado " + nombre);
     })
 }
 

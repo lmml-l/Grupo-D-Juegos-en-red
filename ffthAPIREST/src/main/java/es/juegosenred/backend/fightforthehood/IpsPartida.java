@@ -48,15 +48,6 @@ public class IpsPartida {
 		return ip;
 	}
 	*/
-	 
-	@PutMapping("/deleteid")
-	@ResponseStatus(HttpStatus.CREATED)
-	public String deleteId(@RequestBody String ip) {
-		// System.out.println("ipquedebeborrar0 " + mymatch.getIpsPartida().get(0));
-		// System.out.println("ipquedebeborrar "+ ip.substring(2, ip.length()-3)+ '"');
-		mymatch.getNombresenPartida().remove(ip.substring(2, ip.length() - 3) + '"');
-		return ip;
-	}
 
 	@GetMapping("/ip/myip")
 	@ResponseStatus(HttpStatus.CREATED)
