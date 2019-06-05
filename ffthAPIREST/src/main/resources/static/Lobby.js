@@ -111,7 +111,16 @@ class Lobby extends Phaser.Scene {
 		this.time.addEvent({delay:1000,loop:true, callback: function(){getIPs(function(arrayjugadores)
 			{ipsLobby= arrayjugadores;
 			that.nombreRival[0]=arrayjugadores[0];
-			that.nombreRival[1]=arrayjugadores[1];});
+			that.nombreRival[1]=arrayjugadores[1];
+
+			if(ipsLobby.length == 2){
+				that.time.addEvent({delay:1000, callback: function(){	
+					that.scene.start('CharapterSelectionOnline');
+					//that.musica.stop();
+				}})
+			}
+			});
+
 			}})//ips jugadores en la sala
 
 		//this.time.addEvent({delay:1100,loop:true, callback: function(){putTime(ip,ip)}})
@@ -122,12 +131,14 @@ class Lobby extends Phaser.Scene {
 
 		//se entra automáticamente a local cuando los dos jugadores están
 		this.time.addEvent({delay:3000,loop:true, callback: function(){
+			/*
 			if(ipsLobby.length == 2){
 				that.time.addEvent({delay:1000, callback: function(){
 					that.musica.stop();
 					that.scene.start('CharapterSelectionOnline');
 			}})
 		}
+		*/
 		}})
 
 		//mensaje de iniciar partida
