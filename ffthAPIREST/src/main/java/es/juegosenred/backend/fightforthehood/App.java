@@ -1,5 +1,8 @@
 package es.juegosenred.backend.fightforthehood;
 
+import javax.annotation.PostConstruct;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -7,16 +10,26 @@ import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 
+import es.juegosenred.backend.fightforthehood.nuevoJunio.UsuariosRegistradosReaderWriter;
+
 @SpringBootApplication
 @EnableWebSocket
 public class App implements WebSocketConfigurer
 {
+	private static MyMatch mymatchf;
 	
 	@Bean
 	public MyMatch mymatch() {
 		return new MyMatch();
 	}
 	
+	@Autowired
+	private MyMatch mymatch;
+	
+	@PostConstruct
+	public void init () {
+		App.mymatchf = mymatch;
+	}
 	@Override
 	public void registerWebSocketHandlers(
 	WebSocketHandlerRegistry registry) {
@@ -53,6 +66,7 @@ public class App implements WebSocketConfigurer
     {
     	SpringApplication.run(App.class, args);
     	Time.init();
+    	UsuariosRegistradosReaderWriter.Lector(mymatchf.getListaConParApodoContrasena());
     }
 
 }
