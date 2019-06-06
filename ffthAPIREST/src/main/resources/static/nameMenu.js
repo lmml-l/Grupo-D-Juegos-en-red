@@ -114,8 +114,8 @@ class nameMenu extends Phaser.Scene {
 
 		this.textoSalir = this.add.text(50, 730, "ESC to exit", { fill: '#F4FFF3', font: '24px Impact', align: 'center'});
 
-		this.textoVersion = this.add.text(340, 300, "What's your name?", { fill: '#FFAC00', font: '48px Impact', align: 'center'});
-		this.textoVersion = this.add.text(390, 415, "Press ENTER to search a match", { fill: '#F4FFF3', font: '20px Impact', align: 'center'});
+		this.textoVersion = this.add.text(210, 210, "What's your name?", { fill: '#FFAC00', font: '48px Impact', align: 'center'});
+		this.textoVersion = this.add.text(250, 500, "Press ENTER to search a match", { fill: '#F4FFF3', font: '20px Impact', align: 'center'});
 		this.textoVersion = this.add.text(50, 50,   "Online Mode", { fill: '#F4FFF3', font: '20px Impact', align: 'center'});
 		
 		

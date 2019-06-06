@@ -168,7 +168,7 @@ class Lobby extends Phaser.Scene {
 	retroceder(){
 		var that = this;
 		if(this.escape.isDown){
-			//deletePlayerofRoom(ip) //SE DEBE VOLVER A ACTIVAR CUANDO SE CUMPLA LO PUESTO EN REQUEST.JS
+			deletePlayerofRoom(game.scene.getScene("nameMenu").textoNombreLogin.text)
 			that.musica.stop();
 			that.scene.start('MainMenu');
 			

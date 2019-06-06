@@ -1,3 +1,5 @@
+
+
 package es.juegosenred.backend.fightforthehood;
 
 import java.io.IOException;
@@ -35,14 +37,13 @@ public class WebsocketPuntuacionHandler extends TextWebSocketHandler {
 		System.out.println("Session closed: " + session.getId());
 		sessions.remove(session.getId());
 		
-		ParesDeUsuariosEnLaMismaPartida.clear();
 		BorrarSesionesDeDosEnDos(session);	
 	}
 	
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		
-		//System.out.println("Message received: " + message.getPayload());
+		System.out.println("Message received: " + message.getPayload());
 		JsonNode node = mapper.readTree(message.getPayload());
 		
 		SelectordeTipodeMensaje(session, node);
@@ -57,8 +58,8 @@ public class WebsocketPuntuacionHandler extends TextWebSocketHandler {
 				ParesDeUsuariosEnLaMismaPartida.put(i.get(0).getId(), i);
 				ParesDeUsuariosEnLaMismaPartida.put(i.get(1).getId(), i);
 				IsContained=true;
-				//System.out.println(ParesDeUsuariosEnLaMismaPartida.get(i.get(0).getId()));
-				//System.out.println(ParesDeUsuariosEnLaMismaPartida.get(i.get(1).getId()));
+				System.out.println(ParesDeUsuariosEnLaMismaPartida.get(i.get(0).getId()));
+				System.out.println(ParesDeUsuariosEnLaMismaPartida.get(i.get(1).getId()));
 			}	
 		}
 		
@@ -97,7 +98,7 @@ public class WebsocketPuntuacionHandler extends TextWebSocketHandler {
 	
 	private void sendHostToClient(WebSocketSession session, Object newNode) throws IOException {
 
-		//System.out.println("Message sent: " + newNode.toString());
+		System.out.println("Message sent: " + newNode.toString());
 		List<WebSocketSession> participantes = ParesDeUsuariosEnLaMismaPartida.get(session.getId());
 			if(participantes.get(0).equals(session)) {
 				for(WebSocketSession participant : participantes){
