@@ -111,6 +111,7 @@ public class MyInfoController {
 			ParApodoContrasena.add(myinfo.getApodo());
 			ParApodoContrasena.add(myinfo.getContrasena());
 			mymatch.getListaConParApodoContrasena().add(ParApodoContrasena);
+			es.juegosenred.backend.fightforthehood.nuevoJunio.UsuariosRegistradosReaderWriter.Escritor(mymatch.getListaConParApodoContrasena());
 		}
 		return isSignUpAlready;
 
