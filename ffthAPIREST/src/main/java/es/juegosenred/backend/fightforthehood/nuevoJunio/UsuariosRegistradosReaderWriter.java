@@ -28,14 +28,14 @@ public class UsuariosRegistradosReaderWriter {
 
               FileReader fr = new FileReader("UsuariosRegistrados.txt");
               BufferedReader br = new BufferedReader(fr);
-
               line = br.readLine();
-              String [] a = line.split(" ");
-              List<String> parUsuarioContrasena = new ArrayList<String>();
-              parUsuarioContrasena.add(a[0]);
-              parUsuarioContrasena.add(a[1]);
-              usuariosMyMatch.add(parUsuarioContrasena);
-              
+              if(line!=null) {
+            	  String [] a = line.split(" ");
+                  List<String> parUsuarioContrasena = new ArrayList<String>();
+                  parUsuarioContrasena.add(a[0]);
+                  parUsuarioContrasena.add(a[1]);
+                  usuariosMyMatch.add(parUsuarioContrasena);
+              }
               while (line != null){
                   
             	  String [] b = line.split(" ");

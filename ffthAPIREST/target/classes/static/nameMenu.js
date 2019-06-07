@@ -24,6 +24,7 @@ class nameMenu extends Phaser.Scene {
 
 		//Nuevas Variables Junio
 		this.textoPasswordLogin;
+		this.textoComprobacion;
 		this.textoPasswordNew;
 		this.textoNombreLogin;
 		this.textoNombreNew;
@@ -66,8 +67,20 @@ class nameMenu extends Phaser.Scene {
 				var that = this;
 
 				
-				login(myinfo,function(data){islogininfocorrect=data});//se devuelve bool para saber si la informacion es correcta
+				login(myinfo,function(data){islogininfocorrect=data
+					if(islogininfocorrect == false){
+						that.textoComprobacion.text = "Incorrect password or/and username";
+					}else if(islogininfocorrect == "OK"){
+						that.textoComprobacion.text = "Connecting...";
+					}else if(islogininfocorrect == "UsuarioYaLogueado"){
+						that.textoComprobacion.text = "User already logged in";
+					}else if(islogininfocorrect == "ApodoInvalido"){
+						that.textoComprobacion.text = "Incorrect/non-existing username";
+					}else if(islogininfocorrect == "ContrasenaInvalida"){
+						that.textoComprobacion.text = "Incorrect password";
+					}});//se devuelve bool para saber si la informacion es correcta
 				
+	
 				this.enter.isDown=false;
 
 				this.time.addEvent({delay:2000,  //tiempo que tarda hasta poder volver a pulsar
@@ -85,7 +98,14 @@ class nameMenu extends Phaser.Scene {
 					contrasena: that.textoPasswordNew.text, 
 					}
 					this.enter.isDown=false;
-					signup(myinfo,function(data){})
+					signup(myinfo,function(data){
+						if(data==true){
+							that.textoComprobacion.text = "Username already in use";
+						}else{
+							that.textoComprobacion.text = "Succesfully registered";
+						}
+					})
+					
 				}
 			}
 			
@@ -114,8 +134,8 @@ class nameMenu extends Phaser.Scene {
 
 		this.textoSalir = this.add.text(50, 730, "ESC to exit", { fill: '#F4FFF3', font: '24px Impact', align: 'center'});
 
-		this.textoVersion = this.add.text(210, 210, "What's your name?", { fill: '#FFAC00', font: '48px Impact', align: 'center'});
-		this.textoVersion = this.add.text(250, 500, "Press ENTER to search a match", { fill: '#F4FFF3', font: '20px Impact', align: 'center'});
+		this.textoVersion = this.add.text(350, 210, "What's your name?", { fill: '#FFAC00', font: '48px Impact', align: 'center'});
+		this.textoVersion = this.add.text(390, 500, "Press ENTER to search a match", { fill: '#F4FFF3', font: '20px Impact', align: 'center'});
 		this.textoVersion = this.add.text(50, 50,   "Online Mode", { fill: '#F4FFF3', font: '20px Impact', align: 'center'});
 		
 		
@@ -126,11 +146,12 @@ class nameMenu extends Phaser.Scene {
 		this.izquierda 			= this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
 		this.derecha 			= this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
 
-		this.textoNombreLogin  	= this.add.text(380, 320, "Insert your name", { fill: '#F4FFF3', font: '32px Impact', align: 'center'})
-		this.textoPasswordLogin = this.add.text(380, 400, "Insert your password", { fill: '#F4FFF3', font: '32px Impact', align: 'center'});
+		this.textoComprobacion = this.add.text(270, 550, "", { fill: '#FD0000', font: '40px Impact', align: 'center'});
+		this.textoNombreLogin  	= this.add.text(520, 320, "Insert your name", { fill: '#F4FFF3', font: '32px Impact', align: 'center'});
+		this.textoPasswordLogin = this.add.text(520, 400, "Insert your password", { fill: '#F4FFF3', font: '32px Impact', align: 'center'});
 		
-		this.textoNombreNew  	= this.add.text(80, 320, "Insert your name", { fill: '#F4FFF3', font: '32px Impact', align: 'center'})
-		this.textoPasswordNew	= this.add.text(80, 400, "Insert your password", { fill: '#F4FFF3', font: '32px Impact', align: 'center'});
+		this.textoNombreNew  	= this.add.text(220, 320, "Insert your name", { fill: '#F4FFF3', font: '32px Impact', align: 'center'});
+		this.textoPasswordNew	= this.add.text(220, 400, "Insert your password", { fill: '#F4FFF3', font: '32px Impact', align: 'center'});
 		
 		textoModificable = that.textoNombreLogin;//En funcion de que texto se vaya a modificar , si es contraseña o nombre esta variable apunta a eso
 		//this.textoLogin = this.add.text(380, 400, "Insert your password", { fill: '#F4FFF3', font: '32px Impact', align: 'center'});
@@ -162,12 +183,15 @@ class nameMenu extends Phaser.Scene {
 		this.input.keyboard.on('keydown',function(event){
 			if(textoModificable!=null){
 				if((textoModificable.text === "Insert your name" || textoModificable.text === "Insert your password" ) &&  event.keyCode >=48 && event.keyCode < 90 || event.keyCode == 32){
+					that.textoComprobacion.text = "";
 					textoModificable.text = event.key;
 				}
 				else if(event.keyCode === 8 && textoModificable.text.length>0){
+					that.textoComprobacion.text = "";
 					textoModificable.text = textoModificable.text.substr(0,textoModificable.text.length-1);
 				}
 				else if(event.keyCode == 32 || event.keyCode >=48 && event.keyCode < 90 && textoModificable.text.length<15){
+					that.textoComprobacion.text = "";
 					textoModificable.text += event.key;
 				}
 				}
@@ -176,6 +200,7 @@ class nameMenu extends Phaser.Scene {
 		/////////////Nuevo Junio//////////
 		this.time.addEvent({delay:1000,loop:true,callback:function(){
 			if(islogininfocorrect=="OK"){
+				that.textoComprobacion.text = "";
 				that.scene.start('Lobby');
 				that.musica.stop();
 			}
