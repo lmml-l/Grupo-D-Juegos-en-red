@@ -1,5 +1,49 @@
 # Grupo D Juegos en red 
 
+## Fases de junio
+
+### Fase 3 - Junio
+
+En esta fase, se han solucionado los fallos de comunicación entre el cliente y el servidor mediante API REST.
+
+A continuación, actualizamos la información de esta fase.
+
+**Diagrama de navegación**
+
+En la pantalla inicial, podemos escoger entre una partida local, online o a una guía de los controles.
+
+- *Partida local:*  Pasamos a una pantalla de selección de personajes y de ahí a un combate en un único ordenador.
+
+- *Partida multijugador:* Como principal novedad, el jugador deberá identificarse por su apodo y contraseña. Si no estuviera registrado, en la misma pantalla puede hacerlo. Una vez haya accedido, entrará en un *lobby*, donde esperará a que otro jugador entre a la partida. Después, cada jugador deberá escoger su personaje e indicar que está listo. Cuando ambos estén preparados, comienza la partida.
+
+- *Controles:* Indicación de las teclas que se usan para navegar y jugar
+
+Aunque se indiquen en el diagrama, en esta fase, ignoraremos la implementación y navegación una vez en el *lobby* y en el combate, ya que no dependen de API REST.
+
+![...](https://i.imgur.com/MO1lE5V.png)
+
+
+**Diagrama de clases**
+
+En esta fase, se incluyen las siguientes clases:
+
+![...](https://i.imgur.com/Bq96DRA.png)
+
+**Capturas de pantalla**
+
+**Intrucciones para ejecutar**
+
+Con el IDE Spring Tool Suite 4 (STS) se puede importar el directorio e inicializar el servidor seleccionando, con clic derecho, el archivo app.java y marcar *Run as->Java Application*
+Por otro lado, está el ejecutable de java **INDICAR NOMBRE Y CÓMO SE ABRE**
+
+Una vez esté en marcha el servidor, en un navegador web se deberá direccionar a **localhost:8080** para iniciar un cliente del juego.
+
+
+**--------------------------------------------FIN DE FASE 3 - JUNIO --------------------------------------------**
+
+
+## Fases de la primera convocatoria
+
 **--------------------------------------------FASE 1--------------------------------------------**
 
 **Nombre del juego:** Fight for the hood
