@@ -24,6 +24,7 @@ class nameMenu extends Phaser.Scene {
 		this.textoPasswordLogin;
 		this.textoComprobacion;
 		this.textoPasswordNew;
+		this.textoControles;
 		this.textoNombreLogin;
 		this.textoNombreNew;
 		this.arriba
@@ -128,6 +129,8 @@ class nameMenu extends Phaser.Scene {
 		this.textoVersion = this.add.text(390, 500, "Press ENTER to search a match", { fill: '#F4FFF3', font: '20px Impact', align: 'center'});
 		this.textoVersion = this.add.text(50, 50,   "Online Mode", { fill: '#F4FFF3', font: '20px Impact', align: 'center'});
 		
+		this.textoControles = this.add.text(160, 540, "\nselect\naccept", { fill: '#FFFFFF', font: '30px Impact', align: 'center'});
+		this.textoControles = this.add.text(60, 540, "\nW,A,S,D\nENTER", { fill: '#FFAC00', font: '32px Impact', align: 'center'});
 		var that = this;
 
 		//Nuevo Junio
