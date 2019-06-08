@@ -22,6 +22,11 @@ Aunque se indiquen en el diagrama, en esta fase, ignoraremos la implementación 
 
 ![...](https://i.imgur.com/MO1lE5V.png)
 
+**Información persistente**
+
+Para que el registro de los usuarios sea efectivo, guardamos de forma persistente la lista de usuarios. Cada uno de ellos es representado por su apodo y su contraseña.
+
+En el archivo UsuariosRegistradosReaderWriter, gestionamos la escritura y lectura de los datos desde el documento *UsuariosRegistrados.txt*.
 
 **Diagrama de clases**
 
