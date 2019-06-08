@@ -36,10 +36,18 @@ En esta fase, se incluyen las siguientes clases:
 
 **Capturas de pantalla**
 
+Pantalla de registro y login.
+
+![...](https://i.imgur.com/Bi0cRhI.jpg)
+
+Pantalla de lobby, esperando a más jugadores.
+
+![...](https://i.imgur.com/oTBVW0R.jpg)
+
 **Intrucciones para ejecutar**
 
 Con el IDE Spring Tool Suite 4 (STS) se puede importar el directorio e inicializar el servidor seleccionando, con clic derecho, el archivo app.java y marcar *Run as->Java Application*
-Por otro lado, está el ejecutable de java **INDICAR NOMBRE Y CÓMO SE ABRE**
+Por otro lado, está el ejecutable de java **INDICAR AQUÍ NOMBRE Y CÓMO SE ABRE**
 
 Una vez esté en marcha el servidor, en un navegador web se deberá direccionar a **localhost:8080** para iniciar un cliente del juego.
 
