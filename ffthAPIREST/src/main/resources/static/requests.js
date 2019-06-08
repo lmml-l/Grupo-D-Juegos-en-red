@@ -151,7 +151,7 @@ function getMyIP(request) {
 function getServerStatus(error) {
     $.ajax({
         method: 'GET',
-        url: 'http://' + IPserver + '/historial',
+        url: 'http://' + IPserver + '/ips/idlist',
         headers: {
             "Content-Type": "application/json"
         }
@@ -164,7 +164,7 @@ function getServerStatus(error) {
 function getServerStatusCheck(checking) {
     $.ajax({
         method: 'GET',
-        url: 'http://' + IPserver + '/historial',
+        url: 'http://' + IPserver + '/ips/idlist',
         headers: {
             "Content-Type": "application/json"
         }
@@ -184,19 +184,6 @@ function getIPs(arraips) {
     }).done(function (data) {
         console.log("IPs en partida: " + data)
         arraips(data);
-    })
-}
-
-function getHistorial(request) {
-    $.ajax({
-        method: 'GET',
-        url: 'http://' + IPserver + '/historial',
-        headers: {
-            "Content-Type": "application/json"
-        }
-    }).done(function (data) {
-        console.log("Historial: " + data)
-        request(data);
     })
 }
 

@@ -20,7 +20,6 @@ class Lobby extends Phaser.Scene {
 		this.estadoBusqueda; 	//buscando o encontrado
 		this.nombreRival = new Array(2); 	//conocido o desconocido
 		this.textoPartidas;
-		this.historialPartidas = new Array(5);
 		this.listlp;
 		this.mymatch;
 		this.scene;
@@ -51,22 +50,6 @@ class Lobby extends Phaser.Scene {
 		this.textoSalir    = this.add.text(50, 730, "ESC to exit", { fill: '#F4FFF3', font: '24px Impact', align: 'center'});
 		this.textoConexion = this.add.text(650, 730, "Connection status: " + this.estadoConexion[1], { fill: '#F4FFF3', font: '24px Impact', align: 'center'});
 		//this.textoBusqueda = this.add.text(380, 480, this.estadoBusqueda[0], { fill: '#FFFFFF', font: '36px Impact', align: 'center'});
-
-		//PARTIDAS POR DEFECTO/////////////////////////////
-		this.historialPartidas[0]="-";
-		this.historialPartidas[1]="-";
-		this.historialPartidas[2]="-";
-		this.historialPartidas[3]="-";
-		this.historialPartidas[4]="-";
-		/////////////////////////////////////////////////
-
-		//Historial de partidas
-		this.textoPartidas = this.add.text(50, 580, "Last matches:", 		   { fill: '#FFAC00', font: '24px Impact', align: 'center'});
-		this.textoPartidas1 = this.add.text(50, 600, this.historialPartidas[0], { fill: '#F4FFF3', font: '20px Impact', align: 'center'}); //0
-		this.textoPartidas2 = this.add.text(50, 620, this.historialPartidas[1], { fill: '#F4FFF3', font: '20px Impact', align: 'center'}); //1
-		this.textoPartidas3 = this.add.text(50, 640, this.historialPartidas[2], { fill: '#F4FFF3', font: '20px Impact', align: 'center'}); //2
-		this.textoPartidas4 = this.add.text(50, 660, this.historialPartidas[3], { fill: '#F4FFF3', font: '20px Impact', align: 'center'}); //3
-		this.textoPartidas5 = this.add.text(50, 680, this.historialPartidas[4], { fill: '#F4FFF3', font: '20px Impact', align: 'center'}); //4
 		
 		////////////////////////
 		this.texts[0] = this.add.text(312, 400, "" ,{ fill: '#FFFFFF', font: '36px Impact', align: 'center'});
@@ -157,11 +140,6 @@ class Lobby extends Phaser.Scene {
 				that.jugadorDesc2.text = "Please wait..."
 			}
 		}})
-	
-    	//Se cambian los contenidos de los  textos que muestran los nombres por los apodos de los jugadores actuales.
-		
-		this.time.addEvent({delay:1000,loop:true,  //tiempo que tarda hasta reiniciar
-    	callback: function(){getHistorial(function(data){that.historialPartidas = data})}})
 	}
 
 	//botón para retroceder
@@ -182,21 +160,5 @@ class Lobby extends Phaser.Scene {
 		////////////////////////////////////
 		this.texts[2].text=this.nombreRival[0];
 		this.texts[3].text=this.nombreRival[1];
-
-    	if(this.historialPartidas[this.historialPartidas.length-1]!= null){
-    		this.textoPartidas1.text = this.historialPartidas[this.historialPartidas.length-1]
-    	}
-		if(this.historialPartidas[this.historialPartidas.length-2]!= null){
-    		this.textoPartidas2.text = this.historialPartidas[this.historialPartidas.length-2]
-    	}
-    	if(this.historialPartidas[this.historialPartidas.length-3]!= null){
-    		this.textoPartidas3.text = this.historialPartidas[this.historialPartidas.length-3]
-    	}
-    	if(this.historialPartidas[this.historialPartidas.length-4]!= null){
-    		this.textoPartidas4.text = this.historialPartidas[this.historialPartidas.length-4]
-    	}
-    	if(this.historialPartidas[this.historialPartidas.length-5]!= null){
-    		this.textoPartidas5.text = this.historialPartidas[this.historialPartidas.length-5]
-    	}
 	}
 }

@@ -12,7 +12,6 @@ public class MyMatch {
 	
 	private ArrayList<String> nombresenPartida ;
 	private HashMap<String,String> listadeapodos;
-	private ArrayList<String> historial;
 	private ArrayList<String> ipconectados;
 	private HashMap<String,Integer> tiempoParaDesconexion;
 	private String checker;
@@ -36,18 +35,9 @@ public class MyMatch {
 		this.ipconectados = ipconectados;
 	}
 
-	public ArrayList<String> getHistorial() {
-		return historial;
-	}
-
-	public void setHistorial(ArrayList<String> historial) {
-		this.historial = historial;
-	}
-
 	public MyMatch() {
 		nombresenPartida = new ArrayList<>();
 		listadeapodos = new HashMap<>();
-		historial = new ArrayList<>();
 		ipconectados = new ArrayList<>();
 		tiempoParaDesconexion = new HashMap<>();
 		checker = "1";
