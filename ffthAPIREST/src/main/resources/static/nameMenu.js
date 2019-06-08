@@ -31,12 +31,14 @@ class nameMenu extends Phaser.Scene {
 		this.abajo;
 		this.izquierda;
 		this.derecha;
+		this.indicePos = new Array();
 		////////////////////////
 	}
 
 	preload(){
 		this.load.image('menuNombreFondo','Recursos/Imagenes/menuNombreFondo.png');
 		this.load.audio('musicacontrol','Recursos/Audio/CharacterSelection.mp3');
+		var selector 	 = this.load.image('Selector','Recursos/Imagenes/Selector.png');
 	}
 
 	//botón para retroceder
@@ -140,13 +142,22 @@ class nameMenu extends Phaser.Scene {
 		this.derecha 			= this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
 
 		this.textoComprobacion  = this.add.text(270, 550, "", { fill: '#FD0000', font: '40px Impact', align: 'center'});
-		this.textoNombreLogin  	= this.add.text(520, 320, "Insert your name", { fill: '#F4FFF3', font: '32px Impact', align: 'center'});
-		this.textoPasswordLogin = this.add.text(520, 400, "Insert your password", { fill: '#F4FFF3', font: '32px Impact', align: 'center'});
+		this.textoNombreLogin  	= this.add.text(520, 322, "Insert your name", { fill: '#F4FFF3', font: '32px Impact', align: 'center'});
+		this.textoPasswordLogin = this.add.text(520, 403, "Insert your password", { fill: '#F4FFF3', font: '32px Impact', align: 'center'});
 		
-		this.textoNombreNew  	= this.add.text(220, 320, "Insert your name", { fill: '#F4FFF3', font: '32px Impact', align: 'center'});
-		this.textoPasswordNew	= this.add.text(220, 400, "Insert your password", { fill: '#F4FFF3', font: '32px Impact', align: 'center'});
+		this.textoNombreNew  	= this.add.text(185, 322, "Insert your name", { fill: '#F4FFF3', font: '32px Impact', align: 'center'});
+		this.textoPasswordNew	= this.add.text(185, 403, "Insert your password", { fill: '#F4FFF3', font: '32px Impact', align: 'center'});
 		
 		textoModificable = that.textoNombreLogin;//En funcion de que texto se vaya a modificar , si es contraseña o nombre esta variable apunta a eso
+		
+		this.posArray=1;
+		
+		this.indicePos.push(this.textoNombreNew);
+		this.indicePos.push(this.textoNombreLogin);
+		this.indicePos.push(this.textoPasswordNew);
+		this.indicePos.push(this.textoPasswordLogin);
+		
+		this.selector = this.add.sprite((this.indicePos[this.posArray].x + 350), this.indicePos[this.posArray].y + 20, 'Selector').setScale(1);
 		
 		//Server Caido (ACTUALIZA CADA 1s)
 		this.time.addEvent({delay:1000, loop:true,
@@ -182,6 +193,38 @@ class nameMenu extends Phaser.Scene {
 		}})
 		this.enter.isDown=false;
 		//////////////////////////////////
+	}
+	
+	actualizarSelector(){
+		if(this.posArray==0 || this.posArray==2){
+			this.selector.setPosition(this.indicePos[this.posArray].x - 80, this.indicePos[this.posArray].y + 20);
+		}else{
+			this.selector.setPosition(this.indicePos[this.posArray].x + 350, this.indicePos[this.posArray].y + 20);
+		}
+		
+		if(this.posArray==0 || this.posArray==2){
+			this.selector.angle=180;
+		}else{
+			this.selector.angle=0;
+		}	
+	}
+
+	actualizarPosArray(){	
+		if(this.abajo.isDown && (this.posArray<2)){
+			this.posArray = this.posArray+2;
+		}
+		
+		if(this.arriba.isDown && (1<this.posArray)){
+			this.posArray = this.posArray-2;
+		}
+		
+		if(this.derecha.isDown && (this.posArray<3)){
+			this.posArray++;
+		}
+		
+		if(this.izquierda.isDown && (0<this.posArray)){
+			this.posArray--;
+		}
 	}
 
 	seleccionContraseñaONombre(){
@@ -230,6 +273,8 @@ class nameMenu extends Phaser.Scene {
 	update(){
 		this.retroceder();
 		this.aceptar();
+		this.actualizarSelector();
+		this.actualizarPosArray();
 		this.seleccionContraseñaONombre();
 	}
 }
