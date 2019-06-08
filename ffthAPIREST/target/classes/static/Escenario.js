@@ -278,8 +278,6 @@ colisionesbalasjugador(jugador,balast){
                         jugador.avatar.sprite.alpha = 1;
                     } });
             }
-
-                
             
             //anade la colisión
             var colisionActual = this.physics.add.overlap(balast[j],jugador.avatar.sprite,funcioncallback);
@@ -350,7 +348,6 @@ pausar(){
             this.pausa.isDown       = false; //se inicia a false para que no vuelva a abrirse
             this.game.paused        = true;
             pausado                 = true;
-            //this.scene.sleep(this.scene); //pausa la escena
             this.scene.switch('Pausa');
             this.musica.pause();
 
@@ -387,7 +384,6 @@ preload(){
     this.jugador1.preload();
     this.drops.preload();
     this.hud.preload();
-
 
     //SPRITES
     this.load.image('fondo',        'Recursos/Imagenes/stage.png');
@@ -543,8 +539,6 @@ create(){
     //cartel
     this.plataformas2.create(60, 385, 'cartelPixel').alpha=0; //izquierdo
     this.plataformas2.create(726, 443, 'cartelPixel').alpha=0; //derecho
-
-    //this.suelo2.create(512, 585, 'sueloPixel').alpha=0;
 
     //COLISIONES PARA LAS BALAS
     //plataformas
@@ -707,5 +701,4 @@ sonidos(jugador){
         jugador.dropCheck = 1;
     }
 }
-
 }

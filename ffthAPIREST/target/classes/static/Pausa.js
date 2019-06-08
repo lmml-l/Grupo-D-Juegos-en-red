@@ -9,7 +9,6 @@ class Pausa extends Phaser.Scene {
 	}
 	
 	controlmenu(){
-
 		this.check = false;
 
 		this.salir = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
@@ -38,32 +37,26 @@ class Pausa extends Phaser.Scene {
 		if(this.salir.isDown){
 			this.check = true;
 			this.salir.isDown = false;
-			//this.salir.isDown = false;
 		}
 		if(this.volverMenu.isDown){
 			this.volverMenu.isDown = false;
 			this.scene.stop('MainEscenario');
 			this.scene.stop('Pausa');
 			this.scene.start('MainMenu');
-			
 		}
 	}
 
 	scenechange(){
 		if(this.check){
-			//this.time.clearPendingEvents();
-    		//this.time.removeAllEvents();
     		pausado 	= false;
     		this.check 	= false;
     		this.scene.stop('Pausa');
 			this.scene.wake('MainEscenario');
-			//this.scene.switch('MainEscenario');
 		}
 	}
 
 	update(){
 		this.scenechange();
 		this.actualizarPosArray();
-
 	}
 }

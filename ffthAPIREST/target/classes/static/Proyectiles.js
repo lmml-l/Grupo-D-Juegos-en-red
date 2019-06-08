@@ -4,9 +4,7 @@ function Proyectiles (sprites){
 	this.proyec = sprites;
 	this.proyectilesenescane = new Array();
 	
-
 	var that = this;
-	
 
 	this.preload=function(scene){
 		//cada tipo de proyectil se agrupa en un array
@@ -110,7 +108,6 @@ function Proyectiles (sprites){
 
 	//velocidad y dirección de disparo
 	this.fisicasproyectil=function(arma,avatar,balas){
-		//var select;
 		switch(arma){
 			case "Escopeta":
 				if(avatar.getanim().includes('left')){
@@ -167,7 +164,6 @@ function Proyectiles (sprites){
 
 		return balas;
 	}
-
 
 	//añade balas a la escena según el arma
 	this.create = function(arma,scene,avatar){
@@ -236,9 +232,7 @@ function Proyectiles (sprites){
 						}
 				baladefault.destroy()}});
 		}
-
 	}
 	this.update=function(){
-	
 	}
 }

@@ -1,6 +1,6 @@
 'use strict'
   //El HUD (HEAD-UP DISPLAY) muestra en la parte baja de la pantalla la barra de vida, tiempo restante, arma escogida y rondas ganadas
-   function HUD(escena, sprites,jugadores){
+  function HUD(escena, sprites,jugadores){
     this.spritearmas = sprites;
     this.scene = escena;
     this.jugadores = jugadores;
@@ -12,8 +12,6 @@
     this.MostrarReloj;                    //visualización del tiempo
     this.textoESC;                        //indica que se pausa con ESC
     var that = this;
-
-
 
   this.preload=function(){   // Preload de todas las armas en un sprite de armas.
     that.scene.load.image(' Pistola', that.spritearmas[0]);
@@ -155,8 +153,8 @@
       that.BarrasVidas[0].fillStyle(0xFFAC00, 1.0);
       that.BarrasVidas[0].fillRect(460-that.jugadores[0].vida*4.5, 605,that.jugadores[0].vida*4.5,20); //volteo: desplazo tanto como reduzco
       
-        that.BarrasVidas[1].clear();
-        that.BarrasVidas[1].fillStyle(0xFFAC00, 1.0);
-        that.BarrasVidas[1].fillRect(560, 605,that.jugadores[1].vida*4.5,20); 
+      that.BarrasVidas[1].clear();
+      that.BarrasVidas[1].fillStyle(0xFFAC00, 1.0);
+      that.BarrasVidas[1].fillRect(560, 605,that.jugadores[1].vida*4.5,20); 
     }
 }

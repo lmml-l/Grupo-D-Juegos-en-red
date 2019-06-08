@@ -9,13 +9,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import es.juegosenred.backend.fightforthehood.MyMatch;
-
+//LECTOR Y ESCRITOR DEL NOMBRE Y CONTRASEÑA DE LOS USUSARIOS REGISTRADOS
 public class UsuariosRegistradosReaderWriter {
 
-	
 	  public void resetArchive(File file){
           file.delete();
           file = new File("UsuariosRegistrados.txt");
@@ -23,9 +19,7 @@ public class UsuariosRegistradosReaderWriter {
 	  
 	  public static void Lector(List<List<String>> usuariosMyMatch){
           String line;
-          List<String> UsuariosRegistrados = new ArrayList<>();
           try{
-
               FileReader fr = new FileReader("UsuariosRegistrados.txt");
               BufferedReader br = new BufferedReader(fr);
               line = br.readLine();
@@ -37,7 +31,6 @@ public class UsuariosRegistradosReaderWriter {
                   usuariosMyMatch.add(parUsuarioContrasena);
               }
               while (line != null){
-                  
             	  String [] b = line.split(" ");
                   List<String> parUsuarioContrasenab = new ArrayList<String>();
                   parUsuarioContrasenab.add(b[0]);
@@ -45,24 +38,17 @@ public class UsuariosRegistradosReaderWriter {
                   usuariosMyMatch.add(parUsuarioContrasenab);
                   line = br.readLine();
               }
-
-              
               br.close();
-
-
           }catch (IOException e){
               e.printStackTrace();
           } 
       }
 	  
 	  public static void Escritor(List<List<String>> usuariosRegistrados){
-          
           File file = new File("UsuariosRegistrados.txt");
           FileWriter fw;
-          //PrintWriter pw;
-          
+    
           try{
-              
               fw = new FileWriter(file);
               //pw = new PrintWriter(fw);
               Iterator<List<String>> iterator = usuariosRegistrados.iterator();
@@ -70,27 +56,11 @@ public class UsuariosRegistradosReaderWriter {
             	  List<String> parApodoContraseña = iterator.next();
             	  fw.write(parApodoContraseña.get(0) + " " + parApodoContraseña.get(1)  + "\n");
               }
-              
               fw.close();
-              //pw.close();
           }
           catch (Exception e)
           {
               e.printStackTrace();
-
           }
-          
-          /*finally
-          {
-             try {
-         
-                 if (null != fw)
-                    fw.close();
-             }catch (Exception e2) {
-                    e2.printStackTrace();
-             }
-
-          }*/
       }
-  
 }

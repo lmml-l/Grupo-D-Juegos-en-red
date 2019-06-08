@@ -1,23 +1,9 @@
+//Peticiones API REST
+
 //Variable con la dirección IP del servidor
 var IPserver = location.host;
 
-//Añadir informacion propia
-/*
-function putMyInfo(myinfo) {
-    $.ajax({
-        method: "PUT",
-        url: 'http://'+ IPserver+ '/myinfo/' + myinfo.ip,
-        data: JSON.stringify(myinfo),
-        processData: false,
-        headers: {
-            "Content-Type": "application/json"
-        }
-    }).done(function () {
-        console.log("Player data  IP/Apodo: " + JSON.stringify(myinfo));
-    })
-}
-*/
-
+//put del tiempo de respuesta
 function putMyResponseTime(myinfo, resptime) {
     $.ajax({
         method: "PUT",
@@ -27,12 +13,13 @@ function putMyResponseTime(myinfo, resptime) {
         headers: {
             "Content-Type": "application/json"
         }
-    }).done(function () {
+    }).done(function (){
         console.log("ResponseTime: " + JSON.stringify(resptime));
     })
 }
 
-function putMyRTToZero(myinfo) {
+//puesta a 0 del tiempo de respuesta
+function putMyRTToZero(myinfo){
     $.ajax({
         method: "PUT",
         url: 'http://'+ IPserver+ '/myinfo/' + myinfo.ip + '/resptime/',
@@ -46,7 +33,8 @@ function putMyRTToZero(myinfo) {
     })
 }
 
-function getMyResponseTime(myinfo, request) {
+//get del tiempo de respuesta
+function getMyResponseTime(myinfo, request){
     $.ajax({
         method: 'GET',
         url: 'http://'+ IPserver+ '/myinfo/' + myinfo.ip + '/resptime/',
@@ -59,26 +47,7 @@ function getMyResponseTime(myinfo, request) {
     })
 }
 
-/*
-function addPlayertoRoom (ip) {
-    $.ajax({
-        method: "PUT",
-        url: 'http://'+ IPserver +'/ips/id',
-        data: JSON.stringify(ip),
-        processData: false,
-        headers: {
-            "Content-Type": "application/json"
-        }
-    }).done(function () {
-        console.log("Ip del jugador añadido " + ip);
-    })
-}
-*/
-/*
-LA FUNCION DELETEPLAYEROFROOM HAY QUE AJUSTARLA PARA QUE BORRE LAS SESIONES DE WEBSOCKET 
-ADEMAS DE AJUSTARLA A LAS NUEVAS NECESIDADES 
-SE USA EN LA ESCENA LOBBY (162) Y SE DEBE RESTABLECER CUANDO FUNCIONE ADECUADAMENTE
-*/
+//eliminar jugador de la sala
 function deletePlayerofRoom (nombre) {
     $.ajax({
         method: "PUT",
@@ -107,7 +76,7 @@ function addMatchtoHistory(match) {
     })
 }
 
-
+//conseguir información del jugador
 function getMyInfo(request) {
     $.ajax({
         method: 'GET',
@@ -161,6 +130,7 @@ function getServerStatus(error) {
     })
 }
 
+//Estado del servidor
 function getServerStatusCheck(checking) {
     $.ajax({
         method: 'GET',
@@ -203,6 +173,7 @@ function putTime(ip,id){
 
 /////////// Nuevo Junio ////////////////
 
+//Login (ingreso de un usuario ya registrado)
 function login(myinfo,request){
      $.ajax({
         method: "PUT",
@@ -217,7 +188,7 @@ function login(myinfo,request){
         request(data);
     })
 }
-
+//SignUp (registro de un usuario nuevo)
 function signup(myinfo,request){
       $.ajax({
         method: "PUT",

@@ -1,4 +1,4 @@
-//Pantalla inicial. Da acceso a la selección de personajes, pantalla de controles y, en versiones futuras, juego online
+//PANTALLA INICIAL. Da acceso a la selección de personajes, pantalla de controles y, en versiones futuras, juego online
 class MainMenu extends Phaser.Scene {
 	constructor(){
 		super({key:"MainMenu"});
@@ -18,13 +18,10 @@ class MainMenu extends Phaser.Scene {
 		this.lock4;
 		this.musica;
 
-
 		this.textoControles;
 		this.textoVersion;
 		this.fondo;
 		this.desconexion;
-
-		//this.archive;
 	}
 	
 	menu(){
@@ -39,10 +36,10 @@ class MainMenu extends Phaser.Scene {
 		this.posArray=0;
 
 		//creación de las imágenes
-		var title = this.add.image(0,this.game.canvas.height*(150/600),'title').setScale(0.5);
-		var buttonlocal = this.add.image(0,this.game.canvas.height*(3/6),'buttonlocal').setScale(0.5).setInteractive();
+		var title 		 = this.add.image(0,this.game.canvas.height*(150/600),'title').setScale(0.5);
+		var buttonlocal  = this.add.image(0,this.game.canvas.height*(3/6),'buttonlocal').setScale(0.5).setInteractive();
 		var buttononline = this.add.image(0,this.game.canvas.height*(4/6),'buttononline').setScale(0.5).setInteractive();
-		var controles = this.add.image(0,(this.game.canvas.height*(5/6)),'controles').setScale(0.5).setInteractive();
+		var controles 	 = this.add.image(0,(this.game.canvas.height*(5/6)),'controles').setScale(0.5).setInteractive();
 		//se añaden al array
 		this.smap.push(buttonlocal);
 		this.smap.push(buttononline);
@@ -61,11 +58,11 @@ class MainMenu extends Phaser.Scene {
 		//teclas disponibles
 		this.arriba1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
 		this.arriba2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
-		this.abajo1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
-		this.abajo2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
-		this.go1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
-		this.go2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-		this.salir = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
+		this.abajo1  = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
+		this.abajo2  = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+		this.go1 	 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
+		this.go2 	 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+		this.salir 	 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
 		//inicializa las teclas a no pulsadas (para evitar acarreros de pantallas anteriores)
 		this.go1.isDown=false;
 		this.go2.isDown=false;
@@ -76,16 +73,16 @@ class MainMenu extends Phaser.Scene {
 	}
 	preload(){
 		this.load.image('fondoMenu','Recursos/Imagenes/menuFondo.png');
-		var title = this.load.image('title','Recursos/Imagenes/Logo.png')
-		var buttonlocal = this.load.image('buttonlocal','Recursos/Imagenes/Jugar_Local.png');
+		var title 		 = this.load.image('title','Recursos/Imagenes/Logo.png')
+		var buttonlocal  = this.load.image('buttonlocal','Recursos/Imagenes/Jugar_Local.png');
 		var buttononline = this.load.image('buttononline','Recursos/Imagenes/Jugar_Online.png');
-		var controles = this.load.image('controles','Recursos/Imagenes/Controles.png');
-		var selector = this.load.image('Selector','Recursos/Imagenes/Selector.png');
-		var musica = this.load.audio('musicamenu','Recursos/Audio/Menu.mp3');
+		var controles 	 = this.load.image('controles','Recursos/Imagenes/Controles.png');
+		var selector 	 = this.load.image('Selector','Recursos/Imagenes/Selector.png');
+		var musica 		 = this.load.audio('musicamenu','Recursos/Audio/Menu.mp3');
 	}
 
 	create(){
-		this.fondo = this.add.image(this.game.canvas.width/2,this.game.canvas.height/2,'fondoMenu').setScale(1.3);
+		this.fondo 	 	 = this.add.image(this.game.canvas.width/2,this.game.canvas.height/2,'fondoMenu').setScale(1.3);
 		this.desconexion = this.add.text(700, 710, "", { fill: '#F4FFF3', font: '16px Lucida Console', align: 'center'}); //760, 710
 		this.menu();
 
@@ -97,18 +94,18 @@ class MainMenu extends Phaser.Scene {
 
 		//textos de apoyo
 		this.textoControles = this.add.text(50, 710, "Use A/D or arrows to select\nPress SPACE or ENTER to go", {  fill: '#F4FFF3', font: '24px Impact', align: 'left'});
-		this.textoVersion = this.add.text(700, 750, "v.6.0 Fase 3 Junio", { fill: '#F4FFF3', font: '16px Lucida Console', align: 'center'}); //760, 710
+		this.textoVersion   = this.add.text(700, 750, "v.6.0 Fase 3 Junio", { fill: '#F4FFF3', font: '16px Lucida Console', align: 'center'}); //760, 710
 		var that=this;
-		//comprobación del estado del servidor
+
+		//comprobación del estado del servidor cada segundo
 		this.time.addEvent({delay:1000, loop:true,
 		callback: function(){getServerStatus(function(){
+			//pantalla de error al no tener respuesta del servidor
 			that.desconexion.text = "Server Disconnected";
 			that.scene.start('EscenarioError'); that.musica.stop();})}})
 
 		this.time.addEvent({delay:1000, loop:true,
 		callback: function(){getServerStatusCheck(function(){that.desconexion.text = "";})}})
-
-    	
 	}
 
 	//comprueba que la tecla no está siendo apretada
@@ -129,8 +126,6 @@ class MainMenu extends Phaser.Scene {
 
 	actualizarSelector(){
 		this.selector.setPosition(this.smap[this.posArray].x + 700, this.smap[this.posArray].y); //800
-		
-		
 	}
 
 	actualizarPosArray(){	
@@ -145,8 +140,6 @@ class MainMenu extends Phaser.Scene {
 			
 		}
 		
-		
-
 		if(this.abajo2.isDown && (this.posArray<2) && !this.check && this.lock4){
 			this.posArray++;
 			this.lock4=false;
@@ -160,21 +153,25 @@ class MainMenu extends Phaser.Scene {
 
 	//da paso a la pantalla seleccionada
 	scenechange(){
+		//Pantalla inicial
 		if(this.salir.isDown){
 			this.scene.start('MainMenu');
 			this.musica.stop();
 		}
 		if(this.posArray==0 && this.check){
+			//Selector de personaje (partida offline)
 			this.scene.start('CharapterSelection');
 			this.musica.stop();
 			this.go1.isDown=false;
 			this.go2.isDown=false;
 		}else if(this.posArray==1 && this.check){
+			//Menú de login de partida online
 			this.scene.start('nameMenu');
 			this.musica.stop();
 			this.go1.isDown=false;
 			this.go2.isDown=false;
 		}else if(this.posArray==2 && this.check){
+			//Pantalla de controles
 			this.scene.start('ControlGuide');
 			this.musica.stop();
 			this.go1.isDown=false;

@@ -268,6 +268,7 @@ function Jugador(avatar,controles,proyectiles){
 		that.teclasoltada();
 	}
 
+	//Información JSON
 	this.toJSON = function(){
 		var data = {
 			avatar: that.avatar,

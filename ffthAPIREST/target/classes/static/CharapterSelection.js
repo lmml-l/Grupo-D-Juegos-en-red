@@ -12,7 +12,7 @@ class CharapterSelection extends Phaser.Scene {
 		this.posArrayP2;
 		this.check;
 		this.musica;
-		
+		//teclas
 		this.derecha1;
 		this.derecha2;
 		this.izquierda1;
@@ -22,10 +22,10 @@ class CharapterSelection extends Phaser.Scene {
 		this.textoSalir;
 		this.salir;
 		this.textoModo;
-
+		//pantalla
 		this.textoControles;
 		this.fondo;
-
+		//confirmación
 		this.ready = new Array(2);
 		this.ready1;
 		this.ready2;
@@ -34,7 +34,6 @@ class CharapterSelection extends Phaser.Scene {
 	}
 
 	selection(){
-
 		//comprueba si se ha elegido o no
 		this.checkplayer1 = false;
 		this.checkplayer2 = false;
@@ -43,10 +42,9 @@ class CharapterSelection extends Phaser.Scene {
 		this.posArrayP2=1;
 
 		//sprites
-		var title = this.add.image(this.game.canvas.width*(3/6),this.game.canvas.height*(150/600),'title').setScale(0.5);
-		//var subtitle = this.add.image(this.game.canvas.width*(3/6),this.game.canvas.height*(250/600),'subtitle').setScale(1);
-		var character2 = this.add.image(this.game.canvas.width*(4/6),this.game.canvas.height*(4/6),'character1').setScale(2).setInteractive();
-		var character1 = this.add.image(this.game.canvas.width*(2/6),this.game.canvas.height*(4/6),'character2').setScale(2).setInteractive();
+		var title 		= this.add.image(this.game.canvas.width*(3/6),this.game.canvas.height*(150/600),'title').setScale(0.5);
+		var character2 	= this.add.image(this.game.canvas.width*(4/6),this.game.canvas.height*(4/6),'character1').setScale(2).setInteractive();
+		var character1 	= this.add.image(this.game.canvas.width*(2/6),this.game.canvas.height*(4/6),'character2').setScale(2).setInteractive();
 		//guarda las imágenes en arrays
 		this.pmap1.push(character1);
 		this.pmap1.push(character2);
@@ -63,8 +61,8 @@ class CharapterSelection extends Phaser.Scene {
 		container.add(character2); 
 
 		//teclas disponibles
-		this.derecha1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
-		this.derecha2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+		this.derecha1 	= this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
+		this.derecha2 	= this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
 		this.izquierda1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
 		this.izquierda2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
 		this.confirmar1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
@@ -102,7 +100,6 @@ class CharapterSelection extends Phaser.Scene {
 
 	preload(){
 		var title = this.load.image('title','Recursos/Imagenes/Logo.png');
-		//var subtitle = this.load.image('subtitle','Recursos/Imagenes/subtitle.png');
 		var character1 = this.load.image('character1','Recursos/Imagenes/Character1.png');
 		var character2 = this.load.image('character2','Recursos/Imagenes/Character2.png');
 		var p1 		   = this.load.image('P1','Recursos/Imagenes/J1.png');
@@ -173,7 +170,7 @@ class CharapterSelection extends Phaser.Scene {
 			sprite=this.seleccionaravatar(this.posArrayP1);
 		}
 	}
-//da paso a la pantalla seleccionada sólo si los dos jugadores han elegido o si se decide salir
+	//da paso a la pantalla seleccionada sólo si los dos jugadores han elegido o si se decide salir
 	scenechange(){
 		if(this.salir.isDown){
 			this.scene.start('MainMenu');
@@ -184,13 +181,11 @@ class CharapterSelection extends Phaser.Scene {
 			this.musica.stop();
 		}
 		var that = this;
-		
 	}
 
 	update(){
 		this.scenechange();
 		this.actualizarP1P2();
 		this.actualizarPosArray();
-
 	}
 }

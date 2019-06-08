@@ -29,14 +29,11 @@ function Drops(escena, sprites) {
 	}
 	
 	this.preload = function(){
-
 		that.scene.load.image('Pistola', that.pistola);
 		that.scene.load.image('Escopeta', that.escopeta);
 		that.scene.load.image('Subfusil', that.subfusil);
 		that.scene.load.image('Punoamericano', that.punoamericano);
 		that.scene.load.image('Bate', that.batebeisbol);
-
-
 	}
 
 	this.create = function(){

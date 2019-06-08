@@ -1,8 +1,5 @@
 package es.juegosenred.backend.fightforthehood;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Timer;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -13,12 +10,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class Time {
 	
-	
 	private static MyMatch mymatch;
 	
 	@Autowired
 	public Time(MyMatch match) {
-	Time.mymatch = match;
+		Time.mymatch = match;
 	}
 	
 	private static ScheduledExecutorService connectionController = Executors.newSingleThreadScheduledExecutor();

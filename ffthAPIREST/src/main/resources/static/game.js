@@ -1,4 +1,5 @@
 'use strict'
+//CONFIGURACIÓN DEL JUEGO EN PHASER 3
 var config = {
     type: Phaser.AUTO,
     width: 1024,

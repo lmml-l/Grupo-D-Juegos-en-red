@@ -1,4 +1,4 @@
-//Muestra los ccreditos del juego
+//Muestra los creditos del juego
 class Creditos extends Phaser.Scene {
 	constructor(){
 		super({key:"Creditos"});
@@ -12,13 +12,8 @@ class Creditos extends Phaser.Scene {
 	}
 	
 	controlmenu(){
-
 		this.check = false;
-
-		
-
 		this.salir = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
-
 		this.salir.isDown=false;
 	}
 
@@ -49,6 +44,7 @@ class Creditos extends Phaser.Scene {
 		}
 	}
 
+	//cambio de escena
 	scenechange(){
 		if(this.check){
 			this.time.clearPendingEvents();

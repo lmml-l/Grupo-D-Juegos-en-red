@@ -18,11 +18,9 @@ class CharapterSelectionOnline extends Phaser.Scene {
 		this.posArrayP1;
 		this.posArrayP2;
 
-		//this.derecha1;
 		this.derecha2;
-		//this.izquierda1;
 		this.izquierda2;
-		//this.confirmar1;
+
 		this.confirmar2;
 		this.textoSalir;
 		this.salir;
@@ -53,26 +51,32 @@ class CharapterSelectionOnline extends Phaser.Scene {
 
 		//sprites
 		var title = this.add.image(this.game.canvas.width*(3/6),this.game.canvas.height*(150/600),'title').setScale(0.5);
+		
 		//var subtitle = this.add.image(this.game.canvas.width*(3/6),this.game.canvas.height*(250/600),'subtitle').setScale(1);
 		var character2 = this.add.image(this.game.canvas.width*(4/6),this.game.canvas.height*(4/6),'character1').setScale(2).setInteractive();
 		var character1 = this.add.image(this.game.canvas.width*(2/6),this.game.canvas.height*(4/6),'character2').setScale(2).setInteractive();
+		
 		//guarda las imágenes en arrays
 		this.pmap1.push(character1);
 		this.pmap1.push(character2);
+		
 		//imagen de miniatura del personaje
 		this.p1 = this.add.sprite((this.pmap1[this.posArrayP1].x - 75), (this.pmap1[this.posArrayP1].y - 75),'P1');
+		
 		//engloba las imágenes
 		var container = this.add.container(0,0);
 		container.add(title);
+		
 		//container.add(subtitle); 
 		container.add(character1); 
 		container.add(character2); 
 
 		//teclas disponibles
-		this.derecha2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+		this.derecha2 	= this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
 		this.izquierda2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
 		this.confirmar2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-		this.salir = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
+		this.salir 		= this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
+		
 		//inicializa las teclas a no pulsadas (para evitar acarreros de pantallas anteriores)
 		this.confirmar2.isDown=false;
 		this.salir.isDown=false;
@@ -104,7 +108,6 @@ class CharapterSelectionOnline extends Phaser.Scene {
 
 	preload(){
 		var title = this.load.image('title','Recursos/Imagenes/Logo.png');
-		//var subtitle = this.load.image('subtitle','Recursos/Imagenes/subtitle.png');
 		var character1 = this.load.image('character1','Recursos/Imagenes/Character1.png');
 		var character2 = this.load.image('character2','Recursos/Imagenes/Character2.png');
 		var p1 		   = this.load.image('P1','Recursos/Imagenes/Flecha.png');
@@ -122,6 +125,7 @@ class CharapterSelectionOnline extends Phaser.Scene {
 		this.musica.play();
 
 		this.textModo = this.add.text(50, 50, "Online mode", { fill: '#F4FFF3', font: '20px Impact', align: 'center'});
+		
 		//indicación de los controles
 		this.textoControles = this.add.text(160, 540, "\nselect\naccept", { fill: '#FFFFFF', font: '30px Impact', align: 'center'});
 		this.textoControles = this.add.text(60, 540, "\nA,D\nSPACE", { fill: '#FFAC00', font: '32px Impact', align: 'center'});
@@ -146,7 +150,7 @@ class CharapterSelectionOnline extends Phaser.Scene {
 	
         var that=this;
 		//comprobación del estado del servidor
-			this.time.addEvent({delay:1000, loop:true,
+		this.time.addEvent({delay:1000, loop:true,
 		    callback: function(){getServerStatus(function(){that.scene.start('EscenarioError');})}})
 
 		//Actualiza si el otro jugador ha elegido personaje a traves de websocket
@@ -157,12 +161,12 @@ class CharapterSelectionOnline extends Phaser.Scene {
         		that.textoWaitHost.text = "\n"+"Rival is ready";
         		textoreadysolounavez = true;
         	}
-        } });
+        } 
+    	});
 
     	//Actualiza si el cliente es Host o no 
     	var IsHostText = this.add.text(55, 100, "", { fill: '#F4FFF3', font: '30px Impact', align: 'right'});
     	
-
     	this.time.addEvent({delay:2000, loop: true, 
     	callback: function(){
     		var messageHost = {protocolo: "Host"}
@@ -190,12 +194,10 @@ class CharapterSelectionOnline extends Phaser.Scene {
 	//actualiza las imágenes de la flecha de selección
 	actualizarP1P2(){
 		this.p1.setPosition(this.pmap1[this.posArrayP1].x - 75, this.pmap1[this.posArrayP1].y - 75);
-	
 	}
 
 	//actualiza las posiciones según lo seleccionado
 	actualizarPosArray(){
-
 		var that = this;
 
 		if(this.derecha2.isDown && (this.posArrayP1<1) && !this.checkplayer1 ){
@@ -209,21 +211,18 @@ class CharapterSelectionOnline extends Phaser.Scene {
 				if(connectionJugador.readyState==1){
 					connectionJugador.send(JSON.stringify(message));
 				}
-				
-			sprite=this.seleccionaravatar(this.posArrayP1);
+				sprite=this.seleccionaravatar(this.posArrayP1);
 		}
 
 	}
 
 startPartida () {
 	this.scene.start('EscenarioOnline');
-
 }
 
 //da paso a la pantalla seleccionada sólo si los dos jugadores han elegido o si se decide salir
 	scenechange(){
 		var that=this;
-
 
 		if(this.salir.isDown){
 			this.scene.start('MainMenu');
@@ -247,8 +246,6 @@ startPartida () {
 		    }
            }
  
-            //sprite2 = Skin.skin;
-
 			this.time.addEvent({delay:7000, 
 			callback: function(){that.startPartida()}}); //Quiero añadir un texto que ponga la partida va a comenzar... 
 			//cuando seleccionen listo los dos jugadores y un timer to start 
@@ -260,6 +257,5 @@ startPartida () {
 		this.scenechange();
 		this.actualizarP1P2();
 		this.actualizarPosArray();
-		
 	}
 }

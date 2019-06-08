@@ -1,5 +1,6 @@
 package es.juegosenred.backend.fightforthehood;
 
+//INFORMACIÓN DEL USUARIO
 public class MyInfo {
 
 	private String ip;

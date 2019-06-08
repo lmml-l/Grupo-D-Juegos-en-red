@@ -12,6 +12,9 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 
 import es.juegosenred.backend.fightforthehood.nuevoJunio.UsuariosRegistradosReaderWriter;
 
+//APLICACIÓN
+//Inicialización del backend
+
 @SpringBootApplication
 @EnableWebSocket
 public class App implements WebSocketConfigurer

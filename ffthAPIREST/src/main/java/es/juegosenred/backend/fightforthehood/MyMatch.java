@@ -2,12 +2,9 @@ package es.juegosenred.backend.fightforthehood;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.*;
 
-import org.springframework.stereotype.Component;
-
+//INFORMACIÓN DE LA PARTIDA (COMBATE)
 public class MyMatch {
 	
 	private ArrayList<String> nombresenPartida ;
@@ -17,7 +14,6 @@ public class MyMatch {
 	private String checker;
 	//Nuevas variables
 	private List<List<String>> ListaConParApodoContrasena;
-	private ArrayList<String> ApododeUsuariosenLobby;//Sus funcion se realiza en nombresenPartida;
 	
 	public HashMap<String, Integer> getTiempoParaDesconexion() {
 		return tiempoParaDesconexion;
@@ -37,14 +33,12 @@ public class MyMatch {
 
 	public MyMatch() {
 		nombresenPartida = new ArrayList<>();
-		listadeapodos = new HashMap<>();
-		ipconectados = new ArrayList<>();
+		listadeapodos 	 = new HashMap<>();
+		ipconectados 	 = new ArrayList<>();
 		tiempoParaDesconexion = new HashMap<>();
 		checker = "1";
 		//Nuevas variables
-		ListaConParApodoContrasena = new ArrayList<>();
-	
-		
+		ListaConParApodoContrasena = new ArrayList<>();	//identificación del jugador (nombre/contraseña)
 	}
 
 	public List<List<String>> getListaConParApodoContrasena() {
@@ -58,7 +52,6 @@ public class MyMatch {
 	public MyMatch(ArrayList<String> ipsPartida) {
 		this.nombresenPartida = ipsPartida;
 	}
-
 
 	public ArrayList<String> getNombresenPartida() {
 		return nombresenPartida;
@@ -79,10 +72,7 @@ public class MyMatch {
 	public void AumentarTiempo(int tiemposumado) {		
 		for(String key : tiempoParaDesconexion.keySet()) {
 			tiempoParaDesconexion.put(key,tiempoParaDesconexion.get(key)+tiemposumado);
-			//System.out.println(key);
-			//System.out.println(tiempoParaDesconexion.get(key)+"t");
 		}
-		
 	}
 	
 	public void EliminarIpenIpsPartidaporTime(int maxtime) {
@@ -96,7 +86,7 @@ public class MyMatch {
 		}
 		
 		for(String key: keysBorradas) {
-		tiempoParaDesconexion.remove(key);
+			tiempoParaDesconexion.remove(key);
 		}
 	}
 
@@ -107,6 +97,4 @@ public class MyMatch {
 	public void setChecker(String checker) {
 		this.checker = checker;
 	}
-	
-	
 }

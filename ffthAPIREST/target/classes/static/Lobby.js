@@ -1,4 +1,5 @@
-
+//SALA DE ESPERA DE LOS JUGADORES HASTA LLENAR LA SALA (2 JUGADORES)
+//DA PASO AL SELECTOR DE PERSONAJES
 var ipsLobby = new Array();
 class Lobby extends Phaser.Scene {
 	constructor(){
@@ -11,13 +12,13 @@ class Lobby extends Phaser.Scene {
 		this.textoModo;
 		this.textoSalir;
 		this.textoConexion;
-		this.estadoConexion = new Array(2); //estado de la conexión en todo momento (conectado o desconectado)
+		this.estadoConexion = new Array(2);	//estado de la conexión en todo momento (conectado o desconectado)
 		this.textoBusqueda;
 		this.jugadorDesc1;
 		this.estadoDesc1;
 		this.jugadorDesc2;
 		this.estadoDesc2;
-		this.estadoBusqueda; 	//buscando o encontrado
+		this.estadoBusqueda; 				//buscando o encontrado
 		this.nombreRival = new Array(2); 	//conocido o desconocido
 		this.textoPartidas;
 		this.listlp;
@@ -61,7 +62,7 @@ class Lobby extends Phaser.Scene {
 	
 
 		this.enter = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
-		this.back = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.BACKSPACE);
+		this.back  = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.BACKSPACE);
 
 		this.enter.isDown=false;
 		this.back.isDown=false;
@@ -75,7 +76,7 @@ class Lobby extends Phaser.Scene {
 	create(){
 		var that = this;
 		var i = 0;
-		this.fondo = this.add.image(this.game.canvas.width/2,this.game.canvas.height/2,'menuLobbyFondo').setScale(1.3);
+		this.fondo  = this.add.image(this.game.canvas.width/2,this.game.canvas.height/2,'menuLobbyFondo').setScale(1.3);
 		this.escape = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);	//tecla para salir
 		this.controlmenu();
 
@@ -86,7 +87,7 @@ class Lobby extends Phaser.Scene {
 
 		var that = this;
 		//comprobación del estado del servidor
-			this.time.addEvent({delay:1000, loop:true,
+		this.time.addEvent({delay:1000, loop:true,
 		    callback: function(){getServerStatus(function(){that.scene.start('EscenarioError');})}})
 
 
@@ -106,38 +107,24 @@ class Lobby extends Phaser.Scene {
 
 			}})//ips jugadores en la sala
 
-		//this.time.addEvent({delay:1100,loop:true, callback: function(){putTime(ip,ip)}})
 		that.textoBusqueda = that.add.text(380, 480, that.estadoBusqueda, { fill: '#FFFFFF', font: '36px Impact', align: 'center'});
-		that.jugadorDesc1 = that.add.text(80, 370, that.estadoDesc1, { fill: '#A52019', font: '40px Impact', align: 'center'});
-		that.jugadorDesc2 = that.add.text(600, 370, that.estadoDesc2, { fill: '#A52019', font: '40px Impact', align: 'center'});
-
-
-		//se entra automáticamente a local cuando los dos jugadores están
-		this.time.addEvent({delay:3000,loop:true, callback: function(){
-			/*
-			if(ipsLobby.length == 2){
-				that.time.addEvent({delay:1000, callback: function(){
-					that.musica.stop();
-					that.scene.start('CharapterSelectionOnline');
-			}})
-		}
-		*/
-		}})
+		that.jugadorDesc1  = that.add.text(80, 370, that.estadoDesc1, { fill: '#A52019', font: '40px Impact', align: 'center'});
+		that.jugadorDesc2  = that.add.text(600, 370, that.estadoDesc2, { fill: '#A52019', font: '40px Impact', align: 'center'});
 
 		//mensaje de iniciar partida
 		this.time.addEvent({delay:2000,loop:true, callback: function(){
 			if(ipsLobby.length == 2){
 				that.textoBusqueda.text = "Starting fight...";
-				that.jugadorDesc1.text = "";
-				that.jugadorDesc2.text = "";
+				that.jugadorDesc1.text  = "";
+				that.jugadorDesc2.text  = "";
 			}else if(ipsLobby.length == 1){
 				that.textoBusqueda.text = "Looking for rivals...";
-				that.jugadorDesc1.text = "";
-				that.jugadorDesc2.text = "Please wait..."
+				that.jugadorDesc1.text  = "";
+				that.jugadorDesc2.text  = "Please wait..."
 			}else{
 				that.textoBusqueda.text = "Looking for rivals...";
-				that.jugadorDesc1.text = "Please wait...";
-				that.jugadorDesc2.text = "Please wait..."
+				that.jugadorDesc1.text  = "Please wait...";
+				that.jugadorDesc2.text  = "Please wait..."
 			}
 		}})
 	}
@@ -153,7 +140,6 @@ class Lobby extends Phaser.Scene {
 			that.escape.isDown=false;
 		}
 	}
-
 
 	update(){
 		this.retroceder();
