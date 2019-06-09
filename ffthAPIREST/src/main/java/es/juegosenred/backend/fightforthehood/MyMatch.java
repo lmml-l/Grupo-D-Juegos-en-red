@@ -4,17 +4,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.*;
 
 import org.springframework.stereotype.Component;
 
 public class MyMatch {
 	
-	private ArrayList<String> IpsPartida ;
+	private ArrayList<String> nombresenPartida ;
 	private HashMap<String,String> listadeapodos;
 	private ArrayList<String> historial;
 	private ArrayList<String> ipconectados;
 	private HashMap<String,Integer> tiempoParaDesconexion;
 	private String checker;
+	//Nuevas variables
+	private List<List<String>> ListaConParApodoContrasena;
+	private ArrayList<String> ApododeUsuariosenLobby;//Sus funcion se realiza en nombresenPartida;
 	
 	public HashMap<String, Integer> getTiempoParaDesconexion() {
 		return tiempoParaDesconexion;
@@ -41,25 +45,37 @@ public class MyMatch {
 	}
 
 	public MyMatch() {
-		IpsPartida = new ArrayList<>();
+		nombresenPartida = new ArrayList<>();
 		listadeapodos = new HashMap<>();
 		historial = new ArrayList<>();
 		ipconectados = new ArrayList<>();
 		tiempoParaDesconexion = new HashMap<>();
 		checker = "1";
+		//Nuevas variables
+		ListaConParApodoContrasena = new ArrayList<>();
+	
+		
+	}
+
+	public List<List<String>> getListaConParApodoContrasena() {
+		return ListaConParApodoContrasena;
+	}
+
+	public void setListaConParApodoContrasena(List<List<String>> listaConParApodoContrasena) {
+		ListaConParApodoContrasena = listaConParApodoContrasena;
 	}
 
 	public MyMatch(ArrayList<String> ipsPartida) {
-		this.IpsPartida = ipsPartida;
+		this.nombresenPartida = ipsPartida;
 	}
 
 
-	public ArrayList<String> getIpsPartida() {
-		return IpsPartida;
+	public ArrayList<String> getNombresenPartida() {
+		return nombresenPartida;
 	}
 
-	public void setIpsPartida(ArrayList<String> ipsPartida) {
-		IpsPartida = ipsPartida;
+	public void setNombresenPartida(ArrayList<String> ipsPartida) {
+		nombresenPartida = ipsPartida;
 	}
 
 	public HashMap<String,String> getListadeapodos() {
@@ -84,7 +100,7 @@ public class MyMatch {
 		for(String key : tiempoParaDesconexion.keySet()) {
 			int time = tiempoParaDesconexion.get(key);
 			if(time >= maxtime ) {
-				IpsPartida.remove(key);
+				nombresenPartida.remove(key);
 				keysBorradas.add(key);
 			}
 		}

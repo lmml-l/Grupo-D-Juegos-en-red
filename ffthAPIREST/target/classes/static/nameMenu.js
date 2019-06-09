@@ -1,81 +1,132 @@
 //Pantalla para preguntar por el nombre del jugador
 //Ese dato se envía al servidor y se pasa a buscar partida
 
-var NombreFinal;
-var ip;
-
-var genteensala;
+//var NombreFinal;
+//var ContrasenaFinal;
+var islogininfocorrect;
+var volverAIntentarloguear = true;
+var textoModificable;
 class nameMenu extends Phaser.Scene {
 	constructor(){
 		super({key:"nameMenu"});
-		this.nombre;
 		this.escape;
 		this.enter;		
 		this.textoPregunta;
 		this.textoRepetir;
 		this.textoSalir;
-		this.textoNombre;
+		//this.textoNombre;
 		this.textoEstadosala;
 		this.ipsjugadoressala;
 		this.arrayjugadores;
 		this.salir;
 		this.fondo;
+		this.musica;
+
+		//Nuevas Variables Junio
+		this.textoPasswordLogin;
+		this.textoComprobacion;
+		this.textoPasswordNew;
+		this.textoNombreLogin;
+		this.textoNombreNew;
+		this.arriba
+		this.abajo;
+		this.izquierda;
+		this.derecha;
+		////////////////////////
 	}
 
 	preload(){
 		this.load.image('menuNombreFondo','Recursos/Imagenes/menuNombreFondo.png');
+		this.load.audio('musicacontrol','Recursos/Audio/CharacterSelection.mp3');
 	}
 
 	//botón para retroceder
 	retroceder(){
 		if(this.escape.isDown){
 		this.scene.start('MainMenu');
+		this.musica.stop();
 		this.escape.isDown=false;
 		}
 	}
 
 	
 	aceptar(){
+		var that = this;
+		if(this.enter.isDown) {
+			////////////Login///////////
+			if((textoModificable == this.textoPasswordLogin || textoModificable == this.textoNombreLogin) && volverAIntentarloguear==true){
 
-		if(this.enter.isDown){
-			if(this.textoNombre.text==="Insert your name"){ //Nombre anónimo
-					this.textoNombre.text="Anonymous";
+				volverAIntentarloguear=false;
+
+				var myinfo =
+				{
+				apodo: that.textoNombreLogin.text,
+				contrasena: that.textoPasswordLogin.text, 
 				}
-			NombreFinal = this.textoNombre.text;
-			
+				
+				var that = this;
 
-			var myinfo =
-			{
-				ip: ip,
-				apodo: NombreFinal
-			}
+				
+				login(myinfo,function(data){islogininfocorrect=data
+					if(islogininfocorrect == false){
+						that.textoComprobacion.text = "Incorrect password or/and username";
+					}else if(islogininfocorrect == "OK"){
+						that.textoComprobacion.text = "Connecting...";
+					}else if(islogininfocorrect == "UsuarioYaLogueado"){
+						that.textoComprobacion.text = "User already logged in";
+					}else if(islogininfocorrect == "ApodoInvalido"){
+						that.textoComprobacion.text = "Incorrect/non-existing username";
+					}else if(islogininfocorrect == "ContrasenaInvalida"){
+						that.textoComprobacion.text = "Incorrect password";
+					}});//se devuelve bool para saber si la informacion es correcta
+				
+	
+				this.enter.isDown=false;
 
-			putMyInfo(myinfo);
+				this.time.addEvent({delay:2000,  //tiempo que tarda hasta poder volver a pulsar
+    			callback: function(){volverAIntentarloguear = true;}})
 
-			this.enter.isDown=false;
+				////////////////////////////////
 
-			var that = this; 
-			if(this.ipsjugadoressala.length < 2){ //Hay espacio en partida
-				addPlayertoRoom(myinfo.ip);
-				getIPs(function(arrayjugadores){that.ipsjugadoressala = arrayjugadores})
-				if(this.ipsjugadoressala.length == 1){
-					var arrayconips = [myinfo.ip,this.ipsjugadoressala[0]];
-					addMatchtoHistory(arrayconips);
-				}
-				this.scene.start('Lobby');
 			}
 			else{
-				console.log("The server is full");
-				this.textoEstadosala = this.add.text(450, 515, "The server is full", { fill: '#F4FFF3', font: '20px Impact', align: 'center'});
+			////////////SignUp///////////
+				if(textoModificable == this.textoPasswordNew || textoModificable == this.textoNombreNew){
+					var myinfo =
+					{
+					apodo: that.textoNombreNew.text,
+					contrasena: that.textoPasswordNew.text, 
+					}
+					this.enter.isDown=false;
+					signup(myinfo,function(data){
+						if(data==true){
+							that.textoComprobacion.text = "Username already in use";
+						}else{
+							that.textoComprobacion.text = "Succesfully registered";
+						}
+					})
+					
+				}
 			}
 			
 		}
 	}
 
 
+
+
 	create(){
+		volverAIntentarloguear = true;
+		islogininfocorrect=""
+		
+
 		this.fondo = this.add.image(this.game.canvas.width/2,this.game.canvas.height/2,'menuNombreFondo').setScale(1.3);
 		
+		this.musica = this.game.sound.add('musicacontrol');
+		this.musica.setLoop(true);
+		this.musica.setVolume(0.5);
+		this.musica.play();
+
 		this.textoEstadosala = this.add.text(390, 515, "", { fill: '#F4FFF3', font: '20px Impact', align: 'center'});
 
 		this.escape = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);	//tecla para salir
@@ -83,61 +134,132 @@ class nameMenu extends Phaser.Scene {
 
 		this.textoSalir = this.add.text(50, 730, "ESC to exit", { fill: '#F4FFF3', font: '24px Impact', align: 'center'});
 
-		this.textoVersion = this.add.text(340, 300, "What's your name?", { fill: '#FFAC00', font: '48px Impact', align: 'center'});
-		this.textoVersion = this.add.text(390, 415, "Press ENTER to search a match", { fill: '#F4FFF3', font: '20px Impact', align: 'center'});
+		this.textoVersion = this.add.text(350, 210, "What's your name?", { fill: '#FFAC00', font: '48px Impact', align: 'center'});
+		this.textoVersion = this.add.text(390, 500, "Press ENTER to search a match", { fill: '#F4FFF3', font: '20px Impact', align: 'center'});
 		this.textoVersion = this.add.text(50, 50,   "Online Mode", { fill: '#F4FFF3', font: '20px Impact', align: 'center'});
-		this.textoNombre  = this.add.text(380, 370, "Insert your name", { fill: '#F4FFF3', font: '32px Impact', align: 'center'});
+		
 		
 		var that = this;
-		getIPs(function(arrayjugadores){that.ipsjugadoressala = arrayjugadores})
+		//Nuevo Junio
+		this.arriba 			= this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
+		this.abajo 				= this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
+		this.izquierda 			= this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
+		this.derecha 			= this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
 
+		this.textoComprobacion = this.add.text(270, 550, "", { fill: '#FD0000', font: '40px Impact', align: 'center'});
+		this.textoNombreLogin  	= this.add.text(520, 320, "Insert your name", { fill: '#F4FFF3', font: '32px Impact', align: 'center'});
+		this.textoPasswordLogin = this.add.text(520, 400, "Insert your password", { fill: '#F4FFF3', font: '32px Impact', align: 'center'});
 		
-		getMyIP(function(data){ip = data.ip});
-
-			this.time.addEvent({delay:1000, loop:true,
-		    callback: function(){getServerStatus(function(){that.scene.start('EscenarioError');})}})
-
-		this.time.addEvent({delay:400 , callback: function(){console.log(ip+"abc")}})
+		this.textoNombreNew  	= this.add.text(220, 320, "Insert your name", { fill: '#F4FFF3', font: '32px Impact', align: 'center'});
+		this.textoPasswordNew	= this.add.text(220, 400, "Insert your password", { fill: '#F4FFF3', font: '32px Impact', align: 'center'});
 		
-		this.time.addEvent({delay:500,  //tiempo que tarda hasta reiniciar
-    	callback: function(){getApodo(function(data){that.textoNombre.text=data},ip)}})
+		textoModificable = that.textoNombreLogin;//En funcion de que texto se vaya a modificar , si es contraseña o nombre esta variable apunta a eso
+		//this.textoLogin = this.add.text(380, 400, "Insert your password", { fill: '#F4FFF3', font: '32px Impact', align: 'center'});
+		//this.textoNombre.on('pointerdown',function(){textoModificable = that.textoNombre});
+		//this.textoPassword.on('pointerdown',function(){textoModificable = that.textoPassword});
 		
-		this.time.addEvent({delay:2000,loop:true,
-    	callback: function(){getIPs(function(arrayjugadores){that.ipsjugadoressala = arrayjugadores});}})
+		////////////////////////
 
-			this.input.keyboard.on('keydown',function(event){
-			if(that.textoNombre.text === "Insert your name" &&  event.keyCode >=48 && event.keyCode < 90 || event.keyCode == 32){
-				that.textoNombre.text = event.key;
+		//getIPs(function(arrayjugadores){that.ipsjugadoressala = arrayjugadores})
+
+
+		//Actualiza la ip (variable global) una vez al crearse y luego cada 2s
+		//getMyIP(function(data){ip = data.ip});
+
+		//this.time.addEvent({delay:2000,loop:true,
+    	//callback: function(){getIPs(function(arrayjugadores){that.ipsjugadoressala = arrayjugadores});}})
+
+		//Server Caido (ACTUALIZA CADA 1s)
+		this.time.addEvent({delay:1000, loop:true,
+		   callback: function(){getServerStatus(function(){
+		    that.scene.start('EscenarioError');
+			this.musica.stop();})}})
+
+		//En el caso de que la ip ya este registrada se actualiza el nombre de usuario.
+		//this.time.addEvent({delay:500,  //tiempo que tarda hasta reiniciar
+    	//	callback: function(){getApodo(function(data){that.textoNombreLogin.text=data},ip)}})
+		
+		//Escribir texto para poner nombre de usuario.
+		this.input.keyboard.on('keydown',function(event){
+			if(textoModificable!=null){
+				if((textoModificable.text === "Insert your name" || textoModificable.text === "Insert your password" ) &&  event.keyCode >=48 && event.keyCode < 90 || event.keyCode == 32){
+					that.textoComprobacion.text = "";
+					textoModificable.text = event.key;
+				}
+				else if(event.keyCode === 8 && textoModificable.text.length>0){
+					that.textoComprobacion.text = "";
+					textoModificable.text = textoModificable.text.substr(0,textoModificable.text.length-1);
+				}
+				else if(event.keyCode == 32 || event.keyCode >=48 && event.keyCode < 90 && textoModificable.text.length<15){
+					that.textoComprobacion.text = "";
+					textoModificable.text += event.key;
+				}
+				}
+			})
+
+		/////////////Nuevo Junio//////////
+		this.time.addEvent({delay:1000,loop:true,callback:function(){
+			if(islogininfocorrect=="OK"){
+				that.textoComprobacion.text = "";
+				that.scene.start('Lobby');
+				that.musica.stop();
 			}
-			else if(event.keyCode === 8 && that.textoNombre.text.length>0){
-				that.textoNombre.text = that.textoNombre.text.substr(0,that.textoNombre.text.length-1)
-			}
-			else if(event.keyCode == 32 || event.keyCode >=48 && event.keyCode < 90 && that.textoNombre.text.length<15){
-				that.textoNombre.text += event.key;
-			}
-		}
-		)
+		}})
 
-		//var that=this;
-		//comprobación del estado del servidor
-		//this.time.addEvent({delay:100, loop:true,
-    	//callback: function(){getServerStatus(function(){that.scene.start('EscenarioError');})}})
-
-
+		this.enter.isDown=false;
+		//////////////////////////////////
+		
 	}
 
+
+	seleccionContraseñaONombre(){
+	//Máquina de estados para apuntar a distintos campos de texto
+	//Puedes elegir entre contraseña y nombre para registrarse (new) y 
+
+		var that = this;
+
+		if(that.derecha.isDown){
+			if(textoModificable == that.textoPasswordNew){
+				textoModificable   = that.textoPasswordLogin;
+			} 
+			if(textoModificable == that.textoNombreNew){
+				textoModificable  = that.textoNombreLogin;
+			}
+			that.derecha.isDown = false;
+		}
+		if(that.izquierda.isDown){
+			if(textoModificable == that.textoPasswordLogin){
+				textoModificable 	= that.textoPasswordNew;
+			}
+			if(textoModificable == that.textoNombreLogin){
+				textoModificable  = that.textoNombreNew;
+			}
+			that.izquierda.isDown = false;
+		}
+		if(this.arriba.isDown){
+			if(textoModificable == that.textoPasswordLogin){
+				textoModificable = this.textoNombreLogin;
+			}
+            if(textoModificable == that.textoPasswordNew){
+            	textoModificable = this.textoNombreNew;
+            }
+            this.arriba.isDown = false;
+        }
+        if(this.abajo.isDown){
+            if(textoModificable == that.textoNombreNew){
+				textoModificable = this.textoPasswordNew;
+			}
+            if(textoModificable == that.textoNombreLogin){
+            	textoModificable = this.textoPasswordLogin;
+            }
+            this.abajo.isDown = false;
+        }
+    }
+    
 	update(){
 		this.retroceder();
 		this.aceptar();
-		//var that = this;
-		//getIPs(function(arrayjugadores){that.ipsjugadoressala = arrayjugadores})
-		//console.log(this.ipsjugadoressala);
-
-		//comprobación del estado del servidor
-		
-
-
+		this.seleccionContraseñaONombre();
 	}
 }
 
-//Para retroceder se pulsa escape, el cuadro de texto y la pregunta

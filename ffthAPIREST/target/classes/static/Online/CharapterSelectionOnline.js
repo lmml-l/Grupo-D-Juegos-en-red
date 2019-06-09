@@ -13,6 +13,7 @@ class CharapterSelectionOnline extends Phaser.Scene {
 		this.checkplayer2;
 		this.p1;
 		this.check;
+		this.musica;
 
 		this.posArrayP1;
 		this.posArrayP2;
@@ -68,15 +69,11 @@ class CharapterSelectionOnline extends Phaser.Scene {
 		container.add(character2); 
 
 		//teclas disponibles
-		//this.derecha1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
 		this.derecha2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
-		//this.izquierda1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
 		this.izquierda2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
-		//this.confirmar1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
 		this.confirmar2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 		this.salir = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
 		//inicializa las teclas a no pulsadas (para evitar acarreros de pantallas anteriores)
-		//this.confirmar1.isDown=false;
 		this.confirmar2.isDown=false;
 		this.salir.isDown=false;
 	}
@@ -91,7 +88,7 @@ class CharapterSelectionOnline extends Phaser.Scene {
         "Recursos/Imagenes/Sprites_Personaje2/SpritePistolaIzquierda.png","Recursos/Imagenes/Sprites_Personaje2/SpritePistolaDerecha.png",
         "Recursos/Imagenes/Sprites_Personaje2/SpriteEscopetaIzquierda.png","Recursos/Imagenes/Sprites_Personaje2/SpriteEscopetaDerecha.png",
         "Recursos/Imagenes/Sprites_Personaje2/SpriteThomsomIzquierda.png","Recursos/Imagenes/Sprites_Personaje2/SpriteThomsomDerecha.png",
-        "Recursos/Imagenes/Sprites_Personaje2/SpritePersonajePuñoAmericanoIzquierda.png","Recursos/Imagenes/Sprites_Personaje2/SpritePersonajePuñoAmericanoDerecha.png",
+        "Recursos/Imagenes/Sprites_Personaje2/SpritePersonajePunoAmericanoIzquierda.png","Recursos/Imagenes/Sprites_Personaje2/SpritePersonajePunoAmericanoDerecha.png",
         "Recursos/Imagenes/Sprites_Personaje2/SpriteBateIzquierda.png","Recursos/Imagenes/Sprites_Personaje2/SpriteBateDerecha.png"]
 
 		}else if(posArray==1){
@@ -99,7 +96,7 @@ class CharapterSelectionOnline extends Phaser.Scene {
         "Recursos/Imagenes/Sprites_Personaje/SpritePistolaIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpritePistolaDerecha.png",
         "Recursos/Imagenes/Sprites_Personaje/SpriteEscopetaIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpriteEscopetaDerecha.png",
         "Recursos/Imagenes/Sprites_Personaje/SpriteThomsomIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpriteThomsomDerecha.png",
-        "Recursos/Imagenes/Sprites_Personaje/SpritePersonajePuñoAmericanoIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpritePersonajePuñoAmericanoDerecha.png",
+        "Recursos/Imagenes/Sprites_Personaje/SpritePersonajePunoAmericanoIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpritePersonajePunoAmericanoDerecha.png",
         "Recursos/Imagenes/Sprites_Personaje/SpriteBateIzquierda.png","Recursos/Imagenes/Sprites_Personaje/SpriteBateDerecha.png"]
 		}
 		return spriteHojalocal;
@@ -112,11 +109,18 @@ class CharapterSelectionOnline extends Phaser.Scene {
 		var character2 = this.load.image('character2','Recursos/Imagenes/Character2.png');
 		var p1 		   = this.load.image('P1','Recursos/Imagenes/Flecha.png');
 		this.load.image('menuCharacterFondo','Recursos/Imagenes/menuCharacterFondo.png');
+		this.load.audio('musicacharacterselection','Recursos/Audio/CharacterSelection.mp3');
 	}
 
 	create(){
 		this.fondo = this.add.image(this.game.canvas.width/2,this.game.canvas.height/2,'menuCharacterFondo').setScale(1.3);
 		this.selection();
+
+		this.musica = this.game.sound.add('musicacharacterselection');
+		this.musica.setLoop(true);
+		this.musica.setVolume(0.5);
+		this.musica.play();
+
 		this.textModo = this.add.text(50, 50, "Online mode", { fill: '#F4FFF3', font: '20px Impact', align: 'center'});
 		//indicación de los controles
 		this.textoControles = this.add.text(160, 540, "\nselect\naccept", { fill: '#FFFFFF', font: '30px Impact', align: 'center'});
@@ -137,7 +141,7 @@ class CharapterSelectionOnline extends Phaser.Scene {
 		//texto de espera hasta que el host elija
 		this.textoWaitHost = this.add.text(450, 390, "", {fill: '#F4FFF3', font: '24px Impact', align: 'center'});
 
-		conection();
+		//conection();
         Skin = sprite2;
 	
         var that=this;
@@ -223,6 +227,7 @@ startPartida () {
 
 		if(this.salir.isDown){
 			this.scene.start('MainMenu');
+			this.musica.stop();
 		}
 		if(this.confirmar2.isDown && (IsHost!=null || this.checkplayer2)){
 
@@ -242,21 +247,13 @@ startPartida () {
 		    }
            }
  
-            sprite2 = Skin.skin;
+            //sprite2 = Skin.skin;
 
 			this.time.addEvent({delay:7000, 
 			callback: function(){that.startPartida()}}); //Quiero añadir un texto que ponga la partida va a comenzar... 
 			//cuando seleccionen listo los dos jugadores y un timer to start 
 			
 		}
-		
-		/*var that = this;
-		if(getComp()){
-			this.time.addEvent({delay:100, loop:true,
-		    callback: function(){that.scene.start('EscenarioError');}})
-		}*/
-
-	
 	}
 
 	update(){

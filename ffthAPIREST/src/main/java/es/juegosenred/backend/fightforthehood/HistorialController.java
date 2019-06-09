@@ -38,4 +38,5 @@ public class HistorialController {
 	public Collection<String> getIps(){
 		return mymatch.getHistorial();
 	}
+	
 }

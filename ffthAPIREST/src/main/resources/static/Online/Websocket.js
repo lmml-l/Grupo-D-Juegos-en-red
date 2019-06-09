@@ -39,6 +39,7 @@ function conection (){
 			break;
 			case "Skin":
 			Skin = datosGuardadosComoObjeto.skin;
+			sprite2 = Skin.skin;
 			break;
 			default:
 		}
@@ -79,6 +80,32 @@ function conection (){
 			posInicial = PosicionWS;
 			}
 			break;
+			case "RESTART SALA":
+			IsHost = null;
+			console.log("LLEGA AQUI")
+			var that=this;
+
+			var numeroDeEscenas = game.scene.scenes.length
+			console.log(numeroDeEscenas);
+			var escenaActiva;
+			for(var i = 0; i< numeroDeEscenas ; i++){
+				if(game.scene.scenes[i].scene.settings.active){
+					console.log(game.scene.scenes[i].scene.settings.active);
+					escenaActiva = game.scene.scenes[i]
+				}
+			} 
+    		escenaActiva.time.clearPendingEvents();
+    		escenaActiva.time.removeAllEvents();
+    		escenaActiva.time.addEvent({delay:1500,
+    		callback: function(){
+    			//game.scene.getScene("EscenarioOnline").musica.stop();
+    			console.log(escenaActiva.scene.key)
+    			game.scene.sleep(escenaActiva.scene.key);
+        		//game.scene.stop(escenaActiva.scene.key);
+        		game.scene.start("MainMenu");
+        		
+   			}});
+   			break;
 			default:
 		}
 	}
@@ -132,7 +159,3 @@ function getComp(){
 function setComp(bool){
 	this.comp = bool;
 }
-
-
-
-/////////////////

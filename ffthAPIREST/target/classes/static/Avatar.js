@@ -14,8 +14,8 @@ function Avatar (nam,scen,posx,posy,spritesheet) { //parámetros marcados desde 
 
 		this.preload=function(){
 			
-			that.scene.load.spritesheet(that.names +'p1l',that.hojadespritesheet[0],{ frameWidth: 87, frameHeight: 133 });
-			that.scene.load.spritesheet(that.names +'p1r',that.hojadespritesheet[1],{ frameWidth: 87, frameHeight: 133 });
+			that.scene.load.spritesheet(that.names +'p1l',that.hojadespritesheet[0], { frameWidth: 87, frameHeight: 133 });
+			that.scene.load.spritesheet(that.names +'p1r',that.hojadespritesheet[1], { frameWidth: 87, frameHeight: 133 });
 			that.scene.load.spritesheet(that.names +'p1lp',that.hojadespritesheet[2],{ frameWidth: 87, frameHeight: 134 });
 			that.scene.load.spritesheet(that.names +'p1rp',that.hojadespritesheet[3],{ frameWidth: 87, frameHeight: 134 });
 			that.scene.load.spritesheet(that.names +'p1le',that.hojadespritesheet[4],{ frameWidth: 110, frameHeight: 135 });
@@ -133,26 +133,26 @@ function Avatar (nam,scen,posx,posy,spritesheet) { //parámetros marcados desde 
 			})
 		var g = that.scene.anims.generateFrameNumbers(that.names + 'p1lpa', { start: 0, end: 2 });
 		that.scene.anims.create({
-    			key: that.names + 'Puñoamericano left',
+    			key: that.names + 'Punoamericano left',
    				frames:[g[0],g[1],g[2],g[1]],
     			frameRate: 9,
     			repeat: -1
 			})
 		var r = that.scene.anims.generateFrameNumbers(that.names + 'p1rpa', { start: 0, end: 2 })
 		that.scene.anims.create({
-    			key: that.names + 'Puñoamericano right',
+    			key: that.names + 'Punoamericano right',
    				frames: [r[0],r[1],r[2],r[1]],
     			frameRate: 9,
     			repeat: -1
 			})
 		that.scene.anims.create({
-    			key: that.names + 'Puñoamericano idle left',
+    			key: that.names + 'Punoamericano idle left',
    				frames: that.scene.anims.generateFrameNumbers(that.names + 'p1lpa', { start: 1, end: 1 }),
     			frameRate: 9,
     			repeat: -1
 			})
 		that.scene.anims.create({
-    			key: that.names + 'Puñoamericano idle right',
+    			key: that.names + 'Punoamericano idle right',
    				frames: that.scene.anims.generateFrameNumbers(that.names + 'p1rpa', { start: 1, end: 1 }),
     			frameRate: 9,
     			repeat: -1

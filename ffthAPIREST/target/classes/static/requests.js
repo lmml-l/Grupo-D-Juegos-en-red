@@ -1,8 +1,8 @@
-
 //Variable con la dirección IP del servidor
 var IPserver = location.host;
 
 //Añadir informacion propia
+/*
 function putMyInfo(myinfo) {
     $.ajax({
         method: "PUT",
@@ -16,6 +16,7 @@ function putMyInfo(myinfo) {
         console.log("Player data  IP/Apodo: " + JSON.stringify(myinfo));
     })
 }
+*/
 
 function putMyResponseTime(myinfo, resptime) {
     $.ajax({
@@ -58,6 +59,7 @@ function getMyResponseTime(myinfo, request) {
     })
 }
 
+/*
 function addPlayertoRoom (ip) {
     $.ajax({
         method: "PUT",
@@ -71,18 +73,23 @@ function addPlayertoRoom (ip) {
         console.log("Ip del jugador añadido " + ip);
     })
 }
-
-function deletePlayerofRoom (ip) {
+*/
+/*
+LA FUNCION DELETEPLAYEROFROOM HAY QUE AJUSTARLA PARA QUE BORRE LAS SESIONES DE WEBSOCKET 
+ADEMAS DE AJUSTARLA A LAS NUEVAS NECESIDADES 
+SE USA EN LA ESCENA LOBBY (162) Y SE DEBE RESTABLECER CUANDO FUNCIONE ADECUADAMENTE
+*/
+function deletePlayerofRoom (nombre) {
     $.ajax({
         method: "PUT",
-        url: 'http://' + IPserver + '/ips/deleteid',
-        data: JSON.stringify(ip),
+        url: 'http://' + IPserver + '/apodos/deletenombre',
+        data: JSON.stringify(nombre),
         processData: false,
         headers: {
             "Content-Type": "application/json"
         }
     }).done(function () {
-        console.log("Ip del jugador borrado" + ip);
+        console.log("Nombre del jugador borrado " + nombre);
     })
 }
 
@@ -100,46 +107,6 @@ function addMatchtoHistory(match) {
     })
 }
 
-function addIptoIpConectadas(ip) {
-    $.ajax({
-        method: "PUT",
-        url: 'http://' + IPserver + '/ips/ipconectados',
-        data: JSON.stringify(ip),
-        processData: false,
-        headers: {
-            "Content-Type": "application/json"
-        }
-    }).done(function () {
-        console.log("ip añadida " + JSON.stringify(ip));
-    })
-}
-
-function getIpsConectadas(request) {
-    $.ajax({
-        method: 'GET',
-        url: 'http://' + IPserver + '/ips/idlistconectadas',
-        headers: {
-            "Content-Type": "application/json"
-        }
-    }).done(function (data) {
-        request(data);
-        console.log("Info: " + data)
-    })
-}
-
-function addIptoIpConectadasClear() {
-    $.ajax({
-        method: "PUT",
-        url: 'http://' + IPserver + '/ips/ipconectadosclear',
-        processData: false,
-        headers: {
-            "Content-Type": "application/json"
-        }
-    }).done(function () {
-        console.log("ips conectadas reseteadas ");
-    })
-}
-
 
 function getMyInfo(request) {
     $.ajax({
@@ -153,7 +120,6 @@ function getMyInfo(request) {
         console.log("Info: " + data)
     })
 }
-
 
 //Conseguir apodo 
 function getApodo(request,ip) {
@@ -248,13 +214,34 @@ function putTime(ip,id){
     })
 }
 
-/*Delete item from server
-function deleteItem() {
-    $.ajax({
-        method: 'DELETE',
-        url: 'http://localhost:8080/FightForTheHood/'
-    }).done(function (item) {
-        console.log("Deleted item " + itemId)
+/////////// Nuevo Junio ////////////////
+
+function login(myinfo,request){
+     $.ajax({
+        method: "PUT",
+        url: 'http://'+ IPserver+ '/login/' + myinfo.name,
+        data: JSON.stringify(myinfo),
+        processData: false,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).done(function (data) {
+        console.log(data);
+        request(data);
     })
-    */
-//}
+}
+
+function signup(myinfo,request){
+      $.ajax({
+        method: "PUT",
+        url: 'http://'+ IPserver+ '/signup/' + myinfo.name,
+        data: JSON.stringify(myinfo),
+        processData: false,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).done(function (data) {
+        console.log(data);
+        request(data);
+    })
+}
