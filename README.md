@@ -4,7 +4,7 @@
 
 ### Fase 3 - Junio
 
-En esta fase, se han solucionado los fallos de comunicación entre el cliente y el servidor mediante API REST.
+En esta fase, heredamos las actualizaciones de la fase 5, presentada en la convocatoria de diciembre, para solucionar los fallos de comunicación entre el cliente y el servidor mediante API REST. Por tanto, la implementación de websockets no será objeto de esta memoria y su implementación se mantendrá como estaba por el momento, incluyendo fallos que serán arreglados en la siguiente fase del proyecto.
 
 A continuación, actualizamos la información de esta fase.
 
@@ -18,7 +18,7 @@ En la pantalla inicial, podemos escoger entre una partida local, online o a una 
 
 - *Controles:* Indicación de las teclas que se usan para navegar y jugar
 
-Aunque se indiquen en el diagrama, en esta fase, ignoraremos la implementación y navegación una vez en el *lobby* y en el combate, ya que no dependen de API REST.
+Aunque se indiquen en el diagrama, en esta fase, ignoraremos la implementación y navegación una vez en el *lobby* y en el combate, ya que no dependen de API REST y no son objeto de esta fase.
 
 ![...](https://i.imgur.com/MO1lE5V.png)
 
@@ -47,7 +47,8 @@ Pantalla de lobby, esperando a más jugadores.
 **Intrucciones para ejecutar**
 
 Con el IDE Spring Tool Suite 4 (STS) se puede importar el directorio e inicializar el servidor seleccionando, con clic derecho, el archivo app.java y marcar *Run as->Java Application*
-Por otro lado, está el ejecutable de java **INDICAR AQUÍ NOMBRE Y CÓMO SE ABRE**
+Por otro lado, en este repositorio está el ejecutable de java **fireforthehood-0.0.1-SNAPSHOT.jar**, que se ejecuta como cualquier otro archivo .jar:
+- En Windows, se debe abrir desde la consola de comandos (cmd) con la instrucción *java -jar fireforthehood-0.0.1-SNAPSHOT.jar*
 
 Una vez esté en marcha el servidor, en un navegador web se deberá direccionar a **localhost:8080** para iniciar un cliente del juego.
 
