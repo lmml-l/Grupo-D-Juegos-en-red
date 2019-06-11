@@ -85,6 +85,8 @@ class Lobby extends Phaser.Scene {
 		this.musica.setVolume(0.5);
 		this.musica.play();
 
+		conection();
+		
 		var that = this;
 		//comprobación del estado del servidor
 		this.time.addEvent({delay:1000, loop:true,

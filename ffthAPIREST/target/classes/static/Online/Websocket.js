@@ -84,12 +84,20 @@ function conection (){
 			IsHost = null;
 			console.log("LLEGA AQUI")
 			var that=this;
-    		game.scene.getScene("EscenarioOnline").time.clearPendingEvents();
-    		game.scene.getScene("EscenarioOnline").time.removeAllEvents();
-    		game.scene.getScene("EscenarioOnline").time.addEvent({delay:1500,
+			var escenaActual;
+			for(var i=0; i< game.scene.scenes.length; i++){
+				if(game.scene.scenes[i].scene.settings.active){
+					escenaActual = game.scene.scenes[i];
+					console.log(escenaActual.scene.key)
+				}
+			}
+			console.log(game.scene.getScene(escenaActual.scene.key));
+    		game.scene.getScene(escenaActual.scene.key).time.clearPendingEvents();
+    		game.scene.getScene(escenaActual.scene.key).time.removeAllEvents();
+    		game.scene.getScene(escenaActual.scene.key).time.addEvent({delay:1500,
     		callback: function(){
-    			game.scene.getScene("EscenarioOnline").musica.stop();
-        		game.scene.sleep("EscenarioOnline");
+    			//game.scene.getScene("EscenarioOnline").musica.stop();
+        		game.scene.sleep(escenaActual.scene.key);
         		game.scene.start("MainMenu");
         		
    			}});

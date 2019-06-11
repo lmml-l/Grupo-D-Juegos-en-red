@@ -145,7 +145,7 @@ class CharapterSelectionOnline extends Phaser.Scene {
 		//texto de espera hasta que el host elija
 		this.textoWaitHost = this.add.text(450, 390, "", {fill: '#F4FFF3', font: '24px Impact', align: 'center'});
 
-		conection();
+		
         Skin = sprite2;
 	
         var that=this;
