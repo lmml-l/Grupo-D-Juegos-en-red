@@ -45,7 +45,7 @@ class CharapterSelectionOnline extends Phaser.Scene {
 		this.checkplayer2 = false;
 
 		///Variable websocket inicializacion
-		GetReady = this.checkplayer2;
+		GetReady = false;
 		//selección
 		this.posArrayP1=0;
 
@@ -117,6 +117,7 @@ class CharapterSelectionOnline extends Phaser.Scene {
 
 	create(){
 		SoloMandarUnaVez = false;
+		posInicial = [400, 400, 600, 400]
 		this.fondo = this.add.image(this.game.canvas.width/2,this.game.canvas.height/2,'menuCharacterFondo').setScale(1.3);
 		this.selection();
 
@@ -214,6 +215,8 @@ class CharapterSelectionOnline extends Phaser.Scene {
         			callback: function(){connectionJugador.send(JSON.stringify(message));}})	
 				}
 				sprite=this.seleccionaravatar(this.posArrayP1);
+
+				console.log("AMEN HERMANOS")
 		}
 
 	}
