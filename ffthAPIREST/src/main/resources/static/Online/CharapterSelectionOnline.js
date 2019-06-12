@@ -116,6 +116,7 @@ class CharapterSelectionOnline extends Phaser.Scene {
 	}
 
 	create(){
+		SoloMandarUnaVez = false;
 		this.fondo = this.add.image(this.game.canvas.width/2,this.game.canvas.height/2,'menuCharacterFondo').setScale(1.3);
 		this.selection();
 
@@ -209,7 +210,8 @@ class CharapterSelectionOnline extends Phaser.Scene {
 				var data = {ready : that.checkplayer1 };
 				var message = {protocolo: "GetReady", ready : data };
 				if(connectionJugador.readyState==1){
-					connectionJugador.send(JSON.stringify(message));
+					that.time.addEvent({delay:1000 ,loop:true ,
+        			callback: function(){connectionJugador.send(JSON.stringify(message));}})	
 				}
 				sprite=this.seleccionaravatar(this.posArrayP1);
 		}
