@@ -82,6 +82,7 @@ function conection (){
 			break;
 			case "RESTART SALA":
 			IsHost = null;
+			ipsLobby = new Array();
 			console.log("LLEGA AQUI")
 			var that=this;
 			var escenaActual;

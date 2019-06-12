@@ -126,6 +126,17 @@ public class WebsocketDropHandler extends TextWebSocketHandler {
 			}
 	}
 	
+	
+	private void sendParticipantsInSameMatch(WebSocketSession session, Object newNode) throws IOException {
+
+		//System.out.println("Message sent: " + newNode.toString());
+		List<WebSocketSession> participantes = ParesDeUsuariosEnLaMismaPartida.get(session.getId());
+			for(WebSocketSession participant : participantes){
+				if(!participant.getId().equals(session.getId())) {
+					participant.sendMessage(new TextMessage(newNode.toString()));
+				}
+		}	
+	}
 	private void SelectordeTipodeMensaje(WebSocketSession session , JsonNode node) throws IOException {
 		
 		ObjectNode newNode = mapper.createObjectNode();
@@ -144,7 +155,13 @@ public class WebsocketDropHandler extends TextWebSocketHandler {
 			//sendOtherParticipants(session, newNode);
 			sendHostToClient(session, newNode);
 			break;
-			
+		case "RESTART SALA":
+			newNode.put("protocolo", node.get("protocolo").asText());
+			sendParticipantsInSameMatch(session, newNode);
+			BorrarJugadoresEnPartida();
+			ParesDeUsuariosEnLaMismaPartida.clear();
+			sessions.clear();
+			break;
 		default:
 			
 		}	

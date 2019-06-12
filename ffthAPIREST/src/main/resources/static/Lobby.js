@@ -74,6 +74,7 @@ class Lobby extends Phaser.Scene {
 	}
 
 	create(){
+		ipsLobby = new Array();
 		var that = this;
 		var i = 0;
 		this.fondo  = this.add.image(this.game.canvas.width/2,this.game.canvas.height/2,'menuLobbyFondo').setScale(1.3);
@@ -135,6 +136,9 @@ class Lobby extends Phaser.Scene {
 	retroceder(){
 		var that = this;
 		if(this.escape.isDown){
+			var messagee = {protocolo: "RESTART SALA"}
+			connectionDrops.send(JSON.stringify(messagee))
+			ipsLobby = new Array();
 			deletePlayerofRoom(game.scene.getScene("nameMenu").textoNombreLogin.text)
 			that.musica.stop();
 			that.scene.start('MainMenu');

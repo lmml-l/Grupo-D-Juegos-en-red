@@ -76,10 +76,14 @@ checkPartida(){
         that.musica.stop();
 
         that.time.addEvent({delay:500,  
-        callback: function(){that.victoria.play();}});
+        callback: function(){
+            that.time.clearPendingEvents();
+            that.time.removeAllEvents();
+            that.victoria.play();}});
 
         that.time.addEvent({delay:3000, 
-        callback: function(){that.scene.start('MainMenu'); that.musica.stop();}});
+        callback: function(){
+            that.scene.start('MainMenu'); that.musica.stop();}});
         }});
     }
     if(victorias[1]==3){                                        //jugador 2
@@ -92,10 +96,15 @@ checkPartida(){
             that.musica.stop();
 
         that.time.addEvent({delay:500,  
-            callback: function(){that.victoria.play();}});
+            callback: function(){
+                  that.time.clearPendingEvents();
+                  that.time.removeAllEvents();
+                  that.victoria.play();
+            }});
 
         that.time.addEvent({delay:3000,  
-            callback: function(){that.scene.start('MainMenu'); that.musica.stop();}});
+            callback: function(){
+                that.scene.start('MainMenu'); that.musica.stop();}});
         }});  
     }
 
