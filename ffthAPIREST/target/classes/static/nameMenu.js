@@ -111,8 +111,8 @@ class nameMenu extends Phaser.Scene {
 
 	create(){
 		volverAIntentarloguear = true;
-		islogininfocorrect=""
-		
+		islogininfocorrect=""	
+			
 		this.fondo = this.add.image(this.game.canvas.width/2,this.game.canvas.height/2,'menuNombreFondo').setScale(1.3);
 		
 		this.musica = this.game.sound.add('musicacontrol');
@@ -209,72 +209,43 @@ class nameMenu extends Phaser.Scene {
 		}	
 	}
 
-	actualizarPosArray(){	
+	actualizarPosArrayTexto(){	
 		if(this.abajo.isDown && (this.posArray<2)){
 			this.posArray = this.posArray+2;
+			this.abajo.isDown = false;
 		}
 		
 		if(this.arriba.isDown && (1<this.posArray)){
 			this.posArray = this.posArray-2;
+			this.arriba.isDown = false;
 		}
 		
 		if(this.derecha.isDown && (this.posArray<3)){
 			this.posArray++;
+			this.derecha.isDown = false;
 		}
 		
 		if(this.izquierda.isDown && (0<this.posArray)){
 			this.posArray--;
+			this.izquierda.isDown = false;
+		}
+		
+		if(this.posArray == 0){
+			textoModificable = this.textoNombreNew;
+		}else if(this.posArray == 1){
+			textoModificable = this.textoNombreLogin;
+		}else if(this.posArray == 2){
+			textoModificable = this.textoPasswordNew;
+		}else{
+			textoModificable = this.textoPasswordLogin;
 		}
 	}
 
-	seleccionContraseñaONombre(){
-	//Máquina de estados para apuntar a distintos campos de texto
-	//Puedes elegir entre contraseña y nombre para registrarse (new)
-		var that = this;
-
-		if(that.derecha.isDown){
-			if(textoModificable == that.textoPasswordNew){
-				textoModificable   = that.textoPasswordLogin;
-			} 
-			if(textoModificable == that.textoNombreNew){
-				textoModificable  = that.textoNombreLogin;
-			}
-			that.derecha.isDown = false;
-		}
-		if(that.izquierda.isDown){
-			if(textoModificable == that.textoPasswordLogin){
-				textoModificable 	= that.textoPasswordNew;
-			}
-			if(textoModificable == that.textoNombreLogin){
-				textoModificable  = that.textoNombreNew;
-			}
-			that.izquierda.isDown = false;
-		}
-		if(this.arriba.isDown){
-			if(textoModificable == that.textoPasswordLogin){
-				textoModificable = this.textoNombreLogin;
-			}
-            if(textoModificable == that.textoPasswordNew){
-            	textoModificable = this.textoNombreNew;
-            }
-            this.arriba.isDown = false;
-        }
-        if(this.abajo.isDown){
-            if(textoModificable == that.textoNombreNew){
-				textoModificable = this.textoPasswordNew;
-			}
-            if(textoModificable == that.textoNombreLogin){
-            	textoModificable = this.textoPasswordLogin;
-            }
-            this.abajo.isDown = false;
-        }
-    }
     
 	update(){
 		this.retroceder();
 		this.aceptar();
 		this.actualizarSelector();
-		this.actualizarPosArray();
-		this.seleccionContraseñaONombre();
+		this.actualizarPosArrayTexto();
 	}
 }
