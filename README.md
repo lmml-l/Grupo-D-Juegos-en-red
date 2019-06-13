@@ -2,6 +2,75 @@
 
 ## Fases de junio
 
+### Fase 4 - Junio
+
+En esta fase implementamos websockets para que nuestro juego pueda ser multijugador entre dos equipos en línea.
+En esta documentación explicaremos de forma básica el funcionamiento y la organización interna de dicha implementación.
+
+Partimos de la anterior fase 3 de junio, que al igual que esta hereda los cambios realizados en diciembre en la fase 5.
+
+**Partida multijugador**
+
+Partimos desde la implementación anterior de API REST, en el que dos jugadores pueden conectarse a una sala. Esta vez, en lugar de dar paso a una partida local, acceden a una verdadera partida multijugador.
+
+![...](https://i.imgur.com/ZK3E93K.jpg)
+
+Una vez que dos clientes hayan accedido a la sala, ambos jugadores pasan a la pantalla de selección de personaje. Al primer jugador que entre se le indica que es el *host*. El segundo jugador deberá esperar a que el host elija para poder escoger, tras lo cual comienza la partida. Mientras la sala de espera esté llena, no podrán acceder más jugadores.
+
+![...](https://i.imgur.com/Tge4djb.jpg)
+
+Durante la partida, el jugador maneja a su personaje por el entorno de juego, teniendo ambos clientes las mismas armas disponibles en el escenario, mismo tiempo restante y, en definitiva, la misma información de partida. Una vez que uno de los jugadores gane la pelea, al mejor de tres rondas, se acaba el combate y se reinicia.
+
+En la imagen, un ejemplo de partida sobre un mismo ordenador, pero que sirve para mostrar la sincronización de ambas partidas.
+
+![...](https://i.imgur.com/mmRxQyY.jpg)
+
+**Websockets y mensajes**
+
+A nivel lógico, cada cliente genera por su cuenta toda la información necesaria para ejecutar una partida, como si fuera en local. Dado que necesitamos modificar información que se refleje de la misma manera para ambos jugadores sobre un escenario común, uno de los clientes, el primero en entrar al *lobby*, actuará como *host* para algunas comunicaciones.
+
+Se utilizan cuatro websockets para el envío y recepción de mensajes:
+- **Echo**- Informacion que se comunica a todos los clientes en partida. 
+   Se compone de los siguientes protocolos recogidos en el manejador *WebsocketEchoHandler*:
+    - *GetReady* - En el selector de personajes, da la señal de que el cliente está listo para comenzar
+    - *Skin* - Se comunica el aspecto (skin) que tendrá el personaje al iniciar la partida
+    - *Jugador* - Durante la pelea, se indica información de la clase Jugador como la posición, la vida, el arma o las acciones que realiza (moverse, disparar, etc).
+    
+    La información de *Jugador* se obtiene de forma predictiva, puesto que cada cliente conoce las acciones del otro, las calcula y, periódicamente, las corrige con datos absolutos, como puede ser la posición o la vida.
+    
+- **Drop**- Información que se actualiza desde el cliente *host* al otro.
+   Armas del escenario (drops) y posición inicial.
+   Se compone de los siguientes protocolos recogidos en el manejador *WebsocketDropHandler*:
+    - *Drops* - Se envían las armas generadas desde el *host*
+    - *Posicion* - Se envía la posición inicial generada desde el *host* para que ambos jugadores se coloquen en el mismo sitio
+    
+- **Tiempo**- Información que se actualiza desde el cliente *host* al otro.
+    Sincroniza el tiempo restante por ronda entre los dos jugadores e indica quién es el jugador *host*.
+    Se compone de los siguientes protocolos recogidos en el manejador *WebsocketTimeHandler*:
+    - *Tiempo* - En partida envía el tiempo restante generado en el *host*
+    - *Host* - En el selector de personajes indica únicamente al jugador *host* su estatus como tal
+    
+- **Puntuación** - En prevención de errores, envía desde el *host* el número de victorias conseguido por ambos jugadores.
+
+**Diagrama de clases**
+
+Para la implementación de la comunicación asíncrona, se han añadido cuatro websockets, cada uno con su manejador. Todos ellos se encargan de la agrupación de sesiones, diferenciándose únicamente por los protocolos que gestionan y por el número de clientes que gestionan el mensaje. Es decir, si éstos mensajes son escuchados por los dos jugadores o sólo por uno de ellos.
+
+![...](https://i.imgur.com/pXgX1Vb.png)
+
+**Vídeo**
+
+En este vídeo, resumimos las características de nuestro juego y una demonstración de partida. 
+
+Recomendamos verlo en pantalla completa, pues al subirse a Youtube, muchos monitores acaban distorsionando la imagen con un *efecto Moiré*, no monstrándose como es en realidad a menos de abrir la pantalla completa. 
+
+Pinche en la imagen para ver el vídeo:
+
+[![](http://img.youtube.com/vi/ThUG2cx4QaQ/0.jpg)](http://www.youtube.com/watch?v=ThUG2cx4QaQ "Vídeo")
+
+
+**--------------------------------------------FIN DE FASE 3 - JUNIO --------------------------------------------**
+
 ### Fase 3 - Junio
 
 En esta fase, heredamos las actualizaciones de la fase 5, presentada en la convocatoria de diciembre, para solucionar los fallos de comunicación entre el cliente y el servidor mediante API REST. Por tanto, la implementación de websockets no será objeto de esta memoria y su implementación se mantendrá como estaba por el momento, incluyendo fallos que serán arreglados en la siguiente fase del proyecto.
