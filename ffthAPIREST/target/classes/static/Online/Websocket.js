@@ -36,6 +36,7 @@ function conection (){
 			break;
 			case "GetReady":
 			GetReady = datosGuardadosComoObjeto.ready;
+			console.log("Me ha llegado el ready")
 			break;
 			case "Skin":
 			Skin = datosGuardadosComoObjeto.skin;
