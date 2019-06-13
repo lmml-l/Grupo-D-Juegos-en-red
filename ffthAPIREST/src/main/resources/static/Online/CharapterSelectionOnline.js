@@ -131,7 +131,7 @@ class CharapterSelectionOnline extends Phaser.Scene {
 		//indicación de los controles
 		this.textoControles = this.add.text(160, 540, "\nselect\naccept", { fill: '#FFFFFF', font: '30px Impact', align: 'center'});
 		this.textoControles = this.add.text(60, 540, "\nA,D\nSPACE", { fill: '#FFAC00', font: '32px Impact', align: 'center'});
-		this.subtitulo 		= this.add.text(360, 350, "CHOOSE YOUR FIGHTER", { fill: '#FFAC00', font: '38px Impact', align: 'center'});
+		this.subtitulo 		= this.add.text(360, 350, "WAITING...", { fill: '#FFAC00', font: '38px Impact', align: 'center'});
 		this.textoSalir     = this.add.text(50, 730, "ESC to exit", { fill: '#F4FFF3', font: '24px Impact', align: 'center'});
 		this.textoConexion  = this.add.text(650, 730, "Connection status: connected", { fill: '#F4FFF3', font: '24px Impact', align: 'center'});
 
@@ -159,9 +159,25 @@ class CharapterSelectionOnline extends Phaser.Scene {
 		var textoreadysolounavez = false;
     	this.time.addEvent({delay:1000 ,loop:true ,
         callback: function(){that.checkplayer2 = GetReady
+        	//Indica quién debe escoger primero
+        	if(IsHost!=null && !textoreadysolounavez){
+        		that.subtitulo.text = "NOW YOU CHOOSE YOUR FIGHTER";
+        	}
+        	else if (!textoreadysolounavez){
+        		that.subtitulo.text = "WAITING FOR RIVAL TO CHOOSE";
+        	}
+        	//El host ya ha escogido	
         	if(that.checkplayer2 && !textoreadysolounavez){
         		that.textoWaitHost.text = "\n"+"Rival is ready";
+        		that.subtitulo.text = "NOW YOU CHOOSE YOUR FIGHTER";
         		textoreadysolounavez = true;
+        	}
+        	if(that.checkplayer1){
+        		that.subtitulo.text = "WAITING FOR RIVAL TO CHOOSE";
+        	}
+        	//Indicación de comienzo partida
+        	if(that.checkplayer1 && that.checkplayer2){
+        		that.subtitulo.text = "STARTING FIGHT!";
         	}
         } 
     	});
@@ -177,6 +193,8 @@ class CharapterSelectionOnline extends Phaser.Scene {
     		}
     		if(IsHost!=null){
     			IsHostText.text="You are the host";
+    		}else{
+    			IsHostText.text="You are the guest";
     		}
     	}})
 
@@ -215,8 +233,6 @@ class CharapterSelectionOnline extends Phaser.Scene {
         			callback: function(){connectionJugador.send(JSON.stringify(message));}})	
 				}
 				sprite=this.seleccionaravatar(this.posArrayP1);
-
-				console.log("AMEN HERMANOS")
 		}
 
 	}
@@ -240,6 +256,7 @@ startPartida () {
 		if(this.confirmar2.isDown && (IsHost!=null || this.checkplayer2)){
 
 			this.add.text(480, 390, "\n\n"+"Ready", {fill: '#00853A', font: '24px Impact'});
+			//this.subtitulo.text = "WAITING FOR RIVAL TO CHOOSE"
 		}
 
 		if(this.checkplayer1 && this.checkplayer2){
