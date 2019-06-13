@@ -45,6 +45,7 @@ class nameMenu extends Phaser.Scene {
 	retroceder(){
 		if(this.escape.isDown){
 			this.scene.start('MainMenu');
+			game.scene.getScene("MainMenu").textoDesconexionValor = "";
 			this.musica.stop();
 			this.escape.isDown=false;
 		}

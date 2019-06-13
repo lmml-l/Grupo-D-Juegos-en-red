@@ -30,6 +30,7 @@ create (){
     //devuelve al menú inicial
     if(that.num >= 3){
         that.scene.start('MainMenu');
+        game.scene.getScene("MainMenu").textoDesconexionValor = "";
         }
     }})
 

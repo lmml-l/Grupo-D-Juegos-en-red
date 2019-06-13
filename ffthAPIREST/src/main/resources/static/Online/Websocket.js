@@ -101,6 +101,8 @@ function conection (){
     			//game.scene.getScene("EscenarioOnline").musica.stop();
         		game.scene.sleep(escenaActual.scene.key);
         		game.scene.start("MainMenu");
+        		//Mensaje de error
+        		game.scene.getScene("MainMenu").textoDesconexionValor = "YOUR RIVAL HAS DISCONNECT :( PLEASE TRY AGAIN";
         		
    			}});
    			break;

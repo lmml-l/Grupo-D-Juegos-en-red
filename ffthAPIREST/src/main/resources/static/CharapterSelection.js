@@ -174,6 +174,7 @@ class CharapterSelection extends Phaser.Scene {
 	scenechange(){
 		if(this.salir.isDown){
 			this.scene.start('MainMenu');
+			game.scene.getScene("MainMenu").textoDesconexionValor = "";
 			this.musica.stop();
 		}
 		if(this.checkplayer1 && this.checkplayer2){
