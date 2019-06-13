@@ -46,7 +46,7 @@ function conection (){
 		}
 	}
 	connectionJugador.onclose = function() {
-		setTimeout(conection(),1000);
+		//setTimeout(conection(),1000);
 		console.log("Closing socket");
 	}
 
@@ -62,7 +62,7 @@ function conection (){
 		}
 	}
 	connectionPuntuacion.onclose = function() {
-		setTimeout(conection(),1000);
+		//setTimeout(conection(),1000);
 		console.log("Closing socket");
 	}
 
@@ -105,12 +105,13 @@ function conection (){
         		game.scene.getScene("MainMenu").textoDesconexionValor = "YOUR RIVAL HAS DISCONNECT :( PLEASE TRY AGAIN";
         		
    			}});
+   			connectionDrops.close()
    			break;
 			default:
 		}
 	}
 	connectionDrops.onclose = function() {
-		setTimeout(conection(),1000);
+		//setTimeout(conection(),1000);
 		console.log("Closing socket");
 	}
 
@@ -128,7 +129,7 @@ function conection (){
 		}
 	}
 	connectionTiempo.onclose = function() {
-		setTimeout(conection(),1000);
+		//setTimeout(conection(),1000);
 		console.log("Closing socket");
 		sumCheck();
 		if(getCheck()>=3){

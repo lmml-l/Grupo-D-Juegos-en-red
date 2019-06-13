@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -16,6 +17,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class WebsocketTimeHandler extends TextWebSocketHandler {
+	
+	@Autowired
+	private MyMatch mymatch;
 	
 	private Map<String, WebSocketSession> sessions = new ConcurrentHashMap<>();
 	private Map<String,List<WebSocketSession>> ParesDeUsuariosEnLaMismaPartida = new ConcurrentHashMap<>();
@@ -108,6 +112,10 @@ public class WebsocketTimeHandler extends TextWebSocketHandler {
 			}
 	}
 	
+	private void BorrarJugadoresEnPartida() {
+		mymatch.getNombresenPartida().clear();
+	}
+	
 	private void SelectordeTipodeMensaje(WebSocketSession session , JsonNode node) throws IOException {
 		
 		ObjectNode newNode = mapper.createObjectNode();
@@ -130,6 +138,11 @@ public class WebsocketTimeHandler extends TextWebSocketHandler {
 				newNode.set("ishost", null);
 			}
 			session.sendMessage(new TextMessage(newNode.toString()));
+			break;
+		case "VACIAR SESIONES":
+			BorrarJugadoresEnPartida();
+			ParesDeUsuariosEnLaMismaPartida.clear();
+			sessions.clear();
 			break;
 		default:
 			

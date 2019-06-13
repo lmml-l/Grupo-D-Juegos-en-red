@@ -77,8 +77,8 @@ checkPartida(){
 
         that.time.addEvent({delay:500,  
         callback: function(){
-            that.time.clearPendingEvents();
-            that.time.removeAllEvents();
+            //that.time.clearPendingEvents();
+            //that.time.removeAllEvents();
             that.victoria.play();}});
 
         that.time.addEvent({delay:3000, 
@@ -97,8 +97,8 @@ checkPartida(){
 
         that.time.addEvent({delay:500,  
             callback: function(){
-                  that.time.clearPendingEvents();
-                  that.time.removeAllEvents();
+                  //that.time.clearPendingEvents();
+                  //that.time.removeAllEvents();
                   that.victoria.play();
             }});
 
@@ -106,6 +106,11 @@ checkPartida(){
             callback: function(){
                 that.scene.start('MainMenu'); that.musica.stop();}});
         }});  
+        var mensaje = {protocolo: "VACIAR SESIONES"}
+        connectionDrops.send(JSON.stringify(mensaje));
+        connectionTiempo.send(JSON.stringify(mensaje));
+        connectionJugador.send(JSON.stringify(mensaje));
+        connectionPuntuacion.send(JSON.stringify(mensaje));
     }
 
     //Si los dos jugadores llegan a 0 al mismo tiempo

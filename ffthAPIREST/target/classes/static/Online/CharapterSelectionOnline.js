@@ -176,7 +176,7 @@ class CharapterSelectionOnline extends Phaser.Scene {
         		that.subtitulo.text = "WAITING FOR RIVAL TO CHOOSE";
         	}
         	//Indicación de comienzo partida
-        	if(this.checkplayer1 && this.checkplayer2){
+        	if(that.checkplayer1 && that.checkplayer2){
         		that.subtitulo.text = "STARTING FIGHT!";
         	}
         } 
