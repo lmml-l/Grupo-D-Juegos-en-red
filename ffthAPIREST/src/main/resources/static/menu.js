@@ -18,6 +18,8 @@ class MainMenu extends Phaser.Scene {
 		this.lock4;
 		this.musica;
 
+		this.textoDesconexion;
+		this.textoDesconexionValor;
 		this.textoControles;
 		this.textoVersion;
 		this.fondo;
@@ -93,8 +95,10 @@ class MainMenu extends Phaser.Scene {
 		this.musica.play();
 
 		//textos de apoyo
-		this.textoControles = this.add.text(50, 710, "Use A/D or arrows to select\nPress SPACE or ENTER to go", {  fill: '#F4FFF3', font: '24px Impact', align: 'left'});
-		this.textoVersion   = this.add.text(700, 750, "v.6.0 Fase 3 Junio", { fill: '#F4FFF3', font: '16px Lucida Console', align: 'center'}); //760, 710
+		this.textoDesconexionValor = null;
+		this.textoDesconexion = this.add.text(50, 10, "", {  fill: '#FD0000', font: '24px Impact', align: 'left'});
+		this.textoControles   = this.add.text(50, 710, "Use A/D or arrows to select\nPress SPACE or ENTER to go", {  fill: '#F4FFF3', font: '24px Impact', align: 'left'});
+		this.textoVersion     = this.add.text(700, 750, "v.7.0 Fase 4 Junio", { fill: '#F4FFF3', font: '16px Lucida Console', align: 'center'}); //760, 710
 		var that=this;
 
 		//comprobación del estado del servidor cada segundo
@@ -184,5 +188,8 @@ class MainMenu extends Phaser.Scene {
 		this.actualizarSelector();
 		this.actualizarPosArray();
 		this.teclasoltada();
+
+		if(this.textoDesconexionValor != null)
+			this.textoDesconexion.text = this.textoDesconexionValor;
 	}
 }

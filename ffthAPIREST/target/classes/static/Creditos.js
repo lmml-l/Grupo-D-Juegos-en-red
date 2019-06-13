@@ -50,6 +50,7 @@ class Creditos extends Phaser.Scene {
 			this.time.clearPendingEvents();
     		this.time.removeAllEvents();
 			this.scene.start('MainMenu');
+			game.scene.getScene("MainMenu").textoDesconexionValor = "";
 			this.musica.stop();
 		}
 	}
