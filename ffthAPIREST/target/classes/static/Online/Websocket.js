@@ -78,7 +78,7 @@ function conection (){
 			case "Posicion":
 			PosicionWS = datosGuardadosComoObjeto.posicion;
 			if(PosicionWS!= undefined){
-			posInicial = PosicionWS;
+			//posInicial = PosicionWS;
 			}
 			break;
 			case "RESTART SALA":
@@ -124,6 +124,7 @@ function conection (){
 			Tiempo = datosGuardadosComoObjeto.tiempo; 
 			break;
 			case "Host":
+			if(datosGuardadosComoObjeto.ishost != undefined)
 			IsHost = datosGuardadosComoObjeto.ishost;
 			default:
 		}

@@ -193,11 +193,15 @@ class CharapterSelectionOnline extends Phaser.Scene {
     		}
     		if(IsHost!=null){
     			IsHostText.text="You are the host";
+    			posInicial = [400, 400, 600, 400]
     		}else{
     			IsHostText.text="You are the guest";
+    			posInicial = [600, 400, 400, 400]
+    			console.log(posInicial);
     		}
     	}})
 
+/*
     	//Envía la posición inicial correspondiente al segundo jugador (no host)
     	this.time.addEvent({delay:1000, loop:true, 
     	callback: function(){
@@ -209,6 +213,7 @@ class CharapterSelectionOnline extends Phaser.Scene {
             posInicial = PosicionWS.posicion;
             }
     	}})
+ */
 	}
 
 	//actualiza las imágenes de la flecha de selección
