@@ -44,13 +44,6 @@ public class WebsocketPuntuacionHandler extends TextWebSocketHandler {
 		System.out.println("Session closed: " + session.getId());
 		sessions.remove(session.getId());
 		
-		ObjectNode msg = mapper.createObjectNode();
-		msg.put("protocolo","RESTART SALA");
-		System.out.println("VOY A MANDAR EL MENSAJE");
-		Collection<WebSocketSession> participantes =  sessions.values();
-		for(WebSocketSession participant : participantes) {
-			participant.sendMessage(new TextMessage(msg.toString()));
-		}
 		BorrarJugadoresEnPartida();
 		ParesDeUsuariosEnLaMismaPartida.clear();
 		sessions.clear();
