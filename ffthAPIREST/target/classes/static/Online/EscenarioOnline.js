@@ -58,7 +58,7 @@ restartPartida(){
     this.time.addEvent({delay:1500,
     callback: function(){
         that.scene.restart();
-        that.musica.stop();
+        //that.musica.stop();
     }});
 }
 

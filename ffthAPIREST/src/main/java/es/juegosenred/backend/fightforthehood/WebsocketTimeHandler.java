@@ -2,8 +2,11 @@ package es.juegosenred.backend.fightforthehood;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +25,7 @@ public class WebsocketTimeHandler extends TextWebSocketHandler {
 	private MyMatch mymatch;
 	
 	private Map<String, WebSocketSession> sessions = new ConcurrentHashMap<>();
-	private Map<String,List<WebSocketSession>> ParesDeUsuariosEnLaMismaPartida = new ConcurrentHashMap<>();
+	private BlockingQueue<WebSocketSession> ParesDeUsuariosEnLaMismaPartida = new ArrayBlockingQueue<WebSocketSession>(2);
 	private ObjectMapper mapper = new ObjectMapper();
 	
 	
@@ -30,7 +33,7 @@ public class WebsocketTimeHandler extends TextWebSocketHandler {
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		System.out.println("New user: " + session.getId());
 		sessions.put(session.getId(), session);
-		AgruparSesionesDeDosEnDos(session);
+		ParesDeUsuariosEnLaMismaPartida.add(session);
 	
 	}
 	
@@ -39,21 +42,31 @@ public class WebsocketTimeHandler extends TextWebSocketHandler {
 		System.out.println("Session closed: " + session.getId());
 		sessions.remove(session.getId());
 		
+		ObjectNode msg = mapper.createObjectNode();
+		msg.put("protocolo","RESTART SALA");
+		System.out.println("VOY A MANDAR EL MENSAJE");
+		Collection<WebSocketSession> participantes =  sessions.values();
+		for(WebSocketSession participant : participantes) {
+			participant.sendMessage(new TextMessage(msg.toString()));
+		}
+		BorrarJugadoresEnPartida();
 		ParesDeUsuariosEnLaMismaPartida.clear();
-		BorrarSesionesDeDosEnDos(session);	
+		sessions.clear();
+		//BorrarSesionesDeDosEnDos(session);
+		ParesDeUsuariosEnLaMismaPartida.remove(session);
 	}
 	
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		
-		System.out.println("Message received: " + message.getPayload());
+		//System.out.println("Message received: " + message.getPayload());
 		JsonNode node = mapper.readTree(message.getPayload());
 		
 		SelectordeTipodeMensaje(session, node);
 	}
 	
 	//La nueva sesion se genera cuando los usuarios llegan al CharacterSelectionOnline , asi que se agrupan dos usuarios que seran aquellos que vayan a jugar la partida
-	private void AgruparSesionesDeDosEnDos(WebSocketSession session) {
+	/*private void AgruparSesionesDeDosEnDos(WebSocketSession session) {
 		boolean IsContained= false;
 		for(List<WebSocketSession> i: ParesDeUsuariosEnLaMismaPartida.values()){
 			if(i.size()==1 && !IsContained) {
@@ -71,9 +84,9 @@ public class WebsocketTimeHandler extends TextWebSocketHandler {
 			ListaConParDeUsuariosDeUnaNuevaPartida.add(session);
 			ParesDeUsuariosEnLaMismaPartida.put(session.getId(), ListaConParDeUsuariosDeUnaNuevaPartida);
 		}
-	}
+	}*/
 	
-	private void BorrarSesionesDeDosEnDos(WebSocketSession session){
+	/*private void BorrarSesionesDeDosEnDos(WebSocketSession session){
 		boolean IsFound = false;
 		for(List<WebSocketSession> i: ParesDeUsuariosEnLaMismaPartida.values()){
 			if(i.contains(session)&&!IsFound){
@@ -96,20 +109,31 @@ public class WebsocketTimeHandler extends TextWebSocketHandler {
 			}
 		}
 		
-	}
+	}*/
 
 	
 	private void sendHostToClient(WebSocketSession session, Object newNode) throws IOException {
 		
-		System.out.println("Message sent: " + newNode.toString());
-		List<WebSocketSession> participantes = ParesDeUsuariosEnLaMismaPartida.get(session.getId());
-			if(participantes.get(0).equals(session)) {
-				for(WebSocketSession participant : participantes){
+		//System.out.println("Message sent: " + newNode.toString());
+		//List<WebSocketSession> participantes = ParesDeUsuariosEnLaMismaPartida.get(session.getId());
+		if(ParesDeUsuariosEnLaMismaPartida.peek().equals(session)) {
+			for(WebSocketSession participant : ParesDeUsuariosEnLaMismaPartida){
 				if(!participant.getId().equals(session.getId())) {
 					participant.sendMessage(new TextMessage(newNode.toString()));
 				}
 			}	
-			}
+		}
+	}
+	
+	private void sendParticipantsInSameMatch(WebSocketSession session, Object newNode) throws IOException {
+
+		//System.out.println("Message sent: " + newNode.toString());
+		//List<WebSocketSession> participantes = ParesDeUsuariosEnLaMismaPartida.get(session.getId());
+			for(WebSocketSession participant : ParesDeUsuariosEnLaMismaPartida){
+				if(!participant.getId().equals(session.getId())) {
+					participant.sendMessage(new TextMessage(newNode.toString()));
+				}
+		}	
 	}
 	
 	private void BorrarJugadoresEnPartida() {
@@ -130,14 +154,20 @@ public class WebsocketTimeHandler extends TextWebSocketHandler {
 			
 		case "Host":
 			newNode.put("protocolo", node.get("protocolo").asText());
-			List<WebSocketSession> participantes = ParesDeUsuariosEnLaMismaPartida.get(session.getId());
-			System.out.println(participantes.size());
-			if(participantes.get(0).equals(session)){
+			if(ParesDeUsuariosEnLaMismaPartida.peek().equals(session)){
 				newNode.put("ishost", session.getId());
 			}else {
 				newNode.set("ishost", null);
 			}
 			session.sendMessage(new TextMessage(newNode.toString()));
+			break;
+		case "RESTART SALA":
+			System.out.println("Reseteo sala porq puedo");
+			newNode.put("protocolo", node.get("protocolo").asText());
+			sendParticipantsInSameMatch(session, newNode);
+			BorrarJugadoresEnPartida();
+			ParesDeUsuariosEnLaMismaPartida.clear();
+			sessions.clear();
 			break;
 		case "VACIAR SESIONES":
 			BorrarJugadoresEnPartida();

@@ -127,10 +127,10 @@ public class WebsocketDropHandler extends TextWebSocketHandler {
 		//List<WebSocketSession> ParesDeUsuariosEnLaMismaPartida = ParesDeUsuariosEnLaMismaPartida.get(session.getId());
 			if(ParesDeUsuariosEnLaMismaPartida.peek().equals(session)) {
 				for(WebSocketSession participant : ParesDeUsuariosEnLaMismaPartida){
-				if(!participant.getId().equals(session.getId())) {
-					participant.sendMessage(new TextMessage(newNode.toString()));
-				}
-			}	
+					if(!participant.getId().equals(session.getId())) {
+						participant.sendMessage(new TextMessage(newNode.toString()));
+					}
+				}	
 			}
 	}
 	
@@ -143,7 +143,7 @@ public class WebsocketDropHandler extends TextWebSocketHandler {
 				if(!participant.getId().equals(session.getId())) {
 					participant.sendMessage(new TextMessage(newNode.toString()));
 				}
-		}	
+			}	
 	}
 	private void SelectordeTipodeMensaje(WebSocketSession session , JsonNode node) throws IOException {
 		
