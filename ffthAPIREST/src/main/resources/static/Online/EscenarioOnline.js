@@ -5,7 +5,9 @@ class EscenarioOnline extends Phaser.Scene {
 
 	constructor(){
 		super({key:"EscenarioOnline"});
-        
+
+        this.salir;
+
         //Posicionamos los personajes. Posición definida en CharacterSelection
         this.avatar         = new Avatar("a",this,posInicial[0],posInicial[1],sprite);   //Jugador host
         this.avatar1        = new Avatar("b",this,posInicial[2],posInicial[3],sprite2);  //Jugador cliente
@@ -58,7 +60,7 @@ restartPartida(){
     this.time.addEvent({delay:1500,
     callback: function(){
         that.scene.restart();
-        //that.musica.stop();
+        that.musica.stop();
     }});
 }
 
@@ -144,7 +146,7 @@ checkPartida(){
         this.finTiempoTexto.setText("KO");
         this.ganadorTexto.setText("\nP2 WINS");
         this.restartPartida();
-        //this.musica.stop();
+        this.musica.stop();
     }
     else if(this.jugador1.vida<=0 && this.jugador.vida>0){      //jugador 2
         victorias[0]+=1;
@@ -152,7 +154,7 @@ checkPartida(){
         this.finTiempoTexto.setText("KO");
         this.ganadorTexto.setText("\nP1 WINS");
         this.restartPartida();
-        //this.musica.stop();
+        this.musica.stop();
     } 
     //Si acaba el tiempo
     if(91-this.Clock.getElapsedSeconds() == 0){                 //comprobación de reloj (diferencia de tiempo) 
@@ -385,6 +387,8 @@ preload(){
 }
 
 create(){
+    this.salir        = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
+    this.salir.isDown = false;
 
 	this.add.sprite(512, 215, 'fondo');
 	this.add.sprite(512, 681, 'HUD');
@@ -752,7 +756,16 @@ update(){ //actualizaciones
     //}
 
     this.hud.update();
+
+    if(this.salir.isDown){
+        var messagee = {protocolo: "RESTART SALA"}
+        connectionDrops.send(JSON.stringify(messagee))
+        ipsLobby = new Array();
+        deletePlayerofRoom(game.scene.getScene("nameMenu").textoNombreLogin.text)
+        this.scene.start('MainMenu');
+        this.musica.stop();
     }
+}
 
 sonidos(jugador){
     if(jugador.shotCheck >= 1){
@@ -797,5 +810,4 @@ sonidos(jugador){
         jugador.dropCheck = 1;
     }
 }
-
 }

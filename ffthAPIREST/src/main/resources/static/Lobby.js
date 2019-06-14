@@ -103,7 +103,7 @@ class Lobby extends Phaser.Scene {
 			if(ipsLobby.length == 2){
 				that.time.addEvent({delay:1000, callback: function(){	
 					that.scene.start('CharapterSelectionOnline');
-					//that.musica.stop();
+					that.musica.stop();
 				}})
 			}
 			});
