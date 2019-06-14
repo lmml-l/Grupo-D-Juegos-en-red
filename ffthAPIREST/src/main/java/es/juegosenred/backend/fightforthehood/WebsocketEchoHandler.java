@@ -41,7 +41,6 @@ public class WebsocketEchoHandler extends TextWebSocketHandler {
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 		System.out.println("Session closed: " + session.getId());
 		sessions.remove(session.getId());
-		
 		BorrarJugadoresEnPartida();
 		ParesDeUsuariosEnLaMismaPartida.clear();
 		sessions.clear();
