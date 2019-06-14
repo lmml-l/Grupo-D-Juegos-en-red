@@ -58,7 +58,7 @@ restartPartida(){
     this.time.addEvent({delay:1500,
     callback: function(){
         that.scene.restart();
-        //that.musica.stop();
+        that.musica.stop();
     }});
 }
 
@@ -144,7 +144,7 @@ checkPartida(){
         this.finTiempoTexto.setText("KO");
         this.ganadorTexto.setText("\nP2 WINS");
         this.restartPartida();
-        //this.musica.stop();
+        this.musica.stop();
     }
     else if(this.jugador1.vida<=0 && this.jugador.vida>0){      //jugador 2
         victorias[0]+=1;
@@ -152,7 +152,7 @@ checkPartida(){
         this.finTiempoTexto.setText("KO");
         this.ganadorTexto.setText("\nP1 WINS");
         this.restartPartida();
-        //this.musica.stop();
+        this.musica.stop();
     } 
     //Si acaba el tiempo
     if(91-this.Clock.getElapsedSeconds() == 0){                 //comprobación de reloj (diferencia de tiempo) 
