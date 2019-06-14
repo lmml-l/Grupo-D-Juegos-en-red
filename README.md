@@ -353,6 +353,84 @@ Pinche en la imagen para ver el vídeo:
 [![](http://img.youtube.com/vi/ThUG2cx4QaQ/0.jpg)](http://www.youtube.com/watch?v=ThUG2cx4QaQ "Vídeo")
 
 **--------------------------------------------FIN FASE 4--------------------------------------------**
+**--------------------------------------------FASE 5--------------------------------------------**
+
+En esta fase, añadimos mejoras en la versión local de nuestro juego para poder publicarlo en plataformas web.
+
+En esta sección, describiremos el proceso de finalización de *Fight for the hood*, que incluye una fase de *beta testing*, implementación de mejoras y publicación final.
+
+**Beta testing**
+
+Antes de comenzar la programación de mejoras, realizamos una prueba de evaluación empírica con usuarios. Debido al poco tiempo y calado de las mejoras que podíamos asumir, empleamos como herramienta principal un cuestionario. Éste debía ser completado por los usuarios tras haber probado libremente el juego. De ellos, dos fueron conducidos mientras jugaban, mientras que el resto no obtuvo ninguna ayuda antes de comenzar el cuestionario.
+
+El cuestionario se componía de preguntas de libre respuesta, de selección única o lineal (gradual de 1 a 5).
+Puede ver las respuestas en este enlace: 
+
+https://docs.google.com/spreadsheets/d/1-axOwLXBRekAEEnjYQQIPLlrPGqdba_y3rORISz-AoE/edit?usp=sharing
+
+En síntesis, estas fueron las conclusiones y sugerencias más destacadas:
+
+ - Es necesario indicar que el juego es para dos jugadores en el mismo teclado
+ - La propuesta es suficientemente atractiva de base para ser jugado en una web, pero sólo de manera ocasional
+ - El movimiento de los personajes es demasiado lento respecto a la animación y al estilo de juego. Se reclama agilidad
+ - Algunas armas disparan demasiado lento frente a otras, desequilibrando el juego
+ - La mecánica general se comprende fácilmente
+ - Soltar armas se vuelve confuso
+ - Interfaz suficientemente intuitiva
+ - Buena coherencia visual, aunque flaquea en el menú por una paleta de color apagada
+ - El control es incómodo
+ - No se entiende cuándo te quedas sin munición
+ - El escenario es reconocible, con elementos distinguibles
+ - Pese a que fomenta el dinamismo, el escenario favorece en exceso el movimiento vertical
+ - Se proponen elementos móviles o interactivos
+ - Poca utilidad en las armas cuerpo a cuerpo
+ - Se incide en añadir granadas u otro tipo de arma arrojadiza o explosiva
+ - La música debería seguir un estilo arcade
+
+Glitches encontrados:
+ - Rara vez, el personaje no deja de moverse hacia un lado
+ - Al volver a comenzar una segunda partida, no se actualizan correctamente las *skins* de los personajes. Se mantienen los de la partida anterior.
+ - El personaje se ralentiza al impactar
+   
+**Corrección de glitches**
+   
+   - El error del movimiento se solucionó dándole valor *false* a todos los botones de *Jugador* al iniciar la partida y al regresar de la pausa.
+   
+   - No se logró solucionar el error de las skins, puesto que corresponde a problemas de caché a bajo nivel.
+   
+   - Pese a no ser intencionado, decidimos mantener la ralentización al impactar para obtener dinamismo durante el combate.
+
+**Mejoras añadidas**
+
+A partir de los resultados del *beta testing* y de apreciaciones propias, éstas fueron las mejoras que implementamos:
+
+- Música y efectos de sonido de estilo *arcade chiptune*
+- Aumento de velocidad del personaje
+- Aumento de velocidad de disparo de la pistola y el subfusil
+- Indicación de falta de munición
+- Parpadeo del personaje al recibir daño
+- Gana el jugador con más vida al acabar el tiempo
+- Nuevos mensajes al finalizar rondas
+- Pequeños retoques de color
+- Traducción completa al inglés
+- Pausa con indicación de controles añadidos
+- Indicación de pausa en el HUD
+- Sección de créditos
+
+Sería preciso hacer una mejora de las animaciones, los sprites de las armas y del escenario, para mejorar el estilo visual del juego. El escenario podría añadir plataformas móviles horizontales, para mejorar el comportamiento de los jugadores.
+
+Del mismo modo, sería interesante la adición de nuevas armas a distancia, como granadas, y de elementos interactuables o eventos aleatorios.
+
+No lo pudimos hacer ya que es un trabajo que no podíamos asumir durante el tiempo de desarrollo.
+
+**Publicación**
+
+ - **Kongregate**: https://www.kongregate.com/games/FernandoMoreno/fight-for-the-hood (subido por Fernando Moreno)
+ - **Newgrounds**: https://www.newgrounds.com/portal/view/724180 (subido por Denis Gudiña)
+ - **IndieExpo**: https://www.indiexpo.net/es/games/fight-for-the-hood (subido por Luis Miguel Moreno)
+ - **Game Jolt**: https://gamejolt.com/games/fightforthehood/389141 (subido por Alejandro Carrillo)
+
+**--------------------------------------------FIN DE FASE 5--------------------------------------------**
 
 **Integrantes del equipo de desarrollo:**  
 
