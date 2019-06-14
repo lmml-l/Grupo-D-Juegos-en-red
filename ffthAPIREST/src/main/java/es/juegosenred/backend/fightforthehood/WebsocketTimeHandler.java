@@ -147,12 +147,17 @@ public class WebsocketTimeHandler extends TextWebSocketHandler {
 			
 		case "Host":
 			newNode.put("protocolo", node.get("protocolo").asText());
-			if(ParesDeUsuariosEnLaMismaPartida.peek().equals(session)){
-				newNode.put("ishost", session.getId());
-			}else {
+			if(ParesDeUsuariosEnLaMismaPartida.size()>=2) {
+				if(ParesDeUsuariosEnLaMismaPartida.peek().equals(session)){
+					newNode.put("ishost", session.getId());
+				}else {
+					newNode.set("ishost", null);
+				}
+				session.sendMessage(new TextMessage(newNode.toString()));
+			}
+			else {
 				newNode.set("ishost", null);
 			}
-			session.sendMessage(new TextMessage(newNode.toString()));
 			break;
 		case "RESTART SALA":
 			System.out.println("Reseteo sala porq puedo");
