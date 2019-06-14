@@ -103,7 +103,7 @@ class Lobby extends Phaser.Scene {
 			if(ipsLobby.length == 2){
 				that.time.addEvent({delay:1000, callback: function(){	
 					that.scene.start('CharapterSelectionOnline');
-					that.musica.stop();
+					//that.musica.stop();
 				}})
 			}
 			});
@@ -140,7 +140,7 @@ class Lobby extends Phaser.Scene {
 			connectionDrops.send(JSON.stringify(messagee))
 			ipsLobby = new Array();
 			deletePlayerofRoom(game.scene.getScene("nameMenu").textoNombreLogin.text)
-			that.musica.stop();
+			//that.musica.stop();
 			that.scene.start('MainMenu');
 			
 			that.escape.isDown=false;

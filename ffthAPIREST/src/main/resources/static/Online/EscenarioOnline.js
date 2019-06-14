@@ -60,7 +60,7 @@ restartPartida(){
     this.time.addEvent({delay:1500,
     callback: function(){
         that.scene.restart();
-        that.musica.stop();
+        //that.musica.stop();
     }});
 }
 
@@ -75,7 +75,7 @@ checkPartida(){
 
         this.time.addEvent({delay:1000,                        
         callback: function(){
-        that.musica.stop();
+        //that.musica.stop();
 
         that.time.addEvent({delay:500,  
         callback: function(){
@@ -95,7 +95,7 @@ checkPartida(){
 
         this.time.addEvent({delay:1000,                      
             callback: function(){
-            that.musica.stop();
+            //that.musica.stop();
 
         that.time.addEvent({delay:500,  
             callback: function(){
@@ -106,7 +106,8 @@ checkPartida(){
 
         that.time.addEvent({delay:3000,  
             callback: function(){
-                that.scene.start('MainMenu'); that.musica.stop();}});
+                that.scene.start('MainMenu'); //that.musica.stop();
+            }});
         }});  
         var mensaje = {protocolo: "VACIAR SESIONES"}
         connectionDrops.send(JSON.stringify(mensaje));
@@ -126,7 +127,7 @@ checkPartida(){
             this.finTiempoTexto.setText("KO");
             this.ganadorTexto.setText("\nP1 WINS");
             this.restartPartida();    
-            this.musica.stop();                                 //reinicia el nivel
+            //this.musica.stop();                                 //reinicia el nivel
         }   
         //gana J2
         else if(ganador==1){
@@ -135,7 +136,7 @@ checkPartida(){
             this.finTiempoTexto.setText("KO");
             this.ganadorTexto.setText("\nP2 WINS");
             this.restartPartida(); 
-            this.musica.stop();                                 //reinicia el nivel
+            //this.musica.stop();                                 //reinicia el nivel
         }
     }
 
@@ -146,7 +147,7 @@ checkPartida(){
         this.finTiempoTexto.setText("KO");
         this.ganadorTexto.setText("\nP2 WINS");
         this.restartPartida();
-        this.musica.stop();
+        //this.musica.stop();
     }
     else if(this.jugador1.vida<=0 && this.jugador.vida>0){      //jugador 2
         victorias[0]+=1;
@@ -154,7 +155,7 @@ checkPartida(){
         this.finTiempoTexto.setText("KO");
         this.ganadorTexto.setText("\nP1 WINS");
         this.restartPartida();
-        this.musica.stop();
+        //this.musica.stop();
     } 
     //Si acaba el tiempo
     if(91-this.Clock.getElapsedSeconds() == 0){                 //comprobación de reloj (diferencia de tiempo) 
@@ -166,7 +167,7 @@ checkPartida(){
             console.log('Gana J1');
             this.ganadorTexto.setText("\nP1 WINS");
             this.restartPartida();
-            this.musica.stop();
+            //this.musica.stop();
         }
         //Gana J2 si tiene mayor vida
         if(this.jugador.vida < this.jugador1.vida){
@@ -174,14 +175,14 @@ checkPartida(){
             console.log('Gana J2');
             this.ganadorTexto.setText("\nP2 WINS");
             this.restartPartida();
-            this.musica.stop();
+            //this.musica.stop();
         }
         //Empate
         if(this.jugador.vida === this.jugador1.vida){
             console.log('Empate');
             this.ganadorTexto.setText("\nTIE");
             this.restartPartida();
-            this.musica.stop();
+            //this.musica.stop();
         }
     }
 }
@@ -607,7 +608,8 @@ create(){
 	    callback: function(){getServerStatus(function(){
 	    	that.time.clearPendingEvents();
 	        that.time.removeAllEvents();
-	    	that.scene.start('EscenarioError'); that.musica.stop();})}})
+	    	that.scene.start('EscenarioError'); //that.musica.stop();
+        })}})
     
     var message;            //Jugador
     var messageDrops;       //Drops
@@ -763,7 +765,7 @@ update(){ //actualizaciones
         ipsLobby = new Array();
         deletePlayerofRoom(game.scene.getScene("nameMenu").textoNombreLogin.text)
         this.scene.start('MainMenu');
-        this.musica.stop();
+        //this.musica.stop();
     }
 }
 

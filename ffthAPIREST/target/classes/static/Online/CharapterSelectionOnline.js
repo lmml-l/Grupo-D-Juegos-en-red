@@ -256,7 +256,7 @@ startPartida () {
 			ipsLobby = new Array();
 			deletePlayerofRoom(game.scene.getScene("nameMenu").textoNombreLogin.text)
 			this.scene.start('MainMenu');
-			this.musica.stop();
+			//this.musica.stop();
 		}
 		if(this.confirmar2.isDown && (IsHost!=null || this.checkplayer2)){
 
