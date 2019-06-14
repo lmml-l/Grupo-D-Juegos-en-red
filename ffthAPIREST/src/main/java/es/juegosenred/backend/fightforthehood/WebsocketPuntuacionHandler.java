@@ -35,7 +35,7 @@ public class WebsocketPuntuacionHandler extends TextWebSocketHandler {
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		System.out.println("New user: " + session.getId());
 		sessions.put(session.getId(), session);
-		ParesDeUsuariosEnLaMismaPartida.put(session);
+		ParesDeUsuariosEnLaMismaPartida.add(session);
 	
 	}
 	

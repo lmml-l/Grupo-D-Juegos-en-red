@@ -34,7 +34,7 @@ public class WebsocketDropHandler extends TextWebSocketHandler {
 		System.out.println("New user: " + session.getId());
 		sessions.put(session.getId(), session);
 		//AgruparSesionesDeDosEnDos(session);
-		ParesDeUsuariosEnLaMismaPartida.put(session);
+		ParesDeUsuariosEnLaMismaPartida.add(session);
 	
 	}
 	
