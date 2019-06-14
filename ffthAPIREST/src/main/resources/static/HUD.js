@@ -30,7 +30,7 @@
 
       that.MostrarReloj = that.scene.add.text(484,602, (Math.trunc(91 - that.Clock.getElapsedSeconds())).toString(), { fill: '#FFFFFF', font: '52px Impact', align: 'center'});
 
-      that.textoESC = that.scene.add.text(420, 730, 'Press ESC to pause', { fill: '#FFFFFF', font: '24px Impact', align: 'center'}).setScale(1);
+      that.textoESC = that.scene.add.text(420, 730, 'Press ESC to exit', { fill: '#FFFFFF', font: '24px Impact', align: 'center'}).setScale(1);
 
         //Indica munición
         that.Municiones[0] = that.scene.add.text(115, 716, that.jugadores[1].municiones.toString(), { fill: '#FFFFFF', font: '28px Impact', align: 'left'}).setScale(1);    //Crea la munición del jugador 1

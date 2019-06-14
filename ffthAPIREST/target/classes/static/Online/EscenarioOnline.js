@@ -5,7 +5,10 @@ class EscenarioOnline extends Phaser.Scene {
 
 	constructor(){
 		super({key:"EscenarioOnline"});
-        
+
+        this.salir;
+        this.textoSalir;
+
         //Posicionamos los personajes. Posición definida en CharacterSelection
         this.avatar         = new Avatar("a",this,posInicial[0],posInicial[1],sprite);   //Jugador host
         this.avatar1        = new Avatar("b",this,posInicial[2],posInicial[3],sprite2);  //Jugador cliente
@@ -385,6 +388,9 @@ preload(){
 }
 
 create(){
+    this.salir        = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
+    this.textoSalir   = this.add.text(50, 730, "ESC to exit", { fill: '#F4FFF3', font: '24px Impact', align: 'center'});
+    this.salir.isDown = false;
 
 	this.add.sprite(512, 215, 'fondo');
 	this.add.sprite(512, 681, 'HUD');
@@ -752,7 +758,16 @@ update(){ //actualizaciones
     //}
 
     this.hud.update();
+
+    if(this.salir.isDown){
+        var messagee = {protocolo: "RESTART SALA"}
+        connectionDrops.send(JSON.stringify(messagee))
+        ipsLobby = new Array();
+        deletePlayerofRoom(game.scene.getScene("nameMenu").textoNombreLogin.text)
+        this.scene.start('MainMenu');
+        this.musica.stop();
     }
+}
 
 sonidos(jugador){
     if(jugador.shotCheck >= 1){
@@ -797,5 +812,4 @@ sonidos(jugador){
         jugador.dropCheck = 1;
     }
 }
-
 }
