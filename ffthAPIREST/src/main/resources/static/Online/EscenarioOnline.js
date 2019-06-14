@@ -85,6 +85,8 @@ checkPartida(){
 
         that.time.addEvent({delay:3000, 
         callback: function(){
+            IsHost = null;
+            ipsLobby = new Array();
             that.scene.start('MainMenu'); that.musica.stop();}});
         }});
     }
@@ -106,6 +108,8 @@ checkPartida(){
 
         that.time.addEvent({delay:3000,  
             callback: function(){
+                IsHost = null;
+                ipsLobby = new Array();
                 that.scene.start('MainMenu'); //that.musica.stop();
             }});
         }});  
