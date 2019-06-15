@@ -7,15 +7,13 @@
 En esta fase implementamos websockets para que nuestro juego pueda ser multijugador entre dos equipos en línea.
 En esta documentación explicaremos de forma básica el funcionamiento y la organización interna de dicha implementación.
 
-Partimos de la anterior fase 3 de junio, que al igual que ésta hereda los cambios realizados en diciembre en la fase 5, excepto la música.
+Partimos de la anterior fase 3 de junio, que al igual que ésta hereda los cambios realizados en diciembre en la fase 5, excepto la música y demás efectos de sonido.
 
 **Partida multijugador**
 
-Partimos desde la implementación anterior de API REST, en el que dos jugadores pueden conectarse a una sala. Esta vez, en lugar de dar paso a una partida local, acceden a una verdadera partida multijugador.
-
 ![...](https://i.imgur.com/ZK3E93K.jpg)
 
-Una vez que dos clientes hayan accedido a la sala, ambos jugadores pasan a la pantalla de selección de personaje. Al primer jugador que entre se le indica que es el *host*. El segundo jugador deberá esperar a que el host elija para poder escoger, tras lo cual comienza la partida. Mientras la sala de espera esté llena, no podrán acceder más jugadores.
+Una vez que dos clientes hayan accedido a la sala (*lobby*), ambos jugadores pasan a la pantalla de selección de personaje. Al primer jugador que entre se le indica que es el *host*, mientras que el otro será el *guest*. El segundo jugador deberá esperar a que el host elija para poder escoger, tras lo cual comienza la partida. Mientras la sala de espera esté llena, no podrán acceder más jugadores.
 
 ![...](https://i.imgur.com/Tge4djb.jpg)
 
@@ -59,7 +57,9 @@ Se utilizan cuatro websockets para el envío y recepción de mensajes:
 
 Para la implementación de la comunicación asíncrona, se han añadido cuatro websockets, cada uno con su manejador. Todos ellos se encargan de la agrupación de sesiones, diferenciándose únicamente por los protocolos que gestionan y por el número de clientes que gestionan el mensaje. Es decir, si éstos mensajes son escuchados por los dos jugadores o sólo por uno de ellos.
 
-![...](https://i.imgur.com/pXgX1Vb.png)
+En el siguiente diagrama se muestran las clases utilizadas para ello. Se ignoran las correspondientes a la fase 3.
+
+![...](https://i.imgur.com/Bt4OJ2y.png)
 
 **Vídeo**
 
