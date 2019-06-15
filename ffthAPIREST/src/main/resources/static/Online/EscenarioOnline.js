@@ -81,13 +81,15 @@ checkPartida(){
         callback: function(){
             //that.time.clearPendingEvents();
             //that.time.removeAllEvents();
-            that.victoria.play();}});
+            //that.victoria.play();
+        }});
 
         that.time.addEvent({delay:3000, 
         callback: function(){
             IsHost = null;
             ipsLobby = new Array();
-            that.scene.start('MainMenu'); that.musica.stop();}});
+            that.scene.start('MainMenu'); //that.musica.stop();
+        }});
         }});
     }
     if(victorias[1]==3){                                        //jugador 2
@@ -103,7 +105,7 @@ checkPartida(){
             callback: function(){
                   //that.time.clearPendingEvents();
                   //that.time.removeAllEvents();
-                  that.victoria.play();
+                  //that.victoria.play();
             }});
 
         that.time.addEvent({delay:3000,  
@@ -401,14 +403,14 @@ create(){
     pausado = false;
 
     //Música
-    this.musica = this.game.sound.add('musicabatalla');
-    this.musica.setVolume(0.15);
-    this.musica.play();
+    //this.musica = this.game.sound.add('musicabatalla');
+    //this.musica.setVolume(0.15);
+    //this.musica.play();
 
     //Sonidos
-    this.victoria           = this.game.sound.add('musicavictory');
-    this.musica.setLoop(false);
-    this.musica.setVolume(0.5);
+    //this.victoria           = this.game.sound.add('musicavictory');
+    //this.musica.setLoop(false);
+    //this.musica.setVolume(0.5);
     this.disparosmg         = this.game.sound.add('disparosmg');
     this.disparosmg.setVolume(1);
     this.disparopistola     = this.game.sound.add('disparopistola');
@@ -785,19 +787,19 @@ sonidos(jugador){
     if(jugador.shotCheck >= 1){
         switch(jugador.shotCheck){
             case 2:
-                this.disparoescopeta.play();
+                //this.disparoescopeta.play();
                 break;
             case 3:
-                this.disparopistola.play();
+                //this.disparopistola.play();
                 break;
             case 4:
-                this.disparosmg.play();
+                //this.disparosmg.play();
                 break;
             case 5:
-                this.golpebate.play();
+                //this.golpebate.play();
                 break;
             case 6:
-                this.golpepuno.play();
+                //this.golpepuno.play();
                 break;
         }
         jugador.shotCheck = 1;
@@ -806,19 +808,19 @@ sonidos(jugador){
     if(jugador.dropCheck >= 1){
         switch(jugador.dropCheck){
             case 2:
-                this.recogerbate.play();
+                //this.recogerbate.play();
                 break;
             case 3:
-                this.recogerpuno.play();
+                //this.recogerpuno.play();
                 break;
             case 4:
-                this.recogerescopeta.play();
+                //this.recogerescopeta.play();
                 break;
             case 5:
-                this.recogerpistola.play();
+                //this.recogerpistola.play();
                 break;
             case 6:
-                this.recogersmg.play();
+                //this.recogersmg.play();
                 break;
         }
         jugador.dropCheck = 1;

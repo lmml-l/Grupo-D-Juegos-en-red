@@ -84,7 +84,7 @@ class Lobby extends Phaser.Scene {
 		this.musica = this.game.sound.add('musicacontrol');
 		this.musica.setLoop(true);
 		this.musica.setVolume(0.5);
-		this.musica.play();
+		//this.musica.play();
 
 		conection();
 		

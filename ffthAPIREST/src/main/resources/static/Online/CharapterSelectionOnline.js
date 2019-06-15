@@ -124,7 +124,7 @@ class CharapterSelectionOnline extends Phaser.Scene {
 		this.musica = this.game.sound.add('musicacharacterselection');
 		this.musica.setLoop(true);
 		this.musica.setVolume(0.5);
-		this.musica.play();
+		//this.musica.play();
 
 		this.textModo = this.add.text(50, 50, "Online mode", { fill: '#F4FFF3', font: '20px Impact', align: 'center'});
 		
