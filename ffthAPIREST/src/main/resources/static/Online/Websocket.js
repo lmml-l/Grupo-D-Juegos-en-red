@@ -78,6 +78,9 @@ function conection (){
 			case "RESTART SALA":
 			IsHost = null;
 			ipsLobby = new Array();
+			victorias = new Array(2); //Almacena el nº de partidas ganadas por cada jugador
+            victorias[0]=0; victorias[1]=0;
+            Puntuacion = 0;
 			console.log("LLEGA AQUI")
 			var that=this;
 			var escenaActual;

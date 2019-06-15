@@ -88,9 +88,22 @@ checkPartida(){
         callback: function(){
             IsHost = null;
             ipsLobby = new Array();
+            victorias=new Array(2); //Almacena el nº de partidas ganadas por cada jugador
+            victorias[0]=0; victorias[1]=0;
+            Puntuacion = 0;
             that.scene.start('MainMenu'); //that.musica.stop();
         }});
         }});
+        var mensaje = {protocolo: "VACIAR SESIONES"}
+        connectionDrops.send(JSON.stringify(mensaje));
+        connectionTiempo.send(JSON.stringify(mensaje));
+        connectionJugador.send(JSON.stringify(mensaje));
+        connectionPuntuacion.send(JSON.stringify(mensaje));
+
+        connectionDrops.close();
+        connectionJugador.close();
+        connectionPuntuacion.close();
+        connectionTiempo.close();
     }
     if(victorias[1]==3){                                        //jugador 2
         console.log('P2 WINS!');
@@ -112,6 +125,9 @@ checkPartida(){
             callback: function(){
                 IsHost = null;
                 ipsLobby = new Array();
+                victorias= new Array(2); //Almacena el nº de partidas ganadas por cada jugador
+                victorias[0]=0; victorias[1]=0;
+                Puntuacion = 0;
                 that.scene.start('MainMenu'); //that.musica.stop();
             }});
         }});  
@@ -120,6 +136,11 @@ checkPartida(){
         connectionTiempo.send(JSON.stringify(mensaje));
         connectionJugador.send(JSON.stringify(mensaje));
         connectionPuntuacion.send(JSON.stringify(mensaje));
+
+        connectionDrops.close();
+        connectionJugador.close();
+        connectionPuntuacion.close();
+        connectionTiempo.close();
     }
 
     //Si los dos jugadores llegan a 0 al mismo tiempo
@@ -774,6 +795,9 @@ update(){ //actualizaciones
         */
         IsHost = null;
         ipsLobby = new Array();
+        victorias = new Array(2); //Almacena el nº de partidas ganadas por cada jugador
+        victorias[0]=0; victorias[1]=0;
+        Puntuacion = 0;
 
         connectionDrops.close();
         connectionJugador.close();

@@ -88,6 +88,9 @@ checkPartida(){
         callback: function(){
             IsHost = null;
             ipsLobby = new Array();
+            victorias=new Array(2); //Almacena el nº de partidas ganadas por cada jugador
+            victorias[0]=0; victorias[1]=0;
+            Puntuacion = 0;
             that.scene.start('MainMenu'); //that.musica.stop();
         }});
         }});
@@ -122,6 +125,9 @@ checkPartida(){
             callback: function(){
                 IsHost = null;
                 ipsLobby = new Array();
+                victorias= new Array(2); //Almacena el nº de partidas ganadas por cada jugador
+                victorias[0]=0; victorias[1]=0;
+                Puntuacion = 0;
                 that.scene.start('MainMenu'); //that.musica.stop();
             }});
         }});  
@@ -789,6 +795,9 @@ update(){ //actualizaciones
         */
         IsHost = null;
         ipsLobby = new Array();
+        victorias = new Array(2); //Almacena el nº de partidas ganadas por cada jugador
+        victorias[0]=0; victorias[1]=0;
+        Puntuacion = 0;
 
         connectionDrops.close();
         connectionJugador.close();
