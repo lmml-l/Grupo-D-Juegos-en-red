@@ -764,10 +764,18 @@ update(){ //actualizaciones
     this.hud.update();
 
     if(this.salir.isDown){
+        /*
         var messagee = {protocolo: "RESTART SALA"}
         connectionDrops.send(JSON.stringify(messagee))
         ipsLobby = new Array();
         deletePlayerofRoom(game.scene.getScene("nameMenu").textoNombreLogin.text)
+        */
+
+        connectionDrops.close();
+        connectionJugador.close();
+        connectionPuntuacion.close();
+        connectionTiempo.close();
+
         this.scene.start('MainMenu');
         //this.musica.stop();
     }
