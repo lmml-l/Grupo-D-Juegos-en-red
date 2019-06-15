@@ -138,7 +138,7 @@ checkPartida(){
             victorias[1]+=1;                                    //suma una victoria
             console.log('P2 WINS');
             this.finTiempoTexto.setText("KO");
-            this.ganadorTexto.setText("\nP2 WINS");
+            this.ganadorTexto.setText("\nYOU LOSE");
             this.restartPartida(); 
             //this.musica.stop();                                 //reinicia el nivel
         }
@@ -149,7 +149,7 @@ checkPartida(){
         victorias[1]+=1;
         console.log('Gana J2');
         this.finTiempoTexto.setText("KO");
-        this.ganadorTexto.setText("\nP2 WINS");
+        this.ganadorTexto.setText("\nYOU LOSE");
         this.restartPartida();
         //this.musica.stop();
     }
@@ -157,7 +157,7 @@ checkPartida(){
         victorias[0]+=1;
         console.log('Gana J1');
         this.finTiempoTexto.setText("KO");
-        this.ganadorTexto.setText("\nP1 WINS");
+        this.ganadorTexto.setText("\nYOU WIN");
         this.restartPartida();
         //this.musica.stop();
     } 
@@ -169,7 +169,7 @@ checkPartida(){
         if(this.jugador.vida > this.jugador1.vida){
             victorias[0]+=1;
             console.log('Gana J1');
-            this.ganadorTexto.setText("\nP1 WINS");
+            this.ganadorTexto.setText("\nYOU WIN");
             this.restartPartida();
             //this.musica.stop();
         }
@@ -177,7 +177,7 @@ checkPartida(){
         if(this.jugador.vida < this.jugador1.vida){
             victorias[1]+=1;
             console.log('Gana J2');
-            this.ganadorTexto.setText("\nP2 WINS");
+            this.ganadorTexto.setText("\nYOU LOSE");
             this.restartPartida();
             //this.musica.stop();
         }

@@ -41,20 +41,20 @@ public class WebsocketDropHandler extends TextWebSocketHandler {
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 		System.out.println("Session closed: " + session.getId());
-		sessions.remove(session.getId());
-	
+		//sessions.remove(session.getId());
+		ParesDeUsuariosEnLaMismaPartida.remove(session);
+		
 		ObjectNode msg = mapper.createObjectNode();
 		msg.put("protocolo","RESTART SALA");
 		System.out.println("VOY A MANDAR EL MENSAJE");
-		Collection<WebSocketSession> participantes =  sessions.values();
-		for(WebSocketSession participant : participantes) {
+		//Collection<WebSocketSession> participantes =  sessions.values();
+		for(WebSocketSession participant : ParesDeUsuariosEnLaMismaPartida) {
 			participant.sendMessage(new TextMessage(msg.toString()));
 		}
 		BorrarJugadoresEnPartida();
 		ParesDeUsuariosEnLaMismaPartida.clear();
 		sessions.clear();
 		//BorrarSesionesDeDosEnDos(session);
-		ParesDeUsuariosEnLaMismaPartida.remove(session);
 	}
 	
 	@Override
