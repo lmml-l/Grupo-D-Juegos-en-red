@@ -136,10 +136,16 @@ class Lobby extends Phaser.Scene {
 	retroceder(){
 		var that = this;
 		if(this.escape.isDown){
+			/*
 			var messagee = {protocolo: "RESTART SALA"}
 			connectionDrops.send(JSON.stringify(messagee))
 			ipsLobby = new Array();
 			deletePlayerofRoom(game.scene.getScene("nameMenu").textoNombreLogin.text)
+			*/
+			connectionDrops.close();
+			connectionJugador.close();
+   			connectionPuntuacion.close();
+   			connectionTiempo.close();
 			//that.musica.stop();
 			that.scene.start('MainMenu');
 			

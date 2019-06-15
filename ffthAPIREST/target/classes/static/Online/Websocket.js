@@ -106,6 +106,9 @@ function conection (){
         		
    			}});
    			connectionDrops.close()
+   			connectionJugador.close();
+   			connectionPuntuacion.close();
+   			connectionTiempo.close();
    			break;
 			default:
 		}
@@ -116,7 +119,7 @@ function conection (){
 	}
 
 	//TIEMPO (también se aprovecha para indicar quién es el host)
-	connectionTiempo.onmessage = function(msg) {
+		connectionTiempo.onmessage = function(msg) {
 		putCheck(0);
 		var datosGuardadosComoObjeto = JSON.parse(msg.data);
 		switch(datosGuardadosComoObjeto.protocolo){
