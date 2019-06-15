@@ -156,13 +156,6 @@ public class WebsocketDropHandler extends TextWebSocketHandler {
 			//sendOtherParticipants(session, newNode);
 			sendHostToClient(session, newNode);
 			break;
-			
-		case "Posicion":
-			newNode.put("protocolo", node.get("protocolo").asText());
-			newNode.set("posicion", node.get("posicion"));
-			//sendOtherParticipants(session, newNode);
-			sendHostToClient(session, newNode);
-			break;
 		case "RESTART SALA":
 			System.out.println("Reseteo sala porq puedo");
 			newNode.put("protocolo", node.get("protocolo").asText());

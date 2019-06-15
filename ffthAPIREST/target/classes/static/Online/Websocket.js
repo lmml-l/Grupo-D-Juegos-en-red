@@ -75,12 +75,6 @@ function conection (){
 			case "Drops":
 			DropsWS = datosGuardadosComoObjeto.drops;
 			break;
-			case "Posicion":
-			PosicionWS = datosGuardadosComoObjeto.posicion;
-			if(PosicionWS!= undefined){
-			//posInicial = PosicionWS;
-			}
-			break;
 			case "RESTART SALA":
 			IsHost = null;
 			ipsLobby = new Array();
