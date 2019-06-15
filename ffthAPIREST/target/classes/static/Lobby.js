@@ -84,7 +84,7 @@ class Lobby extends Phaser.Scene {
 		this.musica = this.game.sound.add('musicacontrol');
 		this.musica.setLoop(true);
 		this.musica.setVolume(0.5);
-		this.musica.play();
+		//this.musica.play();
 
 		conection();
 		
@@ -142,6 +142,10 @@ class Lobby extends Phaser.Scene {
 			ipsLobby = new Array();
 			deletePlayerofRoom(game.scene.getScene("nameMenu").textoNombreLogin.text)
 			*/
+
+			IsHost = null;
+            ipsLobby = new Array();
+
 			connectionDrops.close();
 			connectionJugador.close();
    			connectionPuntuacion.close();
