@@ -35,7 +35,7 @@ class ControlGuide extends Phaser.Scene {
 		this.musica = this.game.sound.add('musicacontrol');
 		this.musica.setLoop(true);
 		this.musica.setVolume(0.5);
-		this.musica.play();
+		//this.musica.play();
 
 		this.textoSalir = this.add.text(50, 730, "ESC to exit", { fill: '#F4FFF3', font: '24px Impact', align: 'center'});
 	
@@ -57,7 +57,7 @@ class ControlGuide extends Phaser.Scene {
     		this.time.removeAllEvents();
 			this.scene.start('MainMenu');
 			game.scene.getScene("MainMenu").textoDesconexionValor = "";
-			this.musica.stop();
+			//this.musica.stop();
 		}
 	}
 

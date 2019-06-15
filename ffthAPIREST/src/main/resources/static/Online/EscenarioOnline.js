@@ -91,6 +91,16 @@ checkPartida(){
             that.scene.start('MainMenu'); //that.musica.stop();
         }});
         }});
+        var mensaje = {protocolo: "VACIAR SESIONES"}
+        connectionDrops.send(JSON.stringify(mensaje));
+        connectionTiempo.send(JSON.stringify(mensaje));
+        connectionJugador.send(JSON.stringify(mensaje));
+        connectionPuntuacion.send(JSON.stringify(mensaje));
+
+        connectionDrops.close();
+        connectionJugador.close();
+        connectionPuntuacion.close();
+        connectionTiempo.close();
     }
     if(victorias[1]==3){                                        //jugador 2
         console.log('P2 WINS!');
@@ -120,6 +130,11 @@ checkPartida(){
         connectionTiempo.send(JSON.stringify(mensaje));
         connectionJugador.send(JSON.stringify(mensaje));
         connectionPuntuacion.send(JSON.stringify(mensaje));
+
+        connectionDrops.close();
+        connectionJugador.close();
+        connectionPuntuacion.close();
+        connectionTiempo.close();
     }
 
     //Si los dos jugadores llegan a 0 al mismo tiempo

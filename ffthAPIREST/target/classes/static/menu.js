@@ -92,7 +92,7 @@ class MainMenu extends Phaser.Scene {
 		this.musica = this.game.sound.add('musicamenu');
 		this.musica.setLoop(true);
 		this.musica.setVolume(0.5);
-		this.musica.play();
+		//this.musica.play();
 
 		//textos de apoyo
 		this.textoDesconexionValor = null;
@@ -106,7 +106,8 @@ class MainMenu extends Phaser.Scene {
 		callback: function(){getServerStatus(function(){
 			//pantalla de error al no tener respuesta del servidor
 			that.desconexion.text = "Server Disconnected";
-			that.scene.start('EscenarioError'); that.musica.stop();})}})
+			that.scene.start('EscenarioError'); //that.musica.stop();
+		})}})
 
 		this.time.addEvent({delay:1000, loop:true,
 		callback: function(){getServerStatusCheck(function(){that.desconexion.text = "";})}})
@@ -160,24 +161,24 @@ class MainMenu extends Phaser.Scene {
 		//Pantalla inicial
 		if(this.salir.isDown){
 			this.scene.start('MainMenu');
-			this.musica.stop();
+			//this.musica.stop();
 		}
 		if(this.posArray==0 && this.check){
 			//Selector de personaje (partida offline)
 			this.scene.start('CharapterSelection');
-			this.musica.stop();
+			//this.musica.stop();
 			this.go1.isDown=false;
 			this.go2.isDown=false;
 		}else if(this.posArray==1 && this.check){
 			//Menú de login de partida online
 			this.scene.start('nameMenu');
-			this.musica.stop();
+			//this.musica.stop();
 			this.go1.isDown=false;
 			this.go2.isDown=false;
 		}else if(this.posArray==2 && this.check){
 			//Pantalla de controles
 			this.scene.start('ControlGuide');
-			this.musica.stop();
+			//this.musica.stop();
 			this.go1.isDown=false;
 			this.go2.isDown=false;
 		}
