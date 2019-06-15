@@ -7,7 +7,7 @@
 En esta fase implementamos websockets para que nuestro juego pueda ser multijugador entre dos equipos en línea.
 En esta documentación explicaremos de forma básica el funcionamiento y la organización interna de dicha implementación.
 
-Partimos de la anterior fase 3 de junio, que al igual que esta hereda los cambios realizados en diciembre en la fase 5.
+Partimos de la anterior fase 3 de junio, que al igual que ésta hereda los cambios realizados en diciembre en la fase 5, excepto la música.
 
 **Partida multijugador**
 
@@ -39,10 +39,9 @@ Se utilizan cuatro websockets para el envío y recepción de mensajes:
     La información de *Jugador* se obtiene de forma predictiva, puesto que cada cliente conoce las acciones del otro, las calcula y, periódicamente, las corrige con datos absolutos, como puede ser la posición o la vida.
     
 - **Drop**- Información que se actualiza desde el cliente *host* al otro.
-   Armas del escenario (drops) y posición inicial.
-   Se compone de los siguientes protocolos recogidos en el manejador *WebsocketDropHandler*:
+   Gestiona las armas del escenario (drops), reinicio y vaciado de sala.
+   Se compone del siguiente protocolo recogido en el manejador *WebsocketDropHandler*:
     - *Drops* - Se envían las armas generadas desde el *host*
-    - *Posicion* - Se envía la posición inicial generada desde el *host* para que ambos jugadores se coloquen en el mismo sitio
     
 - **Tiempo**- Información que se actualiza desde el cliente *host* al otro.
     Sincroniza el tiempo restante por ronda entre los dos jugadores e indica quién es el jugador *host*.
@@ -51,6 +50,10 @@ Se utilizan cuatro websockets para el envío y recepción de mensajes:
     - *Host* - En el selector de personajes indica únicamente al jugador *host* su estatus como tal
     
 - **Puntuación** - En prevención de errores, envía desde el *host* el número de victorias conseguido por ambos jugadores.
+
+- **Generales** - En todos los websockets, se indican estos dos protocolos:
+    - *Restart sala* - Resetea el estado de la sala cuando es llamado por una desconexión del rival o fin de partida.
+    - *Vaciar sesiones* - Elimina las sesiones del juego.
 
 **Diagrama de clases**
 
@@ -68,8 +71,16 @@ Pinche en la imagen para ver el vídeo:
 
 [![](http://img.youtube.com/vi/ThUG2cx4QaQ/0.jpg)](http://www.youtube.com/watch?v=ThUG2cx4QaQ "Vídeo")
 
+**Intrucciones para ejecutar**
 
-**--------------------------------------------FIN DE FASE 3 - JUNIO --------------------------------------------**
+Con el IDE Spring Tool Suite 4 (STS) se puede importar el directorio e inicializar el servidor seleccionando, con clic derecho, el archivo app.java y marcar *Run as->Java Application*
+Por otro lado, en este repositorio está el ejecutable de java **fireforthehood-0.0.1-SNAPSHOT.jar**, que se ejecuta como cualquier otro archivo .jar:
+- En Windows, se debe abrir desde la consola de comandos (cmd) con la instrucción *java -jar fireforthehood-0.0.1-SNAPSHOT.jar*
+
+Una vez esté en marcha el servidor, en un navegador web se deberá direccionar a **localhost:8080** para iniciar un cliente del juego.
+
+
+**--------------------------------------------FIN DE FASE 4 - JUNIO --------------------------------------------**
 
 ### Fase 3 - Junio
 
