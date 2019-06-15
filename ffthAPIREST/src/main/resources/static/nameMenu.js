@@ -125,7 +125,7 @@ class nameMenu extends Phaser.Scene {
 		this.musica = this.game.sound.add('musicacontrol');
 		this.musica.setLoop(true);
 		this.musica.setVolume(0.5);
-		this.musica.play();
+		//this.musica.play();
 
 		this.textoEstadosala = this.add.text(390, 515, "", { fill: '#F4FFF3', font: '20px Impact', align: 'center'});
 
@@ -170,7 +170,8 @@ class nameMenu extends Phaser.Scene {
 		this.time.addEvent({delay:1000, loop:true,
 		   callback: function(){getServerStatus(function(){
 		    that.scene.start('EscenarioError');
-			this.musica.stop();})}})
+			//this.musica.stop();
+		})}})
 		
 		//Escribir texto para poner nombre de usuario.
 		this.input.keyboard.on('keydown',function(event){
@@ -195,7 +196,7 @@ class nameMenu extends Phaser.Scene {
 			if(islogininfocorrect=="OK"){
 				that.textoComprobacion.text = "";
 				that.scene.start('Lobby');
-				that.musica.stop();
+				//that.musica.stop();
 			}
 		}})
 		this.enter.isDown=false;
