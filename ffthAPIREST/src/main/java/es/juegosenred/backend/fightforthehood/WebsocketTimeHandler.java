@@ -42,11 +42,11 @@ public class WebsocketTimeHandler extends TextWebSocketHandler {
 		System.out.println("Session closed: " + session.getId());
 		sessions.remove(session.getId());
 		
-		BorrarJugadoresEnPartida();
+		//BorrarJugadoresEnPartida();
 		ParesDeUsuariosEnLaMismaPartida.clear();
 		sessions.clear();
 		//BorrarSesionesDeDosEnDos(session);
-		ParesDeUsuariosEnLaMismaPartida.remove(session);
+		//ParesDeUsuariosEnLaMismaPartida.remove(session);
 	}
 	
 	@Override

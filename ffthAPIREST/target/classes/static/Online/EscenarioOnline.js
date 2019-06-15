@@ -70,7 +70,7 @@ checkPartida(){
     //Si algún jugador llega a 3 victorias gana la partida
     if(victorias[0]==3){                                        //jugador 1
         console.log('P1 WINS!');
-        this.finPartidaTexto.setText("P1 RULES THE HOOD");      //texto en pantalla
+        this.finPartidaTexto.setText("YOU RULE THE HOOD");      //texto en pantalla
         victorias[0]=0; victorias[1]=0;                         //reseteo de rondas
 
         this.time.addEvent({delay:1000,                        
@@ -92,7 +92,7 @@ checkPartida(){
     }
     if(victorias[1]==3){                                        //jugador 2
         console.log('P2 WINS!');
-        this.finPartidaTexto.setText("P2 RULES THE HOOD");      //texto en pantalla
+        this.finPartidaTexto.setText("YOU ARE A LOSER");      //texto en pantalla
         victorias[0]=0; victorias[1]=0;                         //reseteo de rondas
 
         this.time.addEvent({delay:1000,                      
@@ -129,7 +129,7 @@ checkPartida(){
             victorias[0]+=1;                                    //suma una victoria
             console.log('P1 WINS');
             this.finTiempoTexto.setText("KO");
-            this.ganadorTexto.setText("\nP1 WINS");
+            this.ganadorTexto.setText("\nYOU WIN");
             this.restartPartida();    
             //this.musica.stop();                                 //reinicia el nivel
         }   
