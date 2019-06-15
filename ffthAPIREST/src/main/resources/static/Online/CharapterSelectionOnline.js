@@ -257,6 +257,10 @@ startPartida () {
 			ipsLobby = new Array();
 			deletePlayerofRoom(game.scene.getScene("nameMenu").textoNombreLogin.text)
 			*/
+
+			IsHost = null;
+            ipsLobby = new Array();
+
 			connectionDrops.close();
 			connectionJugador.close();
    			connectionPuntuacion.close();
