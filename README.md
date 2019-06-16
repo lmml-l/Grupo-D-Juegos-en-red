@@ -9,6 +9,16 @@ En esta documentación explicaremos de forma básica el funcionamiento y la orga
 
 Partimos de la anterior fase 3 de junio, que al igual que ésta hereda los cambios realizados en diciembre en la fase 5, excepto la música y demás efectos de sonido.
 
+**Vídeo**
+
+En este vídeo, resumimos las características de nuestro juego y una demonstración de partida. 
+
+Recomendamos verlo en pantalla completa, pues al subirse a Youtube, muchos monitores acaban distorsionando la imagen con un *efecto Moiré*, no monstrándose como es en realidad a menos de abrir la pantalla completa. 
+
+Pinche en la imagen para ver el vídeo:
+
+[![](http://img.youtube.com/vi/ThUG2cx4QaQ/0.jpg)](https://www.youtube.com/watch?v=ZfHJshxX_z8&feature=youtu.be "Vídeo")
+
 **Partida multijugador**
 
 Una vez que dos clientes hayan accedido a la sala (*lobby*), ambos jugadores pasan a la pantalla de selección de personaje. Al primer jugador que entre se le indica que es el *host*, mientras que el otro será el *guest*. El segundo jugador deberá esperar a que el host elija para poder escoger, tras lo cual comienza la partida. Mientras la sala esté llena, no podrán acceder más jugadores.
@@ -29,10 +39,10 @@ Si un jugador cierra la partida, el oponente será desconectado.
 
 **Websockets y mensajes**
 
-A nivel lógico, cada cliente genera por su cuenta toda la información necesaria para ejecutar una partida, como si fuera en local. Dado que necesitamos modificar información que se refleje de la misma manera para ambos jugadores sobre un escenario común, uno de los clientes, el primero en entrar al *lobby*, actuará como *host* para algunas comunicaciones.
+A nivel interno, cada cliente genera por su cuenta toda la información necesaria para ejecutar una partida, como si fuera en local. Dado que necesitamos modificar información que se refleje de la misma manera para ambos jugadores sobre un escenario común, uno de los clientes, el primero en entrar al *lobby*, actuará como *host* para algunas comunicaciones.
 
 Se utilizan cuatro websockets para el envío y recepción de mensajes:
-- **Echo**- Informacion que se comunica a todos los clientes en partida. 
+- **Echo**- Información que se comunica a todos los clientes en partida. 
    Se compone de los siguientes protocolos recogidos en el manejador *WebsocketEchoHandler*:
     - *GetReady* - En el selector de personajes, da la señal de que el cliente está listo para comenzar
     - *Skin* - Se comunica el aspecto (skin) que tendrá el personaje al iniciar la partida
@@ -61,19 +71,9 @@ Se utilizan cuatro websockets para el envío y recepción de mensajes:
 
 Para la implementación de la comunicación asíncrona, se han añadido cuatro websockets, cada uno con su manejador. Todos ellos se encargan de la agrupación de sesiones, diferenciándose únicamente por los protocolos que gestionan y por el número de clientes que gestionan el mensaje. Es decir, si éstos mensajes son escuchados por los dos jugadores o sólo por uno de ellos.
 
-En el siguiente diagrama se muestran las clases utilizadas para ello. Se ignoran las correspondientes a la fase 3.
+En el siguiente diagrama se muestran las clases utilizadas para ello junto a sus protocolos. Se ignoran las clases correspondientes a las anteriores fases.
 
 ![...](https://i.imgur.com/Bt4OJ2y.png)
-
-**Vídeo**
-
-En este vídeo, resumimos las características de nuestro juego y una demonstración de partida. 
-
-Recomendamos verlo en pantalla completa, pues al subirse a Youtube, muchos monitores acaban distorsionando la imagen con un *efecto Moiré*, no monstrándose como es en realidad a menos de abrir la pantalla completa. 
-
-Pinche en la imagen para ver el vídeo:
-
-[![](http://img.youtube.com/vi/ThUG2cx4QaQ/0.jpg)](http://www.youtube.com/watch?v=ThUG2cx4QaQ "Vídeo")
 
 **Intrucciones para ejecutar**
 
