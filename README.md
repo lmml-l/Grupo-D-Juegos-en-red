@@ -15,7 +15,7 @@ En este vídeo, resumimos las características de nuestro juego y una demonstrac
 
 Recomendamos verlo en pantalla completa, pues al subirse a Youtube, muchos monitores acaban distorsionando la imagen con un *efecto Moiré*, no monstrándose como es en realidad a menos de abrir la pantalla completa. 
 
-Pinche en la imagen para ver el vídeo:
+**Pinche en la imagen para ver el vídeo:**
 
 [![](https://i.imgur.com/MtMEGOq.jpg)](https://www.youtube.com/watch?v=ZfHJshxX_z8&feature=youtu.be "Vídeo")
 
