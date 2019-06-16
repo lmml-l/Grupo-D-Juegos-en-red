@@ -415,6 +415,8 @@ preload(){
 }
 
 create(){
+    //Jugador = undefined;
+    //Skin = undefined;
     DropsWS = null;
     Tiempo = null;
     this.salir        = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);

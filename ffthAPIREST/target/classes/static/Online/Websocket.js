@@ -96,12 +96,14 @@ function conection (){
     		game.scene.getScene(escenaActual.scene.key).time.addEvent({delay:1500,
     		callback: function(){
     			//game.scene.getScene("EscenarioOnline").musica.stop();
-        		game.scene.sleep(escenaActual.scene.key);
-        		game.scene.start("MainMenu");
+        		//game.scene.sleep(escenaActual.scene.key);
+        		//game.scene.stop(escenaActual.scene.key);
+        		escenaActual.scene.start("MainMenu");
         		//Mensaje de error
         		game.scene.getScene("MainMenu").textoDesconexionValor = "YOUR RIVAL HAS DISCONNECT :( PLEASE TRY AGAIN";
         		
    			}});
+
    			connectionDrops.close()
    			connectionJugador.close();
    			connectionPuntuacion.close();
