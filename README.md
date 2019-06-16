@@ -11,8 +11,6 @@ Partimos de la anterior fase 3 de junio, que al igual que ésta hereda los cambi
 
 **Partida multijugador**
 
-![...](https://i.imgur.com/ZK3E93K.jpg)
-
 Una vez que dos clientes hayan accedido a la sala (*lobby*), ambos jugadores pasan a la pantalla de selección de personaje. Al primer jugador que entre se le indica que es el *host*, mientras que el otro será el *guest*. El segundo jugador deberá esperar a que el host elija para poder escoger, tras lo cual comienza la partida. Mientras la sala esté llena, no podrán acceder más jugadores.
 
 ![...](https://i.imgur.com/AuDsy8V.jpg)
