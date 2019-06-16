@@ -50,7 +50,6 @@ public class UsuariosRegistradosReaderWriter {
     
           try{
               fw = new FileWriter(file);
-              //pw = new PrintWriter(fw);
               Iterator<List<String>> iterator = usuariosRegistrados.iterator();
               while(iterator.hasNext()) {
             	  List<String> parApodoContraseña = iterator.next();

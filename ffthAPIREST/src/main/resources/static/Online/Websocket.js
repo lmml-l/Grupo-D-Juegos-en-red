@@ -36,7 +36,7 @@ function conection (){
 			break;
 			case "GetReady":
 			GetReady = datosGuardadosComoObjeto.ready;
-			console.log("Me ha llegado el ready")
+			console.log("ready")
 			break;
 			case "Skin":
 			Skin = datosGuardadosComoObjeto.skin;
@@ -46,7 +46,6 @@ function conection (){
 		}
 	}
 	connectionJugador.onclose = function() {
-		//setTimeout(conection(),1000);
 		console.log("Closing socket");
 	}
 
@@ -62,7 +61,6 @@ function conection (){
 		}
 	}
 	connectionPuntuacion.onclose = function() {
-		//setTimeout(conection(),1000);
 		console.log("Closing socket");
 	}
 
@@ -81,7 +79,6 @@ function conection (){
 			victorias = new Array(2); //Almacena el nº de partidas ganadas por cada jugador
             victorias[0]=0; victorias[1]=0;
             Puntuacion = 0;
-			console.log("LLEGA AQUI")
 			var that=this;
 			var escenaActual;
 			for(var i=0; i< game.scene.scenes.length; i++){
@@ -96,10 +93,7 @@ function conection (){
     		game.scene.getScene(escenaActual.scene.key).time.addEvent({delay:1500,
     		callback: function(){
     			//game.scene.getScene("EscenarioOnline").musica.stop();
-        		//game.scene.sleep(escenaActual.scene.key);
-        		//game.scene.stop(escenaActual.scene.key);
         		escenaActual.scene.start("MainMenu");
-        		//game.scene.getScene("MainMenu").add.text(50, 10, "YOUR RIVAL HAS DISCONNECT :( PLEASE TRY AGAIN", {  fill: '#FD0000', font: '24px Impact', align: 'left'});
         		textoDesconexion = "YOUR RIVAL HAS DISCONNECT :( PLEASE TRY AGAIN";
         		
    			}});
@@ -113,7 +107,6 @@ function conection (){
 		}
 	}
 	connectionDrops.onclose = function() {
-		//setTimeout(conection(),1000);
 		console.log("Closing socket");
 	}
 
@@ -132,7 +125,6 @@ function conection (){
 		}
 	}
 	connectionTiempo.onclose = function() {
-		//setTimeout(conection(),1000);
 		console.log("Closing socket");
 		sumCheck();
 		if(getCheck()>=3){

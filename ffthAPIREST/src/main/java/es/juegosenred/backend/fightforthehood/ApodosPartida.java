@@ -30,8 +30,6 @@ public class ApodosPartida {
 	@PutMapping("/deletenombre")
 	@ResponseStatus(HttpStatus.CREATED)
 	public String deleteId(@RequestBody String nombre) {
-		//System.out.println("ipquedebeborrar0 " + mymatch.getNombresenPartida().get(0));
-		//System.out.println("ipquedebeborrar "+ nombre.substring(1, nombre.length()-1));
 		mymatch.getNombresenPartida().remove(nombre.substring(1, nombre.length()-1));
 		return nombre;
 	}

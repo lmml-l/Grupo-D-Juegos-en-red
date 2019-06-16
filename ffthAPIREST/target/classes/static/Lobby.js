@@ -60,7 +60,6 @@ class Lobby extends Phaser.Scene {
 		this.texts[4] = this.add.text(320, 190, "PREPARE TO FIGHT!", { fill: '#FFFFFF', font: '54px Impact', align: 'center'});
 		////////////////////////
 	
-
 		this.enter = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
 		this.back  = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.BACKSPACE);
 
@@ -93,8 +92,6 @@ class Lobby extends Phaser.Scene {
 		this.time.addEvent({delay:1000, loop:true,
 		    callback: function(){getServerStatus(function(){that.scene.start('EscenarioError');})}})
 
-
-		
 		this.time.addEvent({delay:1000,loop:true, callback: function(){getIPs(function(arrayjugadores)
 			{ipsLobby= arrayjugadores;
 			that.nombreRival[0]=arrayjugadores[0];
@@ -136,13 +133,6 @@ class Lobby extends Phaser.Scene {
 	retroceder(){
 		var that = this;
 		if(this.escape.isDown){
-			/*
-			var messagee = {protocolo: "RESTART SALA"}
-			connectionDrops.send(JSON.stringify(messagee))
-			ipsLobby = new Array();
-			deletePlayerofRoom(game.scene.getScene("nameMenu").textoNombreLogin.text)
-			*/
-
 			IsHost = null;
             ipsLobby = new Array();
 
@@ -159,7 +149,7 @@ class Lobby extends Phaser.Scene {
 
 	update(){
 		this.retroceder();
-		////////////////////////////////////
+
 		this.texts[2].text=this.nombreRival[0];
 		this.texts[3].text=this.nombreRival[1];
 	}

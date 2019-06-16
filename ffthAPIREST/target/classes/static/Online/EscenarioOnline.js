@@ -45,11 +45,6 @@ class EscenarioOnline extends Phaser.Scene {
         this.ganadorTexto;
         this.finTiempoTexto;
         this.finPartidaTexto;
-        //this.pausaTexto;
-
-        //pausa
-        //this.pausar;
-        //this.pausar.isDown=false; //inicialización a falso para evitar ciclos
 	}
 
 //Reiniciamos el nivel
@@ -77,13 +72,6 @@ checkPartida(){
         callback: function(){
         //that.musica.stop();
 
-        that.time.addEvent({delay:500,  
-        callback: function(){
-            //that.time.clearPendingEvents();
-            //that.time.removeAllEvents();
-            //that.victoria.play();
-        }});
-
         that.time.addEvent({delay:3000, 
         callback: function(){
             IsHost = null;
@@ -91,7 +79,8 @@ checkPartida(){
             victorias=new Array(2); //Almacena el nº de partidas ganadas por cada jugador
             victorias[0]=0; victorias[1]=0;
             Puntuacion = 0;
-            that.scene.start('MainMenu'); //that.musica.stop();
+            that.scene.start('MainMenu'); 
+            //that.musica.stop();
         }});
         }});
         var mensaje = {protocolo: "VACIAR SESIONES"}
@@ -100,26 +89,20 @@ checkPartida(){
         connectionJugador.send(JSON.stringify(mensaje));
         connectionPuntuacion.send(JSON.stringify(mensaje));
 
+        //Cierre de websockets
         connectionDrops.close();
         connectionJugador.close();
         connectionPuntuacion.close();
         connectionTiempo.close();
     }
-    if(victorias[1]==3){                                        //jugador 2
+    if(victorias[1]==3){                                      //jugador 2
         console.log('P2 WINS!');
         this.finPartidaTexto.setText("YOU ARE A LOSER");      //texto en pantalla
-        victorias[0]=0; victorias[1]=0;                         //reseteo de rondas
+        victorias[0]=0; victorias[1]=0;                       //reseteo de rondas
 
         this.time.addEvent({delay:1000,                      
             callback: function(){
             //that.musica.stop();
-
-        that.time.addEvent({delay:500,  
-            callback: function(){
-                  //that.time.clearPendingEvents();
-                  //that.time.removeAllEvents();
-                  //that.victoria.play();
-            }});
 
         that.time.addEvent({delay:3000,  
             callback: function(){
@@ -137,6 +120,7 @@ checkPartida(){
         connectionJugador.send(JSON.stringify(mensaje));
         connectionPuntuacion.send(JSON.stringify(mensaje));
 
+        //Cierre de websockets
         connectionDrops.close();
         connectionJugador.close();
         connectionPuntuacion.close();
@@ -145,7 +129,7 @@ checkPartida(){
 
     //Si los dos jugadores llegan a 0 al mismo tiempo
     if(this.jugador.vida<=0 && this.jugador1.vida<=0){
-        console.log('RandoWinner');
+        console.log('RandomWinner');
         var ganador = Math.floor(Math.random()*2);              //se elige aleatoriamente ganador
         //gana J1
         if(ganador==0){
@@ -154,7 +138,7 @@ checkPartida(){
             this.finTiempoTexto.setText("KO");
             this.ganadorTexto.setText("\nYOU WIN");
             this.restartPartida();    
-            //this.musica.stop();                                 //reinicia el nivel
+            //this.musica.stop();                               //reinicia el nivel
         }   
         //gana J2
         else if(ganador==1){
@@ -163,7 +147,7 @@ checkPartida(){
             this.finTiempoTexto.setText("KO");
             this.ganadorTexto.setText("\nYOU LOSE");
             this.restartPartida(); 
-            //this.musica.stop();                                 //reinicia el nivel
+            //this.musica.stop();                                //reinicia el nivel
         }
     }
 
@@ -337,41 +321,6 @@ atravesarplataformaspersonaje(jugador,plataforma){
         }
     }
 
-/*
-    pausar(){
-    if(this.pausa.isDown){
-        if(pausado === false){
-            this.pausa.isDown       = false; //se inicia a false para que no vuelva a abrirse
-            this.game.paused        = true;
-            pausado                 = true;
-            //this.scene.sleep(this.scene); //pausa la escena
-            this.scene.switch('Pausa');
-            this.musica.pause();
-
-            //Puesta a false de controles de J1
-            this.jugador.keysalto.isDown    = false;
-            this.jugador.keymovder.isDown   = false;
-            this.jugador.keymovizq.isDown   = false;
-            this.jugador.keymovabajo.isDown = false;
-            this.jugador.keydisparo.isDown  = false;
-            this.jugador.keyrecargar.isDown = false;
-            this.jugador.keyrecarma.isDown  = false;
-            this.jugador.keyescudo.isDown   = false;
-
-            //Puesta a false de controles de J2
-            this.jugador1.keysalto.isDown    = false;
-            this.jugador1.keymovder.isDown   = false;
-            this.jugador1.keymovizq.isDown   = false;
-            this.jugador1.keymovabajo.isDown = false;
-            this.jugador1.keydisparo.isDown  = false;
-            this.jugador1.keyrecargar.isDown = false;
-            this.jugador1.keyrecarma.isDown  = false;
-            this.jugador1.keyescudo.isDown   = false;
-        }
-    }
-}
-*/
-
 preload(){
     //carga de hojas de sprites
     this.jugador.avatar.hojadespritesheet = sprite;
@@ -544,8 +493,6 @@ create(){
     //cartel
     this.plataformas2.create(60, 385, 'cartelPixel').alpha=0; //izquierdo
     this.plataformas2.create(726, 443, 'cartelPixel').alpha=0; //derecho
-
-    //this.suelo2.create(512, 585, 'sueloPixel').alpha=0;
 
     //COLISIONES PARA LAS BALAS
     //plataformas
@@ -752,12 +699,6 @@ create(){
         that.jugador1.avatar.sprite.y = Jugador.avatar.sprite.y;
 
         }});
-        
-        /*var that = this;
-		if(getComp()){
-			this.time.addEvent({delay:100, loop:true,
-		    callback: function(){that.scene.start('EscenarioError');}})
-		}*/
 //////////////////////////////////////////////////////////////
 	}
 
@@ -791,12 +732,6 @@ update(){ //actualizaciones
     this.hud.update();
 
     if(this.salir.isDown){
-        /*
-        var messagee = {protocolo: "RESTART SALA"}
-        connectionDrops.send(JSON.stringify(messagee))
-        ipsLobby = new Array();
-        deletePlayerofRoom(game.scene.getScene("nameMenu").textoNombreLogin.text)
-        */
         IsHost = null;
         ipsLobby = new Array();
         victorias = new Array(2); //Almacena el nº de partidas ganadas por cada jugador

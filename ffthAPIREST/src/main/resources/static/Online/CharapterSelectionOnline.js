@@ -200,20 +200,6 @@ class CharapterSelectionOnline extends Phaser.Scene {
     			console.log(posInicial);
     		}
     	}})
-
-/*
-    	//Envía la posición inicial correspondiente al segundo jugador (no host)
-    	this.time.addEvent({delay:1000, loop:true, 
-    	callback: function(){
-    		var messagePosicion = {protocolo: "Posicion", posicion: [600, 400, 400, 400]} //posiciones iniciales en la otra pantalla
-    		if(connectionDrops.readyState==1){
-    			connectionDrops.send(JSON.stringify(messagePosicion));
-    		}
-    		if(PosicionWS!=null && PosicionWS!= undefined){
-            posInicial = PosicionWS.posicion;
-            }
-    	}})
- */
 	}
 
 	//actualiza las imágenes de la flecha de selección
@@ -251,13 +237,6 @@ startPartida () {
 		var that=this;
 
 		if(this.salir.isDown){
-			/*
-			var messagee = {protocolo: "RESTART SALA"}
-			connectionDrops.send(JSON.stringify(messagee))
-			ipsLobby = new Array();
-			deletePlayerofRoom(game.scene.getScene("nameMenu").textoNombreLogin.text)
-			*/
-
 			IsHost = null;
             ipsLobby = new Array();
 
@@ -271,7 +250,6 @@ startPartida () {
 		if(this.confirmar2.isDown && (IsHost!=null || this.checkplayer2)){
 
 			this.add.text(480, 390, "\n\n"+"Ready", {fill: '#00853A', font: '24px Impact'});
-			//this.subtitulo.text = "WAITING FOR RIVAL TO CHOOSE"
 		}
 
 		if(this.checkplayer1 && this.checkplayer2){
@@ -288,9 +266,7 @@ startPartida () {
            }
  
 			this.time.addEvent({delay:7000, 
-			callback: function(){that.startPartida()}}); //Quiero añadir un texto que ponga la partida va a comenzar... 
-			//cuando seleccionen listo los dos jugadores y un timer to start 
-			
+			callback: function(){that.startPartida()}});
 		}
 	}
 

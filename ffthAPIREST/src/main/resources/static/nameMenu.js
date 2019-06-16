@@ -44,12 +44,6 @@ class nameMenu extends Phaser.Scene {
 	//botón para retroceder
 	retroceder(){
 		if(this.escape.isDown){
-
-			//connectionDrops.close();
-			//connectionJugador.close();
-   			//connectionPuntuacion.close();
-   			//connectionTiempo.close();
-
 			this.scene.start('MainMenu');
 			game.scene.getScene("MainMenu").textoDesconexionValor = "";
 			//this.musica.stop();
@@ -251,7 +245,6 @@ class nameMenu extends Phaser.Scene {
 		}
 	}
 
-    
 	update(){
 		this.retroceder();
 		this.aceptar();
