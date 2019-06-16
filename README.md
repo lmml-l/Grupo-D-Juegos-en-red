@@ -13,15 +13,21 @@ Partimos de la anterior fase 3 de junio, que al igual que ésta hereda los cambi
 
 ![...](https://i.imgur.com/ZK3E93K.jpg)
 
-Una vez que dos clientes hayan accedido a la sala (*lobby*), ambos jugadores pasan a la pantalla de selección de personaje. Al primer jugador que entre se le indica que es el *host*, mientras que el otro será el *guest*. El segundo jugador deberá esperar a que el host elija para poder escoger, tras lo cual comienza la partida. Mientras la sala de espera esté llena, no podrán acceder más jugadores.
+Una vez que dos clientes hayan accedido a la sala (*lobby*), ambos jugadores pasan a la pantalla de selección de personaje. Al primer jugador que entre se le indica que es el *host*, mientras que el otro será el *guest*. El segundo jugador deberá esperar a que el host elija para poder escoger, tras lo cual comienza la partida. Mientras la sala esté llena, no podrán acceder más jugadores.
 
-![...](https://i.imgur.com/Tge4djb.jpg)
+![...](https://i.imgur.com/AuDsy8V.jpg)
 
 Durante la partida, el jugador maneja a su personaje por el entorno de juego, teniendo ambos clientes las mismas armas disponibles en el escenario, mismo tiempo restante y, en definitiva, la misma información de partida. Una vez que uno de los jugadores gane la pelea, al mejor de tres rondas, se acaba el combate y se reinicia.
 
 En la imagen, un ejemplo de partida sobre un mismo ordenador, pero que sirve para mostrar la sincronización de ambas partidas.
 
-![...](https://i.imgur.com/mmRxQyY.jpg)
+![...](https://i.imgur.com/OOpCeGM.jpg)
+
+**Desconexión de usuario**
+
+Si un jugador cierra la partida, el oponente será desconectado.
+
+![...](https://i.imgur.com/uVtOavK.jpg)
 
 **Websockets y mensajes**
 
