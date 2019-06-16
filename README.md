@@ -17,7 +17,7 @@ Recomendamos verlo en pantalla completa, pues al subirse a Youtube, muchos monit
 
 Pinche en la imagen para ver el vídeo:
 
-[![](http://img.youtube.com/vi/ThUG2cx4QaQ/0.jpg)](https://www.youtube.com/watch?v=ZfHJshxX_z8&feature=youtu.be "Vídeo")
+[![](https://i.imgur.com/MtMEGOq.jpg)](https://www.youtube.com/watch?v=ZfHJshxX_z8&feature=youtu.be "Vídeo")
 
 **Partida multijugador**
 
