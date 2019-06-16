@@ -82,6 +82,8 @@ class nameMenu extends Phaser.Scene {
 						that.textoComprobacion.text = "User already logged in";
 					}else if(islogininfocorrect == "ApodoInvalido"){
 						that.textoComprobacion.text = "Incorrect/non-existing username";
+					}else if(islogininfocorrect == "NoHueco"){
+						that.textoComprobacion.text = "Full room";
 					}else if(islogininfocorrect == "ContrasenaInvalida"){
 						that.textoComprobacion.text = "Incorrect password";
 					}});//se devuelve bool para saber si la informacion es correcta
