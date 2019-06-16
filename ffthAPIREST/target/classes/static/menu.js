@@ -1,4 +1,6 @@
 //PANTALLA INICIAL. Da acceso a la selección de personajes, pantalla de controles y, en versiones futuras, juego online
+var textoDesconexion = "";
+
 class MainMenu extends Phaser.Scene {
 	constructor(){
 		super({key:"MainMenu"});
@@ -95,8 +97,8 @@ class MainMenu extends Phaser.Scene {
 		//this.musica.play();
 
 		//textos de apoyo
-		this.textoDesconexionValor = null;
-		this.textoDesconexion = this.add.text(50, 10, "", {  fill: '#FD0000', font: '24px Impact', align: 'left'});
+		this.textoDesconexionValor = textoDesconexion;
+		this.textoDesconexion = this.add.text(50, 10, this.textoDesconexionValor, {  fill: '#FD0000', font: '24px Impact', align: 'left'});
 		this.textoControles   = this.add.text(50, 710, "Use A/D or arrows to select\nPress SPACE or ENTER to go", {  fill: '#F4FFF3', font: '24px Impact', align: 'left'});
 		this.textoVersion     = this.add.text(700, 750, "v.7.0 Fase 4 Junio", { fill: '#F4FFF3', font: '16px Lucida Console', align: 'center'}); //760, 710
 		var that=this;
@@ -161,23 +163,27 @@ class MainMenu extends Phaser.Scene {
 		//Pantalla inicial
 		if(this.salir.isDown){
 			this.scene.start('MainMenu');
+			textoDesconexion = "";
 			//this.musica.stop();
 		}
 		if(this.posArray==0 && this.check){
 			//Selector de personaje (partida offline)
 			this.scene.start('CharapterSelection');
+			textoDesconexion = "";
 			//this.musica.stop();
 			this.go1.isDown=false;
 			this.go2.isDown=false;
 		}else if(this.posArray==1 && this.check){
 			//Menú de login de partida online
 			this.scene.start('nameMenu');
+			textoDesconexion = "";
 			//this.musica.stop();
 			this.go1.isDown=false;
 			this.go2.isDown=false;
 		}else if(this.posArray==2 && this.check){
 			//Pantalla de controles
 			this.scene.start('ControlGuide');
+			textoDesconexion = "";
 			//this.musica.stop();
 			this.go1.isDown=false;
 			this.go2.isDown=false;

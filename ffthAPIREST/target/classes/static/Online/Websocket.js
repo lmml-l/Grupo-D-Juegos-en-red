@@ -99,12 +99,12 @@ function conection (){
         		//game.scene.sleep(escenaActual.scene.key);
         		//game.scene.stop(escenaActual.scene.key);
         		escenaActual.scene.start("MainMenu");
-        		//Mensaje de error
-        		game.scene.getScene("MainMenu").textoDesconexionValor = "YOUR RIVAL HAS DISCONNECT :( PLEASE TRY AGAIN";
+        		//game.scene.getScene("MainMenu").add.text(50, 10, "YOUR RIVAL HAS DISCONNECT :( PLEASE TRY AGAIN", {  fill: '#FD0000', font: '24px Impact', align: 'left'});
+        		textoDesconexion = "YOUR RIVAL HAS DISCONNECT :( PLEASE TRY AGAIN";
         		
    			}});
 
-   			connectionDrops.close()
+   			connectionDrops.close();
    			connectionJugador.close();
    			connectionPuntuacion.close();
    			connectionTiempo.close();
